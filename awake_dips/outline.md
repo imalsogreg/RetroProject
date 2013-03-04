@@ -2,7 +2,7 @@
 
 ## Title
 
-### See [title.md](title.md)
+### Cortical slow-waves in retrosplenial cortext accompany awake hippocampal replay
 
 ## Abstract
 

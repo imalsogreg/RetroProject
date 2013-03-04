@@ -1,1 +1,0 @@
-Cortical slow-waves accompany awake hippocampal replay in retrosplenial cortex
