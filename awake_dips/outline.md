@@ -63,12 +63,14 @@
 
 ### Slow-Wave Wake
 
-### Similarity of brain activity during consumption to SWS state - Interesting!
+#### Similarity of brain activity during consumption to SWS state - Interesting!
  * Coordination of many tetrodes in dips, frames
  * Coordination of frames with hippocampal activity
  * K-complexes in LFP
 
-### Differences (Non-involvement of somato and motor cortex) - Also interesting
+#### Differences - Also interesting
+ * Non-involvement of somatosensory and motor cortex
+ * Restriction in time to a couple of frames
 
 ### Advance in understanding of 'offline processing state' previously thought to involve just hippocampus.
 
