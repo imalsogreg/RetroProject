@@ -8,7 +8,7 @@ tbins = et(1)-dt:dt:et(2)+dt;
 
 for iClust = 1:mua.nclust
 
-    rate = hist(mua.clust{iClust}.stimes, tbins);
+    rate = hist(mua.clust{iClust}.stimes, tbins) ./ dt;
     rate = rate(2:end-1);
     mua.clust{iClust}.rate = rate;
     mua.clust{iClust}.time_limits = et;

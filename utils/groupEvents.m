@@ -1,4 +1,4 @@
-function [startIdx, setLen, setId] = group_events(ts, win)
+function [startIdx, setLen, setId] = groupEvents(ts, win)
 
 % initialIdx contains the indicies of the first event in a SET
 % setLen indicates how long each set is

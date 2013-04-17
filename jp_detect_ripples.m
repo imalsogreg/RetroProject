@@ -1,5 +1,15 @@
 function [peakTs, ripWin, ts] = jp_detect_ripples(eeg, channel, varargin)
     
+    if ~isscalar(channel) || mod(channel, 1) || channel <= 0
+        error('Channel must be an scalar containing an integer greater than 0');
+    end
+   
+    chan = find( str2double( eeg.chanlabels) == channel);
+    
+    if isempty(chan)
+        error('Invalid channel specified:%d Please select a channel contained in eeg.chanlabels', channel);
+    end
+    
     args.high_thold = 5;
     args.low_thold =  3;
     args.min_burst_len = .025;
@@ -10,10 +20,13 @@ function [peakTs, ripWin, ts] = jp_detect_ripples(eeg, channel, varargin)
     
     args = parseArgs(varargin, args);
 
-    data = eeg.data(:, channel);
+    data = eeg.data(:, chan);
    
+    fprintf('\tfiltering');
     rFilt = getfilter(eeg.samplerate, 'ripple', 'win');
     ripBand = filtfilt(rFilt, 1, data);
+    
+    fprintf(', computing envelope');
     ripEnv = abs(hilbert( ripBand) );
     
     nSamp = size(data,1);
@@ -27,6 +40,7 @@ function [peakTs, ripWin, ts] = jp_detect_ripples(eeg, channel, varargin)
         ignoreIdx = false( size(ripEnv) );
     end
     
+    fprintf(', detecting events');
     ignoreIdx(ts < args.time_range(1)) = true;
     ignoreIdx(ts > args.time_range(2)) = true;
      
@@ -41,6 +55,7 @@ function [peakTs, ripWin, ts] = jp_detect_ripples(eeg, channel, varargin)
     % which low segments contain high segments
     [~, n] = inseg(low_seg, high_seg);
 
+    fprintf(', finding peaks');
     % define these low segments as the bursts
     winIdx = low_seg( logical(n), :);
     
@@ -59,6 +74,7 @@ function [peakTs, ripWin, ts] = jp_detect_ripples(eeg, channel, varargin)
     % of the recording
     validPeaks = peakIdx > 500 & peakIdx < (nSamp - 500);
 
+    
     % remove invalid peaks
     peakIdx = peakIdx(validPeaks);
     winIdx = winIdx(validPeaks,:);  
@@ -66,4 +82,5 @@ function [peakTs, ripWin, ts] = jp_detect_ripples(eeg, channel, varargin)
     peakTs = ts(peakIdx);
     ripWin = ts(winIdx);
     
+    fprintf(', DONE!\n');
 end

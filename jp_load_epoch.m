@@ -17,6 +17,7 @@ end
 
 epochNames = {};
 epochTimes = [];
+
 while true
     res = textscan(line, '%s%f%f');
     epochNames{end+1} = res{1}{1};

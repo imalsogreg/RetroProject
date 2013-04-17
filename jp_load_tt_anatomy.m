@@ -1,4 +1,5 @@
-function tt_anatomy = jp_load_tt_anatomy(edir)
+function tt_anatomy = jp_load_tt_anatomy(animal, day)
+edir = jp_working_dir(animal, day);
 
 if ~exist(edir,'dir')
     warning('%s directory does not exist', edir);

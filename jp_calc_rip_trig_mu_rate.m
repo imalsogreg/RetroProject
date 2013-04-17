@@ -1,11 +1,10 @@
-function [samp, ts, setLen] = jp_calc_rip_trig_mu_rate(ripTs, mua, win)
+function [samp, sampTs] = jp_calc_rip_trig_mu_rate(ripTs, mua, win)
 
+    if nargin==2
+        win = [-.25 .75];
+    end  
 
-    [startIdx, setLen, setId] = group_events(ripTs, [.5 .25]);
-    
-
-    [samp, ts] = meanTriggeredSignal(ripTs, mua.timestamps, mua.rate, win);
-        
+    [samp, sampTs] = meanTriggeredSignal(ripTs, mua.timestamps, mua.rate, win); 
     
 end
 % fprintf('\n');
