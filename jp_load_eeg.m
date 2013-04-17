@@ -1,6 +1,20 @@
 function varargout = jp_load_eeg(animal, day, epoch, regions, varargin)
 
-% ARGS = parseArgs(varargin, ARGS);
+%JP_LOAD_EEG loads eeg data from disk
+%
+%   MU = JP_LOAD_EEG( animal, day, epoch, region)
+%   Load the eeg data for the specified animal/day/epoch/region(s)
+%   animal: a string containing the animals name
+%   day:    a string or integer formatted as DDMMYY
+%   epoch:  a string containing the name of the desired epoch
+%   region: a single string or cell array of strings
+%
+%   hpcMu  = jp_load_EEG('blue', '032213', 'sleep2', 'HPC');
+%
+%   Each region is returned seperately when multiple regions are specified
+%
+%   [h,c]    = jp_load_EEG('blue', '032213', 'sleep2', {'HPC', 'RSC'});
+%   [h,c,t] = jp_load_EEG('blue', '032213', 'sleep2', {'HPC', 'RSC', 'THAL'});
 
 edir = jp_working_dir(animal, day);
 

@@ -1,4 +1,25 @@
 function varargout = jp_load_multiunit(animal, day, epoch, regions, varargin)
+%JP_LOAD_MULTIUNIT loads multi-unit data from disk
+%
+%   MU = JP_LOAD_MULTIUNIT( animal, day, epoch, region)
+%   Load the multi-unit data for the specified animal/day/epoch/region(s)
+%   animal: a string containing the animals name
+%   day:    a string or integer formatted as DDMMYY
+%   epoch:  a string containing the name of the desired epoch
+%   region: a single string or cell array of strings
+%
+%   hpcMu  = jp_load_multiunit('blue', '032213', 'sleep2', 'HPC');
+%
+%   Each region is returned seperately when multiple regions are specified
+%
+%   [h,c]    = jp_load_multiunit('blue', '032213', 'sleep2', {'HPC', 'RSC'});
+%   [h,c,t] = jp_load_multiunit('blue', '032213', 'sleep2', {'HPC', 'RSC', 'THAL'});
+%
+%   MU = JP_LOAD_MULTIUNIT( animal, day, epoch, region, 'KEY', VAL)
+%       CALC_RATE : calclute the TT and regional MU Rate when equal to 1 (Default 1)
+%       RATE_DT   : bin width for computing MU Rate (Default .01)
+%       SMOOTH    : smooth the multi-unit rate when equal to 1 (Default 1)
+%       SMOOTH_DT : width of kernel to use for smoothin (Default .01)
 
 ARGS.CALC_RATE = 1;
 ARGS.RATE_DT = .01;
