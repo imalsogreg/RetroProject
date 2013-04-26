@@ -8,9 +8,11 @@ epoch = 'sleep2';
 [h.mua, c.mua] = jp_load_multiunit(animal, day, epoch, {'HPC', 'RSC'});
 [h.eeg, c.eeg] = jp_load_eeg(animal, day, epoch, {'HPC', 'RSC'});
 
+
 %% Detect Ripples and Ripple-Sets
 ripTs = jp_detect_ripples(h.eeg, 7);
 [setStart, setLen, setId] = groupEvents(ripTs, [.5 .25]);
+
 
 
 
