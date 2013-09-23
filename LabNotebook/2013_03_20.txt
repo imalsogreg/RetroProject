@@ -1,0 +1,11 @@
+1030 am - show up at work, start journal.  Thought about writing a program gh_newlog that creates a new file in ~/Documents/LabNotebook, names it after the date, opens it in emacs, waits for me to close it, then uploads it to github.  But I decided that is probably a 4-day distraction :)  So I'll do it later maybe.
+
+11 am - Skipped out of 9.02 rat dosing for a half hour at a time to see the Clarity talk.  This guy seems awesome!!  Transparent brains, Thy1-GFP mice, whole-brain flythroughs.  Cortical layers are so beautiful when seen from perspective.  So much structure in hippocampus.
+
+Back to working on code for traveling waves figure 1: draw the trode locations, several sample simultaneous eeg traces (0.5 seconds) and their theta filterings, text labels for the mean phase offsets, and then the color-coded phase-offset map for all TT's.
+
+Trying to do absolute positioning for a few axes in a figure.  Huge pain in the butt...  Time for 9.02.
+
+9.02 over for the day.  Rat barrel cortex II.  Hard but fun!  A group each got one, two, and three receptive fields.  Two receptive fields from previous lecture (maybe), so they will have a good dataset to work with for the paper.
+
+

@@ -1,0 +1,83 @@
+Yesterday: Ran Blue: Sleep - Circulartrack - sleep - small S-shaped track - sleep
+Lots of wobble!  Not a whole lot of cells to match.  Oh well.
+
+Morning: Got Blue, ran day 2 of S-shaped track, with some post-sleep.  But mostly we are trying to get run cells, to see if replay during wake slow waves is always reverse replay.
+
+Afternoon: trying to work on plot2svg.  Stuck on supporting hgtransform.  First attempt was to simply copy hgtransform's 'Matrix' property into the 'transform' tag of the svg element.
+
+Using this:
+http://www.w3.org/TR/2011/REC-SVG11-20110816/coords.html#Introduction
+to tell me about transform attributes.
+
+Unfortunately, there are problems:
+
+Rotate w/ positive angle in matlab goes counterclockwise.
+In SVG, it's clockwise.
+
+Rotation in matlab is about the plot origin (0,0 on the graph)
+Rotation in SVG is about the upper-left corner of the figure.
+
+Translation in y when y is positive is Up.
+In SVG, positive y is down (ie pixel-count)
+
+
+I think my solution will be: 
+1) Figure out the mapping between graph origin and figure pixel.
+2) Manually transale the hgtransform group by svg tag to bring graph
+   origin to pixel 0,0
+3) Vertical flip
+4) Apply the hgtransform matrix
+5) Vertical flip
+6) Put back the pixel 0,0 to graph origin offset.
+
+ie, add the tag
+x_offset = something(fig)
+y_offset = something(fig)
+t_tag = sprintf('transform="translate(%f,%f) scale(1,-1) matrix(%f,%f,%f,%f,%f,%f) scale(1,-1) translate(%f,%f)', ...
+                      -x_offset, -y_offset,                      a, b, c, d, e, f,                x_offset, y_offset);
+
+The next problem is just to find x_offset and y_offset.  I have a promising lead around line 1379 of plot2svg, Juerg's 'project' function.
+He has, for plotting a line object:
+(just a sketch)
+function axchild2svg(fid,id,axIdString,ax,group,paperpos,axchild,axpos,groupax,projection,boundingBoxAxes)
+linex = get(axchild(i),'XData');
+liney = get(axchild(i),'YData');
+[x,y,z] = project(linex,liney,linez,projection);
+x = (x*axpos(3) + axpos(1))*paperpos(3);
+y = (1-(y*axpos(4)+axpos(2)))*paperpos(4);
+
+...
+
+line2svg(fid, ..., x, y, ...)
+
+So, before calling line2svg, he has x and y in screen coordinates
+for [linex,liney] == [0,0], this takes x,y to 289.8, 202.65
+
+This takes my group to the right place!
+
+But manual rotation seems messed up, rotating around something _other_ than upper-left of figure...
+
+Doing this works.  Surprising!
+traslate(-289.8, -202.65)
+rotate(45, 289.8, 202.65)
+But I think I see why.  The whole hgtransform bounding box (size of the fig) moves when I translate.
+And the rotation origin is relative to the upper-left of that bounding box (which is now at -280,-202).  I wonder how this will
+affect transformation matrix stuff....
+
+Yes, it seems to mess up matrix transform.
+
+After lots of searching for how to pin down an origin for transformation matrix, it seems hopeless.
+
+Resorted to: try to decompose the matrix transformation into translation, scale, and rotation (in analysis/misc/decompose2dTransformationMatrix.m)
+
+This works Ok in a 1-off test.  I like the idea: I pass (0,0), (0,1), and (1,0) through the transformation matrix, then by seeing how they get moved, stretched, and rotated, I can get back to the original parameters.  I'm not sure why ppl on the internet say that deconstructing a transformation matrix is impossible.  Doesn't this way work perfectly well?  I might be missing something :S  For example, I assume that there is no sheering.  Maybe sheering is a degenerate case?
+
+Integrated the decomposition into plot2svg.  After a couple hours of mucking around, finally got the order of translate - scale - untranslate - usertranslate - rotate right.  
+
+In the SVG spec, it says that a tag like "transform="rotate(20) transform(10,20) scale(5)" applies those transformations 'in order'.
+In my hands, it seems to be more like reverse-order.
+
+
+
+
+

@@ -1,0 +1,10 @@
+Read Norman Ramsey's paper about expectations from students in his lab.  Interesting part about how grad school is a business - PI needs to meet contractual obligations but has no time to do so him/herself, so hires RA's.  The point isn't that the system is bad though - the point is that an RA has to recognize their quasi-business-partner role and do a good job at it.
+
+Working on Documents/Papers/TravelingWave Figure1 and Figure2 sketches.
+Decided to split Figure 1 into 3 or 4 figs after talking to Matt yesterday.  LFP and MUA get separate figures for sure.
+
+Read most of Simon Marlow's book chapter on STM.  Pretty exciting stuff!
+
+Ran Blue the rat with Hector.  Tons of cells on the track, and reasonable multi-unit in retrosplenial cortex.  Hector told me a couple days ago: ripples that happen alongside wake slow waves are much more likely to be reverse-replay events than ripples not accompanied by wake slow waves.
+
+

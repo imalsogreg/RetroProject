@@ -1,0 +1,56 @@
+9.02 recitation in the morning - lots of fun showing the kids resonating meter-sticks and talking about Andermann and Moore whisker resonance paper.
+
+Rat Blue on circular track.  Decided with Hector that (1) we would try feeding Blue corn, so that he might slow down a little to eat.  We want long pauses without huge rewards, to see if wake slow waves are more related to amount of food or stopping-time.  We alse decided (2) to put Blue on the small S-shaped track, and to give him big rewards half-way down the track on outbound laps.  This will help us get at forward/reverse and inbound/outbound replay.
+
+Started looking into how to program the neuralynx amps.  Matt's code is kind of a promising start (AD on github).
+
+Confusing, but likely important
+
+ADDEFS.H:
+#define DAS-1800
+//#define DT2821
+
+...
+
+#ifdef	  DAS-1800
+#define	  BASE		0x0240
+#define DATASELECT	BASE+0x0002
+#define CONTROLA	BASE+0x0004
+#define CONTROLB	BASE+0x0005
+#define CONTROLC	BASE+0x0006
+#define STATUS			BASE+0x0007
+#define QRAMSTART		BASE+0x000A
+#define COUNTER1		BASE+0x000D
+#define COUNTER2		BASE+0x000E
+#define	CNTRCTRL		BASE+0x000F
+#endif
+
+...
+
+#define	PP_CONTROL	PP_BASE+3     /* write only */
+
+...
+
+This is in an ifdef block for DT2821.
+So DACSR is undefined.  But it's used in
+#define BASE 0x0240
+#define DACSR BASE+0x006
+
+... 
+
+
+ADAMP.C
+
+InitDTPIO(void){
+  outp(PP_CONTROL,0x80);   // (GH's comment: 0x80 is BIT7)
+  WriteAmpControl(0xF000); // raise control bits
+}
+
+void WriteAmpControl(int val){
+  adinfo.piostate = val;   // (GH: adinfo is used for amp control? Or just global state?)
+  WritePIO(val);
+  if(adinfo.piostate != val) ERROR;
+}
+
+int PIOStatus(void){
+  return(inpw(PORT_A)); // (GH's: inpw is for 2 bytes.  PORT_A is PP_BASE  is 0x278
