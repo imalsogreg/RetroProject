@@ -1,0 +1,11 @@
+Today:
+
+Take a look at Caillou (ADthal, Hpc, RSC) hippocampal multi-unit during sleep, b/c Hector looked and thought it was hard to see clear frames.
+
+In many individual-day folders, I wrote a 'loadData.m' script, copy pasted between days with some values changed.  This bit me in the ass even sooner than I expected as I found bugs in the code.  Instead, I'll write a single loadDataGeneral that takes a metadata record.  Individual days will have metadata.m instead of loadData.m
+
+Starting with (devel5) ~/Data/caillou/112813/metadata.m
+
+Interruption: I just got a pull-request accepted with opencv, fixing their opencv.pc pkg-config file generation in cmake.  some guy "@Siddharthk" is saying that now cmake can't find gtk or ffmpeg.  Took some time to search around and help him with that.
+
+
