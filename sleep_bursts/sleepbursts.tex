@@ -1,0 +1,153 @@
+% Template for PLoS
+% Version 1.0 January 2009
+%
+% To compile to pdf, run:
+% latex plos.template
+% bibtex plos.template
+% latex plos.template
+% latex plos.template
+% dvipdf plos.template
+
+\documentclass[10pt]{article}
+
+% amsmath package, useful for mathematical formulas
+\usepackage{amsmath}
+% amssymb package, useful for mathematical symbols
+\usepackage{amssymb}
+
+% graphicx package, useful for including eps and pdf graphics
+% include graphics with the command \includegraphics
+\usepackage{graphicx}
+
+% cite package, to clean up citations in the main text. Do not remove.
+\usepackage{cite}
+
+\usepackage{color} 
+
+% Use doublespacing - comment out for single spacing
+%\usepackage{setspace} 
+%\doublespacing
+
+
+% Text layout
+\topmargin 0.0cm
+\oddsidemargin 0.5cm
+\evensidemargin 0.5cm
+\textwidth 16cm 
+\textheight 21cm
+
+% Bold the 'Figure #' in the caption and separate it with a period
+% Captions will be left justified
+\usepackage[labelfont=bf,labelsep=period,justification=raggedright]{caption}
+
+% Use the PLoS provided bibtex style
+\bibliographystyle{plos2009}
+
+% Remove brackets from numbering in List of References
+\makeatletter
+\renewcommand{\@biblabel}[1]{\quad#1.}
+\makeatother
+
+
+% Leave date blank
+\date{}
+
+\pagestyle{myheadings}
+%% ** EDIT HERE **
+
+
+%% ** EDIT HERE **
+%% PLEASE INCLUDE ALL MACROS BELOW
+
+%% END MACROS SECTION
+
+\begin{document}
+
+% Title must be 150 characters or less
+\begin{flushleft}
+{\Large
+\textbf{Hippocampal Ripples Form Clusters and Modulate Cortical Spiking}
+}
+% Insert Author names, affiliations and corresponding author email.
+\\
+Gregory J. Hale$^{1}$, 
+Stuart P. Layton$^{2}$, 
+Hector Penagos$^{3}$, 
+Matthew A. Wilson$^{4,\ast}$
+\\
+\bf{1} Gregory Hale Brain and Cognitive Sciences, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA
+\bf{2} Stuart Layton Brain and Cognitive Sciences, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA
+\\
+\bf{3} Hector Penagos Brain and Cognitive Sciences, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA
+\\
+\bf{4} Matthew Wilson Brain and Cognitive Sciences, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA
+\\
+$\ast$ E-mail: Corresponding imalsogreg@gmail.com
+\end{flushleft}
+
+% Please keep the abstract between 250 and 300 words
+\section*{Abstract}
+Hippocampal ripples lack the marked regularity of theta waves.  Previous reports describe the timing of ripples as a Poisson process, perhaps with a mild tendency for some ripples to occur in quick succession (bursts).  The recent finding that sequential replay of spatial information content in the hippocampus can span multiple ripple events prompted a reexamination of this timing, because ripple bursts may be involved in the generation of extended replay or its transmission to the rest of the brain.
+By using large tetrode arrays and focusing on ripples that happen in short time windows, we report a higher level of ripple rhythmicity than was previously recognized.  Ripples that form bursts (by falling within a quarter second of any other ripple) tend to be separated by 70-100 milliseconds.  Additionally, ripple bursts accompany tightly time-locked modulation of the retrosplenial cortex.
+Paradoxically, while the longest observed bouts of sequence replay are found while rats are still awake, the rhythmic organization of ripples within bursts is limited to slow-wave sleep.  Ripple bursts in the waking rat are less frequent than in the sleeping rat.  Ripples during wake and sleep have opposing effects on the retrosplenial cortex - activating it during wake and inhibiting it during sleep.
+These findings raise new questions about the mechanisms of ripple generation and the effects of ripples on cortical targets.  Plausible of ripple initiation and cortical response should predict differential effects between waking activity and slow wave sleep.
+
+% Please keep the Author Summary between 150 and 200 words
+% Use first person. PLoS ONE authors please skip this step. 
+% Author Summary not valid for PLoS ONE submissions.   
+\section*{Author Summary}
+
+
+\section*{Introduction}
+
+\section*{Results}
+
+\subsection*{Subsection 1}
+
+\subsection*{Subsection 2}
+
+\section*{Discussion}
+\cite{Mizuseki 2012}
+
+
+% You may title this section "Methods" or "Models". 
+% "Models" is not a valid title for PLoS ONE authors. However, PLoS ONE
+% authors may use "Analysis" 
+\section*{Materials and Methods}
+
+% Do NOT remove this, even if you are not including acknowledgments
+\section*{Acknowledgments}
+
+
+%\section*{References}
+% The bibtex filename
+\bibliography{template}
+
+\section*{Figure Legends}
+%\begin{figure}[!ht]
+%\begin{center}
+%%\includegraphics[width=4in]{figure_name.2.eps}
+%\end{center}
+%\caption{
+%{\bf Bold the first sentence.}  Rest of figure 2  caption.  Caption 
+%should be left justified, as specified by the options to the caption 
+%package.
+%}
+%\label{Figure_label}
+%\end{figure}
+
+
+\section*{Tables}
+%\begin{table}[!ht]
+%\caption{
+%\bf{Table title}}
+%\begin{tabular}{|c|c|c|}
+%table information
+%\end{tabular}
+%\begin{flushleft}Table caption
+%\end{flushleft}
+%\label{tab:label}
+% \end{table}
+
+\end{document}
+
