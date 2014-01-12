@@ -1,0 +1,7 @@
+
+Today:
+
+Did some stuff on arte to make network communication with the server through TChan both ways, and updated ArteSimple and ArteMockMWL to use that api.  Almost ready to run ArteMockMWL I think.
+
+Catching up with the old ripple work - I found my ripple-burst analysis code and updated the github repo: ImAlsoGreg/tetrode-analysis/matlab in the ripples directory.
+
