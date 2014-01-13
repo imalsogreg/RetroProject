@@ -5,16 +5,20 @@
     
     <title>MWL Lab Meeting - Jan 14, 2014</title>
     
-    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-    <meta name="author" content="Hakim El Hattab">
+    <meta name="description" content="Lab meeting">
+    <meta name="author" content="Greg Hale">
     
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
-    <link rel="stylesheet" href="css/reveal.min.css">
-    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+    <link rel="stylesheet" href="css/reveal.css">    
+    <link rel="stylesheet"  href="css/bootstrap.css">
+
+    <link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+    <!--    <link rel="stylesheet" href="css/theme/default.css" id="theme"> -->
     
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -37,30 +41,125 @@
 	    <small>Greg Hale</small>
 	  </p>
 	</section>
+	<section>
+	  <h2>The big question: What does replay do?</h2>
+	  <br/>
+	  <ul>
+	    <li>Phenomenology <br/> <small>What does replay look like, in wake & during sleep, on short tracks and in open arenas?</small></li>
+	    <li>Function <br/> <small>Is replay needed for behavior?</small></li>
+	    <li>Interaction <br/> <small>How does the hippocampus interact with cortex during replay?</small></li>
+	    <br/>
+	    <p><small>This talk doesn't answer the big question, but adds to the picture of how hippocampus and cortex communicate.</small></p>
+	  </ul>
+	</section>
 	
-	<section>
-	  <h2></h2>
-	  <p>
-	    reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
-	    support for CSS 3D transforms to see it in its full glory.
-	  </p>
+	<section> <!-- Replay phenomenology -->
+	  
+	  <section> <!-- Subsection header -->
+	    <h2 class="em">Replay Phenomenology</h2>
+	  </section>
+	  
+	  <section> <!-- Basic phenomenology -->
+	    <div class="row">
+	      <h2>Awake forward and reverse replay</h2>
+	    </div>
+	    <div class="row">
+	      <figure class="col-md-6"> 
+		<img src="fosterFig2.jpg"/>
+	      </figure>
+	      
+	      <figure class="col-md-6"> <img src="dibaFig1.jpg"/>
+		<p class="cap">Diba and Buzsaik, 2007.  Left and Right: Forward and Reverse replay of place cell sequences. Center: Place fields on track.</p>
+		
+	      </figure><br/>
+	      <p class="cap">Foster and Wilson, 2006.  Place cell sequence on track Replayed during pauses, eating.</p>
+	    </div>
+	    
+	  </section>
+	  
+	  
+	  <section>
+	    <div class="row"><h2>Remote Replay</h2></div>
+	    <div class="row">
+	      <div class="col-sm-6">
+		<figure><img src="frankFig.jpg">	      
+		</figure>
+		<p class="cap">Karlson and Frank, 2009. Rat in Environment A can have replay events of Environment B.
+		</p>
+	      </div>
+	      
+	      <div class="col-sm-6">
+		<video width="640" height="480" controls>
+		  <source src="davidson.ogg" type="video/ogg"/>
+		  Your browser does not support the video tag.
+		</video>
+		<p class="cap">
+		  Davidson et. al. 2009. Replay can extend over long (~10m) stretches of track.</p>
+	      </div>
+	    </div>
+	    
+	  </section>
+	  
+	  <section>
+	    <div class="row"><h2>Replay in open fields</h2> </div>
+	    <div class="row">
+	      <div class="col-sm-6">
+		<img src="foster2013.jpg" height="600px"/>
+	      </div>
+	      <div class="col-sm-6">
+		<img src="foster2013a.jpg" height="200px"/><br/>
+		<p class="cap">Pfeiffer and Foster, 2013; Kloosterman and Wilson unpublished.  Replay trajectories in open fields.  May be some influence of past/future behavior on replayed sequences, but they are probably more &quot;exploratory&quot; than the rat&quot;s behavior.
+	      </div>
+	    </div>
+	  </section>
+	  
+	  <section>
+	    <h2>Slow-wave sleep replay</h2>
+	    <img src="lee.jpg" height="400px"/>
+	    <p class="cap" style="text-align:center">Lee and Wilson, 2002.  Brief replay events similar to awake replay (but often not as clean or easy to detect) of past experience occurs during slow wave sleep.</p>
+	  </section>
+	  
+	  <section>
+	    <h2>REM sleep replay</h2>
+	    <img src="louie.jpg" height="400px"/>
+	    <p class="cap" style="text-align:center">Louie and Wilson, 2001.  Replay of past experience occurs during REM sleep, can last for over a minute.</p>
+	  </section>
+
+	  
+	</section>
+	
+	<section> <!-- Function -->
+	  <section>
+	    <h2>Functional Role</h2>
+	  </section>
+
+	  <section>
+	    <h2>Sleep replay disruption and learning</h2>
+	    <img src="val.png"/>
+	    <p class="cap">
+	      Ego-Stengel and Wilson, 2009.  Hippocampal afferent stimulation, locked to sharp-wave ripples (often accompanied by replay), slows spatial learning of the track being replayed.
+	    </p>
+	  </section>
+
+	</section>
+	
+	<section> <!-- Interactions -->
 
 	</section>
 
-	<section>
-	  <h1>THE END</h1>
-	  <h3>BY Hakim El Hattab / hakim.se</h3>
+	<section> <!-- Questions -->
+	  <h1>Questions?</h1>
 	</section>
-
+	
       </div>
-
+      
     </div>
-
+    
     <script src="lib/js/head.min.js"></script>
     <script src="js/reveal.min.js"></script>
-
+    
     <script>
-
+      
       // Full list of configuration options available here:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
