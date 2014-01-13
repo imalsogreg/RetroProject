@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/1475/fkloos/matlab/mwlIO/trunk/@subheader
+END
+display.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/1027/fkloos/matlab/mwlIO/trunk/@subheader/display.m
+END
+getComments.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/1027/fkloos/matlab/mwlIO/trunk/@subheader/getComments.m
+END
+deleteComments.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/!svn/ver/1027/fkloos/matlab/mwlIO/trunk/@subheader/deleteComments.m
+END
+headerType.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/1027/fkloos/matlab/mwlIO/trunk/@subheader/headerType.m
+END
+addComment.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/1027/fkloos/matlab/mwlIO/trunk/@subheader/addComment.m
+END
+hasParam.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/1475/fkloos/matlab/mwlIO/trunk/@subheader/hasParam.m
+END
+setParam.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/1027/fkloos/matlab/mwlIO/trunk/@subheader/setParam.m
+END
+Contents.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/1014/fkloos/matlab/mwlIO/trunk/@subheader/Contents.m
+END
+dumpHeader.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/1027/fkloos/matlab/mwlIO/trunk/@subheader/dumpHeader.m
+END
+len.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/1027/fkloos/matlab/mwlIO/trunk/@subheader/len.m
+END
+getParam.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/1410/fkloos/matlab/mwlIO/trunk/@subheader/getParam.m
+END
+subheader.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/1027/fkloos/matlab/mwlIO/trunk/@subheader/subheader.m
+END
+deleteParam.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/1027/fkloos/matlab/mwlIO/trunk/@subheader/deleteParam.m
+END

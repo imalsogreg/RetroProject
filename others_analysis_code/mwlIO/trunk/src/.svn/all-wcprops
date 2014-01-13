@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/!svn/ver/1032/fkloos/matlab/mwlIO/trunk/src
+END
+posfindtimerange.c
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/1032/fkloos/matlab/mwlIO/trunk/src/posfindtimerange.c
+END
+findrecord.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/1032/fkloos/matlab/mwlIO/trunk/src/findrecord.c
+END
+posfindrecord.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/1032/fkloos/matlab/mwlIO/trunk/src/posfindrecord.c
+END
+mwlio.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/1032/fkloos/matlab/mwlIO/trunk/src/mwlio.c
+END
+mwlwrite.c
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/1032/fkloos/matlab/mwlIO/trunk/src/mwlwrite.c
+END
+poscountrecords.c
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/11/fkloos/matlab/mwlIO/trunk/src/poscountrecords.c
+END
+posloadrecordrange.c
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/1032/fkloos/matlab/mwlIO/trunk/src/posloadrecordrange.c
+END

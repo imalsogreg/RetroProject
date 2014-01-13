@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/!svn/ver/2310/fkloos/matlab/mwlIO/trunk
+END
+mwlIO.spec
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/1029/fkloos/matlab/mwlIO/trunk/mwlIO.spec
+END
+test_mwlio.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/1025/fkloos/matlab/mwlIO/trunk/test_mwlio.m
+END
+loadheader.m
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/!svn/ver/1031/fkloos/matlab/mwlIO/trunk/loadheader.m
+END
+ad_filter_convert.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/ad_filter_convert.m
+END
+Contents.m
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/Contents.m
+END
+mwltypemapping.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/1033/fkloos/matlab/mwlIO/trunk/mwltypemapping.m
+END
+makesources.m
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/!svn/ver/1013/fkloos/matlab/mwlIO/trunk/makesources.m
+END
+mwlopen.m
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/mwlopen.m
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/!svn/ver/2310/fkloos/matlab/mwlIO/trunk/Makefile
+END
+mwlcreate.m
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/mwlcreate.m
+END

@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/2062/fkloos/matlab/fkUtilities/trunk/@configobj
+END
+subsasgn.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/!svn/ver/1328/fkloos/matlab/fkUtilities/trunk/@configobj/subsasgn.m
+END
+sections.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/!svn/ver/1328/fkloos/matlab/fkUtilities/trunk/@configobj/sections.m
+END
+write.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/1328/fkloos/matlab/fkUtilities/trunk/@configobj/write.m
+END
+config2struct.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/!svn/ver/2062/fkloos/matlab/fkUtilities/trunk/@configobj/config2struct.m
+END
+Contents.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/!svn/ver/1328/fkloos/matlab/fkUtilities/trunk/@configobj/Contents.m
+END
+values.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/!svn/ver/1328/fkloos/matlab/fkUtilities/trunk/@configobj/values.m
+END
+configobj.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/!svn/ver/2062/fkloos/matlab/fkUtilities/trunk/@configobj/configobj.m
+END
+getcomment.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/!svn/ver/1328/fkloos/matlab/fkUtilities/trunk/@configobj/getcomment.m
+END
+display.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/!svn/ver/1328/fkloos/matlab/fkUtilities/trunk/@configobj/display.m
+END
+dump.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/1390/fkloos/matlab/fkUtilities/trunk/@configobj/dump.m
+END
+subsref.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/!svn/ver/1328/fkloos/matlab/fkUtilities/trunk/@configobj/subsref.m
+END
+keys.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/1328/fkloos/matlab/fkUtilities/trunk/@configobj/keys.m
+END
+explore.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/!svn/ver/1328/fkloos/matlab/fkUtilities/trunk/@configobj/explore.m
+END
+setcomment.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/!svn/ver/1328/fkloos/matlab/fkUtilities/trunk/@configobj/setcomment.m
+END
+get.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/1328/fkloos/matlab/fkUtilities/trunk/@configobj/get.m
+END

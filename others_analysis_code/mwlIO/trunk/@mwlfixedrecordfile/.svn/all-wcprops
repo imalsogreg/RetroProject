@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/2293/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile
+END
+set.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/set.m
+END
+loadrange.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/!svn/ver/2127/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/loadrange.m
+END
+Contents.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/Contents.m
+END
+appendData.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/appendData.m
+END
+findRecords.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/findRecords.m
+END
+setFieldsInterp.m
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/!svn/ver/1035/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/setFieldsInterp.m
+END
+display.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/display.m
+END
+end.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/end.m
+END
+subsref.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/subsref.m
+END
+closeHeader.m
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/!svn/ver/1942/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/closeHeader.m
+END
+mwlfixedrecordfile.m
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/mwlfixedrecordfile.m
+END
+get.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/get.m
+END
+load.m
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/!svn/ver/2293/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/load.m
+END
+setFields.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/setFields.m
+END
+loadField.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/!svn/ver/1036/fkloos/matlab/mwlIO/trunk/@mwlfixedrecordfile/loadField.m
+END

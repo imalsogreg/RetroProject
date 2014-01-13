@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/!svn/ver/2058/fkloos/matlab/mwlIO/trunk/@mwlfield
+END
+elementsize.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/elementsize.m
+END
+mexcode.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/mexcode.m
+END
+subsasgn.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/subsasgn.m
+END
+print.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/print.m
+END
+Contents.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/Contents.m
+END
+bytesize.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/bytesize.m
+END
+ismember.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/ismember.m
+END
+mwlfield.m
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/!svn/ver/2058/fkloos/matlab/mwlIO/trunk/@mwlfield/mwlfield.m
+END
+display.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/display.m
+END
+eq.m
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/eq.m
+END
+size.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/size.m
+END
+byteoffset.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/byteoffset.m
+END
+code.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/code.m
+END
+mex_fielddef.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/mex_fielddef.m
+END
+matcode.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/matcode.m
+END
+name.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/name.m
+END
+length.m
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlfield/length.m
+END
+formatstr.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/2058/fkloos/matlab/mwlIO/trunk/@mwlfield/formatstr.m
+END
+type.m
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/!svn/ver/1033/fkloos/matlab/mwlIO/trunk/@mwlfield/type.m
+END

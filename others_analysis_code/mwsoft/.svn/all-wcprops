@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 26
+/!svn/ver/713/mwsoft/trunk
+END
+TODO
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/!svn/ver/680/mwsoft/trunk/TODO
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/!svn/ver/680/mwsoft/trunk/ChangeLog
+END
+mwl-wilson-software.spec
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/!svn/ver/680/mwsoft/trunk/mwl-wilson-software.spec
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/!svn/ver/713/mwsoft/trunk/Makefile
+END
+RELEASE
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/!svn/ver/680/mwsoft/trunk/RELEASE
+END
+definitions.mk
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/!svn/ver/680/mwsoft/trunk/definitions.mk
+END

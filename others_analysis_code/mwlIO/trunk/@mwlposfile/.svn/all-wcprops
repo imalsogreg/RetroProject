@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/1414/fkloos/matlab/mwlIO/trunk/@mwlposfile
+END
+display.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlposfile/display.m
+END
+getRecordOffsets.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlposfile/getRecordOffsets.m
+END
+loadrange.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlposfile/loadrange.m
+END
+Contents.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/1014/fkloos/matlab/mwlIO/trunk/@mwlposfile/Contents.m
+END
+setCurrentRecord.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlposfile/setCurrentRecord.m
+END
+closeHeader.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/!svn/ver/1414/fkloos/matlab/mwlIO/trunk/@mwlposfile/closeHeader.m
+END
+get.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwlposfile/get.m
+END
+mwlposfile.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/1033/fkloos/matlab/mwlIO/trunk/@mwlposfile/mwlposfile.m
+END
+setFields.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/1033/fkloos/matlab/mwlIO/trunk/@mwlposfile/setFields.m
+END

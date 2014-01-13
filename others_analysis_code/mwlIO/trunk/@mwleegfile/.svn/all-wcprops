@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/!svn/ver/1477/fkloos/matlab/mwlIO/trunk/@mwleegfile
+END
+display.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwleegfile/display.m
+END
+subsref.m
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/!svn/ver/1477/fkloos/matlab/mwlIO/trunk/@mwleegfile/subsref.m
+END
+Contents.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwleegfile/Contents.m
+END
+closeHeader.m
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/!svn/ver/1414/fkloos/matlab/mwlIO/trunk/@mwleegfile/closeHeader.m
+END
+get.m
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/!svn/ver/1028/fkloos/matlab/mwlIO/trunk/@mwleegfile/get.m
+END
+mwleegfile.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/!svn/ver/1413/fkloos/matlab/mwlIO/trunk/@mwleegfile/mwleegfile.m
+END
+setFields.m
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/!svn/ver/1033/fkloos/matlab/mwlIO/trunk/@mwleegfile/setFields.m
+END
