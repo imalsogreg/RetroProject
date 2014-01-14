@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg3887"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="Yin_yangA.svg"
+   inkscape:export-filename="/home/greghale/Documents/RetroProject/awake_dips/slides/pics/Yin_yangA.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs3889" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="375"
+     inkscape:cy="520"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="483"
+     inkscape:window-height="424"
+     inkscape:window-x="713"
+     inkscape:window-y="158"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata3892">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       transform="translate(142,299.36218)"
+       sodipodi:ry="231"
+       sodipodi:rx="231"
+       sodipodi:cy="233"
+       sodipodi:cx="233"
+       cx="233"
+       cy="233"
+       r="231"
+       id="circle3815" />
+    <path
+       style="fill:#ffffff"
+       inkscape:connector-curvature="0"
+       d="m 375,758.36218 a 226,226 0 1 1 0,-452 113,113 0 0 1 0,226 z"
+       id="path3817" />
+    <circle
+       transform="translate(142,299.36218)"
+       style="fill:#000000"
+       sodipodi:ry="113"
+       sodipodi:rx="113"
+       sodipodi:cy="346"
+       sodipodi:cx="233"
+       cx="233"
+       cy="346"
+       r="113"
+       id="circle3819" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#008080;fill-opacity:1;stroke:none;font-family:Sans"
+       x="373.77362"
+       y="621.77142"
+       id="text3831"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3833"
+         x="373.77362"
+         y="621.77142"
+         style="font-weight:bold;fill:#008080;-inkscape-font-specification:Sans Bold">Asleep</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="207.66949"
+       y="457.65756"
+       id="text3856"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3858"
+         x="207.66949"
+         y="457.65756"
+         style="font-weight:bold;-inkscape-font-specification:Sans Bold">Awake</tspan></text>
+  </g>
+</svg>
