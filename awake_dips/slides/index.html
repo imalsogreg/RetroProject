@@ -40,7 +40,7 @@
 	  </p>
 	</section>
 	<section>
-	  <h2>The big question: What does replay do?</h2>
+	  <h2>Big question: What does replay do?</h2>
 	  <br/>
 	  <ul>
 	    <li>Phenomenology <br/> <small>What does replay look like, in wake & during sleep, on short tracks and in open arenas?</small></li>
@@ -106,7 +106,7 @@
 	      </div>
 	      <div class="col-sm-6">
 		<img src="foster2013a.jpg" height="200px"/><br/>
-		<p class="cap">Pfeiffer and Foster, 2013; Kloosterman and Wilson unpublished.  Replay trajectories in open fields.  May be some influence of past/future behavior on replayed sequences, but they are probably more &quot;exploratory&quot; than the rat&quot;s behavior.
+		<p class="cap">Pfeiffer and Foster, 2013; Kloosterman and Wilson unpublished.  Replay trajectories in open fields.  May be some influence of past/future behavior on replayed sequences, but they are probably more &quot;exploratory&quot; than the rat&apos;s behavior.
 	      </div>
 	    </div>
 	  </section>
@@ -313,6 +313,16 @@
 	    <p class="cap">Somatosensory and parietal cortex (the two recorded) have isolated down states related to sleepiness level.</p>
 	  </section>
 
+	  <section>
+	    <h2>What causes slow waves in awake RSC?</h2><br/>
+	    <p style="text-align:left">Drowsiness?</p>
+	    <p style="text-align:left;font-size:32px">Found many slow waves during dark and light phases of light cycle.</p><br/>
+	    <p style="text-align:left">Track novelty?</p>
+	    <p style="text-align:left;font-size:32px">Slow waves come about without large reward in early learning; but are just as strong late in learning, given large rewards.  Novelty may be sufficient, not necessary.</p><br/>
+	    <p style="text-align:left">Sampling bias?</p>
+	    <p style="text-align:left;font-size:32px">We see slow waves within five seconds of receiving large reward - rats stop this long for small reward and don&apos;t have RSC slow waves.</p>
+	  </section>
+
 	</section>
 
 	<section> <!-- Properties of sleep and wake frames -->
@@ -446,21 +456,45 @@
 	</section>
 
 	<section> <!-- Model -->
-	<section> 
-	  <h2>Two behaviors: wake and sleep</h2>
-	  <img src="pics/Yin_yangA.png" id="ghclean"/>
-	</section>
+	  <section> 
+	    <h2>Two behavioral states: wake and sleep</h2>
+	    <img src="pics/Yin_yangA.png" id="ghclean" height="400px"/>
+	  </section>
 
-	<section> <!-- Model -->
-	  <h2>Two modes: Online and Slow Wave</h2>
-	  <br/>
-	  
-	  <img src="pics/Yin_yangB.png" id="ghclean" height="500px"/>
-	  
-
+	  <section> <!-- Model -->
+	    <h2>Two processing modes: Online and Slow Wave</h2>
+	    
+	    <div class="row">
+	      <div class="col-sm-6">
+		<img src="pics/Yin_yangC.png" id="ghclean" height="400px"/>
+	      </div>
+	      <div class="col-sm-6">
+		<p style="font-size:32px;text-align:left">
+		  Each behavioral state supports both an <em>online</em> and a <em>slow-wave</em> mode.
+		</p>
+		<div style="font-size:20px;">
+		<ul>
+		  <li>Online mode</li>
+		  <ul>
+		    <li>HPC theta</li>
+		    <li>CTX &apos;Desynchronized&apos;</li>
+		    <li>Sensory-driven CTX</li>
+		    <li>Active behavior, REM sleep</li>
+		  </ul>
+		  <li>Slow Wave mode</li>
+		  <ul>
+		    <li>HPC Ripples</li>
+		    <li>CTX Slow waves</li>
+		    <li>Internally driven</li>
+		    <li>Slow-wave sleep, Slow-wave wake</li>
+		  </ul>
+		</ul>
+		</div>
+	      </div>
+	    </div>
+	  </section>
 	</section>
-	</section>
-
+	
 	<section>
 	  <h2>Next steps</h2>
 	  <br/>
@@ -494,7 +528,7 @@
 
       theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
       //transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-      transition: Reveal.getQueryHash().transition || 'none',
+      transition: Reveal.getQueryHash().transition || 'linear',
 
       // Parallax scrolling
       // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
