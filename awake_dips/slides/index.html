@@ -39,7 +39,8 @@
 	    <small>Greg Hale</small>
 	  </p>
 	</section>
-	<section>
+
+ 	<section>
 	  <h2>Big question: What does replay do?</h2>
 	  <br/>
 	  <ul>
@@ -130,7 +131,7 @@
 	  <section>
 	    <h2>Functional Role</h2>
 	  </section>
-
+	  
 	  <section>
 	    <h2>Sleep replay disruption and learning</h2>
 	    <img src="val.png"/>
@@ -138,7 +139,7 @@
 	      Ego-Stengel and Wilson, 2009.  Hippocampal afferent stimulation, locked to sharp-wave ripples (often accompanied by replay), slows spatial learning of the track being replayed.
 	    </p>
 	  </section>
-	 
+	  
 	  <section>
 	    <h2>Awake replay disruption and learning</h2>
 	    <div class="row">
@@ -148,7 +149,7 @@
 	      Jadhav et. at. 2012.  Awake replay disruption impairs spatial working-memory performance, doesn't strongly interfere with referenec memory performance.
 	    </p>
 	  </section>
-
+	  
 	</section>
 	
 	<section> <!-- Interactions -->
@@ -201,7 +202,7 @@
 	<section> <!-- Hippocampal-retrosplenial recordings motivation -->
 
 	  <section> <!-- Title -->
-	  <h2>Hippocampal-Retrosplenial Recordings</h2>
+	    <h2>Hippocampal-Retrosplenial Recordings</h2>
 	  </section>
 
 	  <section> <!-- Overview -->
@@ -316,17 +317,17 @@
 	  <section>
 	    <h2>What causes slow waves in awake RSC?</h2><br/>
 	    <p style="text-align:left">Drowsiness?</p>
-	    <p style="text-align:left;font-size:32px">Found many slow waves during dark and light phases of light cycle.</p><br/>
+	    <p style="text-align:left;font-size:32px">Slow waves during dark and light phases of light cycle.</p><br/>
 	    <p style="text-align:left">Track novelty?</p>
-	    <p style="text-align:left;font-size:32px">Slow waves come about without large reward in early learning; but are just as strong late in learning, given large rewards.  Novelty may be sufficient, not necessary.</p><br/>
+	    <p style="text-align:left;font-size:32px">Slow waves without large reward in early learning; late in learning with large rewards.  Novelty sufficient, not necessary.</p><br/>
 	    <p style="text-align:left">Sampling bias?</p>
-	    <p style="text-align:left;font-size:32px">We see slow waves within five seconds of receiving large reward - rats stop this long for small reward and don&apos;t have RSC slow waves.</p>
+	    <p style="text-align:left;font-size:32px">Large reward slow waves within five seconds - less than small reward stopping time.</p>
 	  </section>
 
 	</section>
 
 	<section> <!-- Properties of sleep and wake frames -->
-
+	  
 	  <section>
 	    <h2>Comparing RSC frames in sleep and wake</h2>
 	  </section>
@@ -395,9 +396,9 @@
 
 
 	</section>
-
+	
 	<section> <!-- Hippocampal involvement -->
-	    
+	  
 	  <section>
 	    <h2>Hippocampal involvement in slow-wave like activity</h2>
 	  </section>
@@ -473,22 +474,22 @@
 		  Each behavioral state supports both an <em>online</em> and a <em>slow-wave</em> mode.
 		</p>
 		<div style="font-size:20px;">
-		<ul>
-		  <li>Online mode</li>
 		  <ul>
-		    <li>HPC theta</li>
-		    <li>CTX &apos;Desynchronized&apos;</li>
-		    <li>Sensory-driven CTX</li>
-		    <li>Active behavior, REM sleep</li>
+		    <li>Online mode</li>
+		    <ul>
+		      <li>HPC theta</li>
+		      <li>CTX &apos;Desynchronized&apos;</li>
+		      <li>Sensory-driven CTX</li>
+		      <li>Active behavior, REM sleep</li>
+		    </ul>
+		    <li>Slow Wave mode</li>
+		    <ul>
+		      <li>HPC Ripples</li>
+		      <li>CTX Slow waves</li>
+		      <li>Internally driven</li>
+		      <li>Slow-wave sleep, Slow-wave wake</li>
+		    </ul>
 		  </ul>
-		  <li>Slow Wave mode</li>
-		  <ul>
-		    <li>HPC Ripples</li>
-		    <li>CTX Slow waves</li>
-		    <li>Internally driven</li>
-		    <li>Slow-wave sleep, Slow-wave wake</li>
-		  </ul>
-		</ul>
 		</div>
 	      </div>
 	    </div>
@@ -502,50 +503,50 @@
 	    <li>Cleanly parse wake slow waves into light-like and deep-like?</li>
 	    <li>Difference in properties of ripples, depending on relationship to frames?</li>
 	    <li>Difference in properties of <em>replay</em>, depending on relationship to frames?</li>
+	    <li>Differentiate between sharp-wave asociated and non-sharp-wave ripples in terms of frames.</li>
 	  </ul>
 	</section>
-
+	
 	<section> <!-- Questions -->
 	  <h1>Thanks.  Questions?</h1>
 	</section>
+	</div>
 	
-      </div>
-      
-    </div>
-    
-    <script src="lib/js/head.min.js"></script>
-    <script src="js/reveal.min.js"></script>
-    
-    <script>
-      
-      // Full list of configuration options available here:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-      controls: true,
-      progress: true,
-      history: true,
-      center: true,
+	</div>
+	
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.min.js"></script>
+	
+	<script>
+	  
+	  // Full list of configuration options available here:
+	  // https://github.com/hakimel/reveal.js#configuration
+	  Reveal.initialize({
+	  controls: true,
+	  progress: true,
+	  history: true,
+	  center: true,
 
-      theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-      //transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-      transition: Reveal.getQueryHash().transition || 'linear',
+	  theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+	  //transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+	  transition: Reveal.getQueryHash().transition || 'default',
 
-      // Parallax scrolling
-      // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-      // parallaxBackgroundSize: '2100px 900px',
+	  // Parallax scrolling
+	  // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+	  // parallaxBackgroundSize: '2100px 900px',
 
-      // Optional libraries used to extend on reveal.js
-      dependencies: [
-      { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-      { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-      { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-      { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-      ]
-      });
+	  // Optional libraries used to extend on reveal.js
+	  dependencies: [
+	  { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+	  { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	  { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+	  { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+	  { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+	  { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+	  ]
+	  });
 
-    </script>
+	</script>
 
   </body>
 </html>
