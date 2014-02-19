@@ -4,7 +4,6 @@ Experience Report: Real-time brain decoding with Haskell
 
 Points to hit:
   + Scientist programmers write bad code! How will I do with Haskell?
-  + Pure functions really were reusable.  Took MWL file parser, repurposed to cut out spikes before 'start time' - for quick debugging by streaming-to-file-from-point-in-time.
   + Expected difficulty vs. actual difficulty.  Getting rid of for loops: hard
     Using arrays: hard.  Using monads: easy.
   + Project goal, reason for the software

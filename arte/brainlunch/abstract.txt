@@ -1,0 +1,8 @@
+ArtE, almost a real-time electrophysiology system
+
+I will summarize the progress on ArtE, a tetrode recording setup originally designed as a no-frills replacement for the aging systems currently used in our lab for recording place cells in freely moving rats.  Exploiting the speed of current desktop computers, our system can quickly process data in very small (1ms) chunks, making it suitable for performing in real-time some of the analyses that we typically only do in post-processing, such as sorting spikes recorded on tetrodes into different clusters and tracking place cell receptive fields.
+
+The ArtE system is not finished; so far we have been using it alongside our lab's current system, simply to be able to record from more tetrodes in parallel.  But we hope hope that it will soon be a free standing system with cababilities that enable new kinds of experiments. I will outline the steps remaining toward that goal.
+
+I will then briefly discuss some specific examples of real-time feedback experiments in hippocampal place cells, ways to generalize the system to be useful for real-time experiments in your own model system, implementation details, and where ArtE fits into the larger landscape of multi-electrode recording setups available.
+
