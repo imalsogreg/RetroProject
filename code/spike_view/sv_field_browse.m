@@ -75,9 +75,13 @@ if(data.use_pos)
     hold off;
 
     h(2) = subplot(2,2,1);
-    plot(data.pos_info.x_filt.data',data.pos_info.y_filt.data','k.','MarkerSize',1,'Parent',h(2)); hold on;
+    data.pos_info.x_filt.data( isnan(data.pos_info.x_filt.data) ) = 0;
+    data.pos_info.y_filt.data( isnan(data.pos_info.y_filt.data) ) = 0;
+    plot(data.pos_info.x_filt.data',data.pos_info.y_filt.data','k.','MarkerSize',1,'Parent',h(2)); 
+    hold on;
     plot(x_out,y_out,'b.','Parent',h(2));
     plot(x_in,y_in,'r.','Parent',h(2)); hold off;
+    axis equal;
     
     hb(1) = subplot(2,2,3);
     plot(conttimestamp(data.pos_info.x_filt),data.pos_info.x_filt.data','k.','MarkerSize',1); hold on;
@@ -92,7 +96,6 @@ if(data.use_pos)
     lin_col = strcmp(clust.featurenames,'pos_at_all_spikes');
     plot(clust.data(out_rows,t_col),clust.data(out_rows,lin_col),'b.','Parent',hb(2));
     plot(clust.data(in_rows,t_col),clust.data(in_rows,lin_col),'r.','Parent',hb(2)); hold off;
-
     linkaxes(hb,'x');
     title(num2str(data.i));
 end
