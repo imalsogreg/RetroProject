@@ -66,4 +66,14 @@ triggers = triggers(:,1);
 rippleByFramePsth = mapMap(@(x) psth_in_windows(events, triggers, ...
                                                 x,'timewin',[-2,2],'samplerate',50), b);
 
-%% Spectrogram
+%% ripple frequencies
+
+rippleFreqs = rippleSpectrogramFreq(rippleEeg);
+rippleFreqs.data(isnan(rippleFreqs.data)) = 0;
+
+%% 
+stateRipples = mapMap(@(x) gh_intersection_segs(x,ripples),b);
+rippleFreqsDist = mapMap(@(x) rippleMeanFreqsInSegments(rippleFreqs,x), ...
+                         stateRipples);
+%%
+rippleFreqsMean = mapMap(@(x) mean(x), rippleFreqsDist);
