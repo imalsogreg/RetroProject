@@ -25,7 +25,10 @@ p.addParamValue('r_thresh', 5e-5);
 
 % options for anatomical_dists
 p.addParamValue('anatomical_dists',[]);
+p.addParamValue('ok_areas',{'CA1','CA3'});
 p.addParamValue('axis_vector',[1 -1] ./ sqrt(2) );
+p.addParamValue('anatomical_groups',false, @isbool);
+p.addParamValue('trode_groups',[]);
 
 p.parse(varargin{:});
 opt = p.Results;
@@ -64,12 +67,26 @@ ok_xcorr_pairs = sum(sum(~isnan(xcorr_dists)))/2
 
 if(~isempty(opt.anatomical_dists))
     anatomical_dists = opt.anatomical_dists;
-else
+elseif(~opt.anatomical_groups)
     anatomical_dists = get_anatomical_dists(place_cells, rat_conv_table, 'axis_vector', opt.axis_vector);
+elseif(opt.anatomical_groups)
+    if isempty(opt.trode_groups)
+          error('full_xcorr_analysis:need_trode_groups',...
+              'need to pass trode_groups param to use anatomical_groups option');
+    end
+    anatomical_dists = get_anatomical_region_dists(place_cells, opt.trode_groups);
 end
 
-[f, X_reg, y_reg] = plot_all_dists(field_dists, xcorr_dists, anatomical_dists,'xcorr_r', opt.xcorr_r);
+if(~opt.anatomical_groups)
+[f, X_reg, y_reg] = plot_all_dists(field_dists, xcorr_dists, anatomical_dists,...
+    'xcorr_r', opt.xcorr_r);
+end
 
+if(opt.anatomical_groups)
+    [f,X_reg_array] = plot_all_dists_by_group(field_dists,xcorr_dists, anatomical_dists);
+end
+    
+error('treat inbound and outbound the right way');
 if(strcmp(opt.field_direction,'inbound'))
     X_reg(:,2) = -1.*X_reg(:,2);
 end
