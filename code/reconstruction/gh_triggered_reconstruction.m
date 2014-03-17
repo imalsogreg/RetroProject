@@ -29,17 +29,22 @@ if(isempty(opt.trig_times))
 
     % temporarily use only a single lfp channel
     if(isempty(opt.phase_cdat)||isempty(opt.env_cdat))
-        lfp = contchans(lfp,'chans',[1]);
-        [opt.lfp_theta,opt.lfp_phase,opt.lfp_env] = gh_theta_filt(opt.lfp);
+        opt.lfp = contchans(opt.lfp,'chans',[1]);
+        [opt.lfp_theta,opt.phase_cdat,opt.env_cdat] = gh_theta_filt(opt.lfp);
+        eeg_r.raw = opt.lfp;
+        eeg_r.theta = opt.lfp_theta;
+        eeg_r.phase = opt.phase_cdat;
+        eeg_r.env = opt.env_cdat;
     end
 
     if(~isempty(opt.lfp_chan))
         %opt.lfp = contchans_r(opt.lfp,'chans',opt.lfp_chan);
-        opt.phase_cdat = contchans(opt.phase_cdat,'chans',opt.lfp_chan);
-        opt.env_cdat = contchans(opt.env_cdat,'chans',opt.lfp_chan);
+        %opt.phase_cdat = contchans(opt.phase_cdat,'chans',opt.lfp_chan);
+        %opt.env_cdat = contchans(opt.env_cdat,'chans',opt.lfp_chan);
+        eeg_r = contchans_r(eeg_r,'chans',opt.lfp_chan);
     end
 
-    trigs = gh_troughs_from_phase(opt.phase_cdat,'phase',opt.phase);
+    trigs = gh_troughs_from_phase(eeg_r,'phase',opt.phase);
 
 else
     

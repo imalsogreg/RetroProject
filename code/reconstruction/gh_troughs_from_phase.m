@@ -76,5 +76,5 @@ if(~isempty(opt.env_thresh))
     match_bool = and(match_bool, suitable_power);
 end
 
-match_times = ts(match_bool);
+match_times = ts(logical(match_bool));
 
