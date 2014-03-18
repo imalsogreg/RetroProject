@@ -10,25 +10,36 @@ p.addParamValue('max_abs_field_dist',0.6)
 p.parse(varargin{:});
 opt = p.Results;
 
-% make an array of place_cells, each row is the same cell over and over again
-n_units = numel(place_cells.clust);
-place_cells.clust = repmat( reshape(place_cells.clust,[],1),1, n_units );
+% THE NEW WAY - Don't make a matrix of place cells.  Make a matrix of place fields
+% Unwrap outbound and inbound.  Take xcorr of two fields on the same neuron?  Sure,
+% it's fine, because (by definition) they won't have enough of a cross-correlation
+% to be included in the final regression
 
-if(strcmp(opt.method, 'peak'))
-    dist_fun = @lfun_peak_dist;
-elseif(strcmp(opt.method,'xcorr'))
-    dist_fun = @lfun_xcorr_dist;
+fields = [];
+for c = 1:numel(place_cells.clust)
+    this_outbound = g
 end
 
-dist_matrix = cellfun( @(x,y) lfun_peak_dist(x,y,opt), place_cells.clust, (place_cells.clust)');
-if(~isempty(opt.max_abs_field_dist));
-    dist_matrix( abs(dist_matrix) > opt.max_abs_field_dist) = NaN;
-end
-
-dist_matrix(logical( tril(ones(n_units))) ) = NaN;
-
-place_cells_out = place_cells;
-place_cells_out.clust = cellfun( @(x) lfun_assign_peak_pos(x,opt), place_cells.clust,'UniformOutput',false);
+% % THE OLD WAY
+% % make an array of place_cells, each row is the same cell over and over again
+% n_units = numel(place_cells.clust);
+% place_cells.clust = repmat( reshape(place_cells.clust,[],1),1, n_units );
+% 
+% if(strcmp(opt.method, 'peak'))
+%     dist_fun = @lfun_peak_dist;
+% elseif(strcmp(opt.method,'xcorr'))
+%     dist_fun = @lfun_xcorr_dist;
+% end
+% 
+% dist_matrix = cellfun( @(x,y) lfun_peak_dist(x,y,opt), place_cells.clust, (place_cells.clust)');
+% if(~isempty(opt.max_abs_field_dist));
+%     dist_matrix( abs(dist_matrix) > opt.max_abs_field_dist) = NaN;
+% end
+% 
+% dist_matrix(logical( tril(ones(n_units))) ) = NaN;
+% 
+% place_cells_out = place_cells;
+% place_cells_out.clust = cellfun( @(x) lfun_assign_peak_pos(x,opt), place_cells.clust,'UniformOutput',false);
 
 end
 

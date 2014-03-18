@@ -41,8 +41,6 @@ else
         'multipeak_max_spacing', opt.multipeak_max_spacing, 'max_abs_field_dist', opt.max_abs_field_dist);
 end
 
-ok_field_pairs = sum(sum(~isnan(field_dists)))/2
-
 if(~isempty(opt.xcorr_dists))
     xcorr_dists = opt.xcorr_dists;
 else
