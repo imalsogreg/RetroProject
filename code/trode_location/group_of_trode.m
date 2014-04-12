@@ -27,6 +27,9 @@ for iG = 1:numel(trode_groups)
 end
 
 if isempty(g)
-    error('group_of_trode:no_matches',...
-           'group_of_trode didn''t find any matches');
+    %error('group_of_trode:no_matches',...
+     %      'group_of_trode didn''t find any matches');
+g.name  = 'NONE';
+g.trodes = cell(0);
+g.color   = [1,0,0];
 end

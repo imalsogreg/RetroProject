@@ -1,12 +1,12 @@
-function [dist_matrix,place_cells_out] = get_field_dists(place_cells, varargin)
+function [dists,fieldSources] = get_field_dists(place_cells, varargin)
 
 p = inputParser();
 p.addParamValue('method', 'peak', @(x) any(strcmp(x, {'peak', 'xcorr'})));
-p.addParamValue('field_direction', 'outbound', @(x) any(strcmp(x, {'outbound', 'inbound'})));
 p.addParamValue('min_peak_rate_thresh', 15);
 p.addParamValue('rate_thresh_for_multipeak',5);
 p.addParamValue('multipeak_max_spacing',0.5);
-p.addParamValue('max_abs_field_dist',0.6)
+p.addParamValue('max_abs_field_dist',2)
+p.addParamValue('draw',false);
 p.parse(varargin{:});
 opt = p.Results;
 
@@ -14,102 +14,127 @@ opt = p.Results;
 % Unwrap outbound and inbound.  Take xcorr of two fields on the same neuron?  Sure,
 % it's fine, because (by definition) they won't have enough of a cross-correlation
 % to be included in the final regression
-
-fields = [];
+fields = cell(0);
+fieldSources = cell(0);
+isValid = [];
 for c = 1:numel(place_cells.clust)
-    this_outbound = g
-end
-
-% % THE OLD WAY
-% % make an array of place_cells, each row is the same cell over and over again
-% n_units = numel(place_cells.clust);
-% place_cells.clust = repmat( reshape(place_cells.clust,[],1),1, n_units );
-% 
-% if(strcmp(opt.method, 'peak'))
-%     dist_fun = @lfun_peak_dist;
-% elseif(strcmp(opt.method,'xcorr'))
-%     dist_fun = @lfun_xcorr_dist;
-% end
-% 
-% dist_matrix = cellfun( @(x,y) lfun_peak_dist(x,y,opt), place_cells.clust, (place_cells.clust)');
-% if(~isempty(opt.max_abs_field_dist));
-%     dist_matrix( abs(dist_matrix) > opt.max_abs_field_dist) = NaN;
-% end
-% 
-% dist_matrix(logical( tril(ones(n_units))) ) = NaN;
-% 
-% place_cells_out = place_cells;
-% place_cells_out.clust = cellfun( @(x) lfun_assign_peak_pos(x,opt), place_cells.clust,'UniformOutput',false);
-
-end
-
-
-function dist = lfun_peak_dist(cellA, cellB, opt)
-    if(or(~lfun_isvalid(cellA,opt), ~lfun_isvalid(cellB,opt)))
-        dist = NaN;
-        return;
+    place_cells.clust{c} = unrollOutboundInbound(place_cells.clust{c});
+    workingClust = place_cells.clust{c};
+    nCellField = 0;
+    while hasField(workingClust,opt)
+        [thisField,thisIsValid,workingClust] = lfunTakeTopField(workingClust,opt);
+        fields = [fields, thisField];
+        isValid = [isValid,thisIsValid];
+        nCellField = nCellField + 1;
     end
-    [p,r_A] = lfun_get_field(cellA,opt);
-    [~,r_B]  = lfun_get_field(cellB,opt);
-    peak_a = p( r_A == max(r_A));
-    peak_b = p( r_B == max(r_B));
-    % max is just in case two bins have the same firing rate
-    dist = double(max(peak_b) - max(peak_a));
+    fieldSources = [fieldSources, cmap(@(x) workingClust.name, cell(1,nCellField))];
+end
+
+binCenters = place_cells.clust{1}.field.bin_centers;
+
+dists = zeros(numel(fields),numel(fields));
+if (strcmp(opt.method,'peak'))
+    for r = 1:numel(fields)
+        for c = (r+1):numel(fields)
+              dists(r,c) = distByPeak(binCenters,fields{r},fields{c});
+              if( abs(dists(r,c)) > opt.max_abs_field_dist )
+                dists(r,c) = NaN;
+              end
+              dists(c,r) = -1 * dists(r,c);
+        end
+    end
+elseif(strcmp(opt.method,'xcorr'))
+    for r = 1:numel(fields)
+        for c = (r+1):numel(fields)
+          dists(r,c) = distByXcorr(binCenters,fields{r},fields{c});  
+        end
+    end
+else
+        error('get_field_dists:method_opt_impossible',...
+            'Impossible case');
+end
+
+if(opt.draw)
+    subplot(1,2,1);
+    lfunDraw(place_cells,fields,fieldSources,dists);
+    subplot(1,2,2);
+    colormap('cool');
+    imagesc(dists);
+end
+
+end
+
+function dist = distByPeak(binCenters,fieldA,fieldB)
+    peakB = binCenters(find(fieldB == max(fieldB),1,'first'));
+    peakA = binCenters(find(fieldA == max(fieldA),1,'first'));
+%    warning('check comment on next line is true');
+    dist = peakA - peakB;  % Distance from B forward to A matches xcorr semantics
+end
+
+function dist = distByXcorr(binCenters,fieldA,fieldB)
+    db = binCenters(2) - binCenters(1);
+    maxb = 2; % 1 meter max lag
+    nLags = ceil(maxb / db);
+    lagb = [-nLags.*db : db : nLags*db];
+    peakA = binCenters( find(fieldA == max(fieldA),1,'first'));
+    peakB = binCenters( find(fieldB == max(fieldB),1,'first'));
+    if abs(peakB - peakA ) < 1
+        x = xcorr(fieldA,fieldB,nLags);
+        dist = lagb( find(x == max(x),1,'first'));
+    else
+        dist = sign(peakB - peakA) * 1;
+    end
+end
+
+function f = lfunDraw(place_cells,fields,fieldLabels,distsMat)
+    bin_centers = place_cells.clust{1}.field.bin_centers;
     
-end
-
-function cellA_out = lfun_assign_peak_pos(cellA, opt)
-    cellA_out = cellA;
-    if(~lfun_isvalid(cellA,opt))
-        cellA_out.peak_pos = NaN;
-        return;
-    end
-    [p, r_A] = lfun_get_field(cellA,opt);
-    peak_pos = p(r_A == max(r_A));
-    cellA_out.peak_pos = peak_pos;
-end
-
-
-function dist = lfun_xcorr_dist(cellA, cellB, opt)
-  if(or(~lfun_isvalid(cellA,opt), ~lfun_isvalid(cellB,opt)))
-        dist = NaN;
-        return;
-  end
-    dist = 0;
-  
-end
-
-function valid = lfun_isvalid(cellA, opt)
-    valid = 1;  %innocent until proven guilty
-    [p,r] = lfun_get_field(cellA,opt);
-    dp = p(2)-p(1);
-    % test that we've crossed the rate threshold
-    if(~isempty(opt.min_peak_rate_thresh))
-        if(max(r) < opt.min_peak_rate_thresh)
-            valid = 0;
-            return;
-        end
-    end
-    % test that first and last peaks aren't too far apart (eliminate
-    % multi-peaks cells)
-    if(~isempty(opt.multipeak_max_spacing))
-        local_max_bool = [0, and(r(2:(end-1)) >= r(1:(end-2)), r(2:(end-1)) >= r(3:end)), 0];
-        cross_thresh_bool = (r >= opt.rate_thresh_for_multipeak);
-        p_of_max = p(and(local_max_bool, cross_thresh_bool));
-        if(numel(p) > 1)
-            if(max(p_of_max) - min(p_of_max) > opt.multipeak_max_spacing)
-                valid = 0;
-                return;
-            end
-        end
+    isDiffName = [0, 1 - strcmp(fieldLabels(1:(end-1)), fieldLabels(2:end))];
+    baselines = cumsum(isDiffName);
+    colorInd = 1:numel(baselines); % doesn't do what I want
+    
+    for n = 1:numel(fields)
+        area(bin_centers, fields{n} ./ max(fields{n}) + baselines(n) - 1,...
+            baselines(n) - 1,'FaceColor',gh_colors(colorInd(n))); hold on;
     end
 end
 
-function [p,r] = lfun_get_field(cellA,opt)
-    p = cellA.field.bin_centers;
-    if(strcmp(opt.field_direction, 'outbound'))
-        r = cellA.field.out_rate;
-    elseif(strcmp(opt.field_direction,'inbound'))
-        r = cellA.field.in_rate;
+function clust = unrollOutboundInbound(clust)
+    bc = clust.field.bin_centers;
+    lastBin = bc(end);
+    db = diff(bc(1:2));
+    unfoldedBinCenters = bc + lastBin + db;
+    newBinCenters = [bc, unfoldedBinCenters];
+    oldOutbound = clust.field.out_rate;
+    oldInbound   = clust.field.in_rate;
+    newField = [oldOutbound, oldInbound(end:-1:1)];
+    clust.field.bin_centers = newBinCenters;
+    clust.field.rate = newField;
+end
+
+function [topField,isValid,adjClust] = lfunTakeTopField(clust,opt)
+    cRate = clust.field.rate;
+    topField = zeros(size(cRate));
+    isValid = true;
+    adjClust = clust;
+    peakP = clust.field.bin_centers(cRate == max(cRate));
+    peakP = peakP(1);
+    iPeak = find(cRate == max(cRate),1,'first');
+    i = iPeak;
+    while i <= numel(cRate) && cRate(i) > opt.rate_thresh_for_multipeak
+        topField(i) = cRate(i);
+        cRate(i) = 0;
+        i = i + 1;
     end
+    i = iPeak - 1;
+    while i >= 1 && cRate(i) > opt.rate_thresh_for_multipeak
+        topField(i) = cRate(i);
+        cRate(i) = 0;
+        i = i - 1;
+    end
+    adjClust.field.rate = cRate;
+end
+
+function b = hasField(clust,opt)
+    b = max(clust.field.rate) > opt.min_peak_rate_thresh;
 end

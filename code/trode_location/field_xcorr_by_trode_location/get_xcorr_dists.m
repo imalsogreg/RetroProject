@@ -1,11 +1,11 @@
-function [xcorr_dists, xcorr_maxr, xcorr_mat] = get_xcorr_dists(place_cells, varargin)
+function [xcorr_dists, xcorr_maxr, xcorr_mat] = get_xcorr_dists(place_cells, field_cells, varargin)
 
 p = inputParser();
 p.addParamValue('timebouts', [min( cellfun(@(x) min(x.stimes), place_cells.clust)), ...
     max(cellfun(@(x) max(x.stimes), place_cells.clust))]);
 p.addParamValue('xcorr_bin_size',0.002);
 p.addParamValue('xcorr_lag_limits', [-0.06, 0.06]);
-p.addParamValue('r_thresh', 5e-5);
+p.addParamValue('r_thresh', 5e-1);
 p.addParamValue('drop_diagonal',true);
 p.addParamValue('smooth_timewin',0.01);
 p.addParamValue('field_dists',[]);
@@ -14,18 +14,32 @@ p.addParamValue('draw_pairs',[]);
 p.parse(varargin{:});
 opt = p.Results;
 
-if(~isempty(opt.field_dists))
-    has_field = ~all(isnan(opt.field_dists));
-    for n = 1:numel(place_cells.clust)
-        place_cells.clust{n}.has_field = has_field(n);
-    end
-end
+% Has-field seems only useful when iterating over place cells.
+% When the input is fields it's different
+% if(~isempty(opt.field_dists))
+%     has_field = ~all(isnan(opt.field_dists));
+%     for n = 1:numel(place_cells.clust)
+%         place_cells.clust{n}.has_field = has_field(n);
+%     end
+% end
 
-n_cells = numel(place_cells.clust);
+% Monkeypatch: old version assumed one field per place cell in place_cells.
+% Going to make that true here by indexing into place_cells at field_cells
+
+pcNames = cmap(@(x) x.name, place_cells.clust);
+inds = zeros(1,numel(field_cells));
+for n = 1:numel(inds)
+        inds(n) = find(strcmp(field_cells{n},pcNames),1,'first');
+end
+place_cells.clust = place_cells.clust(inds);
+
+n_cells  = numel(place_cells.clust);
+n_fields = numel(field_cells);
 n_timebouts = size(opt.timebouts,1);
 
 time_bin_edges = min(min(opt.timebouts)) : opt.xcorr_bin_size : max(max(opt.timebouts));
-time_bin_edges = [time_bin_edges, (time_bin_edges(end) + (time_bin_edges(2)-time_bin_edges(1)))];
+time_bin_dt = time_bin_edges(2) - time_bin_edges(1);
+time_bin_edges = [time_bin_edges, (time_bin_edges(end) + time_bin_dt)];
 n_time_bin_edges = numel(time_bin_edges);
 opt.time_bouts(:,1) = interp1( time_bin_edges, time_bin_edges, opt.timebouts(:,1),'nearest');
 opt.time_bouts(:,2) = interp1( time_bin_edges, time_bin_edges, opt.timebouts(:,2),'nearest');

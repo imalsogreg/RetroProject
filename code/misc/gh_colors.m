@@ -3,7 +3,7 @@ function c = gh_colors(n)
 
 palette = ...
    [...
-    1   1   1; ...  % White
+    1   0.5  0.5; ...  % Ping
     1   0   0; ...  % Red
     0  .5   0; ...  % Green
     0   0   1; ...  % Blue

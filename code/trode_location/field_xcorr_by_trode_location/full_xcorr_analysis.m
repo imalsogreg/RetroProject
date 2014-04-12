@@ -1,4 +1,4 @@
-function [X_reg, y_reg, field_dists, xcorr_dists, xcorr_r, anatomical_dists, f] = full_xcorr_analysis(place_cells, pos_info, rat_conv_table, varargin)
+function [X_reg, y_reg, field_dists, anatomical_dists, xcorr_dists, field_cells, xcorr_r, f] = full_xcorr_analysis(place_cells, pos_info, rat_conv_table, varargin)
 
 p = inputParser();
 
@@ -12,31 +12,40 @@ p.addParamValue('field_direction','outbound');
 p.addParamValue('min_peak_rate_thresh',15);
 p.addParamValue('rate_thresh_for_multipeak', 10);
 p.addParamValue('multipeak_max_spacing', 0.3);
-p.addParamValue('max_abs_field_dist', 0.5);
+p.addParamValue('max_abs_field_dist', 1);
 
 %options for xcorr_dists
 p.addParamValue('xcorr_dists',[]);
 p.addParamValue('xcorr_r',[]);
 p.addParamValue('timebouts', []);
 p.addParamValue('xcorr_bin_size', 0.002);
-p.addParamValue('xcorr_lag_limits', [-0.06, 0.06]);
+p.addParamValue('xcorr_lag_limits', [-0.12, 0.12]);
 p.addParamValue('smooth_timewin', 0.01);
-p.addParamValue('r_thresh', 5e-5);
+p.addParamValue('r_thresh', 1e-2);
 
 % options for anatomical_dists
-p.addParamValue('anatomical_dists',[]);
+p.addParamValue('anatomical_dists',[]);  %pass this to bypass computing it in full_xcorr_anal
 p.addParamValue('ok_areas',{'CA1','CA3'});
+p.addParamValue('swap_on_reverse',true);
+p.addParamValue('ok_pairs',[]);
 p.addParamValue('axis_vector',[1 -1] ./ sqrt(2) );
-p.addParamValue('anatomical_groups',false, @isbool);
+p.addParamValue('anatomical_groups',false);
 p.addParamValue('trode_groups',[]);
 
 p.parse(varargin{:});
 opt = p.Results;
 
+checkOkAreasAndSwapOnReverseParams(opt);
+
+if(isempty(opt.ok_pairs))
+    error('full_xcorr_analysis:unset_ok_pairs',...
+        'Must specify ''ok_pairs'' field, usually as { {''CA3'',''CA1''} } or { {''CA1'',''CA1''} }');
+end
+
 if(~isempty(opt.field_dists))
     field_dists = opt.field_dists;
 else
-    field_dists = get_field_dists(place_cells, 'method', opt.method, 'field_direction', opt.field_direction, ...
+    [field_dists,field_cells] = get_field_dists(place_cells, 'method', opt.method, ...
         'min_peak_rate_thresh', opt.min_peak_rate_thresh, 'rate_thresh_for_multipeak',opt.rate_thresh_for_multipeak,...
         'multipeak_max_spacing', opt.multipeak_max_spacing, 'max_abs_field_dist', opt.max_abs_field_dist);
 end
@@ -51,7 +60,7 @@ else
             opt.timebouts = pos_info.in_run_bouts;
         end
     end
-    [xcorr_dists, opt.xcorr_r] = get_xcorr_dists(place_cells, 'timebouts', opt.timebouts, 'xcorr_bin_size', opt.xcorr_bin_size,...
+    [xcorr_dists, opt.xcorr_r] = get_xcorr_dists(place_cells,field_cells, 'timebouts', opt.timebouts, 'xcorr_bin_size', opt.xcorr_bin_size,...
         'xcorr_lag_limits', opt.xcorr_lag_limits, 'r_thresh', opt.r_thresh, 'field_dists', field_dists, 'smooth_timewin', opt.smooth_timewin);
 end
 
@@ -66,13 +75,13 @@ ok_xcorr_pairs = sum(sum(~isnan(xcorr_dists)))/2
 if(~isempty(opt.anatomical_dists))
     anatomical_dists = opt.anatomical_dists;
 elseif(~opt.anatomical_groups)
-    anatomical_dists = get_anatomical_dists(place_cells, rat_conv_table, 'axis_vector', opt.axis_vector);
+    anatomical_dists = get_anatomical_dists(place_cells, field_cells, rat_conv_table, 'axis_vector', opt.axis_vector);
 elseif(opt.anatomical_groups)
     if isempty(opt.trode_groups)
           error('full_xcorr_analysis:need_trode_groups',...
               'need to pass trode_groups param to use anatomical_groups option');
     end
-    anatomical_dists = get_anatomical_region_dists(place_cells, opt.trode_groups);
+    anatomical_dists = get_anatomical_region_dists(place_cells, field_cells, opt.trode_groups);
 end
 
 if(~opt.anatomical_groups)
@@ -81,10 +90,56 @@ if(~opt.anatomical_groups)
 end
 
 if(opt.anatomical_groups)
-    [f,X_reg_array] = plot_all_dists_by_group(field_dists,xcorr_dists, anatomical_dists);
+    pairColorMap = containers.Map;
+    for n = 1:numel(opt.ok_pairs)
+    pairColorMap([opt.ok_pairs{n}{1},'|',opt.ok_pairs{n}{2}]) = gh_colors(n+1);
+    end
+  plot_all_dists_by_group(field_dists,anatomical_dists,xcorr_dists,...
+      field_cells,opt.trode_groups,pairColorMap);
+  X_reg = 2;
+  y_reg = 2;
 end
+
+end
+
+
+function checkOkAreasAndSwapOnReverseParams(opt)
+
+if(~isempty(opt.ok_pairs))
+    pairs = opt.ok_pairs;
+
+    for p = 1:numel(pairs)
     
-error('treat inbound and outbound the right way');
-if(strcmp(opt.field_direction,'inbound'))
-    X_reg(:,2) = -1.*X_reg(:,2);
+         if(numel(pairs{p}) ~= 2)
+            error('full_xcorr_analysis:bad_pairs','passed ''ok_pairs'' arg must be a cell array of pairs of strings');
+         end
+    
+        thisTarget = pairs{p};
+        thisRemainder = pairs;
+        thisRemainder(p) = [];
+    
+         
+        if(any( cellfun(@(x) pairEq(thisTarget,x), thisRemainder) ))
+             error('full_xcorr_analysis:repeated_pair','found repeats in ''ok_pairs'' parameter');
+        end
+     
+        if(opt.swap_on_reverse)
+            if any (cellfun(@(x) pairEq( flipPair(thisTarget), x), thisRemainder))
+            error('full_xcorr_analysis:pair_matched_flip',...
+                    'found a pair matching its flipped counterpart. This is probably a mistake; it means no reverses will be made.');
+                end
+        end
+        
+    end
+end
+end
+
+function p = flipPair(pair)
+p = pair;
+p{2} = pair{1};
+p{1} = pair{2};
+end
+
+function b = pairEq(pairA,pairB)
+b = strcmp(pairA{1},pairB{1}) && strcmp(pairA{2},pairB{2});
 end

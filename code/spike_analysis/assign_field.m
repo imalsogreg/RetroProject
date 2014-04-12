@@ -110,7 +110,7 @@ for i = 1:numel(sdat.clust)
     %all_counts = all_counts * c_mat;
     
     if(~isempty(opt.smooth_sd_segs))
-        disp('smooth_sd_segs seems broken');
+        disp('smooth_sd_segs seems broken (later note: why?)');
         counts = smoothn(counts,opt.smooth_sd_segs);
         in_counts = smoothn(in_counts,opt.smooth_sd_segs);
         out_counts = smoothn(out_counts,opt.smooth_sd_segs);

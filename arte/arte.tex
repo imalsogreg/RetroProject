@@ -55,8 +55,6 @@
 \pagestyle{myheadings}
 %% ** EDIT HERE **
 
-
-%% ** EDIT HERE **
 %% PLEASE INCLUDE ALL MACROS BELOW
 
 %% END MACROS SECTION
@@ -66,15 +64,15 @@
 % Title must be 150 characters or less
 \begin{flushleft}
 {\Large
-\textbf{ArtE - A system for realtime neural ensemble decoding and feedback}
+\textbf{Arte - A system for real-time neural ensemble decoding and feedback}
 }
 % Insert Author names, affiliations and corresponding author email.
 \\
-Gregory J. Hale$^{1}$, 
+Gregory J. Hale$^{1,\ast}$, 
 Stuart P. Layton$^{2}$, 
 Hector Penagos$^{3}$, 
 Alex Chen$^{4}$,
-Matthew A. Wilson$^{5,\ast}$
+Matthew A. Wilson$^{5}$
 \\
 \bf{1} Gregory Hale Brain and Cognitive Sciences, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA
 \\
@@ -90,17 +88,22 @@ $\ast$ E-mail: Corresponding imalsogreg@gmail.com
 
 % Please keep the abstract between 250 and 300 words
 \section*{Abstract}
-Phenomenological descriptions of hippocampal encoding have outpaced our understanding of their underlying mechanisms and ties to learning. Distinct representations are expressed by the same cells in the same circuits, making them impossible to target using traditional molecular methods.  Some disruption specificity can be achieved by leveraging known statistical relationships between information content and the recency of spatial experience, and such experiments have provided the first evidence of a link between sequence replay and learning.  But this method stops short of being able to distinguish among the diverse forms of spatial content known to be expressed in a single recording session.
-A method of decoding spatial information content in realtime is needed. To do this, we developed a multi-tetrode recording system focused on streaming representations of the processing stages typically used for offline spatial decoding: spike detection, neural source separation (cluster-cutting), position tracking, tuning curve extraction, and Bayesian stimulus reconstruction.  Our implementation makes critical use of Haskell, a programming language that aides software development by strictly separating a program's logic from its effects on program state, greatly simplifying code and eliminating large classes of common software bugs.  We describe the capabilities and limits of our recording system, its implementation, and routes for contributers to add functionality; and we survey the classes of questions that could benefit from real-time stimulus reconstruction and feedback.
+Observational descriptions of hippocampal spatial encoding are outpacing our understanding of their underlying mechanisms and ties to behavior. The traditoinal manipulation techniques can not adequately target the richly choreographed spiking sequences increasingly recognized as an essential feature of spatial encoding. Some disruption specificity can be achieved by leveraging known statistical relationships between information content and the recency of spatial experience, and such experiments have provided the first evidence of a link between sequence replay and learning.  But this method stops short of being able to distinguish among the diverse forms of spatial content known to be expressed in a single recording session.
+
+A method of decoding spatial information content in real-time is needed. To do this, we are developing a multi-tetrode recording system focused on streaming representations of the processing stages typically used for offline spatial decoding: spike detection, neural source separation (cluster-cutting), position tracking, tuning curve extraction, and Bayesian stimulus reconstruction.  Our implementation makes critical use of Haskell, a programming language that aides software development by strictly separating a program's logic from its effects on program state, greatly simplifying code and eliminating large classes of common software bugs.  We describe the capabilities and limits of our recording system, its implementation, and routes for contributers to add functionality; and we survey the classes of questions that could benefit from real-time stimulus reconstruction and feedback.
 
 % Please keep the Author Summary between 150 and 200 words
 % Use first person. PLoS ONE authors please skip this step. 
 % Author Summary not valid for PLoS ONE submissions.   
 \section*{Author Summary}
-Text
+We report a working, open-source neural recordign system, and a proof-of-concept real-time signal decoding algorithm suitable for interpreting neural activity in rats navigating in mazes. We currently use the system to increase the number of neurons we can simultaneously record from. We intend to integrate the new algorithm in order to feed the information content of the navigating rat's brain back into the experiment, for example, by immediately rewarding the rat for exhibiting brain activity hypothesized to reflect memory formation for specific recently-learned events.
 
 \section*{Introduction}
-Text
+Neural sequences appear to be an essential feature of spatial representations. The hippocampus of the navigating rat, which has received the most attention in this area, alternates between two modes of firing, depending on whether the rat is in motion or pausing to consume reward.
+
+During active navigation, individual neurons fire spikes only when rats are in a ~1 meter length region of the track particular to that neuron (the neuron's ``place field'') ~\cite{Okeefe1971}. For every set of cells whose fields partly overlap, spikes from those cells are precisely arranged into sequences that reflect the ordering of the peak preferred locations of each cell, and these sequences are repeated about eight times per second.
+
+ but in both modes, nearly all spikes are embedded in accelerated temporal sequences of recent activity. 
 
 
 \section*{Results}
@@ -110,7 +113,7 @@ Text
 \subsection*{Subsection 2}
 
 \section*{Discussion}
-\cite{Mizuseki 2012}
+Text
 
 
 % You may title this section "Methods" or "Models". 
