@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\urlprefix}{URL }
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -13,10 +13,93 @@
   \textsc{Annotation:}\ #2\end{quotation}}
 \providecommand{\eprint}[2][]{\url{#2}}
 
-\bibitem{Okeefe1971}
+\bibitem{wilson1993dynamics}
+Wilson M, McNaughton B (1993) Dynamics of the hippocampal ensemble code for
+  space.
+\newblock Science 261: 1055–1058.
+\bibAnnoteFile{wilson1993dynamics}
+
+\bibitem{miller2008all}
+Miller EK, Wilson MA (2008) All my circuits: using multiple electrodes to
+  understand functioning neural networks.
+\newblock Neuron 60: 483--488.
+\bibAnnoteFile{miller2008all}
+
+\bibitem{thompson1989place}
+Thompson L, Best P (1989) Place cells and silent cells in the hippocampus of
+  freely-behaving rats.
+\newblock The Journal of neuroscience 9: 2382--2390.
+\bibAnnoteFile{thompson1989place}
+
+\bibitem{okeefe1971the}
 O'Keefe J, Dostrovsky J (1971) The hippocampus as a spatial map. preliminary
   evidence from unit activity in the freely-moving rat.
 \newblock Brain research 34: 171--175.
-\bibAnnoteFile{Okeefe1971}
+\bibAnnoteFile{okeefe1971the}
+
+\bibitem{skaggs1996theta}
+Skaggs WE, McNaughton BL, Wilson MA, Barnes CA (1996) Theta phase precession in
+  hippocampal neuronal populations and the compression of temporal sequences.
+\newblock Hippocampus 6: 149--172.
+\bibAnnoteFile{skaggs1996theta}
+
+\bibitem{dragoi2006temporal}
+Dragoi G, Buzs{\'a}ki G (2006) Temporal encoding of place sequences by
+  hippocampal cell assemblies.
+\newblock Neuron 50: 145--157.
+\bibAnnoteFile{dragoi2006temporal}
+
+\bibitem{foster2007hippocampal}
+Foster DJ, Wilson MA (2007) Hippocampal theta sequences.
+\newblock Hippocampus 17: 1093--1099.
+\bibAnnoteFile{foster2007hippocampal}
+
+\bibitem{foster2006reverse}
+Foster DJ, Wilson MA (2006) Reverse replay of behavioural sequences in
+  hippocampal place cells during the awake state.
+\newblock Nature 440: 680--683.
+\bibAnnoteFile{foster2006reverse}
+
+\bibitem{diba2007forward}
+Diba K, Buzs{\'a}ki G (2007) Forward and reverse hippocampal place-cell
+  sequences during ripples.
+\newblock Nature neuroscience 10: 1241--1242.
+\bibAnnoteFile{diba2007forward}
+
+\bibitem{davidson2009hippocampal}
+Davidson TJ, Kloosterman F, Wilson MA (2009) Hippocampal replay of extended
+  experience.
+\newblock Neuron 63: 497--507.
+\bibAnnoteFile{davidson2009hippocampal}
+
+\bibitem{gupta2012segmentation}
+Gupta AS, van~der Meer MA, Touretzky DS, Redish AD (2012) Segmentation of
+  spatial experience by hippocampal theta sequences.
+\newblock Nature neuroscience 15: 1032--1039.
+\bibAnnoteFile{gupta2012segmentation}
+
+\bibitem{karlsson2009awake}
+Karlsson MP, Frank LM (2009) Awake replay of remote experiences in the
+  hippocampus.
+\newblock Nature neuroscience 12: 913--918.
+\bibAnnoteFile{karlsson2009awake}
+
+\bibitem{pfeiffer2013hippocampal}
+Pfeiffer BE, Foster DJ (2013) Hippocampal place-cell sequences depict future
+  paths to remembered goals.
+\newblock Nature .
+\bibAnnoteFile{pfeiffer2013hippocampal}
+
+\bibitem{liu2012optogenetic}
+Liu X, Ramirez S, Pang PT, Puryear CB, Govindarajan A, et~al. (2012)
+  Optogenetic stimulation of a hippocampal engram activates fear memory recall.
+\newblock Nature 484: 381--385.
+\bibAnnoteFile{liu2012optogenetic}
+
+\bibitem{jezek2011theta}
+Jezek K, Henriksen EJ, Treves A, Moser EI, Moser MB (2011) Theta-paced
+  flickering between place-cell maps in the hippocampus.
+\newblock Nature 478: 246--249.
+\bibAnnoteFile{jezek2011theta}
 
 \end{thebibliography}

@@ -3,47 +3,47 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: arte.aux
 The style file: plos2009.bst
 Database file #1: template.bib
-Warning--I didn't find a database entry for "Mizuseki2012"
+Warning--I didn't find a database entry for "cei2014hippocampal"
 Reallocated singl_function (elt_size=8) to 100 items from 50.
-You've used 1 entry,
+You've used 15 entries,
             2441 wiz_defined-function locations,
-            546 strings with 4578 characters,
-and the built_in function-call counts, 704 in all, are:
-= -- 63
-> -- 8
+            641 strings with 6956 characters,
+and the built_in function-call counts, 10782 in all, are:
+= -- 1004
+> -- 168
 < -- 0
-+ -- 4
-- -- 2
-* -- 57
-:= -- 89
-add.period$ -- 2
-call.type$ -- 1
-change.case$ -- 1
++ -- 84
+- -- 42
+* -- 903
+:= -- 1312
+add.period$ -- 30
+call.type$ -- 15
+change.case$ -- 15
 chr.to.int$ -- 0
-cite$ -- 2
-duplicate$ -- 64
-empty$ -- 70
-format.name$ -- 3
-if$ -- 149
+cite$ -- 30
+duplicate$ -- 1030
+empty$ -- 1110
+format.name$ -- 57
+if$ -- 2396
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 9
-newline$ -- 20
-num.names$ -- 1
-pop$ -- 9
+int.to.str$ -- 15
+missing$ -- 145
+newline$ -- 90
+num.names$ -- 15
+pop$ -- 155
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 4
+skip$ -- 75
 stack$ -- 0
-substring$ -- 94
-swap$ -- 18
+substring$ -- 1521
+swap$ -- 288
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 5
-width$ -- 2
-write$ -- 25
+while$ -- 86
+width$ -- 17
+write$ -- 178
 (There was 1 warning)

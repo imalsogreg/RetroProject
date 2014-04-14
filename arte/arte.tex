@@ -31,9 +31,11 @@
 
 % Text layout
 \topmargin 0.0cm
-\oddsidemargin 0.5cm
-\evensidemargin 0.5cm
-\textwidth 16cm 
+% sidemargins should be 0.5cm
+\oddsidemargin -2.0cm
+\evensidemargin 0.0cm
+%textwidth should be 16cm
+\textwidth 10cm 
 \textheight 21cm
 
 % Bold the 'Figure #' in the caption and separate it with a period
@@ -99,11 +101,19 @@ A method of decoding spatial information content in real-time is needed. To do t
 We report a working, open-source neural recordign system, and a proof-of-concept real-time signal decoding algorithm suitable for interpreting neural activity in rats navigating in mazes. We currently use the system to increase the number of neurons we can simultaneously record from. We intend to integrate the new algorithm in order to feed the information content of the navigating rat's brain back into the experiment, for example, by immediately rewarding the rat for exhibiting brain activity hypothesized to reflect memory formation for specific recently-learned events.
 
 \section*{Introduction}
-Neural sequences appear to be an essential feature of spatial representations. The hippocampus of the navigating rat, which has received the most attention in this area, alternates between two modes of firing, depending on whether the rat is in motion or pausing to consume reward.
+Temporally compressed spike sequences are an essential feature of hippocampal encoding of space. Each increase in our ability to sample large numbers of cells in freely navigating rats has been accompanied by further support this claim \cite{wilson1993dynamics, miller2008all}.
 
-During active navigation, individual neurons fire spikes only when rats are in a ~1 meter length region of the track particular to that neuron (the neuron's ``place field'') ~\cite{Okeefe1971}. For every set of cells whose fields partly overlap, spikes from those cells are precisely arranged into sequences that reflect the ordering of the peak preferred locations of each cell, and these sequences are repeated about eight times per second.
+We are aware of two forms of sequential encoding. The first occurs during active navigation. The majority \cite{thompson1989place} of spiking activity in the hippocampus is due to place cells \cite{okeefe1971the}, which spike only when the rat is within an approximately 1 meter span of the track particular to that place cell (the cell's ``place field''). At any given time, the rat is within the partially overlapping place fields of many place cells. Rather than fire in random order, the spikes are arranged in precise sequences, with spikes from cells with place fields centered just behind the rat first, spikes from place fields centered ahead of the rat last, and a continuum between \cite{skaggs1996theta}. This sequence reflects the sequences of place field centers that the rat would encounter on the track, except it is sped up eight times and repeated once per cycle of the underlying 7-10 Hz ``theta'' oscillation in the local field potential \cite{dragoi2006temporal, foster2007hippocampal}. 
 
- but in both modes, nearly all spikes are embedded in accelerated temporal sequences of recent activity. 
+A second form of sequenced spiking occurs while rats are paused on the track, consuming rewards or grooming. At these times, the hippocampus emits irregular, 100-500 ms bursts of activity, with spikes ordered in time according to the spatial ordering of their respective place fields \cite{foster2006reverse, diba2007forward}. These are known as 'sequence replay' events.
+
+In contrast to the large number of studies elaborating on the phenomena of theta sequences and sequence replay \cite{davidson2009hippocampal,gupta2012segmentation,karlsson2009awake,pfeiffer2013hippocampal,cei2014hippocampal}, interventional studies are rare.
+
+Interventional experiments are harder to come by, because the dynamic nature of the activity patterns under study do not lend themselves to genetic or pharmacological targeting. One can not simply mark and purterb some set of cells (even a set defined by activity-dependent genes ~\cite{liu2012optogenetic}), because an overlapping set of cells supports different representations at short timescales ~\cite{thompson1989place,jezek2011theta}.
+
+However, interventional experiments are needed for answering questions about the importance of stimulus-specific activity patters in spatial navigation and memory.
+
+
 
 
 \section*{Results}
