@@ -66,6 +66,18 @@ Diba K, Buzs{\'a}ki G (2007) Forward and reverse hippocampal place-cell
 \newblock Nature neuroscience 10: 1241--1242.
 \bibAnnoteFile{diba2007forward}
 
+\bibitem{karlsson2009awake}
+Karlsson MP, Frank LM (2009) Awake replay of remote experiences in the
+  hippocampus.
+\newblock Nature neuroscience 12: 913--918.
+\bibAnnoteFile{karlsson2009awake}
+
+\bibitem{lee2002memory}
+Lee AK, Wilson MA (2002) Memory of sequential experience in the hippocampus
+  during slow wave sleep.
+\newblock Neuron 36: 1183--1194.
+\bibAnnoteFile{lee2002memory}
+
 \bibitem{davidson2009hippocampal}
 Davidson TJ, Kloosterman F, Wilson MA (2009) Hippocampal replay of extended
   experience.
@@ -77,12 +89,6 @@ Gupta AS, van~der Meer MA, Touretzky DS, Redish AD (2012) Segmentation of
   spatial experience by hippocampal theta sequences.
 \newblock Nature neuroscience 15: 1032--1039.
 \bibAnnoteFile{gupta2012segmentation}
-
-\bibitem{karlsson2009awake}
-Karlsson MP, Frank LM (2009) Awake replay of remote experiences in the
-  hippocampus.
-\newblock Nature neuroscience 12: 913--918.
-\bibAnnoteFile{karlsson2009awake}
 
 \bibitem{pfeiffer2013hippocampal}
 Pfeiffer BE, Foster DJ (2013) Hippocampal place-cell sequences depict future
@@ -101,5 +107,23 @@ Jezek K, Henriksen EJ, Treves A, Moser EI, Moser MB (2011) Theta-paced
   flickering between place-cell maps in the hippocampus.
 \newblock Nature 478: 246--249.
 \bibAnnoteFile{jezek2011theta}
+
+\bibitem{ego2010disruption}
+Ego-Stengel V, Wilson MA (2010) Disruption of ripple-associated hippocampal
+  activity during rest impairs spatial learning in the rat.
+\newblock Hippocampus 20: 1--10.
+\bibAnnoteFile{ego2010disruption}
+
+\bibitem{girardeau2009selective}
+Girardeau G, Benchenane K, Wiener SI, Buzs{\'a}ki G, Zugaro MB (2009) Selective
+  suppression of hippocampal ripples impairs spatial memory.
+\newblock Nature neuroscience 12: 1222--1223.
+\bibAnnoteFile{girardeau2009selective}
+
+\bibitem{jadhav2012awake}
+Jadhav SP, Kemere C, German PW, Frank LM (2012) Awake hippocampal sharp-wave
+  ripples support spatial memory.
+\newblock Science 336: 1454--1458.
+\bibAnnoteFile{jadhav2012awake}
 
 \end{thebibliography}
