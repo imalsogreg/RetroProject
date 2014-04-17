@@ -113,19 +113,19 @@ The content of sequence replay has a tendency to reflect recent experience, howe
 
 We would like to ask much more specific questions of sequence replay than whether or not it is needed for learning, of course. Does an individual replay reflect active cognitive processing of a route? Does a single theta sequence reflect a single conginitve sampling of a path ahead that may or may not lead to reward? Answering these questions means performing in realtime all of the processing steps from raw signal acquisition and sequence replay detection.
 
-Here we report on two advances toward this goal. The first is a new system for simple acquisition, bandpass filtering, multi-unit spike detection capable of running in tandem with our existing recording systems, with commands entering and data leaving via the network, instead of an immediate user interface. The second is a proof-of-concept application that streams raw spike data and rat position data from the hard disk, performs source separation based on previously-determined waveform discrimation criteria, builds place field models, and performs the Bayesian inference to reveal sequence encoding, all in realtime.
+Here we report on two advances toward this goal. The first is a new system for simple acquisition, bandpass filtering, and multi-unit spike detection capable of running in tandem with our existing recording systems. The second is a proof-of-concept application that streams raw spike data and rat position data from the hard disk, performs source separation based on previously-determined waveform discrimation criteria, builds place field models, and performs the Bayesian inference to reveal sequence encoding, all in realtime.
 
-The first system was written in a mix of c++ and Python, where data acquisition, signal processing, and networking are well-understood problems. The realtime decoding system presented more interesting challenges, in terms modeling place fields, supporting infinite data streams, and concurrency. For this system, we turned to Haskell \cite{HASKELLREPORT}, a language optimized for ease of building abstractions to match an underlying model of computation \cite{WHYFPMATTERS}, through the marriage of a highly extensible static type system and functional purity. Haskell's type system enables the user to build custom times that capture the much of the intent of the algorithm, allowing the large classes of bugs to be eliminated by the compiler. Functional purity is an engineering discipline strictly enforced by Haskell that forbids variables to change their values during program execution. This restriction, thought apparently limiting, has many highly favorable consequences for managing complexity.
+The first system was written in a mix of c++ and Python, where data acquisition, signal processing, and networking are well-understood problems. The realtime decoding system presented more interesting challenges, in terms modeling place fields, supporting infinite data streams, and concurrency. For this system, we turned to Haskell \cite{jones2003haskell}, a language optimized for ease of building composable abstractions \cite{hughes1989functional}, through the marriage of a highly extensible static type system and functional purity. Haskell's type system enables the programmer to build custom times that capture the much of the intent of a model or algorithm, allowing the large classes of bugs to be eliminated by the compiler. Functional purity is an engineering discipline strictly enforced by Haskell that forbids variables to change their values during program execution. This restriction, thought apparently limiting, has many highly favorable consequences for managing complexity. These features fit together exceptionally well for designing highly concurrent programs, a notoriously difficult task in all programming languages \cite{jones2001tackling,harris2005composable}.
 
-
-
-
+We describe the implementation of the basic acquisition system and realtime decoder, and outline a path for integrating the realtime tracking of rat position and source automated spike source localization components that will be needed to actaully conduct experiments.
 
 \section*{Results}
 
-\subsection*{Subsection 1}
+\subsection*{Headless spike acquisition and streaming: performance against existing system}
 
-\subsection*{Subsection 2}
+\subsection*{}
+
+\subsection*{Streaming and concurrency}
 
 \section*{Discussion}
 Text
@@ -135,6 +135,10 @@ Text
 % "Models" is not a valid title for PLoS ONE authors. However, PLoS ONE
 % authors may use "Analysis" 
 \section*{Materials and Methods}
+
+\subsection*{Backend signal processing and data networking}
+Raw data is aquired simultaneously, at 32kHz, from 32 channels simultaneously on 2 NI PCI-6259 analog-to-digital converter cards (National Instruments), using the NIDaqMX c API. After passing data from the driver's memory to our program, samples are written into a circular buffer and passed through a 4th order Butterworth IIR filter. This choice of filter requires only two samples of history per channel, imposing a very short delay (< 1ms) between the collection of a given sample and subsequent processing. 
+
 
 % Do NOT remove this, even if you are not including acknowledgments
 \section*{Acknowledgments}
