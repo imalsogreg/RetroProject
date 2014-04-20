@@ -1,0 +1,63 @@
+<p>You realize that some wells from your cellular assay can't be used because, for one of several reasons.  Running this function you borrowed from your friends filters out those invalid samples leaving you only with the valid ones... or does it?</p>
+
+<pre>
+
+>> edit assayFix.m
+
+function d = assayFix(assayData,minCells,minBright,minWash,c,b,w)
+% ASSAYFIX( assayData, minCells, minBright, minWash )
+% takes assay data and filters out wells that don't 
+%   meet some important minumum standards
+% Input data: 
+%  assayData: wells in rows.  first column is the
+%   number of cells in the well, second column the 
+%   brightness reading, third column is the number 
+%   of washes done for that well, fouth column is 
+%   the amount of CrebRNA detected )
+%  minCells, minBright, minWash - wells must meet these
+%   criteria, or the well will be removed from the dataset
+%  c,b,w - set these to TRUE if you want the filtering to 
+%   happen (sometimes you don't want to drop data, e.g. 
+%   if you are looking at the effect of washing on cell 
+%   count!)
+% Output data:
+%  d: the same as assayData, but filtered by the criteria
+
+
+% First set up our test criteria
+cellCounts  = assayData(:,1);
+tooFewCells = cellCounts < minCells;
+
+brights     = assayData(:,2);
+tooDim      = brights < minBright;
+
+washes      = assayData(:,3);
+tooDirty    = washes < minWash;
+
+% Build the output array
+d = assayData;
+
+% Filter out wells with too few cells if the cellCount
+% filter flag is set
+if(c)
+ d(tooFewCells,:) = [];
+end
+
+% Remove wells where fluourescence is too low and
+% the brightness flag is set
+if(b)
+ d(tooDim,:) = [];
+end
+
+% Remove wells with too few washes if the wash flag
+% is set
+if(w)
+ d(tooDirty,:) = [];
+end
+
+return;
+
+end
+</pre>
+
+<p>Hint - there are no spelling errors here.  Does the function act the way you expect? Really give it some thought (and run it in MATLAB on some test data) before looking at the multiple choices.  This question was meant to be hard.</p>

@@ -136,4 +136,11 @@ Harris T, Marlow S, Peyton-Jones S, Herlihy M (2005) Composable memory
   practice of parallel programming. ACM, pp. 48--60.
 \bibAnnoteFile{harris2005composable}
 
+\bibitem{zhang1998interpreting}
+Zhang K, Ginzburg I, McNaughton BL, Sejnowski TJ (1998) Interpreting neuronal
+  population activity by reconstruction: unified framework with application to
+  hippocampal place cells.
+\newblock Journal of Neurophysiology 79: 1017--1044.
+\bibAnnoteFile{zhang1998interpreting}
+
 \end{thebibliography}

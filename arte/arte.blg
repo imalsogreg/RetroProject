@@ -5,45 +5,45 @@ The style file: plos2009.bst
 Database file #1: template.bib
 Warning--I didn't find a database entry for "cei2014hippocampal"
 Reallocated singl_function (elt_size=8) to 100 items from 50.
-You've used 21 entries,
+You've used 22 entries,
             2441 wiz_defined-function locations,
-            676 strings with 7844 characters,
-and the built_in function-call counts, 14493 in all, are:
-= -- 1347
-> -- 204
+            684 strings with 8169 characters,
+and the built_in function-call counts, 15534 in all, are:
+= -- 1447
+> -- 220
 < -- 1
-+ -- 102
-- -- 51
-* -- 1194
-:= -- 1747
-add.period$ -- 43
-call.type$ -- 21
-change.case$ -- 22
++ -- 110
+- -- 55
+* -- 1288
+:= -- 1870
+add.period$ -- 45
+call.type$ -- 22
+change.case$ -- 23
 chr.to.int$ -- 0
-cite$ -- 42
-duplicate$ -- 1404
-empty$ -- 1517
-format.name$ -- 69
-if$ -- 3241
+cite$ -- 44
+duplicate$ -- 1505
+empty$ -- 1625
+format.name$ -- 74
+if$ -- 3473
 int.to.chr$ -- 0
-int.to.str$ -- 21
-missing$ -- 199
-newline$ -- 120
-num.names$ -- 21
-pop$ -- 234
+int.to.str$ -- 22
+missing$ -- 210
+newline$ -- 125
+num.names$ -- 22
+pop$ -- 247
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 110
+skip$ -- 116
 stack$ -- 0
-substring$ -- 2010
-swap$ -- 394
+substring$ -- 2176
+swap$ -- 416
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 111
-width$ -- 23
-write$ -- 243
+while$ -- 118
+width$ -- 24
+write$ -- 254
 (There was 1 warning)

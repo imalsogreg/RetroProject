@@ -1,0 +1,34 @@
+<p>Bad-scientist Bob just got reviews back on one of his submitted manuscripts: "What if your supposed effect is just due to a correlation between individuals' leg length and running speed?!"  He promptly set out to dismiss this criticism, by running the following code on some data he has collected. Measurements of people's leg lengths and running speeds.  He took multiple measurements from each person (to average out noise), and kept the data in two matrices with invididual subjects in rows.</p>
+
+<pre>
+
+  >> edit legSpeedCorr.m
+
+function p = legSpeedCorr(legLength,runSpeed)
+% LEGSPEEDCOOR(legLength,runSpeed) takes repeated-
+% measurements of leg lengths and running
+% speeds, and asks whether the two are correlated.
+% Such a correlation would hurt the hypothesis
+% of my paper, because it's an alternative 
+% to my preferred interpretation!
+
+% first average across each person's repeated
+% measurements
+legM   = mean(legLength,1);
+speedM = mean(runSpeed, 1);
+
+% Now use MATLAB's corr function to tell me
+% the correlation coefficient and the 
+% p value
+[rho,p] = corr( trypM', jsScoreM' )
+
+% We only care about the p value for the
+% hypothesis-testing, so return now
+
+return
+
+end
+
+</pre>
+
+<p>Not many lines of code for something to go wrong.  He ran his test, and found that p=0.8.  &quot;I accept the null hypothesis - leg length and running speed are not correlated and my original finding stands.&quot;  We certainly have grounds to criticise Bob on his understanding of Null Hypothesis Significance Testing.  But what about his code?</p>

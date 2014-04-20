@@ -1,0 +1,44 @@
+<p>Your numbers from an analysis aren't quite making sense, and you have narrowed the problem down to this function you wrote last March.  Can you tell what happens when you run the function?  Fortunately it's thoroughly commented.  Does it do exactly what you meant for it to do when you wrote it?</p>
+
+<pre>
+  >> edit removeNearestNeighbor.m
+
+function [xs, ys] = removeNearestNeighbor(xs,ys,x,y)
+% REMOVENEARESTNEIGHBOR(xs,ys,x,y) finds the point in
+% the set (xs,ys), and returns the set, with that point removed
+
+% Start with the assumption that the first point is closest to (x,y)
+nearestNeighborInd = 1;
+
+% For each point in the set,
+for n = 1:numel(xs)
+
+  % Find the distance from that point to (x,y)
+  thisDist = sqrt ( (ys(n) - y)^2 + (xs(n) - x)^2 )
+  
+  % And find the distance from the current front-runner
+  % for nearest neighbor
+  oldDist = sqrt( (ys(nearestNeighborInd) - y)^2 + ...
+     (xs(nearestNeighborInd) - x)^2 )
+
+  % When this point is closer to (x,y) than the current record-holder
+  if thisDist < oldDist
+    % update nearestNeighborInd
+    nearestNieghborInd = n;
+  else
+    % otherwise the old record-holder is STILL the nearest neighbor
+    % so do nothing and let the loop continue.
+  end
+
+end
+
+% When the loop is done, we've checked every point in the set,
+% so we can remove the record-holder closest point from the set
+xs[nearestNeighborInd] = [];
+ys[nearestNeighborInd] = [];
+
+end
+
+</pre>
+
+<p>This isn't easy.  See if you can form a guess before moving on to the next page.</p>
