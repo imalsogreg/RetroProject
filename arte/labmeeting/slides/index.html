@@ -46,7 +46,7 @@
 	      <section>
 		<h2>ArtE: toward realtime position decoding</h2>
 		<br/>
-		<h4>Greg Hale <strong>MWL Labmeeting</strong> 2014-04-22</h4>
+		<h4>Greg Hale / <strong>MWL Labmeeting</strong> / 2014-04-22</h4>
 		<br/>
 		<p>Code at:</p>
 		<p><a href="http://github.com/imalsogreg/arte-ephys">
@@ -86,43 +86,100 @@
 		  </div>
 		</div>
 	      </section>
+
 	      <section>
-<h2></h2>
-		<div style="float:left;">
-		  <h3
+		<h2>Reconstruction (&Delta;t = 0.20)</h2>
+		<br/>
+		<p>Decoding (black) matches position (green)</p>
+		<img src="../../pics/rpos200ms.png" width=800/>
+	      </section>
+	      <section>
+		<h2>Reconstruction (&Delta;t = 0.02)</h2>
+		<br/>
+		<p>Decoding (black) matches position (green)</p>
+		<img src="../../pics/thetaSequences.png" width=800/>
+	      </section>
+	      <section>
+		<h2>Reconstruction (&Delta;t = 0.02)</h2>
+		<br/>
+		<p>Decoding (black) matches position (green)</p>
+		<img src="../../pics/anotherReplayDone.png" width=800/>
+	      </section>
+
+
+	      <section>
+		<h2>Realtime experiments</h2>
+		<br/>
+		<div style="float:left;width:40%;">
+		  <img src="../../pics/tmaze.png"/>
+		</div>
+		<div style="float:right;width:45;">
+		  <p><em>Given</em> realtime replay detection:</p>
 		  <ul>
-		    <li>Test</li>
+		    <li><strong>Reward</strong> rat for Left replays</li>
+		    <ol>
+		      <li class="fragment">
+			Is it possible? (If so, overdrive Left replay)</li>
+		      <li class="fragment">
+			Does it change Left behavior?</li>
+		      <li class="fragment">
+			Does it change place field width, asymmetry?</li>
+		    </ol>
+		    <li class="fragment">Condition the <strong>task</strong> on replay content</li>
+		    <ol class="fragment">
+		      <li class="fragment">
+			Left replay in stem  &rarr; Must go Left this trial</li>
+		      <li class="fragment">
+			Learnable?</li>
+		    </ol>
 		  </ul>
 		</div>
-		<div style="float:right;">
-		  <img src="../../pics/rpos200ms.png"/>
-		</div>
 	      </section>
+	      
 	      <section>
 		<h2>Steps involved in decoding</h2>
 		<br/>
-		<ul style="font-size:26pt">
-		  <li>Cluster-cutting</li>
-		  <li>Filter spikes & occupancy by running speed</li>
-		  <li>Compute place fields</li>
-		  <li>Bayesian decode</li>
-		</ul>
-
-
+		<table>
+		  <tr>
+		    <td>0. Acquire spikes, pos</td><td>&rarr; FTP files to MATLAB after experiment</td>
+		  </tr>
+		  <tr>
+		    <td>1. Cluster-cutting</td><td>&rarr; After the fact, by human</td>
+		  </tr>
+		  <tr>
+		    <td>2. Filter by speed</td><td>&rarr; No problem</td>
+		  </tr>
+		  <tr>
+		    <td>3. Compute place fields</td><td>&rarr; Serial, takes time &prop; to #spikes</td>
+		  </tr>
+		  <tr>
+		    <td>4. Bayesian decode</td><td>&rarr; Serial</td>
+		  </tr>
+		</table>
+		<br/>
+		<br/>
+		<h2>Steps involved in realtime decoding</h2>
+		<br/>
+		<table>
+		  <tr>
+		    <td>0. Acquire spikes, pos</td><td>&rarr; Network to <span class="fragment">Haskell</span> for analysis</td>
+		  </tr>
+		  <tr>
+		    <td>1. Cluster-cutting</td><td>&rarr; Manual? Semi-automated? Clusterless?</td>
+		  </tr>
+		  <tr>
+		    <td>2. Filter by speed</td><td>&rarr; No problem</td>
+		  </tr>
+		  <tr>
+		    <td>3. Compute place fields</td><td>&rarr; <strong>Stream-friendly model - parallel over (32) tetrodes</strong></td>
+		  </tr>
+		  <tr>
+		    <td>4. Bayesian decode</td><td>&rarr; <strong>Very concurrent</strong></td>
+		  </tr>
+		</table>
+		<br/>
 	      </section>
 
-	      <section>
-		<h2>Post processing: position reconstruction</h2>
-		<div style="float:left;">
-		<p>
-		  
-		</p>
-		</div>
-		<div style="float:left;">
-		  <img src="../../"/>
-		</div>
-	      </section>
-	      	      
 	    </div>
 	    
 	  </div>
