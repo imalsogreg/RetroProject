@@ -4,3 +4,14 @@
     border: 0px;
     box-shadow: 0px 0px 0px rgba(0,0,0,0);
 }
+
+.reveal section cite {
+    text-align:left;
+    background-color:green;
+}
+
+.reveal pre code{
+    max-height:800px;
+    font-size:18pt;
+    line-height:100%;
+}

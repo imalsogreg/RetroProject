@@ -119,14 +119,14 @@
 		    <li><strong>Reward</strong> rat for Left replays</li>
 		    <ol>
 		      <li class="fragment">
-			Is it possible? (If so, overdrive Left replay)</li>
+			Will they learn to self-stimulate?</li>
 		      <li class="fragment">
 			Does it change Left behavior?</li>
 		      <li class="fragment">
 			Does it change place field width, asymmetry?</li>
 		    </ol>
 		    <li class="fragment">Condition the <strong>task</strong> on replay content</li>
-		    <ol class="fragment">
+		    <ol>
 		      <li class="fragment">
 			Left replay in stem  &rarr; Must go Left this trial</li>
 		      <li class="fragment">
@@ -171,13 +171,170 @@
 		    <td>2. Filter by speed</td><td>&rarr; No problem</td>
 		  </tr>
 		  <tr>
-		    <td>3. Compute place fields</td><td>&rarr; <strong>Stream-friendly model - parallel over (32) tetrodes</strong></td>
+		    <td>3. Compute place fields</td><td>&rarr; <strong>Stream-friendly model - parallel over 32 tetrodes</strong></td>
 		  </tr>
 		  <tr>
 		    <td>4. Bayesian decode</td><td>&rarr; <strong>Very concurrent</strong></td>
 		  </tr>
 		</table>
 		<br/>
+	      </section>
+
+	      <section>
+		<h2>Realtime decoding: MATLAB?</h2>
+		<p>MATLAB is designed to hide bugs from the programmer. Can you find the bug? (1/3)</p>
+		<pre><code trim-data  style="font-size:18pt;line-height:100%;max-height:600px">function [xs, ys] = removeNearestNeighbor(xs,ys,x,y)
+% Return [xs,ys] with the pair nearest to (x,y) removed
+
+nearestNeighborInd = 1;
+
+for n = 1:numel(xs)
+
+  nDist = sqrt ( (ys(n) - y)^2 + (xs(n) - x)^2 )
+  oldDist = sqrt( (ys(nearestNeighborInd) - y)^2 + ...
+     (xs(nearestNeighborInd) - x)^2 )
+
+  % When point n closer to (x,y) than oldPoint
+  if thisDist < oldDist
+    nearestNieghborInd = n;
+  else
+    % Do nothing - oldPoint still the nearest
+  end
+
+  xs(nearestNeighborInd) = [];
+  ys(nearestNeighborInd) = [];
+
+end</code></pre>
+		</section>
+	      
+	      <section>
+		<h4>Find-the-bug (2/3)</h4>
+		<pre><code trim-data style="font-size:18pt;line-height:100%;">function d = assayFix(placeCells,minRate,minStability,minSpikes,r,s,sp)
+% Filter out rows that don't match inclusion standards
+
+% First set up our test criteria
+rates  = placeCells(:,1);
+tooLowRate = rates < minRate;
+
+stability   = placeCells(:,2);
+unstables   = stability < minStability;
+
+spikeCounts = placeCells(:,3);
+tooFewSpks  = spikeCounts < minSpikes;
+
+% Build the output array
+d = placeCells;
+
+if(r)
+% Filter out place cells with too low spike rate
+ d(tooLowRate,:) = [];
+end
+
+if(s)
+ % Remove cells that are unstable
+ d(unstables,:) = [];
+end
+
+if(sp)
+ % Remove cells with too few spikes
+ d(tooFewSpikes,:) = [];
+end</code></pre>
+	      </section>
+	      
+	      <section>
+		<h4>Find-the-bug (3/3)</h4>
+		<pre><code style="font-size:18pt;line-height:100%">
+function p = legSpeedCorr(legLength,runSpeed)
+% LEGSPEEDCOOR(legLength,runSpeed) takes repeated-
+% measurements of leg lengths and running
+% speeds, and asks whether the two are correlated.
+% individual subjects are in rows.
+
+% first average across each person's repeated
+% measurements
+legM   = mean(legLength,1);
+speedM = mean(runSpeed, 1);
+
+% Now use MATLAB's corr function to tell me
+% the correlation coefficient and the 
+% p value
+[rho,p] = corr( trypM', jsScoreM' )
+		    
+</code></pre>
+	      </section>
+		
+	      <section>
+		<h2>Life in c/c++</h2>
+		<br/>
+		<ul>
+		  <li>Computer-like mental model</li>
+		  <li>Hard to build abstractions without adding complexity</li>
+		  <li>Weak typesystem</li> 
+		</ul>
+		<br/>
+		<pre><code data-trim style="line-height:100%;">
+FILE *a;
+a = fopen("spikes.dat","r+");
+e = writeSourceHeader( spikeSource, a );
+CHECK_FILE_OP(e,a);
+e = streamSpikes( spikeSource, a );
+CHECK_FILE_OP(e,a);
+		</code></pre>
+		<p>What is "a" at the end of this block? What if one of the functions threw an exception instead of returning an error code? Does CHECK_FILE_OP close "a" if there is an error in "e"? etc. etc.</p>
+	      </section>
+	      
+	      <section>
+		<h2>More of life in c</h2>
+		<br/>
+		<h4>Find the bug (4/3: Bonus)</h4>
+<pre><code>struct ResponseMessage {
+  uint16 payload;
+  char *payloadData;
+}
+
+int runEcho(Client *c, uint16 pLength, char *pDataIn){
+
+  e = checkClientStats(c);
+  e = touchClientTime(c);
+
+  // Send client back his/her message
+  ResponseMessage r;
+  r.payload = payload;
+  r.pData = malloc(payload);
+  memcpy( r->pData, pDataIn, r->pLength );
+
+  send_client( c->address, &amp;r );
+
+  return 0;
+
+}</code></pre>
+	      </section>
+
+	      <section>
+		<h2>The essence of bugs</h2>
+		<br/>
+		<ul>
+		  <li>State</li>
+		  <ul>
+		    <li>Keeping track of state (stale iterators)</li>
+		    <li>Hidden state (NULL pointers, global variables)</li>
+		  </ul>
+		  <li class="fragment">
+		    &quot;Do what I mean&quot; flexibility (mostly about MATLAB)</li>
+		  <ul class="fragment">
+		    <li>MATLAB's undeclared variables</li>
+		    <li>Number &harr; Bool &harr; Array &harr; Null</li>
+		    <li>Pathologically overloaded functions</li>
+		    <ul>
+		      <li>mean(xs) vs. mean(xs,1) vs. mean(xs,2)</li>
+		      <li>min(xs) vs. min(xs,1) vs. min(xs,[],1)</li>
+		    </ul>
+		  </ul>
+		  <li class="fragment">Barriers to abstraction</li>
+		  <ul class="fragment">
+		    <li>MATLAB - effectively one function per file</li>
+		  </ul>
+		</ul>
 	      </section>
 
 	    </div>
