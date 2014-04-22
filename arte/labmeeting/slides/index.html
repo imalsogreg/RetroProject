@@ -369,6 +369,31 @@ a = a + 1;</code></pre>
 	      </section>
 
 	      <section>
+		<h2>Why Haskell isn&apos;t popular</h2>
+		<br/><br/>
+		<div style="float:left;width:50%">
+		  <h3>Odd consequences of statelessness:</h3>
+		  <ul>
+		    <li>No <code>a = a + 1</code> ever</li>
+		    <li>No arbitrary printf</li>
+		    <li>No arbirtary reading from disk</li>
+		    <li>No for loops</li>
+		    <li>Replace all these with recursion and monads</li>
+		  </ul>
+		  <br/><br/>
+		  <div style="text-align:left;">
+		    <p>Popular = used by companies with 1000's of employees.</p>
+		    <p>Haskell isn't popular because though to be too hard for everyday programmers</p>
+		    <p>But only <em>getting started</em> is hard</p>
+		    <p>What's <strong>really</strong> hard is finding quiet bugs.</p>
+		  </div>
+		</div>
+		<div style="float:right;width:50%">
+		  <img src="../../pics/haskellPromise.png" style="background-color:rgba(255,255,255,0.8);padding:10px;border-radius:10px;"/>
+		</div>
+	      </section>
+
+	      <section>
 		<h2>Life in Haskell</h2>
 		<br/>
 		<pre><code class="haskell">a :: Double  -- Type signature saying 'a' is a Double
