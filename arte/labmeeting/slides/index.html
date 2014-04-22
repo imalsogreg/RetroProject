@@ -371,7 +371,7 @@ a = a + 1;</code></pre>
 	      <section>
 		<h2>Life in Haskell</h2>
 		<br/>
-		<pre><code>a :: Double  -- Type signature saying 'a' is a Double
+		<pre><code class="haskell">a :: Double  -- Type signature saying 'a' is a Double
 a = 10.0     -- a is 10, forever
 
 b :: Double
@@ -402,7 +402,7 @@ myAbs (-4)     -- 4</code></pre>
 		<h2>Data Types</h2>
 		<br/>
 		<p>Lists from scratch</p>
-		<pre><code>data LList a = a :. (LList a)  -- ( :. connects an a and a LList)
+		<pre><code class="haskell">data LList a = a :. (LList a)  -- ( :. connects an a and a LList)
              | (:#)            -- ( :# marks the end of a list)
   deriving (Show)
 infixr 8 :.          -- Make :. associate to the right
@@ -429,8 +429,8 @@ myLength c     -- 4</code></pre>
 		<h2>Life in Haskell</h2>
 		<br/>
 		<p>Don't turn everything into a sequence. Use definitions directly</p>
-		<p>Want to for-loop over a list to transform all the elements? <code>map</code> instead<p>
-		  <pre><code>map :: (a -&gt; b) -&gt; LList a -&gt; LList b
+		<p>Want to for-loop over a list to transform all the elements? <code class="haskell">map</code> instead<p>
+		  <pre><code class="haskell">map :: (a -&gt; b) -&gt; LList a -&gt; LList b
 map _ (:%) = (:%)
 map f (x :. xs) = f x :. map f xs
 
@@ -439,8 +439,8 @@ map succ (4 :. 3 :. 10 :. (:%))  -- 5 :. 4 :. 11 :. (:%)
 map myAbs (4 :. (-3) :. 10 :. (:%))  -- 4 :. 3 :. 10 :. (:%)</code></pre>
 
 <br/>
-<p>Want to for-loop over a list to accumulate a statistic? <code>fold</code> instead</p>
-<pre><code>-- fold f x0 (x1 :. x2 :. (:%)) =  f (f (f x0 x1) x2) x3
+<p>Want to for-loop over a list to accumulate a statistic? <code class="haskell">fold</code> instead</p>
+<pre><code class="haskell">-- fold f x0 (x1 :. x2 :. (:%)) =  f (f (f x0 x1) x2) x3
 fold :: (a -&gt; a -&gt; a) -&gt; a -&gt; (LList a) -&gt; a
 fold _ x0 (:%) = x0
 fold f x0 (x :. xs) = fold (f x0 x) (fold f xs)
@@ -458,7 +458,7 @@ myMean xs = fold (+) 0 xs / fromIntegral (myLength xs)</code></pre>
 		<br/>
 		<p>Let's make a <em>binary lookup tree from scratch</em></p>
 
-		<pre><code>data ATree a b = Leaf
+		<pre><code class="haskell">data ATree a b = Leaf
                | Branch (ATree a b) (a,b) (ATree a b)
   deriving (Show)
 
@@ -492,31 +492,31 @@ u = succ (seek myTree "Greg")   -- Type error! Forgot to check Just/Nothing</cod
 		<br/>
 		<ul>
 		  <li>No functions have used input from the outside world</li>
-		  <li>We defined values but never modified state (e.g. <code>a = a + 1</code>)</li>
+		  <li>We defined values but never modified state (e.g. <code class="haskell">a = a + 1</code>)</li>
 		</ul>
 		<br/><br/>
-		<p>By design. Functions in math don't depend on the environment. Haskell represents values in real world input and output with the <code>IO a</code> type.
+		<p>By design. Functions in math don't depend on the environment. Haskell represents values in real world input and output with the <code class="haskell">IO a</code> type.
 		</p>
 		<br/>
-		<p>Real world is a scary place. Do a little <code>IO</code> to get data. Pass that data through entirely pure functions. Do a little <code>IO</code> to put the transformed data back into the real world.
+		<p>Real world is a scary place. Do a little <code class="haskell">IO</code> to get data. Pass that data through entirely pure functions. Do a little <code class="haskell">IO</code> to put the transformed data back into the real world.
 		</p>
 	      </section>
 
 	      <section>
-		<h2><code>IO</code> is a monad</h2>
+		<h2><code class="haskell">IO</code> is a monad</h2>
 		<br/>
 		<p>
-		  <code>IO</code> is a &quot;monad&quot;. Any type is a monad if you can define two functions on it:
+		  <code class="haskell">IO</code> is a &quot;monad&quot;. Any type is a monad if you can define two functions on it:
 		</p>
-		<pre><code>(&gt;&gt;=)  :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
+		<pre><code class="haskell">(&gt;&gt;=)  :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
 return :: Monad m =&gt; a -&gt; m a</code></pre>
 		<br/>
 		<ul>
-		  <li>No <em>direct</em> access to values wrapped in <code>IO</code></li>
-		  <li>Pipe <code>IO</code> values around using <code>&gt;&gt;=</code> and <code>return</code></li>
+		  <li>No <em>direct</em> access to values wrapped in <code class="haskell">IO</code></li>
+		  <li>Pipe <code class="haskell">IO</code> values around using <code class="haskell">&gt;&gt;=</code> and <code class="haskell">return</code></li>
 		</ul>
 		<br/>
-		<pre><code>getString :: IO String
+		<pre><code class="haskell">getString :: IO String
 
 putStrLn :: String -&gt; IO ()
 
@@ -529,7 +529,7 @@ getLine &gt;&gt;= (\s -&gt; putStrLn (map succ s)) -- Read a string,
 		<br/>
 		<ul>
 		  <li>Monads (there's more to them) tame the complexity of the real world</li>
-		  <li>Stitch together larger <code>IO</code> actions from smaller parts</li>
+		  <li>Stitch together larger <code class="haskell">IO</code> actions from smaller parts</li>
 		</ul>
 
 	      </section>
@@ -539,7 +539,7 @@ getLine &gt;&gt;= (\s -&gt; putStrLn (map succ s)) -- Read a string,
 		<br/>
 		<div style="float:left;width:40%">
 		  <p>Place field type (in C)</p>
-		  <pre><code>struct PlaceField {
+		  <pre><code class="haskell">struct PlaceField {
   double binSpikeRates[100];
   int    nNewSpikes;
   Pos   *posAtNewSpike;
@@ -553,13 +553,13 @@ getLine &gt;&gt;= (\s -&gt; putStrLn (map succ s)) -- Read a string,
 		</div>
 		<div style="float:left;width:60%">
 		  <p>Spike input thread</p>
-		  <pre><code>void acceptSpike(PlaceField *pf, Pos *p){
+		  <pre><code class="haskell">void acceptSpike(PlaceField *pf, Pos *p){
   pf-&gt;nNewSpikes++;
   pf-&gt;posAtNewSpike[s.nNewSpikes] = copy_pf(p);
 }</code></pre>
 		  <br/>
 		  <p>Reconstruction / Spike merger thread</p>
-		  <pre><code>PosEst *doBayes(PlaceField *pf[], int nPf)
+		  <pre><code class="haskell">PosEst *doBayes(PlaceField *pf[], int nPf)
 {
   PosEst *pe = createPosEstimate(pf,nPf);
   for (int n = 0; n &lt; nPf; n++){
@@ -585,11 +585,11 @@ getLine &gt;&gt;= (\s -&gt; putStrLn (map succ s)) -- Read a string,
 		<h3>STM: a journaling concurrency monad</h3>
 		<ul style="line-height:130%;">
 		  <li>STM: Software Transactional Memory</li>
-		  <li>Only 3 things may happen in the <code>STM</code> monad:</li>
+		  <li>Only 3 things may happen in the <code class="haskell">STM</code> monad:</li>
 		  <ol style="line-height:130%;">
 		    <li>Pure function application</li>
 		    <li>Assignment to special shared variables: <strong>TVar</strong>&apos;s</li>
-		    <li><code>&gt;&gt;=</code> to glue together independent STM actions</li>
+		    <li><code class="haskell">&gt;&gt;=</code> to glue together independent STM actions</li>
 		  </ol>
 		</ul>
 		
@@ -613,7 +613,66 @@ getLine &gt;&gt;= (\s -&gt; putStrLn (map succ s)) -- Read a string,
 	      </section>
 
 	      <section>
-		
+		<h2>Types guide the implementation</h2>
+		<br/><br/>
+		<div style="float:left;width:50%">
+		<pre class="fragment" data-fragment-index=1><code class="haskell">-- Full 3D position data.  
+data Position = Position 
+  { _posTime        :: !ExperimentTime
+  , _location       :: !Location
+  , _angle          :: !Angle
+  , _heading        :: !Double
+  , _speed          :: !Double
+  , _posConfidence  :: !PosConf
+  , _headingHistory :: [Double]
+  , _speedHistory   :: [Double]
+
+  , _lastGoodTime   :: !ExperimentTime
+  , _lastGoodLoc    :: !Location
+  }
+  deriving (Eq, Ord, Show, Generic)</code></pre>
+		<br/>
+		<pre class="fragment" data-fragment-index=4><code class="haskell">-- Position/segment relationship
+data TrackPos = TrackPos 
+  { _trackBin :: !TrackBin
+  , _trackDir :: !TrackDirection
+  , _trackEcc :: !TrackEccentricity
+  } deriving (Eq, Ord, Show)</code></pre>
+
+		</div>
+		<div style="float:right;width:50%">
+		  <pre class="fragment" data-fragment-index=2><code class="haskell">-- Directional &amp; spatial track segment
+data TrackBin = TrackBin 
+  { _binNam :: !String
+  , _binLoc :: !Location
+  , _binDir :: !Double -- radians
+  , _binA   :: !Double --
+  , _binZ   :: !Double
+  , _binWid :: !Double
+  } 
+  deriving (Eq, Ord, Show)</code></pre>
+		  <br/>
+		  <pre class="fragment" data-fragment-index=3><code class="haskell">-- Track is a list of segments
+data Track = Track 
+  { _trackBins  :: [TrackBin]} 
+  deriving (Eq, Show)</code></pre>
+		  <br/>
+		  <pre class="fragment" data-fragment-index=5><code class="haskell">-- Field: Any function over TrackPos's
+type Field a = Map.Map TrackPos a</code></pre>
+		</div>
+	      </section>
+	      
+	      <section>
+		<h2>Decoder&apos;s stateful operation</h2>
+		<br/><br/>
+		<pre><code>main = ds &lt;- newTVar :: IO DecoderState
+  mapM_ (\f -&gt; async (parseToStream f &gt;-&gt; updateWithSpike ds)) spikeFiles &gt;&gt;=
+  async (parseToStream posFile &gt;-&gt; updateWithPos ds) &gt;&gt;=
+  async (stepDecoderLoop ds) &gt;&gt;=
+  async (stepVisualization ds)</code></pre>
+		<br/><br/>
+		<p>Essence of the stateful part of the decoder</p>
+		<p>Every other function in the system is a function it the math sense: stateless relationship between argument and return value</p>
 	      </section>
 
 	    </div>
