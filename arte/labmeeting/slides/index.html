@@ -209,7 +209,7 @@ end</code></pre>
 	      
 	      <section>
 		<h4>Find-the-bug (2/3)</h4>
-		<pre><code trim-data style="font-size:18pt;line-height:100%;">function d = assayFix(placeCells,minRate,minStability,minSpikes,r,s,sp)
+		<pre><code trim-data style="font-size:18pt;line-height:100%;">function d = placeCellFilter(placeCells,minRate,minStability,minSpikes,r,s,sp)
 % Filter out rows that don't match inclusion standards
 
 % First set up our test criteria
@@ -262,7 +262,7 @@ speedM = mean(runSpeed, 1);
 		    
 </code></pre>
 	      </section>
-		
+
 	      <section>
 		<h2>Life in c/c++</h2>
 		<br/>
@@ -301,9 +301,9 @@ int runEcho(Client *c, uint16 pLength, char *pDataIn){
   ResponseMessage r;
   r.payload = payload;
   r.pData = malloc(payload);
-  memcpy( r->pData, pDataIn, r->pLength );
+  memcpy( r-&gt;pData, pDataIn, r-&gt;pLength );
 
-  send_client( c->address, &amp;r );
+  send_client( c-&gt;address, &amp;r );
 
   return 0;
 
@@ -315,7 +315,7 @@ int runEcho(Client *c, uint16 pLength, char *pDataIn){
 		<br/>
 		<ul>
 		  <li>State</li>
-		  <ul>
+		  <ul class="fragment">
 		    <li>Keeping track of state (stale iterators)</li>
 		    <li>Hidden state (NULL pointers, global variables)</li>
 		  </ul>
@@ -325,16 +325,295 @@ int runEcho(Client *c, uint16 pLength, char *pDataIn){
 		    <li>MATLAB's undeclared variables</li>
 		    <li>Number &harr; Bool &harr; Array &harr; Null</li>
 		    <li>Pathologically overloaded functions</li>
-		    <ul>
-		      <li>mean(xs) vs. mean(xs,1) vs. mean(xs,2)</li>
-		      <li>min(xs) vs. min(xs,1) vs. min(xs,[],1)</li>
+		    <ul class="fragment">
+		      <li>min(xs) vs. min(xs,2) vs. min(xs,[],2)</li>
 		    </ul>
 		  </ul>
 		  <li class="fragment">Barriers to abstraction</li>
 		  <ul class="fragment">
-		    <li>MATLAB - effectively one function per file</li>
+		    <li>MATLAB: effectively one function per file, pan-matrixism is clunky</li>
+		    <li>c: constantly manage all memory/resources by hand: leaky abstraction</li>
+		    <li>c++: OOP and templates</li>
 		  </ul>
+		  <li class="fragment">Many bugs fit into these categories</li>
+		  <li class="fragment">Only discovered by running the code to the point of the bug (if ever)</li>
 		</ul>
+	      </section>
+	      
+	      <section>
+		<h2>How Haskell prevents bugs</h2>
+		<br/>
+		<ol style="font-size:28pt;line-height:120%;">
+		  <li>Eliminate almost all state</li>
+		  <li class="fragment">Strong typing. Double &ne; Int &ne; Bool</li>
+		  <li class="fragment">Abstraction: Build your own types</li>
+		</ol>
+		<br/><br/><br/>
+		<h3 class="fragment">A different perspective: &quot;Functional programming&quot;</h3>
+		<br/>
+
+		<div style="float:left;width:47%" class="fragment">
+		  <p>C/MATLAB/Python/Java/Perl</p>
+		  <pre><code>int a = 2;
+a = a + 1;</code></pre>
+		  <p>No problem</p><br/>
+		  <p style="text-align:left;"><strong>Imperative program:</strong> A sequence of state changes - programmer must mentally simulate the timeline. Functions are named series of state changes.</p>
+		</div>
+		<div style="float:right;width:50%" class="fragment">
+		  <p>Algebra</p>
+		  <pre><code>int a = 2;
+a = a + 1;</code></pre>
+		  <p class="fragment">Lies! <span class="fragment">(What &quot;a&quot; satisfies that equation?)</span></p><br/>
+		  <p style="text-align:left;" class="fragment"><strong>Functional program:</strong> A set of always-true declarations. <em>Functions in the math sense.</em></p>
+		</div>
+	      </section>
+
+	      <section>
+		<h2>Life in Haskell</h2>
+		<br/>
+		<pre><code>a :: Double  -- Type signature saying 'a' is a Double
+a = 10.0     -- a is 10, forever
+
+b :: Double
+b = 5.0
+
+s :: Double
+s = (+) a b  -- s is the function (+) applied to a and b (15, forever)
+
+d :: Double
+d = b - a
+
+myAbs :: Double -&gt; Double   -- a function from Double to Double
+myAbs x
+  | x &lt;  0 =  -x    -- Definition by parts
+  | x &gt;= 0 =   x
+
+myAbs (-4)     -- 4</code></pre>
+                <br/>
+		<p>We will build <strong>types</strong> and <strong>functions</strong> that fit the job we're trying to do. Two examples:</p>
+		<ul>
+		  <li>Lists for collecting data</li>
+		  <li>Trees for storing key-value pairs and quickly searching them</li>
+		</ul>
+
+	      </section>
+
+	      <section>
+		<h2>Data Types</h2>
+		<br/>
+		<p>Lists from scratch</p>
+		<pre><code>data LList a = a :. (LList a)  -- ( :. connects an a and a LList)
+             | (:#)            -- ( :# marks the end of a list)
+  deriving (Show)
+infixr 8 :.          -- Make :. associate to the right
+                     -- so that:  2 :. 3 :. :#  == 2 :. (3 :. :#)
+
+a :: LList Int
+a = 4 :. 6 :. 8 :. (:#)
+
+b :: LList Int
+b = 4 :. 6 :. (:#)
+
+c :: LList String
+c = "Greg" :. "Cat" :. "Dog" :. "Bear" :. (:#)
+
+myLength :: LList a -&gt; Int             
+myLength (:#) = 0                      -- Definition by parts!
+myLength (x :. xs) = 1 + myLength xs   -- like abs(x)
+
+myLength c     -- 4</code></pre>
+
+	      </section>
+
+	      <section>
+		<h2>Life in Haskell</h2>
+		<br/>
+		<p>Don't turn everything into a sequence. Use definitions directly</p>
+		<p>Want to for-loop over a list to transform all the elements? <code>map</code> instead<p>
+		  <pre><code>map :: (a -&gt; b) -&gt; LList a -&gt; LList b
+map _ (:%) = (:%)
+map f (x :. xs) = f x :. map f xs
+
+map succ (4 :. 3 :. 10 :. (:%))  -- 5 :. 4 :. 11 :. (:%)
+
+map myAbs (4 :. (-3) :. 10 :. (:%))  -- 4 :. 3 :. 10 :. (:%)</code></pre>
+
+<br/>
+<p>Want to for-loop over a list to accumulate a statistic? <code>fold</code> instead</p>
+<pre><code>-- fold f x0 (x1 :. x2 :. (:%)) =  f (f (f x0 x1) x2) x3
+fold :: (a -&gt; a -&gt; a) -&gt; a -&gt; (LList a) -&gt; a
+fold _ x0 (:%) = x0
+fold f x0 (x :. xs) = fold (f x0 x) (fold f xs)
+
+myProd = fold (*) 1
+
+myProd (10 :. 2 :. 4 :. 3 :. (:%))  -- 240
+
+myMean xs = fold (+) 0 xs / fromIntegral (myLength xs)</code></pre>
+		
+	      </section>
+
+	      <section>
+		<h2>Nimble types, safe types</h2>
+		<br/>
+		<p>Let's make a <em>binary lookup tree from scratch</em></p>
+
+		<pre><code>data ATree a b = Leaf
+               | Branch (ATree a b) (a,b) (ATree a b)
+  deriving (Show)
+
+ins :: (Ord a) =&gt; ATree a b -&gt; (a,b) -&gt; ATree a b
+ins Leaf p  = Branch Leaf p Leaf
+ins (Branch l (k,v) r) p'@(k',v')
+  | k' &lt;  k    = Branch (ins l p') (k,v) r
+  | k' &gt;= k    = Branch l          (k,v) (ins r p')
+
+seek :: (Ord a) =&gt; ATree a b -&gt; a -&gt; Maybe b
+seek Leaf _  = Nothing
+seek (Branch l (k,v) r) k'
+  | k' == k     = Just v
+  | k' &lt;  k     = seek l k'
+  | k' &gt;  k     = seek r k'
+
+myTree :: ATree String Int
+myTree = foldl ins Leaf [ ("Greg",4), ("Bear",4), ("Gorilla",7)
+                        , ("Octopus",7), ("Apple",5), ("Zoo",3) ]
+
+s = seek myTree "Greg"    -- Just 4
+t = seek myTree "Bobcat"  -- Nothing
+
+u = succ (seek myTree "Greg")   -- Type error! Forgot to check Just/Nothing</code></pre>
+		<br/>
+		<p>Build <em>anything</em> from scratch.</p>
+	      </section>
+
+	      <section>
+		<h2>Functional purity, interaction with the environment</h2>
+		<br/>
+		<ul>
+		  <li>No functions have used input from the outside world</li>
+		  <li>We defined values but never modified state (e.g. <code>a = a + 1</code>)</li>
+		</ul>
+		<br/><br/>
+		<p>By design. Functions in math don't depend on the environment. Haskell represents values in real world input and output with the <code>IO a</code> type.
+		</p>
+		<br/>
+		<p>Real world is a scary place. Do a little <code>IO</code> to get data. Pass that data through entirely pure functions. Do a little <code>IO</code> to put the transformed data back into the real world.
+		</p>
+	      </section>
+
+	      <section>
+		<h2><code>IO</code> is a monad</h2>
+		<br/>
+		<p>
+		  <code>IO</code> is a &quot;monad&quot;. Any type is a monad if you can define two functions on it:
+		</p>
+		<pre><code>(&gt;&gt;=)  :: Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
+return :: Monad m =&gt; a -&gt; m a</code></pre>
+		<br/>
+		<ul>
+		  <li>No <em>direct</em> access to values wrapped in <code>IO</code></li>
+		  <li>Pipe <code>IO</code> values around using <code>&gt;&gt;=</code> and <code>return</code></li>
+		</ul>
+		<br/>
+		<pre><code>getString :: IO String
+
+putStrLn :: String -&gt; IO ()
+
+getLine &gt;&gt;= putPutStrLn :: IO ()  -- Read a string from the keyboard, 
+                                  -- pipe it to the monadic print function
+
+getLine &gt;&gt;= (\s -&gt; putStrLn (map succ s)) -- Read a string,
+                                          -- apply a pure function to string
+                                          -- pass that to IO function</code></pre>
+		<br/>
+		<ul>
+		  <li>Monads (there's more to them) tame the complexity of the real world</li>
+		  <li>Stitch together larger <code>IO</code> actions from smaller parts</li>
+		</ul>
+
+	      </section>
+
+	      <section>
+		<h2>Concurrency: extreme real-world messiness</h2>
+		<br/>
+		<div style="float:left;width:40%">
+		  <p>Place field type (in C)</p>
+		  <pre><code>struct PlaceField {
+  double binSpikeRates[100];
+  int    nNewSpikes;
+  Pos   *posAtNewSpike;
+}</code></pre>
+		  <br/>
+		  <p class="fragment">Two options:</p>
+		  <ul class="fragment">
+		    <li>Run as is. Threads overwrite each other half way through operations. <strong>Guaranteed</strong> data corruption and crashes</li>
+		    <li>Use locks. No more corrupted data. <strong>Guaranteed</strong> freezing.</li>
+		  </ul>
+		</div>
+		<div style="float:left;width:60%">
+		  <p>Spike input thread</p>
+		  <pre><code>void acceptSpike(PlaceField *pf, Pos *p){
+  pf-&gt;nNewSpikes++;
+  pf-&gt;posAtNewSpike[s.nNewSpikes] = copy_pf(p);
+}</code></pre>
+		  <br/>
+		  <p>Reconstruction / Spike merger thread</p>
+		  <pre><code>PosEst *doBayes(PlaceField *pf[], int nPf)
+{
+  PosEst *pe = createPosEstimate(pf,nPf);
+  for (int n = 0; n &lt; nPf; n++){
+    writeSpikesToField(pf[n]);
+    resetNewSpikes(pf[n]);
+  }
+}</code></pre>
+		      </div>
+	      </section>
+
+	      <section>
+		<h2>Decoding concurrency requirements</h2>
+		<br/>
+		<br/>
+		<img src="../../pics/concurrency.png" height=600/>
+		<br/><br/>
+		<h3 style="text-align:right;">(Nightmarish)</h3>
+	      </section>
+
+	      <section>
+		<h2>Monads to the rescue</h2>
+		<br/>
+		<h3>STM: a journaling concurrency monad</h3>
+		<ul style="line-height:130%;">
+		  <li>STM: Software Transactional Memory</li>
+		  <li>Only 3 things may happen in the <code>STM</code> monad:</li>
+		  <ol style="line-height:130%;">
+		    <li>Pure function application</li>
+		    <li>Assignment to special shared variables: <strong>TVar</strong>&apos;s</li>
+		    <li><code>&gt;&gt;=</code> to glue together independent STM actions</li>
+		  </ol>
+		</ul>
+		
+	      </section>
+
+	      <section>
+		<h2>Streaming position reconstruction in the STM monad</h2>
+
+		<br/><br/>
+		<div style="float:left;width:45%">
+		<ul>
+		  <li>STM lets threads run without locks</li>
+		  <li>Tracks TVar reads/writes in a journal</li>
+		  <li>In case of collission, unroll action, retry</li>
+		  <li><strong>Only possible because of type system: no arbitrary state changes allowed</strong></li>
+		</ul>
+		</div>
+		<div style="float:left;width:45%">
+		  <img src="../../pics/concurrencySTM.png" height=500/>
+		</div>
+	      </section>
+
+	      <section>
+		
 	      </section>
 
 	    </div>
