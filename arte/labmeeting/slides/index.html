@@ -59,7 +59,7 @@
 	      <section>
 		<h2>Position decoding basics</h2>
 		<br/>
-		<p>Goal: A tool to sumarize the firing of many place cells</p>
+		<p>Goal: A tool to summarize the firing of many place cells</p>
 		<br/>
 		<div>
 		  <div style="float:left;">
@@ -132,6 +132,7 @@
 		      <li class="fragment">
 			Learnable?</li>
 		    </ol>
+		    <li class="fragment"><strong>Disrupt</strong> exploratory theta sequences</li>
 		  </ul>
 		</div>
 	      </section>
@@ -376,7 +377,7 @@ a = a + 1;</code></pre>
 		  <ul>
 		    <li>No <code>a = a + 1</code> ever</li>
 		    <li>No arbitrary printf</li>
-		    <li>No arbirtary reading from disk</li>
+		    <li>No arbitrary reading from disk</li>
 		    <li>No for loops</li>
 		    <li>Replace all these with recursion and monads</li>
 		  </ul>
@@ -545,8 +546,8 @@ return :: Monad m =&gt; a -&gt; m a</code></pre>
 
 putStrLn :: String -&gt; IO ()
 
-getLine &gt;&gt;= putPutStrLn :: IO ()  -- Read a string from the keyboard, 
-                                  -- pipe it to the monadic print function
+getLine &gt;&gt;= putStrLn :: IO ()  -- Read a string from the keyboard, 
+                                     -- pipe it to the monadic print function
 
 getLine &gt;&gt;= (\s -&gt; putStrLn (map succ s)) -- Read a string,
                                           -- apply a pure function to string
@@ -628,7 +629,7 @@ getLine &gt;&gt;= (\s -&gt; putStrLn (map succ s)) -- Read a string,
 		<ul>
 		  <li>STM lets threads run without locks</li>
 		  <li>Tracks TVar reads/writes in a journal</li>
-		  <li>In case of collission, unroll action, retry</li>
+		  <li>In case of collision, unroll action, retry</li>
 		  <li><strong>Only possible because of type system: no arbitrary state changes allowed</strong></li>
 		</ul>
 		</div>
@@ -700,6 +701,19 @@ type Field a = Map.Map TrackPos a</code></pre>
 		<p>Every other function in the system is a function it the math sense: stateless relationship between argument and return value</p>
 	      </section>
 
+	      <section>
+		<h2>The path to doing actual experiments</h2>
+		<br/><br/>
+		<h3>ArtE backend can record spikes, ArteDecoder can decode at speed - a couple more hurdles in the way:</h3>
+		<ol>
+		  <li>Realtime position tracking</li>
+		  <li>Connect ArtE spike detection (or OpenEphys, or Pugl) to decoder</li>
+		  <li>Labal replay event boundaries in realtime</li>
+		  <li>Realtime computer-assisted clustercutting, or</li>
+		  <li>Realtime clusterless</li>
+		</ol>
+		<br/><br/>
+		<h3>Thanks for listening! Feedback?</h3>
 	    </div>
 	    
 	  </div>
