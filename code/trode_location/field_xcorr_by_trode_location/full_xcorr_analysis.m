@@ -1,4 +1,4 @@
-function [X_reg, y_reg, field_dists, anatomical_dists, xcorr_dists, field_cells, xcorr_r, f] = full_xcorr_analysis(place_cells, pos_info, rat_conv_table, varargin)
+function [X_reg, y_reg, field_dists, anatomical_dists, xcorr_dists, field_cells, xcorr_r, f] = full_xcorr_analysis(d,m, varargin)
 
 p = inputParser();
 
@@ -37,9 +37,13 @@ opt = p.Results;
 
 checkOkAreasAndSwapOnReverseParams(opt);
 
+place_cells       = d.spikes;
+pos_info            = d.pos_info;
+rat_conv_table = d.rat_conv_table;
+
 if(isempty(opt.ok_pairs))
     error('full_xcorr_analysis:unset_ok_pairs',...
-        'Must specify ''ok_pairs'' field, usually as { {''CA3'',''CA1''} } or { {''CA1'',''CA1''} }');
+        'Must specify ''ok_pairs'' field, usually as { {''CA3,CA1''} } or { {''CA1,CA1''} }');
 end
 
 if(~isempty(opt.field_dists))
@@ -49,6 +53,23 @@ else
         'min_peak_rate_thresh', opt.min_peak_rate_thresh, 'rate_thresh_for_multipeak',opt.rate_thresh_for_multipeak,...
         'multipeak_max_spacing', opt.multipeak_max_spacing, 'max_abs_field_dist', opt.max_abs_field_dist);
 end
+
+groups = cmap(@(x) group_of_trode(m.trode_groups,x(6:7)), field_cells);
+groups = cmap(@(x) x(1).name, groups);
+
+okPairs = zeros(numel(field_cells), numel(field_cells));
+for m = 1:numel(field_cells)
+    for n = 1:numel(field_cells)
+        if any(strcmp(opt.ok_pairs, [groups{m},',',groups{n}]))
+            okPairs(m,n) = 1;
+        elseif any(strcmp(opt.ok_pairs,[groups{n},',',groups{m}]))
+            okPairs(m,n) = -1;
+        else
+            okPairs(m,n) = 0;
+        end
+    end
+end
+%field_dists(~okPairs) = NaN;
 
 if(~isempty(opt.xcorr_dists))
     xcorr_dists = opt.xcorr_dists;
@@ -70,7 +91,7 @@ else
     xcorr_r = [];
 end
 
-ok_xcorr_pairs = sum(sum(~isnan(xcorr_dists)))/2
+n_ok_xcorr_pairs = sum(sum(~isnan(xcorr_dists)))/2
 
 if(~isempty(opt.anatomical_dists))
     anatomical_dists = opt.anatomical_dists;
@@ -83,6 +104,8 @@ elseif(opt.anatomical_groups)
     end
     anatomical_dists = get_anatomical_region_dists(place_cells, field_cells, opt.trode_groups);
 end
+
+
 
 if(~opt.anatomical_groups)
 [f, X_reg, y_reg] = plot_all_dists(field_dists, xcorr_dists, anatomical_dists,...
@@ -110,11 +133,13 @@ if(~isempty(opt.ok_pairs))
 
     for p = 1:numel(pairs)
     
-         if(numel(pairs{p}) ~= 2)
-            error('full_xcorr_analysis:bad_pairs','passed ''ok_pairs'' arg must be a cell array of pairs of strings');
-         end
+        thisComma = find(pairs{p} == ',');
+        if isempty(thisComma)
+                error('full_xcorr_analysis:checkOpts','Bad ok_pairs param');
+        end
+        thisTarget = {pairs{p}(1:(thisComma-1)), pairs{p}(thisComma+1:end)};
     
-        thisTarget = pairs{p};
+        %thisTarget = pairs{p};
         thisRemainder = pairs;
         thisRemainder(p) = [];
     
