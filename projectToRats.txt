@@ -1,0 +1,11 @@
+yolanda: Can't quite understand the notes about CA1/CA3.
+See 120711. The LFP chanlabels seem to match expected CA1-looking or CA3-looking LFP., and are spatially divided in the hippocampus the right way. But I can't understand the mapping between LFP channels and amps a1 a2, b1 b2, etc...
+121111, the colors don't seem to match at all which LFP comes from which area, and in general it's hard to see hippocampal features. Theta is there, but no ripples?
+
+121211 - Can't find the p file.
+
+112511 - Pretty nice. LFP labeling looks good, minus 1 or 2 oddballs. Loads of cells.
+
+Triggered reconstruction
+ yolanda (CA1-CA3 / CA1-long?). 
+  120711 (trode_groups looks good here for most channels)

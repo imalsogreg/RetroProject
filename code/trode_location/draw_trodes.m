@@ -1,7 +1,5 @@
 function h = draw_trodes(rat_conv_table,varargin)
 
-
-
 p = inputParser();
 p.addParamValue('trode_labels',[]);
 p.addParamValue('pref_x',[]);
@@ -14,11 +12,11 @@ p.addParamValue('axis_padding',[]);
 p.addParamValue('trode_groups',[]);
 p.addParamValue('date',[]);
 p.addParamValue('trode_groups_args',cell(0));
-p.addParamValue('trode_colors',[]); % <-- unually you want to use trode_groups instead
+p.addParamValue('trode_colors',[]); % <-- usually you want to use trode_groups instead
+p.addParamValue('highlight_inds',[]);
 p.addParamValue('filled',false);
 p.parse(varargin{:});
 opt = p.Results;
-
 
 
 if(~isempty(opt.trode_labels))
@@ -78,6 +76,8 @@ end
 h = scatter(trode_xs,trode_ys,opt.MarkerSize,trode_cs, fi{:});
 hold on;
 
+scatter(trode_xs(opt.highlight_inds), trode_ys(opt.highlight_inds), opt.MarkerSize, ...
+    trode_cs(opt.highlight_inds), 'filled');
 
 if(opt.draw_names)
     text(trode_xs,trode_ys,trode_names);

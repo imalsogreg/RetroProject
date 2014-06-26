@@ -2,6 +2,7 @@ function [r_pos_out,trigs] = gh_triggered_reconstruction(r_pos_in,pos,varargin)
 
 p = inputParser();
 p.addParamValue('time_range',[-0.2 0.2],@(x) all(size(x) == [1 2])); % pre-post trig window
+p.addParamValue('r_pos_n_shift',[]);
 p.addParamValue('pos_range',[-0.5 0.5]); % pre-post position range to display
 p.addParamValue('anal_range',[]); % global time range for analysis
 p.addParamValue('lfp',[]);
@@ -24,6 +25,24 @@ opt = p.Results;
 total_time = diff(opt.time_range);
 crit_range = opt.time_range + [-1 1]*opt.extra_time_buffer;
 
+if(~isempty(opt.r_pos_n_shift))
+    nRow = size(r_pos_in(1),1);
+    assert(numel(r_pos_n_shift == numel(r_pos_in)));
+    for c = 1:numel(r_pos_n_shift)
+        this_shift = r_pos_n_shift(c);
+        if (this_shift > 0)
+            r_pos_in(c).pdf_by_t = ...
+                [zeros(nRow,this_shift), r_pos_in(c).pdf_by_t(:,1:(end - thisShift))];
+        elseif (this_shift < 0)
+            r_pos_in(c).pdf_by_t = ...
+                [r_pos_in(c).pdf_by_t(:,thisShift:end), zeros(nRow,this_shift)];
+        else
+            r_pos_in(c).pdf_by_t = r_pos_in(c).pdf_by_t;
+        end    
+    end
+
+end
+
 % get trigger times
 if(isempty(opt.trig_times))
 
@@ -35,13 +54,16 @@ if(isempty(opt.trig_times))
         eeg_r.theta = opt.lfp_theta;
         eeg_r.phase = opt.phase_cdat;
         eeg_r.env = opt.env_cdat;
+    else
+        eeg_r.phase = opt.phase_cdat;
+        eeg_r.env   = opt.env_cdat;
     end
 
     if(~isempty(opt.lfp_chan))
         %opt.lfp = contchans_r(opt.lfp,'chans',opt.lfp_chan);
         %opt.phase_cdat = contchans(opt.phase_cdat,'chans',opt.lfp_chan);
         %opt.env_cdat = contchans(opt.env_cdat,'chans',opt.lfp_chan);
-        eeg_r = contchans_r(eeg_r,'chans',opt.lfp_chan);
+        eeg_r = contchans_r(eeg_r,'chanlabels',opt.lfp_chan);
     end
 
     trigs = gh_troughs_from_phase(eeg_r,'phase',opt.phase);
