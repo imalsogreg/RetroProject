@@ -126,45 +126,6 @@ if(opt.drop_diagonal)
     xcorr_dists( diag_logicals ) = NaN;
 end
 
-%rates_by_bouts = mat2cell(rates_array_bouts_in_cells, ones(n_cells,1), n_timebouts);
-%rates_by_bouts = permute(rates_array_bouts_in_cells,[1,3,2]);    
-
-%big_rates_by_bouts = repmat(rates_by_bouts,1,n_cells);
-
-%r_individual_bouts = cellfun( @(x,y) lfun_new_multibout_xcorr(x,y,opt), ...
-%    big_rates_by_bouts, permute(big_rates_by_bouts,[2,1,3]));
-
-%r_mean_over_bouts = 
-
-
-% OLD WAY %
-
-%n_cells = numel(place_cells.clust);
-%neuron_array = repmat( reshape(place_cells.clust, [],1), 1, n_cells);
-
-%counts_matrix = cellfun(@(x) histc(x.stimes', time_bin_edges), place_cells.clust,'UniformOutput',false);
-%counts_matrix = repmat( reshape(counts_matrix, [], 1), 1, n_cells );
-
-%opt.lag_times = opt.xcorr_lag_limits(1) : opt.xcorr_bin_size : opt.xcorr_lag_limits(2);
-%if( mod(numel(opt.lag_times) ,2 ) == 0)
-%    error('get_xcorr_dists:wrong_lag_limits_and_bin_size','Try different xcorr_bin_size and xcorr_lag_limits.');
-%end
-%opt.max_lags = (numel(opt.lag_times) - 1)/2;
-
-
-%n_bouts = size(opt.timebouts,1);
-%bouts_cell = mat2cell(opt.timebouts, ones(n_bouts,1), 2);
-%bouts_cell = reshape(bouts_cell,[],1); % make bouts cell column vector
-%ind_bouts_cell = mat2cell(ind_bouts, ones(n_bouts,1), 2);
-%ind_bouts_cell = permute(ind_bouts_cell, [2,3,1]); % make ind_bouts_cell a z vector
-%counts_all_bouts = cellfun(@(x) 
-%xcorr_dists_all_bouts = cellfun( @(x) lfun_xcorr_this_bout(counts_matrix, counts_matrix', x), ind_bouts_cell);
-
-%if(isempty(opt.xcorr_mat))
-%    xcorr_mat = cellfun(@(x,y)lfun_xcorr_multibouts(x,y,opt), neuron_array,(neuron_array)','UniformOutput',false);
-%end
-%xcorr_maxr = cellfun( @(x) max(x), xcorr_mat);
-%xcorr_dists = cellfun(@(x) lfun_xcorr_best_time(x,opt), xcorr_mat);
 
 end
 
