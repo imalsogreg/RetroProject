@@ -1,4 +1,4 @@
-function [xcorr_dists, xcorr_maxr, xcorr_mat] = get_xcorr_dists(place_cells, field_cells, varargin)
+function [xcorr_dists, xcorr_maxr, xcorr_mat] = get_xcorr_dists(place_cells, field_cells, fields, d, varargin)
 
 p = inputParser();
 p.addParamValue('timebouts', [min( cellfun(@(x) min(x.stimes), place_cells.clust)), ...
@@ -32,6 +32,32 @@ for n = 1:numel(inds)
         inds(n) = find(strcmp(field_cells{n},pcNames),1,'first');
 end
 place_cells.clust = place_cells.clust(inds);
+
+% From each clust, drop the spikes that aren't part of this field.
+% This only works with the above monkeypatch in place.
+first_inbound_ind = numel(fields{1})/2 + 1;
+bin_c = place_cells.clust{1}.field.bin_centers;
+for n = 1:numel(place_cells.clust)
+    field = fields{n};
+    if(sum(fields{n}(1:(first_inbound_ind-1))) > 0)
+        bouts = d.pos_info.out_run_bouts;
+    elseif(sum(fields{n}(first_inbound_ind:end)) > 0)
+        bouts = d.pos_info.in_run_bouts;
+    else
+        error('get_xcorr_dists:bad_field','Bad field for cell');
+    end
+    bidirect_rates = field(1:(first_inbound_ind-1)) ...
+        + field(end:-1:first_inbound_ind);
+    field_start = bin_c(find(bidirect_rates > 0,1,'first'));
+    field_end   = bin_c(find(bidirect_rates > 0,1,'last'));
+    stimes = place_cells.clust{n}.stimes;
+    pos_at_spike = interp1(conttimestamp(d.pos_info.lin_filt),...
+        d.pos_info.lin_filt.data, stimes);
+    keep = gh_points_are_in_segs(place_cells.clust{n}.stimes, bouts) & ...
+        pos_at_spike >= field_start & pos_at_spike <= field_end;
+    place_cells.clust{n}.stimes = place_cells.clust{n}.stimes(keep);
+    place_cells.clust{n}.data = place_cells.clust{n}.data(keep,:);
+end
 
 n_cells  = numel(place_cells.clust);
 n_fields = numel(field_cells);

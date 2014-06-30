@@ -3,7 +3,7 @@ function [X_reg, y_reg, field_dists, anatomical_dists, xcorr_dists, field_cells,
 p = inputParser();
 
 %general options
-p.addParamValue('plot',true);
+p.addParamValue('draw',true);
 
 %options for field_dists
 p.addParamValue('field_dists',[]);
@@ -43,13 +43,13 @@ rat_conv_table = d.rat_conv_table;
 
 if(isempty(opt.ok_pairs))
     error('full_xcorr_analysis:unset_ok_pairs',...
-        'Must specify ''ok_pairs'' field, usually as { {''CA3,CA1''} } or { {''CA1,CA1''} }');
+        'Must specify ''ok_pairs'' field, usually as  {''CA3,CA1''}  or { ''CA1,CA1'' }');
 end
 
 if(~isempty(opt.field_dists))
     field_dists = opt.field_dists;
 else
-    [field_dists,field_cells] = get_field_dists(place_cells, 'method', opt.method, ...
+    [field_dists,field_cells,fields] = get_field_dists(place_cells, 'method', opt.method, ...
         'min_peak_rate_thresh', opt.min_peak_rate_thresh, 'rate_thresh_for_multipeak',opt.rate_thresh_for_multipeak,...
         'multipeak_max_spacing', opt.multipeak_max_spacing, 'max_abs_field_dist', opt.max_abs_field_dist);
 end
@@ -81,7 +81,7 @@ else
             opt.timebouts = pos_info.in_run_bouts;
         end
     end
-    [xcorr_dists, opt.xcorr_r] = get_xcorr_dists(place_cells,field_cells, 'timebouts', opt.timebouts, 'xcorr_bin_size', opt.xcorr_bin_size,...
+    [xcorr_dists, opt.xcorr_r] = get_xcorr_dists(place_cells,field_cells, fields, d, 'timebouts', opt.timebouts, 'xcorr_bin_size', opt.xcorr_bin_size,...
         'xcorr_lag_limits', opt.xcorr_lag_limits, 'r_thresh', opt.r_thresh, 'field_dists', field_dists, 'smooth_timewin', opt.smooth_timewin);
 end
 

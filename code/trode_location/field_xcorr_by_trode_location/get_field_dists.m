@@ -1,4 +1,4 @@
-function [dists,fieldSources] = get_field_dists(place_cells, varargin)
+function [dists,fieldSources,fields] = get_field_dists(place_cells, varargin)
 
 p = inputParser();
 p.addParamValue('method', 'peak', @(x) any(strcmp(x, {'peak', 'xcorr'})));

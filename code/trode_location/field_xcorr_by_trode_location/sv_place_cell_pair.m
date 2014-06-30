@@ -21,8 +21,11 @@ data.sdat = d.spikes;
 
 data.f = figure('Position',[50 50 400 300],'KeyPressFcn',@localfn_figure_keypress);
 
-localfn_plot_phase(sdat.clust{data.m},sdat.clust{data.n},p.Results.rat_conv_table,opt);
-localfn_plot_field_phase_extents(sdat.clust{data.m}, sdat.clust{data.n}, opt);
+[~,~,fieldDists,anatomicalDists,xCorrDists] = full_xcorr_analysis(d,m,'draw',false);
+
+localfn_plot_phase(1,2,d);
+%localfn_plot_phase(sdat.clust{data.m},sdat.clust{data.n},p.Results.rat_conv_table,opt);
+%localfn_plot_field_phase_extents(sdat.clust{data.m}, sdat.clust{data.n}, opt);
 
 
 data.sdat = sdat;
