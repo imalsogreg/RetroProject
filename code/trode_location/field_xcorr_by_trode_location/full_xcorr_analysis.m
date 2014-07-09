@@ -1,4 +1,4 @@
-function [X_reg, y_reg, field_dists, anatomical_dists, xcorr_dists, field_cells, xcorr_r, f] = full_xcorr_analysis(d,m, varargin)
+function [X_reg, y_reg, field_dists, anatomical_dists, xcorr_dists, field_cells, fields, xcorr_r, xcorr_mat, f] = full_xcorr_analysis(d,m, varargin)
 
 p = inputParser();
 
@@ -37,8 +37,8 @@ opt = p.Results;
 
 checkOkAreasAndSwapOnReverseParams(opt);
 
-place_cells       = d.spikes;
-pos_info            = d.pos_info;
+place_cells    = d.spikes;
+pos_info       = d.pos_info;
 rat_conv_table = d.rat_conv_table;
 
 if(isempty(opt.ok_pairs))
@@ -81,7 +81,7 @@ else
             opt.timebouts = pos_info.in_run_bouts;
         end
     end
-    [xcorr_dists, opt.xcorr_r] = get_xcorr_dists(place_cells,field_cells, fields, d, 'timebouts', opt.timebouts, 'xcorr_bin_size', opt.xcorr_bin_size,...
+    [xcorr_dists, opt.xcorr_r, xcorr_mat] = get_xcorr_dists(place_cells,field_cells, fields, d, 'timebouts', opt.timebouts, 'xcorr_bin_size', opt.xcorr_bin_size,...
         'xcorr_lag_limits', opt.xcorr_lag_limits, 'r_thresh', opt.r_thresh, 'field_dists', field_dists, 'smooth_timewin', opt.smooth_timewin);
 end
 

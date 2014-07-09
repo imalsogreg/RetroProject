@@ -119,7 +119,8 @@ end
 
 r = cellfun( @(x,y) lfun_new_xcorr(x,y,opt),  big_rates_array, (big_rates_array'),...
     'UniformOutput', false);
-    
+xcorr_mat = r;    
+
 xcorr_dists = cellfun( @(x) lfun_xcorr_best_time(x,opt), r);
 xcorr_maxr = cellfun( @(x) max(x), r);
 

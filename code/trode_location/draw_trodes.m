@@ -14,6 +14,7 @@ p.addParamValue('date',[]);
 p.addParamValue('trode_groups_args',cell(0));
 p.addParamValue('trode_colors',[]); % <-- usually you want to use trode_groups instead
 p.addParamValue('highlight_inds',[]);
+p.addParamValue('highlight_names',[]);
 p.addParamValue('filled',false);
 p.parse(varargin{:});
 opt = p.Results;
@@ -76,8 +77,24 @@ end
 h = scatter(trode_xs,trode_ys,opt.MarkerSize,trode_cs, fi{:});
 hold on;
 
+if(~isempty(opt.highlight_inds))
 scatter(trode_xs(opt.highlight_inds), trode_ys(opt.highlight_inds), opt.MarkerSize, ...
     trode_cs(opt.highlight_inds), 'filled');
+end
+
+if(~isempty(opt.highlight_names))
+inds = [];
+if(~iscell(opt.highlight_names))
+    opt.highlight_names = {opt.highlight_names};
+end
+for n = 1:numel(opt.highlight_names)
+   inds = [inds, find( strcmp(opt.highlight_names{n}(6:7),  ...
+       trode_names) ...
+       ,1,'first')];
+end
+scatter(trode_xs(inds), trode_ys(inds), opt.MarkerSize, ...
+    trode_cs(inds), 'filled');
+end
 
 if(opt.draw_names)
     text(trode_xs,trode_ys,trode_names);
