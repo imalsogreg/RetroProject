@@ -4,15 +4,17 @@ p = inputParser();
 
 %general options
 p.addParamValue('draw',true);
+p.addParamValue('zero_diagonal',true);
 
 %options for field_dists
 p.addParamValue('field_dists',[]);
 p.addParamValue('method','peak');
-p.addParamValue('field_direction','outbound');
+p.addParamValue('field_direction','');
 p.addParamValue('min_peak_rate_thresh',15);
 p.addParamValue('rate_thresh_for_multipeak', 10);
 p.addParamValue('multipeak_max_spacing', 0.3);
 p.addParamValue('max_abs_field_dist', 1);
+p.addParamValue('smooth_field_m_sd',0.1);
 
 %options for xcorr_dists
 p.addParamValue('xcorr_dists',[]);
@@ -49,6 +51,11 @@ end
 if(~isempty(opt.field_dists))
     field_dists = opt.field_dists;
 else
+    track_len = max(d.pos_info.interp_lin) - min(d.pos_info.interp_lin);
+    n_seg = 100;
+    smooth_segs = opt.smooth_field_m_sd * n_seg / track_len; % TODO: Is this right?
+    place_cells = assign_field(place_cells,pos_info,'smooth_sd_segs',smooth_segs,'n_track_seg',n_seg);
+    d.spikes = place_cells;
     [field_dists,field_cells,fields] = get_field_dists(place_cells, 'method', opt.method, ...
         'min_peak_rate_thresh', opt.min_peak_rate_thresh, 'rate_thresh_for_multipeak',opt.rate_thresh_for_multipeak,...
         'multipeak_max_spacing', opt.multipeak_max_spacing, 'max_abs_field_dist', opt.max_abs_field_dist);
@@ -67,22 +74,31 @@ for m = 1:numel(field_cells)
         else
             okPairs(m,n) = 0;
         end
+        if opt.zero_diagonal && (m == n)
+            okPairs(m,n) = 0;
+        end
     end
 end
-%field_dists(~okPairs) = NaN;
+field_dists(~okPairs) = NaN;
 
 if(~isempty(opt.xcorr_dists))
     xcorr_dists = opt.xcorr_dists;
 else
     if(and( isempty(opt.timebouts), ~isempty(opt.field_direction)))
         if(strcmp(opt.field_direction,'outbound'))
+            error('full_xcorr_analysis:run_specific','Specifying a field direction is depricated.');
             opt.timebouts = pos_info.out_run_bouts;
         elseif(strcmp(opt.field_direction,'inbound'))
+            error('full_xcorr_analysis:run_specific','Specifying a field direction is depricated.');
             opt.timebouts = pos_info.in_run_bouts;
         end
+    elseif(isempty(opt.timebouts))
+        xcorr_timebouts = [pos_info.out_run_bouts; pos_info.in_run_bouts];
     end
-    [xcorr_dists, opt.xcorr_r, xcorr_mat] = get_xcorr_dists(place_cells,field_cells, fields, d, 'timebouts', opt.timebouts, 'xcorr_bin_size', opt.xcorr_bin_size,...
-        'xcorr_lag_limits', opt.xcorr_lag_limits, 'r_thresh', opt.r_thresh, 'field_dists', field_dists, 'smooth_timewin', opt.smooth_timewin);
+    [xcorr_dists, opt.xcorr_r, xcorr_mat] = ...
+        get_xcorr_dists(place_cells,field_cells, fields, d, 'timebouts', xcorr_timebouts, 'xcorr_bin_size', opt.xcorr_bin_size,...
+        'xcorr_lag_limits', opt.xcorr_lag_limits, 'r_thresh', opt.r_thresh, 'field_dists', field_dists, ...
+        'smooth_timewin', opt.smooth_timewin);
 end
 
 if(~isempty(opt.xcorr_r))
@@ -104,8 +120,6 @@ elseif(opt.anatomical_groups)
     end
     anatomical_dists = get_anatomical_region_dists(place_cells, field_cells, opt.trode_groups);
 end
-
-
 
 if(~opt.anatomical_groups)
 [f, X_reg, y_reg] = plot_all_dists(field_dists, xcorr_dists, anatomical_dists,...
@@ -133,30 +147,35 @@ if(~isempty(opt.ok_pairs))
 
     for p = 1:numel(pairs)
     
-        thisComma = find(pairs{p} == ',');
-        if isempty(thisComma)
-                error('full_xcorr_analysis:checkOpts','Bad ok_pairs param');
-        end
-        thisTarget = {pairs{p}(1:(thisComma-1)), pairs{p}(thisComma+1:end)};
+        thisTarget = toPair(pairs{p});
     
         %thisTarget = pairs{p};
         thisRemainder = pairs;
         thisRemainder(p) = [];
     
          
-        if(any( cellfun(@(x) pairEq(thisTarget,x), thisRemainder) ))
+        if(any( cellfun(@(x) strcmp(pairs{p},x), thisRemainder) ))
              error('full_xcorr_analysis:repeated_pair','found repeats in ''ok_pairs'' parameter');
         end
      
         if(opt.swap_on_reverse)
-            if any (cellfun(@(x) pairEq( flipPair(thisTarget), x), thisRemainder))
+            if any (cellfun(@(x) pairEq( thisTarget, flipPair(toPair(x))), thisRemainder))
             error('full_xcorr_analysis:pair_matched_flip',...
                     'found a pair matching its flipped counterpart. This is probably a mistake; it means no reverses will be made.');
-                end
+            end
         end
         
     end
 end
+end
+
+function p = toPair(pairString)
+  commaInd = find(pairString == ',',1,'first');
+  if (isempty(commaInd) || commaInd >= numel(pairString))
+      error('full_xcorr_analysis:toPair',['Pair name not ok: ', pairString]);
+  end
+  p{1} = pairString(1:(commaInd-1));
+  p{2} = pairString((commaInd+1):end);
 end
 
 function p = flipPair(pair)

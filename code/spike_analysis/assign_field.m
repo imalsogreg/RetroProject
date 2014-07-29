@@ -6,6 +6,7 @@ p.addParamValue('timewin',[]);
 p.addParamValue('smooth_sd_segs',[]);
 p.addParamValue('track_info',[]);
 p.addParamValue('track_to_patches_width',10);
+p.addParamValue('draw',false);
 p.parse(varargin{:});
 opt = p.Results;
 
@@ -57,11 +58,13 @@ all_times_logicals = ones(size(inbound_logicals));
 all_times_oc = gh_whistc(pos.lin_filt.data',all_times_logicals,track_bin_edges);
 all_times_oc = all_times_oc(1:end-1) .* pos_dt;
 
+if(opt.draw)
 plot(track_bin_centers,bidirect_oc,'k');
 hold on
 plot(track_bin_centers,all_times_oc,'k','Linestyle','--');
 plot(track_bin_centers,outbound_oc,'b');
 plot(track_bin_centers,inbound_oc,'g');
+end
 
 pos.occupancy.bin_centers = track_bin_centers;
 pos.occupancy.all_times = all_times_oc;
