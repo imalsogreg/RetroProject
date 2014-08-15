@@ -16,10 +16,16 @@ import Model.DefaultValues
 -- |Place field excitation level vs. track position
 field :: HippoParams -> CellParams -> Pos -> Double
 field HippoParams{..} CellParams{..} p
-  | p <= fieldPeak  = placeCellMaxHeight - (realToFrac $ (fieldPeak - p) / (fieldPeak - fieldStart))
+  | p <= fieldPeak  =
+    let fracInField = (p-fieldStart)/(fieldPeak-fieldStart)
+        undroopedHeight = placeCellMaxHeight * r2 fracInField
+        droop = if p < fieldStart
+                then (1- r2 fracInField) * midDroop * undroopedHeight
+                else (1- r2 fracInField) * midDroop * undroopedHeight
+    in undroopedHeight - droop
   | p >  fieldPeak  =
-    placeCellMaxHeight * (1 - 
-    (realToFrac((p - fieldPeak)/(fieldStop - fieldPeak))) ^ (2::Int))
+      let fracFromPeak = 1-(p-fieldPeak)/(fieldStop-fieldPeak)
+      in placeCellMaxHeight * (1 - (r2 fracFromPeak) ^ (2::Int))
 field _ _ _ = error "Impossible case"
 
 inhibAtXVal :: HippoParams -> XVal -> Double
@@ -127,3 +133,6 @@ crossingSpikes d h@HippoParams{..} c = withSystemRandom $ \gen -> do
     where
       f g _     = ( < probCrossingSpike ) <$> uniformR (0,1) g
       spikeXs g = filterM (f g :: XVal -> IO Bool) $ crossings d h c
+
+r2 :: (Real a, Fractional b) => a -> b
+r2 = realToFrac

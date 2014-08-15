@@ -19,7 +19,7 @@ library
   exposed-modules:     Model, Model.ModelTypes, Model.DefaultValues, Model.Gloss
   -- other-modules:       
   other-extensions:    GeneralizedNewtypeDeriving, RecordWildCards
-  build-depends:       base >=4.7 && <4.8, mwc-random, gloss
+  build-depends:       base >=4.6 && <4.8, mwc-random, gloss
   hs-source-dirs:      .
   default-language:    Haskell2010
 
@@ -28,4 +28,4 @@ executable Interact
   other-modules:       Model, Model.ModelTypes, Model.DefaultValues
   main-is:             Interact.hs
   hs-source-dirs:      . exec
-  build-depends:       base >=4.7 && <4.8, mwc-random, precession-model, gloss
+  build-depends:       base >=4.6 && <4.8, mwc-random, precession-model, gloss

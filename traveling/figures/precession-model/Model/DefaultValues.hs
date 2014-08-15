@@ -27,8 +27,9 @@ defaultHippo = HippoParams {
 defaultCell :: Pos -> Double -> CellParams
 defaultCell p anatomyPos = CellParams {
     fieldPeak  = p
-  , fieldStart = p - 1
+  , fieldStart = p - 1.5
   , fieldStop  = p + 0.05
+  , midDroop   = 1
   , anatomy    = anatomyPos
   }
 
