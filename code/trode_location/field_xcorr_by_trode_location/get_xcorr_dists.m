@@ -5,7 +5,7 @@ p.addParamValue('timebouts', [min( cellfun(@(x) min(x.stimes), place_cells.clust
     max(cellfun(@(x) max(x.stimes), place_cells.clust))]);
 p.addParamValue('xcorr_bin_size',0.002);
 p.addParamValue('xcorr_lag_limits', [-0.06, 0.06]);
-p.addParamValue('r_thresh', 5e-1);
+p.addParamValue('r_thresh', 1e-3);
 p.addParamValue('drop_diagonal',true);
 p.addParamValue('smooth_timewin',0.01);
 p.addParamValue('field_dists',[]);
@@ -13,15 +13,6 @@ p.addParamValue('xcorr_mat',[]);
 p.addParamValue('draw_pairs',[]);
 p.parse(varargin{:});
 opt = p.Results;
-
-% Has-field seems only useful when iterating over place cells.
-% When the input is fields it's different
-% if(~isempty(opt.field_dists))
-%     has_field = ~all(isnan(opt.field_dists));
-%     for n = 1:numel(place_cells.clust)
-%         place_cells.clust{n}.has_field = has_field(n);
-%     end
-% end
 
 % Monkeypatch: old version assumed one field per place cell in place_cells.
 % Going to make that true here by indexing into place_cells at field_cells
