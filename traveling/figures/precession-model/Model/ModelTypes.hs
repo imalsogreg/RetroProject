@@ -7,6 +7,7 @@ data CellParams = CellParams {
     fieldPeak  :: Pos
   , fieldStart :: Pos
   , fieldStop  :: Pos
+  , midDroop   :: Double
   , anatomy    :: Double
   } deriving (Eq, Ord, Show)
 
