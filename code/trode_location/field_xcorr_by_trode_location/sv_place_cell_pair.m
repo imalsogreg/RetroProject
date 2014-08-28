@@ -1,4 +1,4 @@
-function f = sv_place_cell_pair(d,m,okPairs,varargin)
+function f = sv_place_cell_pair(d,m,okPair,varargin)
 % f = SV_PHASE_PAIR (sdat, ['rat_conv_table',conv_table], ['m',blue_cell_index],
 %                          ['n',green_cell_index],['draw_extras',bool],
 %                          ['trode_groups', trode_groups], ['overlay', bool],
@@ -16,7 +16,7 @@ p.parse(varargin{:});
 opt = p.Results;
 
 [~,~,fieldDists,anatomicalDists,xCorrDists,fieldCells,fields,xcorr_r,xcorr_mat] = ...
-    full_xcorr_analysis(d,m,'ok_pairs',okPairs,'draw',false);
+    full_xcorr_analysis(d,m,'ok_pair',okPair,'draw',false);
 
 
 pcNames = cmap(@(x) x.name, d.spikes.clust);
@@ -57,7 +57,7 @@ function localfn_plots(f)
   subplot(2,3,2); localfn_plot_field(dat.m,dat);
   subplot(2,3,4); localfn_plot_field(dat.n,dat);
   subplot(2,3,5); localfn_plot_mat(dat.m,dat.n,...
-      max(-50,log(dat.xCorrR)));
+      max(-50,real(log(dat.xCorrR))));
   xlabel('xcorr');
   subplot(2,3,6); localfn_plot_mat(dat.m,dat.n,dat.fieldDists); xlabel('field');
 end
@@ -96,7 +96,8 @@ end
 
 function localfn_plot_trode_pos(m,n,d)
   hold off;
-  draw_trodes(d.rat_conv_table,'highlight_names',...
+  draw_trodes(d.rat_conv_table,'trode_groups',d.trode_groups,...
+      'highlight_names',...
       {d.spikes.clust{m}.name,d.spikes.clust{n}.name});
 end
 

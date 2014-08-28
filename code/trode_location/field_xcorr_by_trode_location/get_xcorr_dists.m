@@ -1,8 +1,8 @@
-function [xcorr_dists, xcorr_maxr, xcorr_mat] = get_xcorr_dists(place_cells, field_cells, fields, d, varargin)
+function [xcorr_dists, xcorr_maxr, xcorr_mat] = get_xcorr_dists(fieldClusts, field_cells, fields, d, varargin)
 
 p = inputParser();
-p.addParamValue('timebouts', [min( cellfun(@(x) min(x.stimes), place_cells.clust)), ...
-    max(cellfun(@(x) max(x.stimes), place_cells.clust))]);
+p.addParamValue('timebouts', [min( cellfun(@(x) min(x.stimes), fieldClusts)), ...
+    max(cellfun(@(x) max(x.stimes), fieldClusts))]);
 p.addParamValue('xcorr_bin_size',0.002);
 p.addParamValue('xcorr_lag_limits', [-0.06, 0.06]);
 p.addParamValue('r_thresh', 1e-3);
@@ -14,21 +14,12 @@ p.addParamValue('draw_pairs',[]);
 p.parse(varargin{:});
 opt = p.Results;
 
-% Monkeypatch: old version assumed one field per place cell in place_cells.
-% Going to make that true here by indexing into place_cells at field_cells
 
-pcNames = cmap(@(x) x.name, place_cells.clust);
-inds = zeros(1,numel(field_cells));
-for n = 1:numel(inds)
-        inds(n) = find(strcmp(field_cells{n},pcNames),1,'first');
-end
-place_cells.clust = place_cells.clust(inds);
-
-% From each clust, drop the spikes that aren't part of this field.
+% From each fieldClust, drop the spikes that aren't part of this field.
 % This only works with the above monkeypatch in place.
 first_inbound_ind = numel(fields{1})/2 + 1;
-bin_c = place_cells.clust{1}.field.bin_centers;
-for n = 1:numel(place_cells.clust)
+bin_c = fieldClusts{1}.field.bin_centers;
+for n = 1:numel(fieldClusts)
     field = fields{n};
     if(sum(fields{n}(1:(first_inbound_ind-1))) > 0)
         bouts = d.pos_info.out_run_bouts;
@@ -41,16 +32,16 @@ for n = 1:numel(place_cells.clust)
         + field(end:-1:first_inbound_ind);
     field_start = bin_c(find(bidirect_rates > 0,1,'first'));
     field_end   = bin_c(find(bidirect_rates > 0,1,'last'));
-    stimes = place_cells.clust{n}.stimes;
+    stimes = fieldClusts{n}.stimes;
     pos_at_spike = interp1(conttimestamp(d.pos_info.lin_filt),...
         d.pos_info.lin_filt.data, stimes);
-    keep = gh_points_are_in_segs(place_cells.clust{n}.stimes, bouts) & ...
+    keep = gh_points_are_in_segs(fieldClusts{n}.stimes, bouts) & ...
         pos_at_spike >= field_start & pos_at_spike <= field_end;
-    place_cells.clust{n}.stimes = place_cells.clust{n}.stimes(keep);
-    place_cells.clust{n}.data = place_cells.clust{n}.data(keep,:);
+    fieldClusts{n}.stimes = fieldClusts{n}.stimes(keep);
+    fieldClusts{n}.data = fieldClusts{n}.data(keep,:);
 end
 
-n_cells  = numel(place_cells.clust);
+n_cells  = numel(fieldClusts);
 n_fields = numel(field_cells);
 n_timebouts = size(opt.timebouts,1);
 
@@ -94,7 +85,7 @@ else
 end
 
 rates_cell = cellfun( @(x) sm_cof .* conv(reshape(histc(x.stimes, time_bin_edges),1,[]),sm_krn,'same' ),  ...
-    reshape(place_cells.clust,[],1),'UniformOutput', false);
+    reshape(fieldClusts,[],1),'UniformOutput', false);
 rates_array = cell2mat(rates_cell);
 rates_array_broken_into_bouts = rates_array(:, ind_expansion);
 
@@ -107,18 +98,20 @@ big_rates_array = repmat(rates_array_bouts_concat, 1, n_cells);
 if(~isempty(opt.field_dists))
     big_rates_array( isnan(opt.field_dists) ) = {NaN};
 end
-
-r = cellfun( @(x,y) lfun_new_xcorr(x,y,opt),  big_rates_array, (big_rates_array'),...
+tmptmp = []
+r = arrayfun( @(x,y) lfun_new_xcorr(rates_array_bouts_concat{x},rates_array_bouts_concat{y},opt),  ...
+        repmat([1:n_fields]', 1,        n_fields),...
+        repmat([1:n_fields],  n_fields, 1       ),...
     'UniformOutput', false);
 xcorr_mat = r;    
 
 xcorr_dists = cellfun( @(x) lfun_xcorr_best_time(x,opt), r);
-xcorr_maxr = cellfun( @(x) max(x), r);
+xcorr_maxr = cellfun( @(x) max(x(~isnan(x))), r);
 
 for n = 1:size(opt.draw_pairs,1)
     figure; subplot(2,1,1);
-    this_a = place_cells.clust{opt.draw_pairs(n,1)};
-    this_b = place_cells.clust{opt.draw_pairs(n,2)};
+    this_a = fieldClusts{opt.draw_pairs(n,1)};
+    this_b = fieldClusts{opt.draw_pairs(n,2)};
     plot( this_a.field.bin_centers, this_a.field.out_rate, 'b'); hold on;
     plot( this_a.field.bin_centers, -1.*this_a.field.in_rate, 'b');
     plot(this_b.field.bin_centers, this_b.field.out_rate,'r');
@@ -140,8 +133,9 @@ end
 
 if(opt.drop_diagonal)
     diag_logicals = logical( eye(size(xcorr_dists)) );
-    r( diag_logicals ) = {NaN};
+    %r( diag_logicals ) = {NaN};
     xcorr_dists( diag_logicals ) = NaN;
+    xcorr_maxr ( diag_logicals ) = NaN;
 end
 
 

@@ -28,8 +28,7 @@ p.addParamValue('r_thresh', 1e-2);
 % options for anatomical_dists
 p.addParamValue('anatomical_dists',[]);  %pass this to bypass computing it in full_xcorr_anal
 p.addParamValue('ok_areas',{'CA1','CA3'});
-p.addParamValue('swap_on_reverse',true);
-p.addParamValue('ok_pairs',[]);
+p.addParamValue('ok_pair',[]);
 p.addParamValue('axis_vector',[1 -1] ./ sqrt(2) );
 p.addParamValue('anatomical_groups',false);
 p.addParamValue('trode_groups',[]);
@@ -37,29 +36,28 @@ p.addParamValue('trode_groups',[]);
 p.parse(varargin{:});
 opt = p.Results;
 
-checkOkAreasAndSwapOnReverseParams(opt);
+checkParams(opt);
 
 place_cells    = d.spikes;
 pos_info       = d.pos_info;
 rat_conv_table = d.rat_conv_table;
 
-if(isempty(opt.ok_pairs))
+if(isempty(opt.ok_pair))
     error('full_xcorr_analysis:unset_ok_pairs',...
         'Must specify ''ok_pairs'' field, usually as  {''CA3,CA1''}  or { ''CA1,CA1'' }');
 end
 
-if(~isempty(opt.field_dists))
-    field_dists = opt.field_dists;
-else
-    track_len = max(d.pos_info.interp_lin) - min(d.pos_info.interp_lin);
-    n_seg = 100;
-    smooth_segs = opt.smooth_field_m_sd * n_seg / track_len; % TODO: Is this right?
-    place_cells = assign_field(place_cells,pos_info,'smooth_sd_segs',smooth_segs,'n_track_seg',n_seg);
-    d.spikes = place_cells;
-    [field_dists,field_cells,fields] = get_field_dists(place_cells, 'method', opt.method, ...
+
+track_len = max(d.pos_info.interp_lin) - min(d.pos_info.interp_lin);
+n_seg = 100;
+smooth_segs = opt.smooth_field_m_sd * n_seg / track_len; % TODO: Is this right?
+place_cells = assign_field(place_cells,pos_info,'smooth_sd_segs',smooth_segs,'n_track_seg',n_seg);
+[fields,field_cells] = get_fields(place_cells, 'method', opt.method, ...
         'min_peak_rate_thresh', opt.min_peak_rate_thresh, 'rate_thresh_for_multipeak',opt.rate_thresh_for_multipeak,...
         'multipeak_max_spacing', opt.multipeak_max_spacing, 'max_abs_field_dist', opt.max_abs_field_dist);
-end
+
+fieldClusts = place_cells_index_by_field(place_cells,field_cells);
+place_cells.clust = fieldClusts;
 
 groups = cmap(@(x) group_of_trode(m.trode_groups,x(6:7)), field_cells);
 groups = cmap(@(x) x(1).name, groups);
@@ -67,20 +65,33 @@ groups = cmap(@(x) x(1).name, groups);
 okPairs = zeros(numel(field_cells), numel(field_cells));
 for m = 1:numel(field_cells)
     for n = 1:numel(field_cells)
-        if any(strcmp(opt.ok_pairs, [groups{m},',',groups{n}]))
+        if strcmp(opt.ok_pair, [groups{m},',',groups{n}])
             okPairs(m,n) = 1;
-        elseif any(strcmp(opt.ok_pairs,[groups{n},',',groups{m}]))
-            okPairs(m,n) = -1;
+        elseif strcmp(opt.ok_pair,[groups{n},',',groups{m}])
+            okPairs(m,n) = 0;
         else
             okPairs(m,n) = 0;
         end
         if opt.zero_diagonal && (m == n)
             okPairs(m,n) = 0;
         end
+        if strcmp(groups{m},groups{n}) && m > n
+            okPairs(m,n) = 0;
+        end
     end
 end
+
+%********************* Field Distances **********************
+if(~isempty(opt.field_dists))
+    field_dists = opt.field_dists;
+else
+    d.spikes.clusts = fieldClusts;
+    field_dists = get_field_dists(field_cells,fields,fieldClusts,'okMatrix',okPairs);
+end
+
 field_dists(~okPairs) = NaN;
 
+%************** Time Crosscorrelations *******************
 if(~isempty(opt.xcorr_dists))
     xcorr_dists = opt.xcorr_dists;
 else
@@ -96,9 +107,10 @@ else
         xcorr_timebouts = [pos_info.out_run_bouts; pos_info.in_run_bouts];
     end
     [xcorr_dists, opt.xcorr_r, xcorr_mat] = ...
-        get_xcorr_dists(place_cells,field_cells, fields, d, 'timebouts', xcorr_timebouts, 'xcorr_bin_size', opt.xcorr_bin_size,...
-        'xcorr_lag_limits', opt.xcorr_lag_limits, 'r_thresh', opt.r_thresh, 'field_dists', field_dists, ...
-        'smooth_timewin', opt.smooth_timewin);
+        get_xcorr_dists(fieldClusts,field_cells, fields, d, 'timebouts', xcorr_timebouts, ...
+        'xcorr_bin_size', opt.xcorr_bin_size,...
+        'xcorr_lag_limits', opt.xcorr_lag_limits, 'r_thresh', opt.r_thresh,...
+        'field_dists', field_dists, 'smooth_timewin', opt.smooth_timewin);
 end
 
 if(~isempty(opt.xcorr_r))
@@ -118,7 +130,7 @@ elseif(opt.anatomical_groups)
           error('full_xcorr_analysis:need_trode_groups',...
               'need to pass trode_groups param to use anatomical_groups option');
     end
-    anatomical_dists = get_anatomical_region_dists(place_cells, field_cells, opt.trode_groups);
+    anatomical_dists = get_anatomical_region_dists(fieldClusts, field_cells, opt.trode_groups);
 end
 
 if(~opt.anatomical_groups)
@@ -127,12 +139,12 @@ if(~opt.anatomical_groups)
 end
 
 if(opt.anatomical_groups)
-    pairColorMap = containers.Map;
-    for n = 1:numel(opt.ok_pairs)
+  pairColorMap = containers.Map;
+  for n = 1:numel(opt.ok_pairs)
     pairColorMap([opt.ok_pairs{n}{1},'|',opt.ok_pairs{n}{2}]) = gh_colors(n+1);
-    end
+  end
   plot_all_dists_by_group(field_dists,anatomical_dists,xcorr_dists,...
-      field_cells,opt.trode_groups,pairColorMap);
+    field_cells,opt.trode_groups,pairColorMap);
   X_reg = 2;
   y_reg = 2;
 end
@@ -140,33 +152,16 @@ end
 end
 
 
-function checkOkAreasAndSwapOnReverseParams(opt)
+function checkParams(opt)
 
-if(~isempty(opt.ok_pairs))
-    pairs = opt.ok_pairs;
-
-    for p = 1:numel(pairs)
-    
-        thisTarget = toPair(pairs{p});
-    
-        %thisTarget = pairs{p};
-        thisRemainder = pairs;
-        thisRemainder(p) = [];
-    
-         
-        if(any( cellfun(@(x) strcmp(pairs{p},x), thisRemainder) ))
-             error('full_xcorr_analysis:repeated_pair','found repeats in ''ok_pairs'' parameter');
-        end
-     
-        if(opt.swap_on_reverse)
-            if any (cellfun(@(x) pairEq( thisTarget, flipPair(toPair(x))), thisRemainder))
-            error('full_xcorr_analysis:pair_matched_flip',...
-                    'found a pair matching its flipped counterpart. This is probably a mistake; it means no reverses will be made.');
-            end
-        end
-        
-    end
+if iscell(opt.ok_pair)
+    error('full_xcorr_analysis:bad_okPairs_param','Pass one okPairs like: ''ca3,ca1'' ');
 end
+
+if find( opt.ok_pair == ',') == []
+    error('full_xcorr_analysis:bad_okPairs_param','Pass one okPairs like: ''ca3,ca1'' ');
+end
+
 end
 
 function p = toPair(pairString)

@@ -20,7 +20,7 @@ if( n(d) >= n('021313') && n(d) <= n('023113'))
     trode_groups{2}.trodes = {'11','13','14','15','16','17','18','19','21','22','18arte','17arte'};
     trode_groups{2}.color = [0 1 0];
 
-    trode_groups{3}.name   = 'HPC';
+    trode_groups{3}.name   = 'CA1';
     trode_groups{3}.trodes = {'01','02','03','04','05','06','08','10'};
     trode_groups{3}.color = [0 0 1];
 
@@ -44,7 +44,7 @@ if( n(d) >= n('030113') && n(d) <= n('032713'))
     trode_groups{2}.trodes = {'11','13','14','15','16','17','18','19','21','22','18arte','17arte'};
     trode_groups{2}.color = [0 1 0];
 
-    trode_groups{3}.name   = 'HPC';
+    trode_groups{3}.name   = 'CA1';
     trode_groups{3}.trodes = {'01','02','03','04','05','06','07','08','10'};
     trode_groups{3}.color = [0 0 1];
 
@@ -82,7 +82,7 @@ if ( n(d) == n('032813') )
     trode_groups{3}.trodes = {'01','03','04','05','06','08','10'};
     trode_groups{3}.color = [1 0 1];
 
-    trode_groups{4}.name = 'HPC';
+    trode_groups{4}.name = 'CA1';
     trode_groups{4}.trodes = {'02'};
     trode_groups{4}.color = [0 0 1];
 
@@ -110,7 +110,7 @@ if( n(d) > n('032813') && n(d) <= n('040913'))
     trode_groups{2}.trodes = {'11','13','14','15','16','17','18','19','21','22','18arte','17arte'};
     trode_groups{2}.color = [0 1 0];
 
-    trode_groups{3}.name = 'HPC';
+    trode_groups{3}.name = 'CA1';
     trode_groups{3}.trodes = {'02'};
     trode_groups{3}.color = [0 0 1];
 
