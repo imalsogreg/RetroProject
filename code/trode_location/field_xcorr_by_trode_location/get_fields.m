@@ -1,6 +1,7 @@
 function [fields,fieldSources] = get_fields(place_cells,varargin)
 
 p = inputParser();
+p.addParamValue('ok_directions',{'outbound','inbound'});
 p.addParamValue('method', 'peak', @(x) any(strcmp(x, {'peak', 'xcorr'})));
 p.addParamValue('min_peak_rate_thresh', 15);
 p.addParamValue('rate_thresh_for_multipeak',5);
@@ -14,7 +15,7 @@ fields = cell(0);
 fieldSources = cell(0);
 isValid = [];
 for c = 1:numel(place_cells.clust)
-    place_cells.clust{c} = unrollOutboundInbound(place_cells.clust{c});
+    place_cells.clust{c} = unrollOutboundInbound(place_cells.clust{c},opt);
     workingClust = place_cells.clust{c};
     nCellField = 0;
     while hasField(workingClust,opt)
@@ -28,14 +29,20 @@ end
 end
 
 
-function clust = unrollOutboundInbound(clust)
+function clust = unrollOutboundInbound(clust,opt)
     bc = clust.field.bin_centers;
     lastBin = bc(end);
     db = diff(bc(1:2));
     unfoldedBinCenters = bc + lastBin + db;
     newBinCenters = [bc, unfoldedBinCenters];
     oldOutbound = clust.field.out_rate;
+    if(all(not(strcmp('outbound',opt.ok_directions))))
+        oldOutbound = zeros(size(oldOutbound));
+    end
     oldInbound   = clust.field.in_rate;
+    if(all(not(strcmp('inbound',opt.ok_directions))))
+        oldInbound = zeros(size(oldInbound));
+    end
     newField = [oldOutbound, oldInbound(end:-1:1)];
     clust.field.bin_centers = newBinCenters;
     clust.field.rate = newField;

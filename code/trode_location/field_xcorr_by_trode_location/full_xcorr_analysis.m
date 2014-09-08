@@ -5,6 +5,7 @@ p = inputParser();
 %general options
 p.addParamValue('draw',true);
 p.addParamValue('zero_diagonal',true);
+p.addParamValue('ok_directions',{'outbound','inbound'});
 
 %options for field_dists
 p.addParamValue('field_dists',[]);
@@ -54,7 +55,8 @@ smooth_segs = opt.smooth_field_m_sd * n_seg / track_len; % TODO: Is this right?
 place_cells = assign_field(place_cells,pos_info,'smooth_sd_segs',smooth_segs,'n_track_seg',n_seg);
 [fields,field_cells] = get_fields(place_cells, 'method', opt.method, ...
         'min_peak_rate_thresh', opt.min_peak_rate_thresh, 'rate_thresh_for_multipeak',opt.rate_thresh_for_multipeak,...
-        'multipeak_max_spacing', opt.multipeak_max_spacing, 'max_abs_field_dist', opt.max_abs_field_dist);
+        'multipeak_max_spacing', opt.multipeak_max_spacing, 'max_abs_field_dist', opt.max_abs_field_dist,...
+        'ok_directions',opt.ok_directions);
 
 fieldClusts = place_cells_index_by_field(place_cells,field_cells);
 place_cells.clust = fieldClusts;
