@@ -6,32 +6,35 @@ p.addParamValue('xcorr_range',0.2);
 p.addParamValue('xcorr_step', 0.005);
 p.addParamValue('r_tau',0.010);
 p.addParamValue('only_direction',[]);
+p.addParamValue('min_vel',0.2);
 p.parse(varargin{:});
 opt = p.Results;
 
+trodeGroup0   = d.trode_groups( cellfun(@(x) strcmp(x.name,area0),d.trode_groups) );
 placeCells0   = placeCellsOfGroup(d.spikes, area0,   d.trode_groups);
+trodeGroupTau = d.trode_groups( cellfun(@(x) strcmp(x.name,areaTau),d.trode_groups) );
 placeCellsTau = placeCellsOfGroup(d.spikes, areaTau, d.trode_groups);
 
 % Do one pass just to get the trigger times
-throwawayRpos = gh_decode_pos(placeCells0,d.pos_info,'r_tau',opt.r_tau);
-[~,trigTimes] = gh_triggered_reconstruction(throwawayRpos,d.pos_info);
-rposTrig0 = triggeredBidirectTimeshift(placeCells0,d.pos_info);
 rTimewin = [min(d.pos_info.timestamp),max(d.pos_info.timestamp)];
+throwawayRpos = decode_pos_with_trode_pos(placeCells0,d.pos_info,trodeGroup0,'r_tau',opt.r_tau,'r_timewin',rTimewin);
+[~,trigTimes] = gh_triggered_reconstruction(throwawayRpos,d.pos_info,'lfp',d.thetaRaw);
+rposTrig0 = triggeredBidirect(placeCells0,d.pos_info,trodeGroup0,0,opt.min_vel,trigTimes,opt.r_tau,rTimewin,opt.only_direction);
+
 steps = -opt.xcorr_range : opt.xcorr_step : opt.xcorr_range;
 
-rs = arrayfun(@(s) triggeredBidirectTimeshift(placeCellsTau,posInfo,s,...
-    trigTimes,opt.r_tau,rTimewin,opt.only_direction,rposTrig0));
+rs = arrayfun(@(s) triggeredBidirectCorr(placeCellsTau,d.pos_info,trodeGroupTau,s,...
+    opt.min_vel,trigTimes,opt.r_tau,rTimewin,opt.only_direction,rposTrig0),steps);
 
 end
 
+function rpTrig = triggeredBidirect(placeCells,posInfo,tg,tDelay,minVel,trigTimes,rTau,rTimewin,onlyDir) 
 
-function r2 = triggeredBidirectTimeshift(placeCells,posInfo,tDelay,trigTimes,rTau,rTimewin,onlyDir,trigRPos0)
+    rpOut = decode_pos_with_trode_pos(placeCells,posInfo,tg,'r_tau',rTau,'r_timewin',rTimewin+tDelay,'field_direction','outbound');
+    rpIn  = decode_pos_with_trode_pos(placeCells,posInfo,tg,'r_tau',rTau,'r_timewin',rTimewin+tDelay,'field_direction','inbound');
 
-    rpOut = gh_decode_pos(placeCells,posInfo,'r_tau',rTau,'r_timewin',rTimewin+tDelay,'field_direction','outbound');
-    rpIn  = gh_decode_pos(placeCells,posInfo,'r_tau',rTau,'r_timewin',rTimewin+tDelay,'field_direction','inbound');
-
-    rpTrigOut = gh_triggered_reconstruction(rpOut,posInfo,'min_vel', min_vel,'trig_times',trigTimes);
-    rpTrigIn  = gh_triggered_reconstruction(rpIn, posInfo,'min_vel',-min_vel,'trig_times',trigTimes);
+    rpTrigOut = gh_triggered_reconstruction(rpOut,posInfo,'min_vel', minVel,'trig_times',trigTimes);
+    rpTrigIn  = gh_triggered_reconstruction(rpIn, posInfo,'min_vel',-minVel,'trig_times',trigTimes);
 
     if(strcmp(onlyDir,'outbound'))
         rpTrig = rpTrigOut;
@@ -47,7 +50,12 @@ function r2 = triggeredBidirectTimeshift(placeCells,posInfo,tDelay,trigTimes,rTa
             ['Didn''t recognize only_direction option:',onlyDir]);
     end
     
-    r2 = corr(reshape(trigRPos0,[],1), reshape(rpTrig,[],1));
+end
+
+function r2 = triggeredBidirectCorr(placeCells,posInfo,tg,tDelay,minVel,trigTimes,rTau,rTimewin,onlyDir,trigRPos0)
+
+    rpTrig = triggeredBidirect(placeCells,posInfo,tg,tDelay,minVel,trigTimes,rTau,rTimewin,onlyDir);
+    r2 = corr(reshape(trigRPos0.pdf_by_t,[],1), reshape(rpTrig.pdf_by_t,[],1));
     
 end
 
