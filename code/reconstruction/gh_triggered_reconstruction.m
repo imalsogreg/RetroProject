@@ -16,7 +16,7 @@ p.addParamValue('min_vel',0.2,@isreal);
 p.addParamValue('normalize_within_chan',false,@islogical);
 p.addParamValue('lfp_chan',[]);
 p.addParamValue('phase',0);
-p.addParamValue('draw',true);
+p.addParamValue('draw',false);
 p.parse(varargin{:});
 opt = p.Results;
 

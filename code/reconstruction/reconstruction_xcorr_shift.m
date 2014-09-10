@@ -17,8 +17,11 @@ placeCellsTau = placeCellsOfGroup(d.spikes, areaTau, d.trode_groups);
 
 % Do one pass just to get the trigger times
 rTimewin = [min(d.pos_info.timestamp),max(d.pos_info.timestamp)];
-throwawayRpos = decode_pos_with_trode_pos(placeCells0,d.pos_info,trodeGroup0,'r_tau',opt.r_tau,'r_timewin',rTimewin);
-[~,trigTimes] = gh_triggered_reconstruction(throwawayRpos,d.pos_info,'lfp',d.thetaRaw);
+throwawayRpos = decode_pos_with_trode_pos(placeCells0,d.pos_info,...
+    trodeGroup0,'r_tau',opt.r_tau,'r_timewin',rTimewin,'field_direction','bidirect');
+[~,trigTimesOut] = gh_triggered_reconstruction(throwawayRpos,d.pos_info,'lfp',d.thetaRaw,'min_vel',opt.min_vel);
+[~,trigTimesIn]  = gh_triggered_reconstruction(throwawayRpos,d.pos_info,'lfp',d.thetaRaw,'min_vel',-opt.min_vel);
+trigTimes = [trigTimesOut,trigTimesIn];
 rposTrig0 = triggeredBidirect(placeCells0,d.pos_info,trodeGroup0,0,opt.min_vel,trigTimes,opt.r_tau,rTimewin,opt.only_direction);
 
 steps = -opt.xcorr_range : opt.xcorr_step : opt.xcorr_range;
@@ -33,17 +36,20 @@ function rpTrig = triggeredBidirect(placeCells,posInfo,tg,tDelay,minVel,trigTime
     rpOut = decode_pos_with_trode_pos(placeCells,posInfo,tg,'r_tau',rTau,'r_timewin',rTimewin+tDelay,'field_direction','outbound');
     rpIn  = decode_pos_with_trode_pos(placeCells,posInfo,tg,'r_tau',rTau,'r_timewin',rTimewin+tDelay,'field_direction','inbound');
 
-    rpTrigOut = gh_triggered_reconstruction(rpOut,posInfo,'min_vel', minVel,'trig_times',trigTimes);
-    rpTrigIn  = gh_triggered_reconstruction(rpIn, posInfo,'min_vel',-minVel,'trig_times',trigTimes);
+    trigTimesOut = gh_times_in_timewins(trigTimes,posInfo.out_run_bouts);
+    trigTimesIn  = gh_times_in_timewins(trigTimes,posInfo.in_run_bouts);
+    
+    rpTrigOut = gh_triggered_reconstruction(rpOut,posInfo,'min_vel', minVel,'trig_times',trigTimesOut);
+    rpTrigIn  = gh_triggered_reconstruction(rpIn, posInfo,'min_vel',-minVel,'trig_times',trigTimesIn);
 
-    if(strcmp(onlyDir,'outbound'))
+    if(strcmp(onlyDir,'outbound') || sum(sum(isnan(rpTrigIn.pdf_by_t))) > 0)
         rpTrig = rpTrigOut;
-    elseif(strcmp(onlyDir,'inbound'))
+    elseif(strcmp(onlyDir,'inbound') || sum(sum(isnan(rpTrigOut.pdf_by_t))) > 0)
         rpTrig = rpTrigIn;
     elseif(isempty(onlyDir))
         rpTrig = rpTrigOut;
         for n = 1:numel(rpTrig)
-            rpTrig(n).pdf_by_t = rpTrig(n).pdf_by_t + rpTrigIn(n).pdf_by_t(end:-1:1,:);
+            rpTrig(n).pdf_by_t = rpTrig(n).pdf_by_t .* rpTrigIn(n).pdf_by_t(end:-1:1,:);
         end
     else
         error('reconstruction_xcorr_shift:unrecognizedOnlyDirection',...
