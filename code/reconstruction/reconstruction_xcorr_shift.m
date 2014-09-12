@@ -32,15 +32,19 @@ rs = arrayfun(@(s) triggeredBidirectCorr(placeCellsTau,d.pos_info,trodeGroupTau,
 end
 
 function rpTrig = triggeredBidirect(placeCells,posInfo,tg,tDelay,minVel,trigTimes,rTau,rTimewin,onlyDir) 
-
-    rpOut = decode_pos_with_trode_pos(placeCells,posInfo,tg,'r_tau',rTau,'r_timewin',rTimewin+tDelay,'field_direction','outbound');
-    rpIn  = decode_pos_with_trode_pos(placeCells,posInfo,tg,'r_tau',rTau,'r_timewin',rTimewin+tDelay,'field_direction','inbound');
+    disp(['tic',num2str(tDelay)]);
+    rpOut = decode_pos_with_trode_pos(placeCells,posInfo,tg,'r_tau',rTau,'r_timewin',...
+        rTimewin,'field_direction','outbound');
+    rpIn  = decode_pos_with_trode_pos(placeCells,posInfo,tg,'r_tau',rTau,'r_timewin',...
+        rTimewin,'field_direction','inbound');
 
     trigTimesOut = gh_times_in_timewins(trigTimes,posInfo.out_run_bouts);
     trigTimesIn  = gh_times_in_timewins(trigTimes,posInfo.in_run_bouts);
     
-    rpTrigOut = gh_triggered_reconstruction(rpOut,posInfo,'min_vel', minVel,'trig_times',trigTimesOut);
-    rpTrigIn  = gh_triggered_reconstruction(rpIn, posInfo,'min_vel',-minVel,'trig_times',trigTimesIn);
+    rpTrigOut = gh_triggered_reconstruction(rpOut,posInfo,'min_vel', minVel,...
+        'trig_times',trigTimesOut+tDelay);
+    rpTrigIn  = gh_triggered_reconstruction(rpIn, posInfo,'min_vel',-minVel,...
+        'trig_times',trigTimesIn+tDelay);
 
     if(strcmp(onlyDir,'outbound') || sum(sum(isnan(rpTrigIn.pdf_by_t))) > 0)
         rpTrig = rpTrigOut;
