@@ -48,9 +48,14 @@ bidirect_oc = bidirect_oc(1:end-1) .* pos_dt; % drop the last bin, count(times =
 outbound_oc = gh_whistc(pos.lin_filt.data',outbound_logicals,track_bin_edges);
 outbound_oc = outbound_oc(1:end-1) .* pos_dt; % drop the last bin, count(times == last edge)
 
+
 [pos_times_in_inbound_bouts,inbound_logicals] = gh_times_in_timewins(pos_ts,pos.in_run_bouts);
 inbound_oc = gh_whistc(pos.lin_filt.data',inbound_logicals,track_bin_edges);
 inbound_oc = inbound_oc(1:end-1) .* pos_dt; % drop the last bin, count(times == last edge)
+
+if(sum(isnan(outbound_oc)) > 0 || sum(isnan(inbound_oc)) > 0)
+    error('assign_field:nan_in_occupancy','Occupancy has nan');
+end
 
 % one more series, ignoring velocity
 pos_times_all_times = pos_ts;

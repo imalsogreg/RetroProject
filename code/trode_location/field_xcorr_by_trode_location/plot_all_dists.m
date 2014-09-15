@@ -1,18 +1,11 @@
 function [f, X_reg, y_reg] = plot_all_dists(field_dists, xcorr_dists, anatomical_dists, varargin)
 
 p = inputParser();
-p.addParamValue('drop_diagonal', true);
 p.addParamValue('xcorr_r',[]);
 p.parse(varargin{:});
 opt = p.Results;
 
 n_cells = size(field_dists,1);
-
-keep_bool = logical(triu( ones(n_cells, n_cells) ));
-if(opt.drop_diagonal)
-    keep_bool( logical(eye(n_cells, n_cells)) ) = 0;
-    keep_bool = logical(keep_bool);
-end
 
 if(isempty(opt.xcorr_r))
     xcorr_r = ones(size(xcorr_dists));
@@ -20,15 +13,17 @@ else
     xcorr_r = opt.xcorr_r;
 end
 
-field_dists = lfun_condition_matrix(field_dists,keep_bool);
-xcorr_dists = lfun_condition_matrix(xcorr_dists, keep_bool);
-anatomical_dists = lfun_condition_matrix(anatomical_dists, keep_bool);
-xcorr_r = lfun_condition_matrix(xcorr_r, keep_bool);
+field_dists = reshape(field_dists,1,[]);
+xcorr_dists = reshape(xcorr_dists,1,[]);
+anatomical_dists = reshape(anatomical_dists,1,[]);
+xcorr_r = reshape(xcorr_r,1,[]);
 
 keep_bool = min( [~isnan(field_dists) ;...
     ~isnan(xcorr_dists) ; ...
     ~isnan(anatomical_dists)], [], 1);
 keep_bool = logical(keep_bool);
+
+
 
 field_dists = field_dists(keep_bool);
 xcorr_dists = xcorr_dists(keep_bool);

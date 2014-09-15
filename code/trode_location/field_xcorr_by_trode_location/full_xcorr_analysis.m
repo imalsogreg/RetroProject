@@ -44,8 +44,8 @@ pos_info       = d.pos_info;
 rat_conv_table = d.rat_conv_table;
 
 if(isempty(opt.ok_pair))
-    error('full_xcorr_analysis:unset_ok_pairs',...
-        'Must specify ''ok_pairs'' field, usually as  {''CA3,CA1''}  or { ''CA1,CA1'' }');
+    error('full_xcorr_analysis:unset_ok_pair',...
+        'Must specify ''ok_pairs'' field, usually as  ''CA3,CA1''  or ''CA1,CA1'' ');
 end
 
 

@@ -72,6 +72,7 @@ if(data.use_pos)
     bar(clust.field.bin_centers,clust.field.out_rate,'b','Parent',h(1));
     hold on;
     bar(clust.field.bin_centers,-1*clust.field.in_rate,'r','Parent',h(1));
+    ylim([-40,40]);
     hold off;
 
     h(2) = subplot(2,2,1);

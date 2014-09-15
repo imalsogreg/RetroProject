@@ -1,7 +1,5 @@
 function c = trode_colors(dat, trode_groups)
 
-warning('Not thoroughly debugged trode_colors.m');
-
 if(iscell(dat))
     trode_names = dat;
 elseif(isempty(dat))
@@ -42,7 +40,7 @@ for n = 1:numel(groups)
     end
 end
 if(~matched)
-    warning(['Trode named ', target,' not found in any trode-group.']);
+%    warning(['Trode named ', target,' not found in any trode-group.']);
     c = [0.85 0.85 0.85];
 end
 
