@@ -2,7 +2,7 @@ function [ rs,steps ] = reconstruction_xcorr_shift(d,m,area0,areaTau, varargin )
 %RECONSTRUCTION_XCORR_SHIFT Slide one rpos wrt the other, check correlation
 % at each shift
 p = inputParser();
-p.addParamValue('xcorr_range',0.2);
+p.addParamValue('xcorr_range',0.1);
 p.addParamValue('xcorr_step', 0.005);
 p.addParamValue('r_tau',0.010);
 p.addParamValue('only_direction',[]);
@@ -22,16 +22,21 @@ throwawayRpos = decode_pos_with_trode_pos(placeCells0,d.pos_info,...
 [~,trigTimesOut] = gh_triggered_reconstruction(throwawayRpos,d.pos_info,'lfp',d.thetaRaw,'min_vel',opt.min_vel);
 [~,trigTimesIn]  = gh_triggered_reconstruction(throwawayRpos,d.pos_info,'lfp',d.thetaRaw,'min_vel',-opt.min_vel);
 trigTimes = [trigTimesOut,trigTimesIn];
-rposTrig0 = triggeredBidirect(placeCells0,d.pos_info,trodeGroup0,0,opt.min_vel,trigTimes,opt.r_tau,rTimewin,opt.only_direction);
+rposTrig0 = triggeredBidirect(placeCells0,d.pos_info,trodeGroup0,0,0,opt.min_vel,trigTimes,opt.r_tau,rTimewin,opt.only_direction);
 
 steps = -opt.xcorr_range : opt.xcorr_step : opt.xcorr_range;
+posSteps = -5:1:5;
 
-rs = arrayfun(@(s) triggeredBidirectCorr(placeCellsTau,d.pos_info,trodeGroupTau,s,...
-    opt.min_vel,trigTimes,opt.r_tau,rTimewin,opt.only_direction,rposTrig0),steps);
+rs = zeros(numel(posSteps),numel(steps));
+
+for p = 1:numel(posSteps)
+    rs(p,:) = arrayfun(@(s) triggeredBidirectCorr(placeCellsTau,d.pos_info,trodeGroupTau,s,posSteps(p),...
+        opt.min_vel,trigTimes,opt.r_tau,rTimewin,opt.only_direction,rposTrig0),steps);
+end
 
 end
 
-function rpTrig = triggeredBidirect(placeCells,posInfo,tg,tDelay,minVel,trigTimes,rTau,rTimewin,onlyDir) 
+function rpTrig = triggeredBidirect(placeCells,posInfo,tg,tDelay,posShift,minVel,trigTimes,rTau,rTimewin,onlyDir) 
     disp(['tic',num2str(tDelay)]);
     rpOut = decode_pos_with_trode_pos(placeCells,posInfo,tg,'r_tau',rTau,'r_timewin',...
         rTimewin,'field_direction','outbound');
@@ -60,12 +65,25 @@ function rpTrig = triggeredBidirect(placeCells,posInfo,tg,tDelay,minVel,trigTime
             ['Didn''t recognize only_direction option:',onlyDir]);
     end
     
+    rpTop    = repmat(rpTrig.pdf_by_t(1,:),   abs(posShift),1);
+    rpBottom = repmat(rpTrig.pdf_by_t(end,:), abs(posShift),1);
+   
+    if(posShift >= 1)
+        rpTrig.pdf_by_t = [rpTrig.pdf_by_t((1+posShift):end,:); rpBottom];
+    elseif(posShift <= (-1))
+        rpTrig.pdf_by_t = [rpTop; rpTrig.pdf_by_t(1:(end-abs(posShift)),:)];
+    end
+    
 end
 
-function r2 = triggeredBidirectCorr(placeCells,posInfo,tg,tDelay,minVel,trigTimes,rTau,rTimewin,onlyDir,trigRPos0)
+function r2 = triggeredBidirectCorr(placeCells,posInfo,tg,tDelay,posShift,minVel,trigTimes,rTau,rTimewin,onlyDir,trigRPos0)
 
-    rpTrig = triggeredBidirect(placeCells,posInfo,tg,tDelay,minVel,trigTimes,rTau,rTimewin,onlyDir);
+    rpTrig = triggeredBidirect(placeCells,posInfo,tg,tDelay,posShift,minVel,trigTimes,rTau,rTimewin,onlyDir);
     r2 = corr(reshape(trigRPos0.pdf_by_t,[],1), reshape(rpTrig.pdf_by_t,[],1));
+
+    subplot(2,1,1); plot_multi_r_pos(trigRPos0,posInfo,'norm_c',true);
+    subplot(2,1,2); plot_multi_r_pos(rpTrig,   posInfo,'norm_c',true);
+    title(['t: ', num2str(tDelay),'  p:', num2str(posShift)]);
     
 end
 
