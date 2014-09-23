@@ -1,25 +1,36 @@
-<H2 align="center">Awake Dips Outline </H2>
-
-## Title
-
-### Cortical slow-waves in retrosplenial cortext accompany awake hippocampal replay
-
-## Abstract
+Awake Dips Outline
+==================
 
 
+##Cortical slow-waves in retrosplenial cortext accompany awake hippocampal replay###
 
-## Intro
+**Abstract**
+
+  - Ripple-frame coordination maybe important for memory
+  - During reward, RSC has slow-waves
+  - Wake slow waves resemble sleep in terms of LFP shape, spindles, MUA down-states
+  - Wake slow waves differ in RSC-specificity
+  - SWW comes with large reward, immediately, whether sleep deprived or not.
+  - Ripples & replay come with SWW, correlated at behavioral timescale
+  - SWS-like activity in RSC and HPC at same time are part of circuit-level offline state, 
+     maybe useful for same reason as sleep considered useful
 
 
+**Intro**
 
+  - Ctx-Hpc coordination in sleep maybe important for memory
+    - Buzsaki two-phase consolidation model
+    - Ripple-spindle coordination
+    - Ripple-frame coordination with replay
+  - 
 
-## Materials
+**Materials**
 
- * 30tt drives with pattern of guide tubes targeting 3 areas
- * Drive, surgery, adjusting done as previously reported
+ - 30tt drives with pattern of guide tubes targeting 3 areas
+ - Drive, surgery, adjusting done as previously reported
  
 
-## Results
+**Results**
 
 ### Figure 1 (Sleep slow waves)
  * Example rasters, LFP
