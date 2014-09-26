@@ -12,7 +12,7 @@ p.addParamValue('fraction_overlap',0); % how much should short regression timewi
 
 p.addParamValue('timewins',[]);
 
-p.addParamValue('nlin_regress', false);
+p.addParamValue('nlin_regress', true);
 
 %p.addParamValue('theta_filt',[]);   <-- these seem unused
 %p.addParamValue('theta_phase',[]);

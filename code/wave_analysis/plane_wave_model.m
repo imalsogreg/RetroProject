@@ -69,6 +69,10 @@ else
     error('Unrecognized y_hat_form.  value or phase, please.');
 end
 
+% sanitize
+yhat(isnan(yhat)) = 0;
+yhat(yhat == Inf) = 1000000;
+
 if(opt.draw)
     u_times = unique(time);
     u_x = unique(x(:,2));

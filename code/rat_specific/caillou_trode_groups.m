@@ -1,13 +1,12 @@
 function trode_groups = caillou_trode_groups(varargin)
 
-if(nargin == 0)
-    grp = 'areas';
-else
-    grp = varargin{1};
-    grp = 'areas';
-end
+p = inputParser();
+p.addParamValue('date','112812');
+p.addParamValue('segment_style','areas',(@(x) (any(strcmp(x,{'areas','ml'})))));
+p.parse(varargin{:});
+opt = p.Results;
 
-if(strcmp(grp,'areas'))
+if(strcmp(opt.segment_style,'areas'))
 
 trode_groups{1}.name   = 'THAL';
 trode_groups{1}.trodes = {'01','02','03','29','30'};
@@ -24,8 +23,17 @@ trode_groups{2}.color = [0 0.5 0];
 trode_groups{3}.name   = 'CA1';
 trode_groups{3}.trodes = {'06','08','09','10','11','12','13','14','16','16arte'};
 trode_groups{3}.color = [0 0 1];
-end
 
 trode_groups{5}.name = 'BAD';
 trode_groups{5}.trodes = {'07','15','15arte','26'};
 trode_groups{5}.color = [0.1 0.1 0.1];
+
+elseif(strcmp(opt.segment_style,'ml'))
+   trode_groups{1}.name = 'medial';
+   trode_groups{1}.color = [1 0 0];
+   trode_groups{1}.trodes = {'08','16','07','10','06'};
+   
+   trode_groups{2}.name = 'lateral';
+   trode_groups{2}.color = [0 0 1];
+   trode_groups{2}.trodes = {'11','14','13','12'};
+end

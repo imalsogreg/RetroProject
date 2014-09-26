@@ -1,11 +1,11 @@
-function [f1,f2,f3,f4] = describe_wave(d,m,varargin)
+function [f1,f2,f3,f4,eeg_r,eeg_wave] = describe_wave(d,m,varargin)
 
 [defaultChans,defaultTWin,defaultFitTWin] = ratDefaults(m);
 
 p = inputParser();
 p.addParamValue('upleft_chanlabels',defaultChans);
 p.addParamValue('timewin',defaultTWin);
-p.addParamValue('fitTimewin');
+p.addParamValue('fitTimewin',defaultFitTWin);
 p.addParamValue('eeg_r',[]);
 p.addParamValue('brainPicPath','/home/greghale/Documents/Papers/RetroProject/code/thesis/wave_fig/brainFig.png');
 p.parse(varargin{:});
@@ -13,24 +13,27 @@ opt = p.Results;
 
 if ~isfield(d,'eeg_r')
     if(isempty(opt.eeg_r))
-        d.eeg_r = prep_eeg_for_regress(eeg_r);
+        d.eeg_r = prep_eeg_for_regress(d.eeg,'timewin_buffer',2);
     else
         d.eeg_r = opt.eeg_r;
     end
 end
+eeg_r = d.eeg_r;
+fields = fieldnames(d.eeg_r);
+for n = 1:numel(fieldnames(d.eeg_r))
+    d.eeg_r.(fields{n}).data( isnan(d.eeg_r.(fields{n}).data) ) = 0;
+end
 
-f1 = drawBrainAndExampleWaves(d,m,opt.brainPicPath,opt.timewin,opt.upleft_chanlabels);
+[f1] = drawBrainAndExampleWaves(d,m,opt.brainPicPath,opt.timewin,opt.upleft_chanlabels);
 f2 = figure; text(0,0,'RetroProject/code/thesis/wave_fig/figure_draft');
-f3 = drawTimeseries(d,m,opt.fitTimewin);
-%dt = 0.5;
-%lfp_wave = gh_long_wave_regress(eeg_r, rat_conv, 'short_timewin', dt);
-%mua_wave = gh_long_wave_regress(mua_r, rat_conv, 'short_timewin', dt);
+[f3,eeg_wave] = drawTimeseries(d,m,opt.fitTimewin);
+f4 = 0;
 
 
 end
 
 
-function f = drawBrainAndExampleWaves(d,m,brainPicPath,tWin,chanlabels)
+function [f,eeg_r] = drawBrainAndExampleWaves(d,m,brainPicPath,tWin,chanlabels)
 
 figWidth  = 600;
 figHeight = 400;
@@ -65,6 +68,8 @@ text(0+tWin(1)+0.1,0.05-1.3, '100uV','HorizontalAlignment','right');
 text(0.05+tWin(1)+0.1,0-1.35, '100ms','HorizontalAlignment','center');
 set(gca,'Position',[0.4,0,0.6,1]);
 
+eeg_r = d.eeg_r;
+
 end
 
 function [x,y,c] = trodePosAndColor(tName,trode_groups,rat_conv_table)
@@ -78,14 +83,33 @@ function tWin = safeTimeWin(tWin, cdat)
 tWin = [max(cdat.tstart,tWin(1)-2), min(cdat.tend,tWin(2)+2)];
 end
 
+function [f,eeg_regress] = drawTimeseries(d,m,timewin,timeseriesOpts)
+    if (~isfield(d,'eeg_regress'))
+        eeg_r = contwin_r(d.eeg_r,timewin);
+        eeg_regress = gh_long_wave_regress(eeg_r,d.rat_conv_table);
+        d.eeg_regress = eeg_regress;
+    end
+    f = figure('Color',[1,1,1]);
+    ax(1) = subplot(4,1,1); gh_plot_cont(d.pos_info.lin_vel_cdat);
+    set(gca,'XColor',[1,1,1]); set(gca,'XTick',[]); set(gca,'YColor',[1,1,1]); set(gca,'YTick',[]);
+    ylabel('Vel (m/s)');
+    ax(2) = subplot(4,1,2); plot(d.eeg_regress.timestamps,d.eeg_regress.est(1,:));
 
+    ylabel('{\lambda} (mm/cycle)');
+
+    ax(3) = subplot(4,1,3); plot(d.eeg_regress.timestamps,d.eeg_regress.est(2,:));
+    ylabel('{\theta} (° from M/L)');
+    linkaxes(ax,'x');
+    ax(4) = subplot(4,1,4); plot(d.eeg_regress.timestamps,d.eeg_regress.r_squared);
+    linkaxes(ax,'x');
+end
 
 function [chanLabels,tWin,fitTWin] = ratDefaults(m)
 
      if(strContains(m.basePath,'morpheus'))
          chanLabels = {'24','17','12'};
          tWin = [904.17 904.7]; % TODO is rat running now?
-         fitTWin = [900,1000];
+         fitTWin = [1420, 1720];
      else
          error('ratUpLeftChans:noLabelData',['Don''t know which ',...
                                              'channels to use for ',...

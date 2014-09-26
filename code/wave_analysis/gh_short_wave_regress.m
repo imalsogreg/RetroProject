@@ -63,7 +63,7 @@ if(opt.nlin_regress)
 else
     b = b0;
     ci = NaN * ones(5, 2);
-    r_squared = 0;
+    r_squared = 1 - sum(r.^2) / sum ((y-mean(y)).^2);
 end
     
 est = b;
