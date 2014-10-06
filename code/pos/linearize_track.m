@@ -11,7 +11,7 @@ p.addParamValue('linearize_rule','delaunay',@(x) any(strcmp(x,{'delaunay','segme
 p.addParamValue('head_angle_offset',0,@isreal);
 p.addParamValue('filtopt',struct(),@isstruct);
 p.addParamValue('max_frame_jump',0.25,@isreal);
-p.addParamValue('n_clip_jump_iter',20);
+p.addParamValue('n_clip_jump_iter',50);
 p.addParamValue('track_length',3.59,@isreal);
 p.addParamValue('min_interdiode_dist',[],@isreal); % not yet implemented
 p.addParamValue('interp_count',500,@isreal); % spline sampling for lin pos
@@ -155,6 +155,12 @@ if(opt.debug_spline)
 end
 
 yy = new_yy;
+
+indOk = sum(isnan(yy)) == 0 & isnan(xx) == 0;
+xx = xx(:,indOk);
+yy = yy(:,indOk);
+new_xx = new_xx(:,indOk);
+new_yy = new_yy(:,indOk);
 
 track_info.xx_os = new_xx .* opt.track_length ./ max(yy_cum_dists);
 track_info.yy_os = new_yy;
@@ -346,6 +352,8 @@ abs_speed_filt = contfn(speeds,'fn',abs_fn);
 pos.lin_vel_timestamp = conttimestamp(speeds);
 pos.lin_vel = speeds.data;
 pos.lin_vel_cdat = speeds;
+pos.lin_vel_cdat.data( abs(pos.lin_vel_cdat.data) > 1 ) = 0;
+pos.lin_vel_cdat.data = smooth(pos.lin_vel_cdat.data,15);
 
 out_run_bouts = contbouts(pos_speed_filt,'datargunits','data',...
     'thresh',opt.run_thresh,'minevdur',0.2,'mindur',0.4,'window',0.1);
