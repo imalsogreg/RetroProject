@@ -12,7 +12,7 @@ p.addParamValue('field_dists',[]);
 p.addParamValue('method','peak');
 p.addParamValue('field_direction',''); % don't use
 p.addParamValue('min_peak_rate_thresh',15);
-p.addParamValue('rate_thresh_for_multipeak', 10);
+p.addParamValue('rate_thresh_for_multipeak', 5);
 p.addParamValue('multipeak_max_spacing', 0.3);
 p.addParamValue('max_abs_field_dist', 1);
 p.addParamValue('smooth_field_m_sd',0.1);
@@ -137,7 +137,7 @@ end
 
 if(~opt.anatomical_groups)
 [f, X_reg, y_reg] = plot_all_dists(field_dists, xcorr_dists, anatomical_dists,...
-    'xcorr_r', opt.xcorr_r);
+    'xcorr_r', opt.xcorr_r,'draw',opt.draw);
 end
 
 if(opt.anatomical_groups)

@@ -10,13 +10,14 @@ function f = sv_place_cell_pair(d,m,okPair,varargin)
 % Flip blue cell id with LEFT and RIGHT arrow keys.  Green cell with UP and DOWN
 
 p = inputParser();
+p.addParamValue('ok_directions',{'outbound','inbound'});
 p.addParamValue('m',1,@isreal);
 p.addParamValue('n',2,@isreal);
 p.parse(varargin{:});
 opt = p.Results;
 
 [~,~,fieldDists,anatomicalDists,xCorrDists,fieldCells,fields,xcorr_r,xcorr_mat] = ...
-    full_xcorr_analysis(d,m,'ok_pair',okPair,'draw',false);
+    full_xcorr_analysis(d,m,'ok_pair',okPair,'ok_directions',opt.ok_directions,'draw',false);
 
 
 pcNames = cmap(@(x) x.name, d.spikes.clust);

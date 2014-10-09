@@ -2,10 +2,9 @@ function [f, X_reg, y_reg] = plot_all_dists(field_dists, xcorr_dists, anatomical
 
 p = inputParser();
 p.addParamValue('xcorr_r',[]);
+p.addParamValue('draw',true);
 p.parse(varargin{:});
 opt = p.Results;
-
-n_cells = size(field_dists,1);
 
 if(isempty(opt.xcorr_r))
     xcorr_r = ones(size(xcorr_dists));
@@ -31,7 +30,11 @@ anatomical_dists = anatomical_dists(keep_bool);
 xcorr_r = xcorr_r(keep_bool);
 
 %f = scatter(field_dists, xcorr_dists, 320.*xcorr_r, anatomical_dists,'filled');
-f = scatter3(field_dists,anatomical_dists,xcorr_dists, 160.*xcorr_r);
+if(opt.draw)
+    f = scatter3(field_dists,anatomical_dists,xcorr_dists, 160.*xcorr_r);
+else
+    f = 0;
+end
 
 X_reg = [ ones(numel(field_dists), 1), field_dists', anatomical_dists'];
 y_reg = xcorr_dists';
