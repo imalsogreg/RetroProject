@@ -10,7 +10,7 @@ p.addParamValue('ok_directions',{'outbound','inbound'});
 %options for field_dists
 p.addParamValue('field_dists',[]);
 p.addParamValue('method','peak');
-p.addParamValue('field_direction','');
+p.addParamValue('field_direction',''); % don't use
 p.addParamValue('min_peak_rate_thresh',15);
 p.addParamValue('rate_thresh_for_multipeak', 5);
 p.addParamValue('multipeak_max_spacing', 0.3);
@@ -28,7 +28,7 @@ p.addParamValue('r_thresh', 1e-2);
 
 % options for anatomical_dists
 p.addParamValue('anatomical_dists',[]);  %pass this to bypass computing it in full_xcorr_anal
-p.addParamValue('ok_areas',{'CA1','CA3'});
+p.addParamValue('ok_areas',[]); % don't use!
 p.addParamValue('ok_pair',[]);
 p.addParamValue('axis_vector',[1 -1] ./ sqrt(2) );
 p.addParamValue('anatomical_groups',false);
