@@ -8,13 +8,21 @@ function f = scatterFigure(d,m,varargin)
     p.addParamValue('fieldCells',[]);
     p.addParamValue('fields',[]);
     p.addParamValue('xcorr_mat',[]);
+    p.addParamValue('X_reg',[]);
+    p.addParamValue('y_reg',[]);
+    p.addParamValue('lags',[]);
+    p.addParamValue('okPairs',[]);
+    %p.addParamValue('dFieldLims',[-1,1]);
+    %p.addParamValue('dAnatomyLims',[-2,2]);
     p.parse(varargin{:});
     opt = p.Results;
     
     if(isempty(opt.fieldDists) || isempty(opt.timeDists) || ...
             isempty(opt.anatomyDists) || isempty(opt.fieldCells) || ...
-            isempty(opt.fields) || isempty(opt.xcorr_mat))
-        [X_reg, y_reg, field_dists, anatomical_dists, xcorr_dists, field_cells, fields, xcorr_r, xcorr_mat, ~] = ...
+            isempty(opt.fields) || isempty(opt.xcorr_mat) || ...
+            isempty(opt.lags) || isempty(opt.X_reg) || ...
+            isempty(opt.y_reg) )
+        [X_reg, y_reg, field_dists, anatomical_dists, xcorr_dists, field_cells, fields, xcorr_r, xcorr_mat, lags, okPairs, ~] = ...
             full_xcorr_analysis(d,m, ...
             'ok_directions',opt.exampleData.ok_directions,'ok_pair',opt.exampleData.okPair,'draw',false);
     else
@@ -24,6 +32,10 @@ function f = scatterFigure(d,m,varargin)
         field_dists      = opt.fieldDists;
         anatomical_dists = opt.anatomyDists;
         xcorr_mat        = opt.xcorr_mat;
+        lags             = opt.lags;
+        X_reg            = opt.X_reg;
+        y_reg            = opt.y_reg;
+        okPairs          = opt.okPairs;
     end
     
     f = figure('Color','white');
@@ -40,20 +52,75 @@ function f = scatterFigure(d,m,varargin)
             plotRaster(thisCellName, d, opt.exampleData.rasterTWins(:,j));
         end
     end
-    %linkaxes(ax,'x');
     
     figure('Color',[1,1,1]);
-    pairs  = [1,2; 1,3; 2,3];
-    nPairs = size(pairs,2);
+    pairs  = opt.exampleData.fields([1,2; 1,3; 2,3]);
+    nPairs = size(pairs,1);
     for n = 1:nPairs
         thisPair = pairs(n,:);
-        subplot(3,nPairs,(n*(nPairs-1))+1);
+        subplot(3,nPairs,(n));
         text(0,0,num2str(field_dists(thisPair(1),thisPair(2))));
-        subplot(3,nPairs,(n*(nPairs-1))+2);
-        plotXCorr(xcorr_mat,thisPair(1),thisPair(2));
-        subplot(3,nPairs,(n*(nPairs-1))+3);
+        subplot(3,nPairs,(nPairs+n));
+        plotXCorr(xcorr_mat,lags,thisPair(1),thisPair(2));
+        subplot(3,nPairs,(2*nPairs)+n);
+        text(0,0,num2str(anatomical_dists(thisPair(1),thisPair(2))));
     end
     
+    figure('Color',[1,1,1]);
+    drawScatter(field_dists,anatomical_dists,xcorr_dists,X_reg,y_reg,...
+        pairs,okPairs,opt);
+    
+end
+
+function drawScatter(fDists,aDists,xDists,X_reg,y_reg,pairs,okPairs,opt)
+
+    nPairs = size(pairs,1);
+    for p = 1:nPairs
+        exampleFDist(1,p) = fDists(pairs(p,1),pairs(p,2));
+        exampleADist(1,p) = aDists(pairs(p,1),pairs(p,2));
+        exampleXDist(1,p) = xDists(pairs(p,1),pairs(p,2));
+    end
+    fDists(~okPairs) = NaN;
+    aDists(~okPairs) = NaN;
+    xDists(~okPairs) = NaN;
+    fDists=reshape(fDists,1,[]);
+    aDists=reshape(aDists,1,[]);
+    xDists=reshape(xDists,1,[]);
+    okB = not (isnan(fDists) | isnan(aDists) | isnan(xDists));
+    fDists=fDists(okB);
+    aDists=aDists(okB);
+    xDists=xDists(okB);
+    plot3(fDists,aDists,xDists,'.','Color',[0.8,0.8,0.8],'MarkerSize',32);
+    hold on;    
+    dFieldLims = xlim();
+    dAnatomyLims = ylim();
+    plot3(fDists,dAnatomyLims(1)*ones(size(fDists)), xDists,'b.');
+    plot3(dFieldLims(1)*ones(size(aDists)), aDists, xDists,'r.');
+    plot3(exampleFDist,exampleADist,exampleXDist,'o','MarkerSize',32);
+    pairLabels = {'A vs. B', 'A vs. C', 'B vs. C'};
+    for p = 1:nPairs
+        text(exampleFDist(1,p),exampleADist(1,p),exampleXDist(1,p),...
+            pairLabels{p});
+        plot3([exampleFDist(1,p),exampleFDist(1,p)],...
+              [exampleADist(1,p),dAnatomyLims(1)],...
+              [exampleXDist(1,p),exampleXDist(1,p)],'--');
+        plot3([exampleFDist(1,p),dFieldLims(1)],...
+              [exampleADist(1,p),exampleADist(1,p)],...
+              [exampleXDist(1,p),exampleXDist(1,p)],'--');
+    end
+    xlabel('Field Dist'); ylabel('Anatomy Dist'); zlabel('Time Dist');
+    
+    [b,bint,r,rint,stats] = regress(xDists', [fDists', aDists',ones(size(fDists'))]);
+    
+    xs = linspace(dFieldLims(1)/3,dFieldLims(2)/3,2);
+    plot3(xs,dAnatomyLims(1)*ones(size(xs)),b(3)+ b(1)*xs,'b','LineWidth',3);
+    xs = linspace(dAnatomyLims(1)/2, dAnatomyLims(2)/2, 2);
+    plot3(dFieldLims(1)*ones(size(xs)),xs,b(3) + b(2)*xs,'r','LineWidth',3);
+    b
+    bint
+    r
+    rint
+    stats
     
 end
 
@@ -90,15 +157,24 @@ function plotRaster(cellName, d, tWin)
     set(gca,'YTick',[]);
 end
 
-function plotXCorr(xcorrMat,m,n)
-    % Do this!
+function plotXCorr(xcorrMat,lags,m,n)
+    thisXCorr = xcorrMat{m,n};
+    plot(lags,thisXCorr);
+    hold on;
+    mInd = find(thisXCorr == max(thisXCorr), 1, 'first');
+    maxX = lags(mInd);
+    maxY = thisXCorr(mInd);
+    plot(lags(mInd),maxY*1.1,'v');
+    ylim([0,maxY*1.2]);
+    text(lags(mInd),maxY*1.1,[num2str(floor(maxX*1000)),'ms']);
 end
 
 function dat = defaultExampleData(d,m)
     if(strContains(m.pFileName,'caillou'))
-        dat.fields = [11,22,14];
+        dat.fields = [11,14,22];
         dat.ok_directions = {'outbound'};
-        dat.okPair = 'medial,lateral';
+        %dat.okPair = 'medial,lateral';
+        dat.okPair = 'any,any';  % Pair-restriction is only for CA3/CA1
         dat.rasterTWins = [5645.5, 5647.5; 5809.2,5809.9]';
     else
         error('scatterFigure:noNameMatch',['No default fields for ', m.pFileName]);

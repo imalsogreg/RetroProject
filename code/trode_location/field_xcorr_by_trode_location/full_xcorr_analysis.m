@@ -1,4 +1,4 @@
-function [X_reg, y_reg, field_dists, anatomical_dists, xcorr_dists, field_cells, fields, xcorr_r, xcorr_mat, f] = full_xcorr_analysis(d,m, varargin)
+function [X_reg, y_reg, field_dists, anatomical_dists, xcorr_dists, field_cells, fields, xcorr_r, xcorr_mat, lags, okPairs, f] = full_xcorr_analysis(d,m, varargin)
 
 p = inputParser();
 
@@ -22,7 +22,7 @@ p.addParamValue('xcorr_dists',[]);
 p.addParamValue('xcorr_r',[]);
 p.addParamValue('timebouts', []);
 p.addParamValue('xcorr_bin_size', 0.002);
-p.addParamValue('xcorr_lag_limits', [-0.12, 0.12]);
+p.addParamValue('xcorr_lag_limits', [-0.1, 0.1]);
 p.addParamValue('smooth_timewin', 0.01);
 p.addParamValue('r_thresh', 1e-2);
 
@@ -45,7 +45,7 @@ rat_conv_table = d.rat_conv_table;
 
 if(isempty(opt.ok_pair))
     error('full_xcorr_analysis:unset_ok_pair',...
-        'Must specify ''ok_pairs'' field, usually as  ''CA3,CA1''  or ''CA1,CA1'' ');
+        'Must specify ''ok_pairs'' field, usually as  ''CA3,CA1'', ''CA1,CA1'', or ''any,any'' ');
 end
 
 
@@ -67,7 +67,7 @@ groups = cmap(@(x) x(1).name, groups);
 okPairs = zeros(numel(field_cells), numel(field_cells));
 for m = 1:numel(field_cells)
     for n = 1:numel(field_cells)
-        if strcmp(opt.ok_pair, [groups{m},',',groups{n}])
+        if strcmp(opt.ok_pair, [groups{m},',',groups{n}]) || strcmp(opt.ok_pair,'any,any')
             okPairs(m,n) = 1;
         elseif strcmp(opt.ok_pair,[groups{n},',',groups{m}])
             okPairs(m,n) = 0;
@@ -88,10 +88,10 @@ if(~isempty(opt.field_dists))
     field_dists = opt.field_dists;
 else
     d.spikes.clusts = fieldClusts;
-    field_dists = get_field_dists(field_cells,fields,fieldClusts,'okMatrix',okPairs);
+    field_dists = get_field_dists(field_cells,fields,fieldClusts);
 end
 
-field_dists(~okPairs) = NaN;
+%field_dists(~okPairs) = NaN;
 
 %************** Time Crosscorrelations *******************
 if(~isempty(opt.xcorr_dists))
@@ -108,7 +108,7 @@ else
     elseif(isempty(opt.timebouts))
         xcorr_timebouts = [pos_info.out_run_bouts; pos_info.in_run_bouts];
     end
-    [xcorr_dists, opt.xcorr_r, xcorr_mat] = ...
+    [xcorr_dists, opt.xcorr_r, xcorr_mat,lags] = ...
         get_xcorr_dists(fieldClusts,field_cells, fields, d, 'timebouts', xcorr_timebouts, ...
         'xcorr_bin_size', opt.xcorr_bin_size,...
         'xcorr_lag_limits', opt.xcorr_lag_limits, 'r_thresh', opt.r_thresh,...

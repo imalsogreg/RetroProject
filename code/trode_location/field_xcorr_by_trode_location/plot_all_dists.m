@@ -22,8 +22,6 @@ keep_bool = min( [~isnan(field_dists) ;...
     ~isnan(anatomical_dists)], [], 1);
 keep_bool = logical(keep_bool);
 
-
-
 field_dists = field_dists(keep_bool);
 xcorr_dists = xcorr_dists(keep_bool);
 anatomical_dists = anatomical_dists(keep_bool);

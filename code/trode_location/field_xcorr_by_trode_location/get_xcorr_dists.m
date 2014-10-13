@@ -1,4 +1,4 @@
-function [xcorr_dists, xcorr_maxr, xcorr_mat] = get_xcorr_dists(fieldClusts, field_cells, fields, d, varargin)
+function [xcorr_dists, xcorr_maxr, xcorr_mat,lags] = get_xcorr_dists(fieldClusts, field_cells, fields, d, varargin)
 
 p = inputParser();
 p.addParamValue('timebouts', [min( cellfun(@(x) min(x.stimes), fieldClusts)), ...
@@ -76,7 +76,7 @@ opt.max_lags = (numel(opt.lag_times) - 1)/2;
 
 if(isempty(opt.smooth_timewin))
     opt.smooth_n_bins = 1;
-    sm_krn = [1];
+    sm_krn = 1;
     sm_cof = 1;
 else
     opt.smooth_n_bins = opt.smooth_timewin / opt.xcorr_bin_size;
@@ -107,6 +107,7 @@ xcorr_mat = r;
 
 xcorr_dists = cellfun( @(x) lfun_xcorr_best_time(x,opt), r);
 xcorr_maxr = cellfun( @(x) max(x(~isnan(x))), r);
+lags = opt.lag_times;
 
 for n = 1:size(opt.draw_pairs,1)
     figure; subplot(2,1,1);
