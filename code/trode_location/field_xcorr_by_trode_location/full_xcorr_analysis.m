@@ -11,7 +11,7 @@ p.addParamValue('ok_directions',{'outbound','inbound'});
 p.addParamValue('field_dists',[]);
 p.addParamValue('method','peak');
 p.addParamValue('field_direction',''); % don't use
-p.addParamValue('min_peak_rate_thresh',10);
+p.addParamValue('min_peak_rate_thresh',15);
 p.addParamValue('rate_thresh_for_multipeak', 5);
 p.addParamValue('multipeak_max_spacing', 0.3);
 p.addParamValue('max_abs_field_dist', 1);
