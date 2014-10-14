@@ -11,7 +11,7 @@ p.addParamValue('ok_directions',{'outbound','inbound'});
 p.addParamValue('field_dists',[]);
 p.addParamValue('method','peak');
 p.addParamValue('field_direction',''); % don't use
-p.addParamValue('min_peak_rate_thresh',15);
+p.addParamValue('min_peak_rate_thresh',10);
 p.addParamValue('rate_thresh_for_multipeak', 5);
 p.addParamValue('multipeak_max_spacing', 0.3);
 p.addParamValue('max_abs_field_dist', 1);
@@ -61,7 +61,7 @@ place_cells = assign_field(place_cells,pos_info,'smooth_sd_segs',smooth_segs,'n_
 fieldClusts = place_cells_index_by_field(place_cells,field_cells);
 place_cells.clust = fieldClusts;
 
-groups = cmap(@(x) group_of_trode(m.trode_groups,x(6:7)), field_cells);
+groups = cmap(@(x) group_of_trode(d.trode_groups,x(6:7)), field_cells);
 groups = cmap(@(x) x(1).name, groups);
 
 okPairs = zeros(numel(field_cells), numel(field_cells));

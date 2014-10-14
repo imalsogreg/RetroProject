@@ -22,6 +22,7 @@ function f = scatterFigure(d,m,varargin)
             isempty(opt.fields) || isempty(opt.xcorr_mat) || ...
             isempty(opt.lags) || isempty(opt.X_reg) || ...
             isempty(opt.y_reg) )
+        d.trode_groups = m.trode_groups_fn('date',m.today,'segment_style',opt.exampleData.trode_groups_style);
         [X_reg, y_reg, field_dists, anatomical_dists, xcorr_dists, field_cells, fields, xcorr_r, xcorr_mat, lags, okPairs, ~] = ...
             full_xcorr_analysis(d,m, ...
             'ok_directions',opt.exampleData.ok_directions,'ok_pair',opt.exampleData.okPair,'draw',false);
@@ -176,6 +177,7 @@ function dat = defaultExampleData(d,m)
         %dat.okPair = 'medial,lateral';
         dat.okPair = 'any,any';  % Pair-restriction is only for CA3/CA1
         dat.rasterTWins = [5645.5, 5647.5; 5809.2,5809.9]';
+        dat.trode_groups_style = 'ml';
     else
         error('scatterFigure:noNameMatch',['No default fields for ', m.pFileName]);
     end
