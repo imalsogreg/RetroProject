@@ -66,7 +66,7 @@
 % Title must be 150 characters or less
 \begin{flushleft}
 {\Large
-\textbf{Spatial Information Synchrony in a Desynchronized Circuit}
+\textbf{Spatial Information Synchrony in the Desynchronized Hippocampus}
 }
 % Insert Author names, affiliations and corresponding author email.
 \\
@@ -126,8 +126,16 @@ We first characterized the timing of the theta rhythm, in a mannar essentially s
 Using multiunit firing rate (MUA) instead of LFP to estimate the underlying rhythm produced qualitatively similar results, with some quantitative differences. The goodness-of-fit across many tetrodes to a single traveling wave model was lower for MUA than LFP (r^2^ = 0.9 +/- 0.1 (LFP) vs. 0.7 +/- 0.1 (MUA) (TODO FIX)), and the best-fit line offen differed between the two measures, by 30 +/- 10 degrees (TODO). Importantly, 
 
 \subsection*{Co-firing of remote place cells}
+We directly measured the relationship between anatomical spacing and spike timing in pairs of place cells. If two cells with the same place field and phase precession profile are separated by a spatial interval corresponding to a 20ms delay between theta peaks, two fast-timescale timing relationships are likely. If phase precession proceeds according to the local theta oscillation, then spikes from the cell 'downstream' with respect to the traveling wave will occur 20ms later than those of the upstream cell. Alternatively, if phase precession disregards the anatomical delays of theta phase, then spikes from the two cells should fire roughly in synchrony. Other timing relationships are of course possible, but it is not clear what they would imply mechanistically.
+
+These predictions can be generalized beyond place cells with perfectly overlapping fields. For any pair of place cells both in CA1, we model the theta-timescale time offsets of the spike trains as the sum of one contribution from the cells' receptive field spacing and another contribution from the cells' anatomical spacing (Figure 2 TODO). Pooling cell pairs across rats, we estimate each meter of place field distance to contribute 20 +/- 6 ms (TODO) of delay and each mm of anatomical spacing along the traveling wave axis contributing 2 +/- 5 ms (TODO). In other words, place cells fire with temporal delays that reflect spatial relationships on the track, and these spiking events are tightly coordinated throughout the measured extent of CA1 (about 3 mm).
+
+We applied a similar (but simpler) procedure to assess the timing coupling between CA3 and CA1, by simply regressing the spike timing delay against place field delay, among place cell pairs were the first member is from CA3 and the second is from CA1. In this case, the slope of the regression (20 +/- 6 ms/m TODO)corresponds to the anatomy-agnostic theta sequence timing relationship, and the y offset (2 +/- 5 ms/mm TODO ) corresponds to the impact of the members' residence in structures with offset views of the theta clock. As in CA1/CA1 pairs, CA3/CA1 pairs exhibit robust theta sequence relationships with very little effect of anatomical separation.
 
 \subsection*{Trajectory code synchrony of remote populations}
+To assess the impact of anatomical distance on spatial representations more directly, we turned to population decoding, which provides a direct view of theta seuences as well as spontaneous spatial replay events. 
+
+Within CA1, we partitioned cells into three groups according to the tetrode they were recorded on, then discarded the middle group, leaving two groups separated by a millimeter at their closest point, two millimeters on average. We then reconstructed the rat's location twice, once from each set of tetrodes, at a 10ms (TODO) temporal scale suitable for observing theta sequences. 
 
 \section*{Discussion}
 
