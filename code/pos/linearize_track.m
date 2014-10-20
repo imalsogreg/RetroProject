@@ -287,7 +287,9 @@ for n = 1:opt.n_clip_jump_iter
     ts_for_interp = ts_for_interp(ok_bool); % new stuff
     lin_for_interp = lin_for_interp(ok_bool); % new stuff
 end
-
+if(opt.circular_track)
+   lin_for_interp = mod(lin_for_interp,max(pos.lin)); 
+end
 % make a smoothed linear position sdat
 
 %pos.interp_lin = interp1(pos.timestamp,pos.lin,interp_ts); % removed line

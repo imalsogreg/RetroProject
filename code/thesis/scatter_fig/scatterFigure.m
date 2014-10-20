@@ -172,7 +172,7 @@ end
 
 function dat = defaultExampleData(d,m)
     if(strContains(m.pFileName,'caillou'))
-        dat.fields = [11,14,22];
+        dat.fields = [11,15,16];
         dat.ok_directions = {'outbound'};
         %dat.okPair = 'medial,lateral';
         dat.okPair = 'any,any';  % Pair-restriction is only for CA3/CA1
