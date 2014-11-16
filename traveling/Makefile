@@ -1,2 +1,2 @@
-traveling.pdf : traveling.md theta.bib
-	pandoc traveling.md --template=traveling.tex --csl=plos.csl --biblatex --filter pandoc-citeproc --bibliography=theta.bib -o traveling.pdf
+traveling.pdf : traveling.md metadata.yaml theta.bib
+	pandoc traveling.md metadata.yaml --csl=plos.csl --bibliography=theta.bib -V geometry:margin=1in -s -o traveling.pdf
