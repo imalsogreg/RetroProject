@@ -1,4 +1,4 @@
-function [fields,fieldSources] = get_fields(place_cells,varargin)
+function [fields,fieldSources,xs] = get_fields(place_cells,varargin)
 
 p = inputParser();
 p.addParamValue('ok_directions',{'outbound','inbound'});
@@ -14,6 +14,9 @@ opt = p.Results;
 fields = cell(0);
 fieldSources = cell(0);
 isValid = [];
+
+xs = unfoldBinCenters(place_cells.clust{1});
+
 for c = 1:numel(place_cells.clust)
     place_cells.clust{c} = unrollOutboundInbound(place_cells.clust{c},opt);
     workingClust = place_cells.clust{c};
@@ -28,13 +31,16 @@ for c = 1:numel(place_cells.clust)
 end
 end
 
-
-function clust = unrollOutboundInbound(clust,opt)
+function xs = unfoldBinCenters(clust)
     bc = clust.field.bin_centers;
     lastBin = bc(end);
     db = diff(bc(1:2));
-    unfoldedBinCenters = bc + lastBin + db;
-    newBinCenters = [bc, unfoldedBinCenters];
+    xs = bc + lastBin + db;
+    xs = [bc, xs];
+end
+
+function clust = unrollOutboundInbound(clust,opt)
+    newBinCenters = unfoldBinCenters(clust);
     oldOutbound = clust.field.out_rate;
     if(all(not(strcmp('outbound',opt.ok_directions))))
         oldOutbound = zeros(size(oldOutbound));
