@@ -1,106 +1,15 @@
-% Template for PLoS
-% Version 1.0 January 2009
-%
-% To compile to pdf, run:
-% latex plos.template
-% bibtex plos.template
-% latex plos.template
-% latex plos.template
-% dvipdf plos.template
+# Abstract #
 
-\documentclass[10pt]{article}
-
-% amsmath package, useful for mathematical formulas
-\usepackage{amsmath}
-% amssymb package, useful for mathematical symbols
-\usepackage{amssymb}
-
-% graphicx package, useful for including eps and pdf graphics
-% include graphics with the command \includegraphics
-\usepackage{graphicx}
-
-% cite package, to clean up citations in the main text. Do not remove.
-\usepackage{cite}
-
-\usepackage{color} 
-
-% Use doublespacing - comment out for single spacing
-%\usepackage{setspace} 
-%\doublespacing
-
-
-% Text layout
-\topmargin 0.0cm
-% sidemargins should be 0.5cm
-\oddsidemargin -2.0cm
-\evensidemargin 0.0cm
-%textwidth should be 16cm
-\textwidth 10cm 
-\textheight 21cm
-
-% Bold the 'Figure #' in the caption and separate it with a period
-% Captions will be left justified
-\usepackage[labelfont=bf,labelsep=period,justification=raggedright]{caption}
-
-% Use the PLoS provided bibtex style
-\bibliographystyle{plos2009}
-
-% Remove brackets from numbering in List of References
-\makeatletter
-\renewcommand{\@biblabel}[1]{\quad#1.}
-\makeatother
-
-
-% Leave date blank
-\date{}
-
-\pagestyle{myheadings}
-%% ** EDIT HERE **
-
-%% PLEASE INCLUDE ALL MACROS BELOW
-
-%% END MACROS SECTION
-
-\begin{document}
-
-% Title must be 150 characters or less
-\begin{flushleft}
-{\Large
-\textbf{Arte - A system for real-time neural ensemble decoding and feedback}
-}
-% Insert Author names, affiliations and corresponding author email.
-\\
-Gregory J. Hale$^{1,\ast}$, 
-Stuart P. Layton$^{2}$, 
-Hector Penagos$^{3}$, 
-Alex Chen$^{4}$,
-Matthew A. Wilson$^{5}$
-\\
-\bf{1} Gregory Hale Brain and Cognitive Sciences, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA
-\\
-\bf{2} Stuart Layton Brain and Cognitive Sciences, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA
-\bf{3} Hector Penagos Brain and Cognitive Sciences, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA
-\\
-\bf{4} Alex Chen, Davis Senior High School, Davis, CA, USA
-\\
-\bf{5} Matthew Wilson Brain and Cognitive Sciences, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA
-\\
-$\ast$ E-mail: Corresponding imalsogreg@gmail.com
-\end{flushleft}
-
-% Please keep the abstract between 250 and 300 words
-\section*{Abstract}
 Observational descriptions of hippocampal spatial encoding are outpacing our understanding of their underlying mechanisms and ties to behavior. The traditoinal manipulation techniques can not adequately target the richly choreographed spiking sequences increasingly recognized as an essential feature of spatial encoding. Some disruption specificity can be achieved by leveraging known statistical relationships between information content and the recency of spatial experience, and such experiments have provided the first evidence of a link between sequence replay and learning.  But this method stops short of being able to distinguish among the diverse forms of spatial content known to be expressed in a single recording session.
 
 A method of decoding spatial information content in real-time is needed. To do this, we are developing a multi-tetrode recording system focused on streaming representations of the processing stages typically used for offline spatial decoding: spike detection, neural source separation (cluster-cutting), position tracking, tuning curve extraction, and Bayesian stimulus reconstruction. We also extend a method for position reconstruction without human spike-sorting to operate in realtime. Our implementation makes critical use of Haskell, a programming language that aides software development by strictly separating a program's logic from its effects on program state, greatly simplifying code and eliminating large classes of common software bugs.  We describe the capabilities and limits of our recording system, its implementation, and routes for contributers to add functionality; and we survey the classes of questions that could benefit from real-time stimulus reconstruction and feedback.
 
-% Please keep the Author Summary between 150 and 200 words
-% Use first person. PLoS ONE authors please skip this step. 
-% Author Summary not valid for PLoS ONE submissions.   
-\section*{Author Summary}
+# Author Summary #
+
 We report a working, open-source neural recordign system, and a proof-of-concept real-time signal decoding algorithm suitable for interpreting neural activity in rats navigating in mazes. We currently use the system to increase the number of neurons we can simultaneously record from. We intend to integrate the new algorithm in order to feed the information content of the navigating rat's brain back into the experiment, for example, by immediately rewarding the rat for exhibiting brain activity hypothesized to reflect memory formation for specific recently-learned events.
 
-\section*{Introduction}
+# Introduction #
+
 Temporally compressed spike sequences are increasingly recognized as an essential feature of hippocampal encoding of space. Each increase in our ability to sample large numbers of cells in freely navigating rats has been accompanied by further support this claim \cite{wilson1993dynamics, miller2008all}.
 
 Physiologists are aware of two forms of sequential encoding. The first occurs during active navigation. The majority \cite{thompson1989place} of spiking activity in the hippocampus is due to place cells \cite{okeefe1971the}, which spike only when the rat is within an approximately 1 meter span of the track particular to that place cell (the cell's ``place field''). At any given time, the rat is within the partially overlapping place fields of many place cells. Rather than fire in random order, the spikes are arranged in precise sequences, with spikes from cells with place fields centered just behind the rat first, spikes from place fields centered ahead of the rat last, and a continuum between \cite{skaggs1996theta}. This sequence reflects the sequences of place field centers that the rat would encounter on the track, except it is sped up eight times and repeated once per cycle of the underlying 7-10 Hz ``theta'' oscillation in the local field potential \cite{dragoi2006temporal, foster2007hippocampal}. 
@@ -119,40 +28,39 @@ The first system was written in a mix of c++ and Python, where data acquisition,
 
 We describe the implementation of the basic acquisition system, a realtime decoder that can perform without the need for manual spike-sorting \cite{kloosterman2013clusterless TODO}, and outline a path for integrating the realtime tracking of rat position and source automated spike source localization components that will be needed to actaully conduct experiments.
 
-\section*{Results}
+# Results #
 
-\subsection*{Headless spike acquisition and streaming: performance against existing system}
+## Headless spike acquisition and streaming: performance against existing system ##
 
 \subsection*{}
 
-\subsection*{Streaming and concurrency}
+## Streaming and Concurrency ##
 
-\section*{Discussion}
+# Discussion #
 Text
 
+# Materials and Methods #
 
-% You may title this section "Methods" or "Models". 
-% "Models" is not a valid title for PLoS ONE authors. However, PLoS ONE
-% authors may use "Analysis" 
-\section*{Materials and Methods}
-
-\subsection*{Backend signal processing and data networking}
+## Backend signal processing and data networking ##
 Raw data is aquired simultaneously, at 32kHz, from 32 channels simultaneously on 2 NI PCI-6259 analog-to-digital converter cards (National Instruments), using the NIDaqMX c API. After passing data from the driver's memory to our program, samples are written into a circular buffer and passed through a 4th order Butterworth IIR filter. This choice of filter requires only two samples of history per channel, imposing a very short delay (< 1ms) between the collection of a given sample and subsequent processing. Spikes are detected by comparing each sample to a threshold, noting threshold crossings, and then waiting for one or a few cycles of acquisition until enough samples have been collected to meet the waveform length required by the user. Parameters like filter properties, spike threshold, and spike waveform length are initially set in a configuration file, and later modified through a networked API, so that the program can be run without an immediate graphical user interface - this is a preferable arrangement for a parallel, potentially distributed system, in which we may want a single command issued by the user to affect recording systems running on multiple computers.
 
-\subsection*{Interoperability}
+## Interoperability ##
+
 Our previous recording system (AD. M.A.W. 1998 TODO date, cite?) also ran as a distributed collection of low-end acquisition computers receiving analog signals as input. In order to compare the recording quality and timing of our new system to the old system, we physically split sets of four analog inputs to two separat amplifiers - one serving each recording system. AD relies on hardware filtering of broadband data into the spike waveform band (300-6000 Hz) by a 3rd order Butterworth filter. ArtE reduces the hardware system requirements by digitally filtering a single broadband input into two signal bands - the spike band and the local field potential band (0.1 - 475 Hz), in each case using a digital filter designed to mirror the properites of AD's analog filters. Finally, using both systems in tandem required careful timebase coordination. Using standard computer system clocks is completely inadequate, as network delays between computers are on the order of several miliseconds, and can vary depending on system load. Instead, we route a diginal clock signal used to synchronize the AD computers into the ArtE system, and manually issue a counter resetting command to ArtE over the network while AD does the same for its own synchroization process. This fairly hard-coded timebase integration is one problem that will have to be solved before ArtE can be used in isolatoin from AD, but not a very difficult one.
 
 Isolated spike waveforms as well as downsampled, continuous local field potential signals are saved to disk in a different format from the one used in the rest of our cluster-cutting and analysis workflow. Until these tools are rewritten to work with the ArtE data format, we convert ArtE files into AD format, and continue with xclust (MAW - TODO) for cluster-cutting and MATLAB (Mathworks, Natick, MA TODO) for general analysis.
 
-\subsection*{Offline position decoding}
+## Offline position decoding ##
 We compute fast timescale summaries of neural ensemble activicty through Bayesian stimulus decoding, as described in Zhang et. al. \cite{zhang1998interpreting}. Implementations of this procedure to date, including those used in our lab \cite{davidson2009hippocampal} are decidedly unfriendly to streaming, as they build models of place fields by sorting all spikes from the beginning of the recording session into the spatial bins partioning the track. This operation has time and space complexity linear in the number of recorded spikes, making it unsuitable for continuous streaming. Place field computations derived late in the recording would take longer than those computed at the beginning, and memory would be exhausted in finite time. These problems do not interfere with offline position decoding, because place fields may be computed once,slowly, and used repeatedly. The computation of many place fields that are synthesized into a single position estimate may be computed serially.
 
-\subsection*{Online position decoding}
+## Online position decoding ##
+
 Modifying the place field models to update in constant time, rather than performing a linear-time recomputation for each incoming spike, is straightforward. Treatment of a large number of such models in parallel, rather than serially, is more challenging, because these models are ultimately combined into a single position estimate. Aditionally, the process of model update must run concurrently with graphic renderings, user input, and the regular computation of the position estimate itself.
 
 To perform Bayesian decoding in realtime, we left the relative comfort of c++ and MATLAB for Haskell, on the promise that Haskell's type system and functional purity guarentees would simplify the static design of the model, and aid in the highly concurrent data flow. 
 
-\subsection*{Modeling place fields with Haskell data types}
+## Modeling place fields with Haskell data types ##
+
 The phenomenology of place fields and the diversity of maze environments add complexity to the core notion of computing the place field, which is simply spike rate as a function of track position. These complexities are generally addressed in an ad-hoc way appropriate to each experiment. Due to the increased engineering effort involved in performing reconstruction in realtime, we aimed to anticipate as many of these issues as possible in the design of our stimulus model. We specify mazes as a collection of spatial bins, each with a user-assigned ``outbound'' direction and physical width. An animal's relationship to the environment is thus the combination of its relationship two each spatial bin in three respects, (1) physical proximity to the bin, (2) ``outbound'' or ``inbound'' heading with respect to the bin, and (3) position of the head with respect to the track width, either ``centered'' or ``leaning over''.
 
 Matrix-based languages like MATLAB and c would suggest a representation of a place field as a three-dimentional array (with bin identity in the first dimension, the two possible heading directions in the second dimension, and head-overhang in the third dimension, for example). A particular position is referenced as an index into that array (for instance, the value at field[14,1,2] could correspond to a stored value related to the 14th spatial bin, inbound running direction, head overhanging the edge). This is error prone. It requires the programmer to remember the mapping between maxrix dimenison and stimulus dimension, as well as a mapping between discreet values and stimulus levels (for example, than 1 means ``inbound'' and 2 means ``outbound''). Naming the levels with variables does not solve the problem, because the variable ``outboundLevel'' and ``headOverhanging'' are both of the same type. Accidentally swapping the two (for example, writing field[14, headOverhanging, outboundDir] (TODO code formatting)) will result in code that compiles and runs, but produces incorrect output.
@@ -163,7 +71,7 @@ Our Haskell model of the track is the basis for the model of the rat's instantan
 
 A place field is modeled in a similar mannar to the occupancy map - as a function from spatial bin to a number roughly equivalent to a ``spike count'' in that bin. Each time a neuron fires a spike, the instantaneous position map is added to the place field function accumulated so far. In the simple case when the spatial bin containing the animal is assigned a 1.0, each spike adds an integer to that spatial bin in the place field. When position is taken by the more usual Gaussain-smoothed method, each spike adds a gaussian curve to the accumulated field. This procedure gives us constant-time, constant-memory spike-count functions that are simple to update, while respecting the complexity of the underlying behavior (the separate consideration for outbound vs. inbound running direction, and the consideration of whether the head is aligned with the track or leaning over the edge). When needed, the actual firing rate function can be computed, in constant time, by dividing the neuron's specific spike-rate function by the global occupancy function, at each spatial bin.
 
-\subsection*{Managing concurrency and streaming data}
+## Managing concurrency and streaming data ##
 
 To decode in realtime, we must simultaneously update place fields with information from new spikes, update the current postion of the rat, read the place fields and combine them into a single position estimate, handle user input, and render something to the screen. All of these operations interact with the same underlying data, and thus the problem is inherrently in a difficult programming regine (TODO CITE Concurrency difficulty paper). Due to strict enforcement of functional purity and immutable data, Haskell is in a special position to simplify concurrent computations. Indeed, the STM library provides a lockless concurrency scheme that allows multiple threads to simultaneously modify the same data if they wish (this genarally leads to data corruption), as long as the only variables modified are of a special type provisioned by the library, called TVars. STM tracks access to these veriables, detects when two threads have made conflicting changes, and roles both changes back, allowing the threads to attempt their modifications again.
 
@@ -171,45 +79,12 @@ We took advantage of the STM library to coordinate this concurrent read and writ
 
 The problem is not amenable to processing by entirely independent threads (``embarassingly parallel''), because the decoding step requires access to all place fields. In addition to place field updates, we accumulate spike-counts within short timewindows, and the decoding thread must reset all of these counts to zero each time a position estimate is produced. We group the resetting of all place field cell counts into a single atomic operation, to prevent the data inconsistencies that would inevitably arise if count-updating and count-resetting were interleaved. The grouping of actions into atomic blocks that can be retried upon collission is precisely the strength of the STM library that makes it so suitable for the structure of our decoding algorithm.
 
-\subsection*{Clusterless decoding}
+## Clusterless decoding ##
 
 It is often impractical to manually segment many tetrodes' spikes into putative single units, especially during a realtime experiment, when clusters need to be cut before any realtime feedback can be administered. Kloosterman et. al. \cite{Kloosterman2013clusterless TODO} developed a method for Bayesian stimulus decoding from tetrode data without explicit spike sorting and provided an implementation in MATLAB. We extended this method by providing a new implementation that runs in bounded memory and time (Kloosterman's takes time and memory proportional to the number of spikes recorded, which makes it too slow for large-scale, long-running recordings). To restructure the alrogithm in a way that would continue to perform with potentially-infinite streams of data, we turned again to Haskell for its ease of use when working with custom data structures.
 
 Kloosterman et. al.'s algorithm requires the comparison of recently-received spikes (the testing-set) to the amplitudes of all spikes received from the beginning of reconding (the training-set) along with the rat's track location during those training-set spikes. An estimate of the rat's position at testing-time is derived through Bayesian inference over a combination of the training-set spikes weighted by their amplitude-similarity to the testing-set spikes. A literal implementation of this algorithm has the disadvantage of making a larger and larger number of comparisons as the experiment progresses and the training-set grows. An obvious alternative would be to divide the space of spike amplitudes into a set of cubes, and update the cube into which each training-spike falls with the rat's current position. However, because amplitude space is four dimensional, the number of cubes required to tile amplitude space at a reasonable resulution is too large to store in computer memory. Sparse matricies and KD-trees are two good data structures for holding multi-dimensional data in limited memory. We chose the reimplement clusterless decoding using the latter, at a slight performance penalty, because trees are somewhat more convenient to work with than matricies in Haskell. In order to accomotade new training-set spikes in bounded memory, when a new spike arrives less than some threshold distance from its nearest neighbor, the two are combined into one, and the payloads of the two (the place fields) are summed according to each point's weight. 
 
-% Do NOT remove this, even if you are not including acknowledgments
-\section*{Acknowledgments}
+# Acknowledgements #
 
-
-%\section*{References}
-% The bibtex filename
-\bibliography{template}
-
-\section*{Figure Legends}
-%\begin{figure}[!ht]
-%\begin{center}
-%%\includegraphics[width=4in]{figure_name.2.eps}
-%\end{center}
-%\caption{
-%{\bf Bold the first sentence.}  Rest of figure 2  caption.  Caption 
-%should be left justified, as specified by the options to the caption 
-%package.
-%}
-%\label{Figure_label}
-%\end{figure}
-
-
-\section*{Tables}
-%\begin{table}[!ht]
-%\caption{
-%\bf{Table title}}
-%\begin{tabular}{|c|c|c|}
-%table information
-%\end{tabular}
-%\begin{flushleft}Table caption
-%\end{flushleft}
-%\label{tab:label}
-% \end{table}
-
-\end{document}
-
+# References #

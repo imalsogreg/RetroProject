@@ -30,7 +30,7 @@ p.addParamValue('r_thresh', 1e-2);
 p.addParamValue('anatomical_dists',[]);  %pass this to bypass computing it in full_xcorr_anal
 p.addParamValue('ok_areas',[]); % don't use!
 p.addParamValue('ok_pair',[]);
-p.addParamValue('axis_vector',[1 -1] ./ sqrt(2) );
+p.addParamValue('axis_vector',[1, 0]);
 p.addParamValue('anatomical_groups',false);
 p.addParamValue('trode_groups',[]);
 
