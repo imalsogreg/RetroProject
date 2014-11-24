@@ -32,11 +32,7 @@ end
 end
 
 function xs = unfoldBinCenters(clust)
-    bc = clust.field.bin_centers;
-    lastBin = bc(end);
-    db = diff(bc(1:2));
-    xs = bc + lastBin + db;
-    xs = [bc, xs];
+    [~,xs] = unwrap_linear_field(clust.field);
 end
 
 function clust = unrollOutboundInbound(clust,opt)
