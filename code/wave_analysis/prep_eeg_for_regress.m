@@ -76,6 +76,12 @@ if(not(isempty(p.Results.small_timewin)))
     eeg_for_regress_small = contwin_r(eeg_for_regress,p.Results.small_timewin);
 end
 
+fs = fieldnames(eeg_for_regress);
+for f = 1:numel(fs)
+    toZero = isnan(eeg_for_regress.(fs{f}).data);
+    eeg_for_regress.(fs{f}).data(toZero) = 0;
+end
+
 function new_cdat = lfun_contzero(cdat, zero_bool)
 new_cdat = cdat;
 new_cdat.data = cdat.data .* repmat((~zero_bool)', 1, size(cdat.data,2));

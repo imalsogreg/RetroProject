@@ -8,6 +8,7 @@ p.addParamValue('samplerate',1000);
 p.addParamValue('loadMUA',true);
 p.addParamValue('loadSpikes',true);
 p.addParamValue('computeFields',true);
+p.addParamValue('segment_style',[]);
 p.parse(varargin{:});
 opt = p.Results;
 
@@ -21,7 +22,7 @@ dayOfWeek = m.today(3:4);
 
 d.epochs = loadMwlEpoch('filename',[m.basePath, '/epoch.epoch']);
 
-d.trode_groups = m.trode_groups_fn('date',m.today);
+d.trode_groups = m.trode_groups_fn('date',m.today,'segment_style',opt.segment_style);
 
 d.rat_conv_table = m.rat_conv_table;
 
@@ -37,7 +38,8 @@ if(p.Results.loadEEG)
       'arte_correction_factor',m.arteCorrectionFactor,...
       'samplerate',p.Results.samplerate];
   
-  d.eeg = quick_eeg(eegArgs{:});
+  d.eeg   = quick_eeg(eegArgs{:});
+  d.eeg_r = prep_eeg_for_regress(d.eeg);
   if ~ischar(m.singleThetaChan)
        error('laodData:badSingleThetaChan','singleThetaChan must be string');
   end
@@ -51,7 +53,8 @@ end
 if(p.Results.loadMUA)
 d.mua = mua_at_date(m.today, m.mua_filelist_fn, 'keep_groups', m.keepGroups,...
     'trode_groups', m.trode_groups_fn, 'timewin', m.loadTimewin, 'arte_correction_factor',m.arteCorrectionFactor,...
-    'ad_trodes',m.ad_tts,'arte_trodes',m.arte_tts,'width_window',m.width_window,'threshold',m.threshold);
+    'ad_trodes',m.ad_tts,'arte_trodes',m.arte_tts,'width_window',m.width_window,'threshold',m.threshold, ...
+    'segment_style', opt.segment_style);
 [~,d.mua_rate] = assign_rate_by_time(d.mua,'timewin',timewin,'samplerate',p.Results.samplerate);
 end
 

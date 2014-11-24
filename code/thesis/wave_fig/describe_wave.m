@@ -7,7 +7,7 @@ p.addParamValue('upleft_chanlabels',defaultChans);
 p.addParamValue('timewin',defaultTWin);
 p.addParamValue('fitTimewin',defaultFitTWin);
 p.addParamValue('eeg_r',[]);
-p.addParamValue('brainPicPath','/home/greghale/Documents/Papers/RetroProject/code/thesis/wave_fig/brainFig.png');
+p.addParamValue('brainPicPath','/home/greghale/Documents/RetroProject/code/thesis/wave_fig/brainFig.png');
 p.parse(varargin{:});
 opt = p.Results;
 

@@ -11,12 +11,13 @@ p.addParamValue('sort',true);
 p.addParamValue('sort_areas',[]);
 p.addParamValue('width_window',[-Inf,Inf]);
 p.addParamValue('threshold',[]);
+p.addParamValue('segment_style',[]);
 p.parse(varargin{:});
 opt = p.Results;
 
 if(~isempty(opt.keep_groups))
     if(~isempty(opt.trode_groups))
-        tg = opt.trode_groups('date',dateStr);
+        tg = opt.trode_groups('date',dateStr,'segment_style',opt.segment_style);
         keep_trodes = cell(0);
         for n = 1:numel(opt.keep_groups)
             this_group = strcmp(opt.keep_groups{n}, cmap(@(x) x.name, tg));
@@ -57,6 +58,9 @@ mua_ad = immua(flist_ad, 'timewin', opt.timewin, 'arte_correction_factor', 0,'t_
 mua = mua_ad;
 if(numel(flist_arte.comp_list) > 0)
     mua.clust = [mua.clust, mua_arte.clust];
+end
+if(~isfield(mua, 'clust'))
+    mua.clust = cell(0);
 end
 mua.nclust = numel(mua.clust);
 
