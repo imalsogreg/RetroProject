@@ -38,8 +38,13 @@ n_bins = numel(timebins);
 bin_centers = timebins + dt_bin/2;
 timestamp_for_imcont = bin_centers';
 
+if(nclust > 0)
 total_rates_cdat = imcont('timestamp',timestamp_for_imcont,...
                           'data', zeros(n_bins,nclust));
+else
+error('assign_rate_by_time:no_clusts','There are no clusters in this cdat');
+end
+
 smoothing_kernel = [];
 nyquist_period = 2*(1/opt.samplerate);
 half_kernel_n_sd = 4;

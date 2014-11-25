@@ -1,6 +1,6 @@
 function mua_list = mnil_mua_filelist(comp_list,date)
 
-base_path = ['/home/greghale/mnil/',date];
+base_path = ['/home/greghale/Data/mnil/',date];
 day = date(3:4);
 
 mua_list.file_list = {...
