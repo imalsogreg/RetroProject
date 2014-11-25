@@ -1,10 +1,11 @@
 function f = browseAsymmetry(d)
-
+    close all;
     f = figure('KeyPressFcn',@keyCallback);
-
     gd.i = 1;
-    gd.fields       = get_fields(d.spikes);
-    gd.sourceTrodes = cmap(@(x) x(6:7), gd.fields.clust)
+    [gd.fields, gd.sourceCells,~,gd.place_cells] = get_fields(d.spikes);
+    gd.sourceTrodes = cmap(@(x) x(6:7), gd.sourceCells);
+    gd.rat_conv_table = d.rat_conv_table;
+    gd.trode_groups = d.trode_groups;
     gd.handles = guihandles(f);
 
     guidata(f,gd);
@@ -16,9 +17,9 @@ function keyCallback(f,e)
     gd = guidata(f);
 
     if(strcmp(e.Key,'uparrow'))
-        gd = max(gd-1,1);
-    elseif(strcmp(e.key,'downarrow'))
-        gd = min(gd + 1, numel(gd.fields));
+        gd.i = max(gd.i-1,1);
+    elseif(strcmp(e.Key,'downarrow'))
+        gd.i = min(gd.i + 1, numel(gd.fields));
     end
 
     guidata(f,gd);
@@ -27,7 +28,7 @@ function keyCallback(f,e)
 end
 
 function myDraw(f,gd)
-    
+    if(isfield(gd,'i'))
     figure(f);
     subplot(1,2,1);
     draw_trodes(gd.rat_conv_table,'trode_groups',gd.trode_groups,...
@@ -35,7 +36,7 @@ function myDraw(f,gd)
     hold off;
 
     subplot(1,2,2);
-    clust = gd.fields.clust(gd.i);
+    clust = gd.place_cells{gd.i};
     nBins = numel(clust.bin_centers);
     xs = clust.bin_centers(1:(nBins/2));
     ys = clust.rate(1:(nBins/2)) + clust.rate(end:-1:(nBins/2 + 1));
@@ -43,5 +44,5 @@ function myDraw(f,gd)
     hold on;
     plot( xs, clust.in_run_rate, 'r' );
     area(xs,ys);
-    
+    end
 end

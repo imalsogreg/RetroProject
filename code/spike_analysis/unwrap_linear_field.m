@@ -15,9 +15,9 @@ function fNew = unwrap_linear_field(field, varargin)
     fNew.bin_centers = xs;
     fNew.rate = zeros(size(xs));
     if(any(strcmp('outbound',opt.ok_directions)))
-        fNew.rate(1:numel(bc)) = field.out_run_rate;
+      fNew.rate(1:numel(bc)) = field.out_rate;
     if(any(strcmp('inbound',opt.ok_directions)))
-        fNew.rate((numel(bc)+1):end) = field.in_run_rate(end:(-1):1);
+        fNew.rate((numel(bc)+1):end) = field.in_rate(end:(-1):1);
     end
     
 end

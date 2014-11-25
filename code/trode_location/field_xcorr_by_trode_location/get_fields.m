@@ -1,4 +1,4 @@
-function [fields,fieldSources,xs] = get_fields(place_cells,varargin)
+function [fields,fieldSources,xs,unwrappedPlaceCells] = get_fields(place_cells,varargin)
 
 p = inputParser();
 p.addParamValue('ok_directions',{'outbound','inbound'});
@@ -29,25 +29,32 @@ for c = 1:numel(place_cells.clust)
     end
     fieldSources = [fieldSources, cmap(@(x) workingClust.name, cell(1,nCellField))];
 end
+unwrappedPlaceCells = sdatslice(place_cells,'names',fieldSources);
+unwrappedPlaceCells.clust = cmap(@(x) unrollOutboundInbound(x,opt), place_cells.clust);
 end
 
-function xs = unfoldBinCenters(clust)
-    [~,xs] = unwrap_linear_field(clust.field);
+function clustNew = unfoldBinCenters(clust)
+    field = unwrap_linear_field(clust.field);
+    clustNew = clust;
+    clustNew.field = field;
 end
 
-function clust = unrollOutboundInbound(clust,opt)
-    newBinCenters = unfoldBinCenters(clust);
-    oldOutbound = clust.field.out_rate;
-    if(all(not(strcmp('outbound',opt.ok_directions))))
-        oldOutbound = zeros(size(oldOutbound));
-    end
-    oldInbound   = clust.field.in_rate;
-    if(all(not(strcmp('inbound',opt.ok_directions))))
-        oldInbound = zeros(size(oldInbound));
-    end
-    newField = [oldOutbound, oldInbound(end:-1:1)];
-    clust.field.bin_centers = newBinCenters;
-    clust.field.rate = newField;
+function newClust = unrollOutboundInbound(clust,opt)
+    opt2 = {'ok_directions',opt.ok_directions};
+    newClust = clust;
+    field = unwrap_linear_field(newClust.field,opt2{:});
+    newClust.field = field;
+%    oldOutbound = clust.field.out_rate;
+%    if(all(not(strcmp('outbound',opt.ok_directions))))
+%        oldOutbound = zeros(size(oldOutbound));
+%    end
+%    oldInbound   = clust.field.in_rate;
+%    if(all(not(strcmp('inbound',opt.ok_directions))))
+%        oldInbound = zeros(size(oldInbound));
+%    end
+%    newField = [oldOutbound, oldInbound(end:-1:1)];
+%    clust.field.bin_centers = newClust;
+%    clust.field.rate = newField;
 end
 
 function [topField,isValid,adjClust] = lfunTakeTopField(clust,opt)

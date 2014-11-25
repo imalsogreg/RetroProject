@@ -88,7 +88,11 @@ if(~iscell(opt.highlight_names))
     opt.highlight_names = {opt.highlight_names};
 end
 for n = 1:numel(opt.highlight_names)
-   inds = [inds, find( strcmp(opt.highlight_names{n}(6:7),  ...
+    thisName = opt.highlight_names{n};
+    if(length(thisName) > 2)
+        thisName = thisName(6:7);
+    end
+    inds = [inds, find( strcmp(thisName,  ...
        trode_names) ...
        ,1,'first')];
 end
