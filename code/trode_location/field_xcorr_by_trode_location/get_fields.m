@@ -1,4 +1,4 @@
-function [fields,fieldSources,xs,unwrappedPlaceCells] = get_fields(place_cells,varargin)
+function [fields,fieldSources,unwrappedPlaceCells] = get_fields(place_cells,varargin)
 
 p = inputParser();
 p.addParamValue('ok_directions',{'outbound','inbound'});
@@ -15,7 +15,7 @@ fields = cell(0);
 fieldSources = cell(0);
 isValid = [];
 
-xs = unfoldBinCenters(place_cells.clust{1});
+% xs = unfoldBinCenters(place_cells.clust{1}); % not true after refactor
 
 for c = 1:numel(place_cells.clust)
     place_cells.clust{c} = unrollOutboundInbound(place_cells.clust{c},opt);
@@ -30,7 +30,6 @@ for c = 1:numel(place_cells.clust)
     fieldSources = [fieldSources, cmap(@(x) workingClust.name, cell(1,nCellField))];
 end
 unwrappedPlaceCells = sdatslice(place_cells,'names',fieldSources);
-unwrappedPlaceCells.clust = cmap(@(x) unrollOutboundInbound(x,opt), place_cells.clust);
 end
 
 function clustNew = unfoldBinCenters(clust)
