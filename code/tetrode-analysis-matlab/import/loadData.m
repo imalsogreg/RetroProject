@@ -56,12 +56,13 @@ if(p.Results.loadMUA)
     'trode_groups', m.trode_groups_fn, 'timewin', m.loadTimewin, 'arte_correction_factor',m.arteCorrectionFactor,...
     'ad_trodes',m.ad_tts,'arte_trodes',m.arte_tts,'width_window',m.width_window,'threshold',m.threshold, ...
     'segment_style', opt.segment_style);
-[~,d.mua_rate] = assign_rate_by_time(d.mua,'timewin',timewin,'samplerate',p.Results.samplerate);
+    [~,d.mua_rate] = assign_rate_by_time(d.mua,'timewin',timewin,'samplerate',p.Results.samplerate);
 end
 
 if(p.Results.loadSpikes)
-d.spikes = imspike('spikes','arte_correction_factor',m.arteCorrectionFactor,...
-    'ad_dirs',cmap(@(x) [x,dayOfWeek], m.ad_tts),'arte_dirs',cmap(@(x) [x,dayOfWeek],m.arte_tts)  );
+    d.spikes = imspike('spikes','arte_correction_factor',m.arteCorrectionFactor,...
+        'ad_dirs',cmap(@(x) [x,dayOfWeek], m.ad_tts),'arte_dirs',cmap(@(x) [x,dayOfWeek],m.arte_tts)  );
+    d.spikes = assign_theta_phase(d.spikes, thetaCdatR,'lfp_default_chan',m.singleThetaChan);
 end
 
 if(p.Results.loadPos)

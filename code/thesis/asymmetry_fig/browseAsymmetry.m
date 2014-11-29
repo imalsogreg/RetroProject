@@ -2,8 +2,9 @@ function f = browseAsymmetry(d)
     close all;
     f = figure('KeyPressFcn',@keyCallback);
     gd.i = 1;
-    [gd.fields, gd.sourceCells,gd.xs,gd.place_cells] = get_fields(d.spikes);
-    gd.sourceTrodes = cmap(@(x) x(6:7), gd.sourceCells);
+    [~, sourceCells,place_cells] = get_fields(d.spikes);
+    gd.fields = cmap(@(x) x.field, place_cells.clust);
+    gd.sourceTrodes = sourceCells;
     gd.rat_conv_table = d.rat_conv_table;
     gd.trode_groups = d.trode_groups;
     gd.handles = guihandles(f);
@@ -21,7 +22,8 @@ function keyCallback(f,e)
     elseif(strcmp(e.Key,'downarrow'))
         gd.i = min(gd.i + 1, numel(gd.fields));
     end
-
+    gd.i
+    gd.sourceTrodes{gd.i}
     guidata(f,gd);
     myDraw(f,gd);
 
@@ -36,16 +38,16 @@ function myDraw(f,gd)
     hold off;
 
     subplot(1,2,2);
-    clust = gd.place_cells.clust{gd.i};
-    nBins = numel(clust.field.bin_centers);
-    xs = clust.field.bin_centers(1:(nBins/2));
-    ys = clust.field.rate(1:(nBins/2)) + ...
-           clust.field.rate(end:-1:(nBins/2 + 1));
+    nBins = numel(gd.fields{gd.i}.bin_centers);
+    xs = gd.fields{gd.i}.bin_centers(1:(nBins/2));
+    ys_out = gd.fields{gd.i}.rate(1:(nBins/2));
+    ys_in  = gd.fields{gd.i}.rate(end:-1:(nBins/2 + 1));
     hold off;
-    area(xs,ys);
+    area(xs,ys_out);
     hold on;
-    plot( xs, clust.field.out_rate, 'b' );
-    plot( xs, clust.field.in_rate, 'r' );
-
+    area(xs,(-1).*ys_in,'FaceColor','r');
+    plot( xs, gd.fields{gd.i}.out_rate, 'b' );
+    plot( xs, (-1) * gd.fields{gd.i}.in_rate, 'r' );
+    ylim([-30,30]);
     end
 end
