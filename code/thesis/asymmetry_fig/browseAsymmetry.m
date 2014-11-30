@@ -7,6 +7,9 @@ function f = browseAsymmetry(d)
     gd.sourceTrodes = sourceCells;
     gd.rat_conv_table = d.rat_conv_table;
     gd.trode_groups = d.trode_groups;
+    gd.asymmetry = cmap(...
+        @(x) fieldAsymmetry(x,x.field.bin_centers,x.field.rate), ...
+        place_cells.clust);
     gd.handles = guihandles(f);
 
     guidata(f,gd);
@@ -49,5 +52,6 @@ function myDraw(f,gd)
     plot( xs, gd.fields{gd.i}.out_rate, 'b' );
     plot( xs, (-1) * gd.fields{gd.i}.in_rate, 'r' );
     ylim([-30,30]);
+    title(num2str(gd.asymmetry{gd.i}));
     end
 end

@@ -4,7 +4,7 @@ p = inputParser();
 p.addParamValue('ok_directions',{'outbound','inbound'});
 p.addParamValue('method', 'peak', @(x) any(strcmp(x, {'peak', 'xcorr'})));
 p.addParamValue('min_peak_rate_thresh', 10);
-p.addParamValue('edge_rate_thresh',1);
+p.addParamValue('edge_rate_thresh',0.25);
 p.addParamValue('rate_thresh_for_multipeak',5);
 p.addParamValue('multipeak_max_spacing',0.5);
 p.addParamValue('max_abs_field_dist',2);
@@ -36,29 +36,39 @@ for n = 1:numel(unwrappedPlaceCells.clust)
 end
 end
 
-function edges = mergeNeighbors(fieldEdges,fieldRate,opt)
+function edges = mergeNeighbors(fieldEdges,xs,fieldRate,opt)
     isClean = true;
     edges = fieldEdges;
     nSubfields = numel(fieldEdges)-1;
-    for n = 2:nSubfields-1
+    for n = 2:nSubfields
         prevRange = [fieldEdges(n-1),fieldEdges(n)  ];
         nextRange = [fieldEdges(n),  fieldEdges(n+1)];
-        isOk = @(r) max(fieldRate(r(1):r(2))) >= opt.min_peak_rate_thresh;
-        if ~isOk(prevRange) || ~isOk(nextRange)
-            edges(n) = [];
+        bigRange = [prevRange(1),nextRange(2)];
+        lastX = xs(floor(numel(xs)/2));
+        isOk = @(r) ...
+            ((max(fieldRate(xs >= r(1) & xs <= r(2))) >= ...
+            opt.min_peak_rate_thresh));
+        %if(~all(size(bigRange) == [1,2])) || (~all(size(prevRange) == [1,2])) || (~ all(size(nextRange) == [1,2])) || numel(lastX) == 1
+        %    a =1
+        %end
+        if (~isOk(prevRange) || ~isOk(nextRange)) && ...
+                (sign(lastX - bigRange(1)) == ...
+                 sign(lastX - bigRange(2)))
+            edges(n) = NaN;  % Flag for removal
             isClean = false;
         end
     end
     if ~isClean
-        edges = mergeNeighbors(edges,fieldRate,opt);
+        edges = edges(~isnan(edges));
+        edges = mergeNeighbors(edges,xs,fieldRate,opt);
     end
 end
 
-function clustNew = unfoldBinCenters(clust)
-    field = unwrap_linear_field(clust.field);
-    clustNew = clust;
-    clustNew.field = field;
-end
+%function clustNew = unfoldBinCenters(clust)
+%    field = unwrap_linear_field(clust.field);
+%    clustNew = clust;
+%    clustNew.field = field;
+%end
 
 function newClust = unrollOutboundInbound(clust,opt)
     newClust = clust;
@@ -94,12 +104,24 @@ function [topFields,isValid,adjClust] = lfunTakeTopField(clust,opt)
         cRate(i) = 0;
         i = i - 1;
     end
+
+    % Pad to help with onset-at-edge cases
+    dx = xs(2) - xs(1);
+    xs = [xs(1)-dx, xs, xs(end)+dx];
+    topField = [0, topField, 0];
+
     adjClust.field.rate = cRate;
-    fieldEdges = xs(diff(topField ~= 0) ~= 0);
+    fieldEdges = xs(diff(topField > 0) ~= 0) + dx;
+    
+    % Undo the padding
+    xs = xs(2:(end-1));
+    topField = topField(2:(end-1));
+    
     fieldEdges = ...
         [fieldEdges(1), ...
          xs(topField < opt.rate_thresh_for_multipeak & localMins(topField)),...
          fieldEdges(end)];
+    fieldEdges = mergeNeighbors(fieldEdges,xs,topField,opt);
     nFields = numel(fieldEdges) - 1;
     topFields = cell(1,nFields);
     for n = 1:nFields
@@ -108,6 +130,8 @@ function [topFields,isValid,adjClust] = lfunTakeTopField(clust,opt)
         thisField(thisKeep) = topField(thisKeep);
         topFields{n} = thisField;
     end
+    topFields = filterCell(@(x) (max(x) > opt.min_peak_rate_thresh), ...
+                           topFields);
 end
 
 function b = hasField(clust,opt)
