@@ -10,7 +10,7 @@ end
 
 function dd = defaultData(m)
 
-    if strcmp(m.today,'112511')
+    if strcmp(m.today,'112511')  % yolanda
         dd.indA = 
     end
 

@@ -2,6 +2,8 @@ function [fields,fieldSources,unwrappedPlaceCells] = get_fields(place_cells,vara
 
 p = inputParser();
 p.addParamValue('ok_directions',{'outbound','inbound'});
+p.addParamValue('min_boundary_edge_dist',0.25);
+p.addParamValue('min_peak_edge_dist',0);
 p.addParamValue('method', 'peak', @(x) any(strcmp(x, {'peak', 'xcorr'})));
 p.addParamValue('min_peak_rate_thresh', 10);
 p.addParamValue('edge_rate_thresh',0.25);
@@ -14,26 +16,29 @@ opt = p.Results;
 
 fields = cell(0);
 fieldSources = cell(0);
-isValid = [];
-
-% xs = unfoldBinCenters(place_cells.clust{1}); % not true after refactor
 
 for c = 1:numel(place_cells.clust)
     place_cells.clust{c} = unrollOutboundInbound(place_cells.clust{c},opt);
     workingClust = place_cells.clust{c};
     nCellField = 0;
     while hasField(workingClust,opt)
-        [thisField,thisIsValid,workingClust] = lfunTakeTopField(workingClust,opt);
+        [thisField,workingClust] = lfunTakeTopField(workingClust,opt);
         fields = [fields, thisField];
-        isValid = [isValid,thisIsValid];
         nCellField = nCellField + numel(thisField);
     end
     fieldSources = [fieldSources, cmap(@(x) workingClust.name, cell(1,nCellField))];
+    xs = workingClust.field.bin_centers;
 end
+
+keep = cellfun(@(r) okBoundaries(xs,r,opt), fields);
+fields       = fields(keep);
+fieldSources = fieldSources(keep);
+
 unwrappedPlaceCells = sdatslice(place_cells,'names',fieldSources);
 for n = 1:numel(unwrappedPlaceCells.clust)
     unwrappedPlaceCells.clust{n}.field.rate = fields{n};
 end
+
 end
 
 function edges = mergeNeighbors(fieldEdges,xs,fieldRate,opt)
@@ -77,10 +82,28 @@ function newClust = unrollOutboundInbound(clust,opt)
     newClust.field = field;
 end
 
+function b = okBoundaries(xs,rates,opt)
+
+    fieldEdges = [min(xs(rates>0)), max(xs(rates>0))];
+    xMid = xs(floor( numel(xs)/2));
+    okBoundaries = ...
+        all( abs(fieldEdges - min(xs)) >= opt.min_boundary_edge_dist) & ...
+        all( abs(fieldEdges - max(xs)) >= opt.min_boundary_edge_dist) & ...
+        all( abs(fieldEdges - xMid) >= opt.min_boundary_edge_dist );
+    fieldPeaks = xs(rates == max(rates));
+    okPeaks = all( abs(fieldPeaks - min(xs)) >= opt.min_peak_edge_dist) & ...
+              all( abs(fieldPeaks - max(xs)) >= opt.min_peak_edge_dist) & ...
+              all( abs(fieldPeaks - xMid) >= opt.min_peak_edge_dist);
+
+          
+    b = okBoundaries & okPeaks;
+end
+
+
 % This guy was written to return 1 field, but I'd like it to return
 % possibly more, if that one has a deep valley that should split the
 % field into two parts. Really ought to use phase here to break
-function [topFields,isValid,adjClust] = lfunTakeTopField(clust,opt)
+function [topFields,adjClust] = lfunTakeTopField(clust,opt)
     if strcmp(clust.name,'cell_2323_cl-2')
         a = 1;
     end

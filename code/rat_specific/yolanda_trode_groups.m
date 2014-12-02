@@ -4,6 +4,7 @@ p = inputParser();
 p.addParamValue('areas',[]);
 p.addParamValue('date','121111');
 p.addParamValue('silent',false);
+p.addParamValue('segment_style',[]);
 p.parse(varargin{:});
 opt = p.Results;
 
