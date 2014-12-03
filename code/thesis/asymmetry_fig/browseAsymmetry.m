@@ -5,6 +5,10 @@ function f = browseAsymmetry(d)
     [~, sourceCells,place_cells] = get_fields(d.spikes);
     gd.fields = cmap(@(x) x.field, place_cells.clust);
     gd.sourceTrodes = sourceCells;
+    gd.spikeXs = ...
+        cmap(@(x) fieldXs(x), place_cells.clust);
+    gd.spikePhases = ...
+        cmap(@(x) fieldPhases(x), place_cells.clust);
     gd.rat_conv_table = d.rat_conv_table;
     gd.trode_groups = d.trode_groups;
     gd.asymmetry = cmap(...
@@ -16,13 +20,20 @@ function f = browseAsymmetry(d)
 
 end
 
+function xs = fieldXs(clust)
+    xsCol = find(strcmp('pos_at_spike',clust.featurenames),1,'first');
+    fieldXsOk = clust.field.bin_centers(clust.field.rate > 0);
+    xs = 
+
+end
+
 function keyCallback(f,e)
 
     gd = guidata(f);
 
-    if(strcmp(e.Key,'uparrow'))
+    if(strcmp(e.Key,'rightarrow'))
         gd.i = max(gd.i-1,1);
-    elseif(strcmp(e.Key,'downarrow'))
+    elseif(strcmp(e.Key,'leftarrow'))
         gd.i = min(gd.i + 1, numel(gd.fields));
     end
     gd.i
@@ -35,12 +46,13 @@ end
 function myDraw(f,gd)
     if(isfield(gd,'i'))
     figure(f);
-    subplot(1,2,1);
+
+    subplot(2,2,1);
     draw_trodes(gd.rat_conv_table,'trode_groups',gd.trode_groups,...
         'highlight_names',gd.sourceTrodes(gd.i));
     hold off;
 
-    subplot(1,2,2);
+    subplot(2,2,2);
     nBins = numel(gd.fields{gd.i}.bin_centers);
     xs = gd.fields{gd.i}.bin_centers(1:(nBins/2));
     ys_out = gd.fields{gd.i}.rate(1:(nBins/2));
@@ -53,5 +65,8 @@ function myDraw(f,gd)
     plot( xs, (-1) * gd.fields{gd.i}.in_rate, 'r' );
     ylim([-30,30]);
     title(num2str(gd.asymmetry{gd.i}));
+    
+    subplot(2,2,3);
+    plot(gd.spikeXs, gd.spikePhases,'.');
     end
 end

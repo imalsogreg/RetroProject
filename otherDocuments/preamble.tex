@@ -1,0 +1,30 @@
+\usepackage{color}
+
+\usepackage{fontspec}
+
+\definecolor{grey}{rgb}{0.5,0.5,0.5}
+
+\setmainfont{Dosis ExtraLight}
+\setsansfont{Dosis ExtraLight}
+\newfontfamily\mytitlefont{Dosis ExtraLight}
+\usepackage{titling}
+\renewcommand\maketitlehooka{\mytitlefont}
+
+\usepackage{titlesec}
+\newcommand*{\justifyheading}{\raggedleft}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\justifyheading\hrule\color{grey}}{\chaptertitlename\ \thechapter}
+  {20pt}{\Huge}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\justifyheading\hrule\color{grey}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\justifyheading\hrule\color{grey}}{\thesubsection}{1em}{}
+
+\usepackage{blindtext}
+
+\makeatletter
+\let\old@rule\@rule
+\def\@rule[#1]#2#3{\textcolor{blue}{\old@rule[#1]{#2}{#3}}}
+\makeatother
+
+
