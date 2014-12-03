@@ -1,6 +1,5 @@
-% The title
-% Greg Hale
-% December 2014
+% The title4
+
 
 Test
 ====

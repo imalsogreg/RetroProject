@@ -15,7 +15,7 @@ extension HTML    = ".html"
 extension WordDoc = ".doc"
 extension PDF     = ".pdf"
 
-rawFileDir   = "reports"
+rawFileDir   = "."
 buildFileDir = "build"
 
 cmd f fmt  =
