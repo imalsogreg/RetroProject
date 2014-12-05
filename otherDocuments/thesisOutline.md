@@ -105,8 +105,8 @@ Coordinated information coding in a desynchronized network
 ## Discussion
 
  - Recap CA1 theta phase offsets imply a 20ms delay for every 1mm lateral travel
- - **Take-home:** Despite timing differences in putative excitatory drive,
-   information coding is tightly synchronized
+ - **Take-home:** Despite timing differences in excitatory drive, information 
+   coding is tightly synchronized
  - Information timing decoupled from bulk firing rate timing
  - Different parts of CA1 weakly preferentially carry most of the spike rate at 
    different times (this is how there is in fact an anatomical gradient in 
@@ -129,7 +129,9 @@ Coordinated information coding in a desynchronized network
       - Too few units, had to collapse data over time, or average over cells
       - Not sensitive to cycle-by-cycle variations in theta wave parameters.
  - New questions
-      - Is theta desynchronized, traveling,  within CA3 place cells, EC grid cells, etc? 
+      - Is theta desynchronized, traveling,  within CA3, EC, others? 
+      - Which model (1,2, or another) accounts for greater synchrony in infomation
+        content than in underlying excitation?
       - EC layer 3 grid cells do not phase precess. Do they contribute to CA1 timing?
       - 'Medial' and 'lateral' CA1 carry preferentially early and late stages of
         theta sequences, but we only looked at the most medial 1/3 of CA1 - does this
@@ -140,4 +142,52 @@ Coordinated information coding in a desynchronized network
       - Is the synchrony of place cell coding used downstream? Actively maintained 
         in CA1?
 
-Real time decoding of 
+Real time position decoding from populations of place cells
+===========================================================
+
+## Intro
+
+ - Theta sequences and sequence replay in place cells, phenomenology
+      - Replay occurs during reward consumption & slow-wave sleep
+      - Theta sequences always present during running
+      - Both theta sequences and replay touch parts of the track in a way
+        that isn't strictly tied to recency of experience or future goals
+      - However there is a statistical bias during sleep for replay of
+        maze experienced just prior to sleep, and statistical bias for
+        awake replay to involve salient parts of a maze (start/reward location)
+ - Disrupting all replay events (e.g. through electrical stimulation
+   triggered by ripples detected in real time):
+      - Disruption of all ripples in sleep slows learning of the more recently
+        experienced track.
+      - Disruption of all awake ripples in a working memory task interferes
+        with decisions involving working memory, doesn't measurably interfere 
+        with simpler decisions
+ - For more concrete evidence of where replay comes from and what its functional
+   role is, **need to condition our manipulations on the information encoded in 
+   replay event**. Examples:
+      - Is replay content in any way under rat's control?
+           - Reward rat for replays that go West, punish for replays that go East
+           - Do West-going replays then happen more often?
+      - Are rats aware of their replay content?
+           - Use most recent replay (West or East) to determine which arm of a maze
+             will be rewarded
+           - Can rat learn to use their own replay (or its correlates) to guide
+             their behavior?
+ - Decoding replay information in real time is difficult
+      - Tracking rat, isolating units, computing place fields, and stimulus decoding
+        all happen offline; need to happen online for streaming data
+      - *Throughput requirements:* must decode at least as quickly as data comes in
+      - *Latency requirements:* data -> decoding lag must be fast enough for 
+        behavioral feedback, preferably fast enough to disrupt an ongoing replay
+      - *Asymptotic requirements:* Decoding time must not increase with duration of
+        experiment, or long experiments ruled out.
+      - *Concurrency:* Many sources of data (32 tetrodes, tracker, user input) all
+        updating a single model
+ - Chose Haskell for implementing, lots of advantages mostly due to type system
+      - Haskell types model domain very tightly, compiler checks program logic
+      - Types let compiler check whole codebase during code rewrites / code experiments
+      - Types tell runtime system which operations are pure (not-interacting),
+        very nice property for concurrency
+ - Minimizing human intervention: no time for manual spike sorting
+
+## Materials and Methods
