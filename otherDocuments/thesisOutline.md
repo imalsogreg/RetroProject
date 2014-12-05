@@ -191,3 +191,58 @@ Real time position decoding from populations of place cells
  - Minimizing human intervention: no time for manual spike sorting
 
 ## Materials and Methods
+
+### Backend signal acquisition and networking
+
+ - Compatible with existing recording system, runs side by side with shared timestamps
+ - NiDAQ cards, 64 channels at 32 kHz
+ - Software spike filtering, software LFP filtering
+ - Software grouping of channels into tetrodes, spike detection
+ - Publish spikes and LFP to the network for other programs to process
+
+### Offline position reconstruction
+
+ - Manually sort spikes from many cells on single tetrode into groups, recover
+   single-cell spike trains
+ - Turn rat location on curved track into simple stimulus for prediciton
+      - Distance along track
+      - 'Outbound' or 'inbound' running direction
+ - Compute likehood of spike rate given stimulus, using data from whole session
+ - For a given ~15ms time window, use spikes in that time window and matching
+   spike rate likehood functions (place fields) to predict stimulus (track pos)
+   by bayesian inference
+
+### Online position reconstruction
+
+ - Manual spike sorting probably far too slow, use semi-automated or clusterless
+ - Choosing data structure for spike sorting & decoding with bounded memory & time use
+ - Likelihood functions have to be updated during experiment
+      - By a lot of threads (~ 32 tetrodes * spike rate, plus current position)
+      - Decoder also writes to likelihood function
+ - Use Haskell's concurrency library to coordinate many writing/reading threads
+
+## Results
+
+ - Decoding quality
+      - Offline position reconstruction compared to online with clusters, online
+        clusterless
+      - Tracking of rat's position
+      - Appearance of theta sequences
+      - Appearance of replay
+ - Decoding speed w.r.t. real time requirements
+ - Incidence of bugs, deadlocks; experience with refactoring & adding features
+
+## Discussion
+
+
+ - Recap: designed tool for decoding streaming place cell data
+ - Remaining components needed to run experiments:
+      - Networked rat tracker and track linearizer
+      - Online line-finding algorithm
+      - Combining estimates from multiple computers (for > 16 tetrode case)
+
+
+Retrosplenial slow-wave wake and interaction with hippocampus
+=============================================================
+
+## Intro
