@@ -246,3 +246,9 @@ Retrosplenial slow-wave wake and interaction with hippocampus
 =============================================================
 
 ## Intro
+
+### Cortico-hippocampal interactions during sleep thought to be important for memory
+
+ - Two phase consolidation model: encode at wake, burn-in during sleep
+ - HPC ripples correlated w/ sleep CTX sleep spindles - communication signature?
+ - Regular interval between hippocampal frame onset and cortical frame onset
