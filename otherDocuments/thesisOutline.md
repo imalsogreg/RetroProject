@@ -246,3 +246,39 @@ Retrosplenial slow-wave wake and interaction with hippocampus
 =============================================================
 
 ## Intro
+
+## Materials & Methods
+
+ - 10 tetrodes in HPC, 10 tetrodes split between retrosplenial, 
+   somatosensory, motor, posterior parietal cortex
+ - Trained rats to run circular track for reward every 270 degrees CCW
+
+## Results
+
+### Characterizing slow-wave sleep (SWS) in cortex
+
+ - Examples of light sleep, spindles, frames and K-complexes in LFP, spiking
+ - Examples of deep sleep, frames and K-complexes in LFP, spiking
+ - Distribution of activity over all cortical electrodes
+ - Average up-state length, down-state length
+
+### Retrosplenial cortex enters SWS-like state during novelty / large rewards
+
+ - Examples
+ - Average up-state length, down-state length
+
+### RSC awake slow waves coordinate with hippocampal ripples
+
+ - 5-second window showing co-transition into SWS-like state 
+   (RSC frames, HPC ripples & replay)
+ - 200-second window showing behavioral-timescale relationship
+ - Cross-correlation of ripples & RSC frames similar between wake and SWS
+
+### RSC awake slow waves, evolution over training
+ 
+ - Occur at most stopping points early in training
+ - After ~1 week, spontaneous frames & small-reward frames stop, but large-reward frames persist (for at least a month)
+
+### Anatomical restriction
+
+ - Simultaneously recorded somatosensor, motor, posterior parietal cortex have no frame-like activity (noticeable changes in spike rate or LFP) during RSC awake frames
