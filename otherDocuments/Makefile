@@ -1,2 +1,2 @@
-build/thesisOutline.pdf: thesisOutline.md
+build/thesisOutline.pdf: thesisOutline.org render.hs
 	runhaskell render.hs

@@ -1,17 +1,19 @@
-% Outline: Hippocampal coding and time constraints
+% Thesis Outline: Hippocampal coding and time constraints
 % Gregory Hale
 
 Overview
 ========
 
-Three chapters about populations of neurons in the hippocampus coordinating their activity on very fine timescales, and how that coordination relates to the larger context of inputs and readouts. In the first chapter, explore the lack of synchrony in timing of the brain rhythms underlying excitatory drive in hippocampal place cells, and the impact of those differences on the ability of distant place cells to coordinate reliably during population-wide coding events. In the second chapter, describe the development of a tool for detecting place cell population coding events and using the information they contain to manipulate brain activity in an experimental way. In the third chapter, describe the unexpected transition of retrosplenial cortex into a slow-wave-sleep like state during reward consumption, and the timing relationship between hippocampal activity and retrosplenial cortex during these events. Conclude with a discussion about coordinated encoding that ties the three chapters together - how does the sequential nature of coding in hippocampus relate to afferents and efferents - do they also encode information in spike sequences? What experiments using real-time ensemble decoding would help answer those?
+Three chapters about populations of neurons in the hippocampus coordinating their activity on very fine timescales, and how that coordination relates to the larger context of hippocampal inputs, outputs, and experimental measurements. In the first chapter, explore the lack of synchrony in timing of the brain rhythms underlying excitatory drive in hippocampal place cells, and the impact of those differences on the ability of distant place cells to coordinate reliably during population-wide coding events. In the second chapter, describe the development of a tool for detecting place cell population coding events and using the information they contain to manipulate brain activity in an experimental way. In the third chapter, describe the unexpected transition of retrosplenial cortex into a slow-wave-sleep like state during reward consumption, and the timing relationship between hippocampal activity and retrosplenial cortex during these events. Conclude with a discussion about coordinated encoding that ties the three chapters together - how does the sequential nature of coding in hippocampus relate to afferents and efferents - do they also encode information in spike sequences? What experiments using real-time ensemble decoding would help answer those?
+
+\pagebreak
 
 General Background
 ==================
 
 ## Hippocampal anatomy and physiology relevant to information coding
 
- - Hippocampal anatomy: cell layer and derdritic layer
+ - Hippocampal anatomy: cell layer and dendritic layer
  - Hippocampal laminar anatomy: CA1, CA3, entorhinal cortex; their connectivity
  - Hippocampal place cells
  - Theta oscillations and multiunit spike phase
@@ -19,7 +21,7 @@ General Background
 
 ## Sleep states, cortical rhythms, hippocampal-cortical interactions
 
- - Sleep statges, cortical eeg correlates (spindles, delta, theta)
+ - Sleep stages, cortical EEG correlates (spindles, delta, theta)
  - Up-down states in vitro, frames of cortical spikes during sleep in vivo
  - Hippocampal ripples and sleep replay, wake replay
  - Hippocampal-cortical coordination of ripples/spindles, spatial content in 
@@ -35,6 +37,8 @@ General Background
  - Concurrency - difficulty of running multiple threads
    simultaneously, and how Haskell's type system makes it 
    tractable for very concurrent situations
+
+\pagebreak
 
 Coordinated information coding in a desynchronized network
 ===========================================================
@@ -112,17 +116,17 @@ Coordinated information coding in a desynchronized network
    different times (this is how there is in fact an anatomical gradient in 
    spike rate timing)
  - Traveling wave parameters match those from other tetrode array study
- - Model 1: Spatially graded, temporalyl constant additional excitation 
+ - Model 1: Spatially graded, temporally constant additional excitation 
    compensates for delayed theta in more lateral locations.
      - Predictions for place field size match data
      - Prediction for skewness don't
  - Model 2: Afferents don't have traveling waves, but CA3 (main input 1) is 
-   uniformally different phase from entorhinal cortex (main input 2), and 
+   uniformly different phase from entorhinal cortex (main input 2), and 
    CA1 phase is inherited from a mixture of these two, according to the 
    proportional strength of the inputs at that point. Medial CA1 gets more
    heavy EC input and is excited earlier , lateral CA1 more heavy CA3 input 
    and is excited later. Phase precessing from individual CA1 cells is
-   inherrited directly from one input area or the other.
+   inherited directly from one input area or the other.
       - Possibly more parsimonious than graded excitation model
       - Requires CA1 phase to be between CA3 and EC phases, but this isn't the case
  - Limitations of this study
@@ -130,17 +134,19 @@ Coordinated information coding in a desynchronized network
       - Not sensitive to cycle-by-cycle variations in theta wave parameters.
  - New questions
       - Is theta desynchronized, traveling,  within CA3, EC, others? 
-      - Which model (1,2, or another) accounts for greater synchrony in infomation
+      - Which model (1,2, or another) accounts for greater synchrony in information
         content than in underlying excitation?
       - EC layer 3 grid cells do not phase precess. Do they contribute to CA1 timing?
       - 'Medial' and 'lateral' CA1 carry preferentially early and late stages of
         theta sequences, but we only looked at the most medial 1/3 of CA1 - does this
         trend continue as you proceed laterally, with very lateral place cells
         prospectively coding far ahead of the rat?
-      - 'Traveling wave' model often a poor fit to invididual cycles. Can larger
+      - 'Traveling wave' model often a poor fit to individual cycles. Can larger
         grids of electrodes find a more accurate structure, more whole picture
       - Is the synchrony of place cell coding used downstream? Actively maintained 
         in CA1?
+
+\pagebreak
 
 Real time position decoding from populations of place cells
 ===========================================================
@@ -204,13 +210,13 @@ Real time position decoding from populations of place cells
 
  - Manually sort spikes from many cells on single tetrode into groups, recover
    single-cell spike trains
- - Turn rat location on curved track into simple stimulus for prediciton
+ - Turn rat location on curved track into simple stimulus for prediction
       - Distance along track
       - 'Outbound' or 'inbound' running direction
- - Compute likehood of spike rate given stimulus, using data from whole session
+ - Compute likelihood of spike rate given stimulus, using data from whole session
  - For a given ~15ms time window, use spikes in that time window and matching
-   spike rate likehood functions (place fields) to predict stimulus (track pos)
-   by bayesian inference
+   spike rate likelihood functions (place fields) to predict stimulus (track pos)
+   by Bayesian inference
 
 ### Online position reconstruction
 
@@ -241,6 +247,7 @@ Real time position decoding from populations of place cells
       - Online line-finding algorithm
       - Combining estimates from multiple computers (for > 16 tetrode case)
 
+\pagebreak
 
 Retrosplenial slow-wave wake and interaction with hippocampus
 =============================================================
@@ -287,7 +294,38 @@ Retrosplenial slow-wave wake and interaction with hippocampus
 
 ### Anatomical restriction
 
- - Simultaneously recorded somatosensor, motor, posterior parietal cortex have no frame-like activity (noticeable changes in spike rate or LFP) during RSC awake frames
+ - Simultaneously recorded somatosensory, motor, posterior parietal cortex have no frame-like activity (noticeable changes in spike rate or LFP) during RSC awake frames
 
 
+### Slow-wave wake not limited to times of sleepiness
 
+ - Awake SWS-like activity continues in both light and dark phases of light cycle
+ - Many SW's are flanked by fast running and chewing
+
+## Discussion
+
+ - Recap: Awake slow-waves in RSC, coordinated with HPC, fully awake
+ - Recap: Spontaneous SW's decrease w/ training, can always be brought back with large rewards
+ - Online (running) vs. Offline (reflecting or sleeping) may be a better dichotomy for brain
+   states than the wake vs. sleep dichotomy
+ - The hypothesized roles for HPC-CTX interaction during sleep may apply during wake too
+ - Wake SW's have similar properties to sleep SW's
+      - Multi-tetrode coordinated gaps in spiking
+      - Multi-tetrode coordinated K-complexes in LFP
+      - Timing relationship to HPC ripples
+ - Wake SW's differ from sleep
+      - Wake limited to a few frames. Sleep, continuous SW's for minutes
+      - Wake restricted to RSC, sleep is all-cortex
+ - New questions:
+      - What other brain areas have SWWake? Papez circuit?
+      - What's the mechanism for the switch from awake-aroused to SWW cortex?
+      - What causes Slow Waves to traverse all of cortex during sleep, and not wake?
+      - Is there information content in slow-wave frame spikes? Is it bounded by
+        slow wave boundaries in an interesting way?
+
+\pagebreak
+
+Conclusion / Wrap-up
+====================
+
+Brief summary of the role of populations of neurons in hippocampal spatial coding. Much more reliability in the timing of place cell spike sequences than there is in single cell measures like phase precession. We want to know if population sequences are an essential feature of coding, or just a means of denoising, and answering that question will involve manipulations that account for information content in and react to it in real time, as well as studies of how population sequences are interpreted by downstream cortical areas.

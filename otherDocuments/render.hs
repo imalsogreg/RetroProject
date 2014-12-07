@@ -20,7 +20,7 @@ buildFileDir = "build"
 
 cmd f fmt  =
   "pandoc -o " ++ (buildFileDir </> f') ++
-  " --latex-engine=xelatex -H preamble.tex " ++
+  " --latex-engine=xelatex -H preamble.tex --toc " ++
   (rawFileDir </> f)
   where f' = stripExt f ++ extension fmt
 
@@ -29,7 +29,7 @@ fnExtension = reverse . takeWhile (/= '.') . reverse
 ------------------------------------------------------------------------------
 main = do
   args <- getArgs
-  rawFiles <- filter ((=="md").fnExtension) `fmap`
+  rawFiles <- filter ((=="org").fnExtension) `fmap`
               getDirectoryContents rawFileDir
   let fmt = case args of
         []  -> PDF
