@@ -1,4 +1,7 @@
-* Overview2
+
+\newpage
+
+* Overview
 
 Three chapters about populations of neurons in the hippocampus
 coordinating their activity on very fine timescales, and how that
@@ -20,6 +23,8 @@ in hippocampus relate to afferents and efferents - do they also encode
 information in spike sequences? What experiments using real-time
 ensemble decoding would help answer those?
 
+\newpage
+
 * General Background
 
 ** Hippocampal anatomy and physiology relevant to information coding
@@ -35,7 +40,9 @@ ensemble decoding would help answer those?
 *** Sleep stages, cortical EEG correlates (spindles, delta, theta)
 *** Up-down states in vitro, frames of cortical spikes during sleep in vivo
 *** Hippocampal ripples and sleep replay, wake replay
-*** Hippocampal-cortical coordination of ripples/spindles, spatial content in CA1 and visual cortex
+*** Hippocampal-cortical coordination of ripples/spindles
+*** Spatial content in CA1 and visual cortex
+
 
 ** Haskell
 
@@ -43,28 +50,25 @@ ensemble decoding would help answer those?
 *** What are types
 *** Avoiding bugs by lifting program logic into types, compiler catches mistakes early
 *** Avoiding bugs through declarative programming
-*** Concurrency - difficulty of running multiple threads simultaneously, and how Haskell's type system makes it tractable for very concurrent situations
+*** Concurrency - difficulty of running multiple threads simultaneously
+*** Software transactional memory
 
+
+\newpage
 
 * Coordinated information coding in a desynchronized network
 
-** Intro
+** Introduction
 
-***  CA1 place cell excitation is timed by 10Hz oscillation - theta rhythm
-*** theta seems to be a traveling wave, and peak excitation for one point in CA1 happens at a different time from peak excitation from another point in CA1.
-*** Two views of the role of theta oscillation phase in hippocampal CA1 place cell spiking
-
-*** Different phases of underlying theta responsible for different functions, opening different communication pathways.
-***  Smooth dependence of place cell spiking phase on rat location within place field.
-
-*** How to reconcile idea of several small windows of opportunity for communication with CA3 or cortex, with the continuum of place cell encoding?
-*** For any 'phase' claim (CA3 peak spiking vs. CA1 phase, phase precession, etc.) we have to address whether phenomenon happens at different times for different points in CA1
-*** My focus: do place cells in different parts of CA1 start precessing at different times? Or, w.r.t. theta sequences, are theta sequences misaligned for different subsets of CA1 place cells?
-*** Despite time offsets in underlying excitation, place encoding is synchronized to better than 10 ms over the 3 mm of hippocampal tissue recorded
+*** CA1 place cell excitation is timed by 10Hz oscillation - theta rhythm
+*** Tension between hypothesized roles in gating communication channels and encoding
+*** Theta as traveling wave, excitatory time offsets over hippocampal CA1
+*** Theta-dependent phenomena: locally modulated or globally synchronized?
+*** Theta sequences: locally paced or globally synchronized?
 
 ** Results
 
-*** Theta phase spatial properties and timing offsets
+*** Theta phase spatial properties and timing offsets: 20ms delay per mm
 
 -  Theta oscillation recorded from LFP, phase offsets correlated w/
    medial-lateral electrode location
@@ -74,7 +78,7 @@ ensemble decoding would help answer those?
    comparison to findings with LFP
 -  From traveling wave parameters, estimate the timing offset per unit
    anatomical distance in CA1 (20 ms/mm)
-
+ 
 *** Ensemble theta sequences are synchronized
 
 -  Subdivide tetrodes according to anatomical location, three groups 1mm
@@ -96,7 +100,7 @@ ensemble decoding would help answer those?
 -  Measure ~3 ms per anatomical mm (lower than predicted from theta time
    offsets)
 
-*** Place field properties correlate with anatomical location
+*** Place field properties correlate weakly with anatomical location
 
 -  Lateral CA1 units tend to be longer
 -  No significant correlation between anatomical location and field
@@ -112,11 +116,10 @@ ensemble decoding would help answer those?
 
 ** Discussion
 
-***  Recap CA1 theta phase offsets imply a 20ms delay for every 1mm lateral travel
+*** Theta traveling wave matches previous report: ~20ms/mm delay
 *** Despite theta timing differences, information coding is synchronized
-*** Information timing decoupled from bulk firing rate timing
 *** Different parts of CA1 weakly preferentially carry most of the spike rate at different times 
-*** Traveling wave parameters match those from other tetrode array study
+
 *** Model 1: Spatially graded, temporally constant compensating excitation
 
    -  Predictions for place field size match data
@@ -164,11 +167,12 @@ ensemble decoding would help answer those?
 
 \pagebreak
 
+*** Information timing decoupled from bulk firing rate for globally coherent coding
 * Real time position decoding from populations of place cells
 
-** Intro
+** Introduction
 
--  Theta sequences and sequence replay in place cells, phenomenology
+*** Theta sequences and sequence replay in place cells, phenomenology
 
    -  Replay occurs during reward consumption & slow-wave sleep
    -  Theta sequences always present during running
@@ -179,8 +183,7 @@ ensemble decoding would help answer those?
       awake replay to involve salient parts of a maze (start/reward
       location)
 
--  Disrupting all replay events (e.g. through electrical stimulation
-   triggered by ripples detected in real time):
+*** Summary of semi-indiscriminant replay disruption studies
 
    -  Disruption of all ripples in sleep slows learning of the more
       recently experienced track.
@@ -188,9 +191,7 @@ ensemble decoding would help answer those?
       interferes with decisions involving working memory, doesn't
       measurably interfere with simpler decisions
 
--  For more concrete evidence of where replay comes from and what its
-   functional role is, *need to condition our manipulations on the
-   information encoded in replay event*. Examples:
+*** Rationale for information-dependent replay manipulation
 
    -  Is replay content in any way under rat's control?
 
@@ -205,7 +206,7 @@ ensemble decoding would help answer those?
       -  Can rat learn to use their own replay (or its correlates) to
          guide their behavior?
 
--  Decoding replay information in real time is difficult
+*** Online replay decoding challenges
 
    -  Tracking rat, isolating units, computing place fields, and
       stimulus decoding all happen offline; need to happen online for
@@ -220,8 +221,9 @@ ensemble decoding would help answer those?
    -  /Concurrency:/ Many sources of data (32 tetrodes, tracker, user
       input) all updating a single model
 
--  Chose Haskell for implementing, lots of advantages mostly due to type
-   system
+*** Minimizing human intervention: no time for manual spike sorting
+
+*** Choosing the right language for implementation: Haskell
 
    -  Haskell types model domain very tightly, compiler checks program
       logic
@@ -230,7 +232,7 @@ ensemble decoding would help answer those?
    -  Types tell runtime system which operations are pure
       (not-interacting), very nice property for concurrency
 
--  Minimizing human intervention: no time for manual spike sorting
+
 
 ** Materials and Methods
 
@@ -275,7 +277,7 @@ ensemble decoding would help answer those?
 
 ** Results
 
--  Decoding quality
+*** Decoding quality: theta sequences and replay
 
    -  Offline position reconstruction compared to online with clusters,
       online clusterless
@@ -283,25 +285,26 @@ ensemble decoding would help answer those?
    -  Appearance of theta sequences
    -  Appearance of replay
 
--  Decoding speed w.r.t. real time requirements
--  Incidence of bugs, deadlocks; experience with refactoring & adding
-   features
+*** Decoding speed and realtime requeriments
+*** Bugs, deadlocks, crashes and refactorings
 
 ** Discussion
 
--  Recap: designed tool for decoding streaming place cell data
--  Remaining components needed to run experiments:
+*** Recap: designed tool for decoding streaming place cell data
+*** Remaining components needed to run experiments
 
    -  Networked rat tracker and track linearizer
    -  Online line-finding algorithm
    -  Combining estimates from multiple computers (for > 16 tetrode
       case)
+*** Experimental goals with sequence replay
+*** Extension to non-hippocampal contexts
 
 \pagebreak
 
 * Retrosplenial slow-wave wake and interaction with hippocampus
 
-** Intro
+** Introduction
 
 *** Cortico-hippocampal interactions during sleep thought to be
 important for memory
