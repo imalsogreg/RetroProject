@@ -38,7 +38,7 @@ Basal dendritic arbors extending upward from the cell bodies toward the skull (t
 
 *** Hippocampal laminar anatomy: CA1, CA3, entorhinal cortex; their connectivity
 
-The first sheet fold described above divides the /proximal-distal axis/ into two parts, CA3 and CA1. 
+The first sheet fold described above divides the /proximal-distal axis/ into two parts, CA3 and CA1 (CA comes from /cornu ammonis/, "ram's horn", due to the 
 
 
 *** Hippocampal place cells
