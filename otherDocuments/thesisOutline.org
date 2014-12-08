@@ -29,7 +29,7 @@ using real-time ensemble decoding would help answer those questions?
 
 ** Hippocampal anatomy and physiology relevant to information coding
 
-A brief reveiw of cellular organization in the hippocampus is given to help the reader stay oriented during discussions of electrode placement and traveling wave propagation. We also describe the common hippocampal field potential and basic spiking patterns of excitatory neurons in freely-moving rats, which are central to the rest of the thesis.
+A brief reveiw of cellular organization in the hippocampus is given to help the reader stay oriented during discussions of electrode placement and traveling wave propagation. We also describe the freely moving rat's common hippocampal local field potential and single-unit spiking properties, which are central to the rest of the thesis.
 
 *** Hippocampal anatomy: cell layer and dendritic layers
 The rat hippocampus is a curved, complex, three-dimensional structure most easily thought of as a sheet, about 10 by 7 mm face-on and 1mm thick, folded into a 'C' shape first along its short axis, and again into a larger 'C' along its long axis. The face of the sheet is fully tiled by primarily excitatory pyramidal neurons. Their cell bodies of these neurons are collected into a thin (about 0.1mm) band whithin the sheet's 1mm thickness. 
@@ -39,8 +39,12 @@ Basal dendritic arbors extending upward from the cell bodies toward the skull (t
 *** Hippocampal laminar anatomy: CA1, CA3, entorhinal cortex; their connectivity
 The first folding of the sheet described above divides the /proximal-distal axis/ into two parts, named CA3 and CA1 by Lorente de Nó [@lorente1934studies], (CA stands for "cornu ammonis", or ram's horn, which is reminiscent of the shape of the hippocampus in cross section).
 
+CA3 derdrites receive most of their synaptic input from the /dentate gyrus/, entorhinal cortex, and the axons of other CA3 neurons. [TODO]. CA1 receives most of its input from CA3 and entorhinal cortex, but does not project to itself [TODO]. These patterns of inputs are more restricted than in many other parts of the cortex and have lead to computational models that take advantage of a layer with recurrent connections (CA3) connecting to one without (CA1), but none have wide acceptance. We will see later that our understanding of information processing within a single layer is incomplete, and this makes it difficult to speculate on the nature information transmission between areas.
+
 
 *** Hippocampal place cells
+Pyramidal cells increase their firing rate dramatically when rats enter a particular part of a maze, as originally described by O'Keefe [TODO]. The region of space eliciting spikes is that cells's /place field/. Typical place fields are between 20 and 80 centimeters long [TODO], and different neurons have different place fields; recording about 30 neurons is enough to find an 3 meter track without any gaps unrepresented by at least one place field. The behavior of place fields in response to distortions of the environment is a matter of human curiosity responsible for the demise of fandastical numbers of laboratory rats. 
+
 *** Theta oscillations and multiunit spike phase
 *** Theta phase precession & theta sequences
 
