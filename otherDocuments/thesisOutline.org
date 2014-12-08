@@ -4,7 +4,7 @@
 * Overview
 
 Three chapters about populations of neurons in the hippocampus
-coordinating their activity on very fine timescales, and how that
+coordinating their activity on fine timescales, and how that
 coordination relates to the larger context of hippocampal inputs,
 outputs, and experimental measurements. In the first chapter, explore
 the lack of synchrony in timing of the brain rhythms underlying
@@ -13,15 +13,15 @@ differences on the ability of distant place cells to coordinate reliably
 during population-wide coding events. In the second chapter, describe
 the development of a tool for detecting place cell population coding
 events and using the information they contain to manipulate brain
-activity in an experimental way. In the third chapter, describe the
+activity or behavior experimentally. In the third chapter, describe the
 unexpected transition of retrosplenial cortex into a slow-wave-sleep
 like state during reward consumption, and the timing relationship
 between hippocampal activity and retrosplenial cortex during these
 events. Conclude with a discussion about coordinated encoding that ties
 the three chapters together - how does the sequential nature of coding
-in hippocampus relate to afferents and efferents - do they also encode
-information in spike sequences? What experiments using real-time
-ensemble decoding would help answer those?
+in hippocampus relate to coding in the afferents and efferents - 
+do they also encode information in spike sequences? What experiments 
+using real-time ensemble decoding would help answer those questions?
 
 \newpage
 
@@ -30,6 +30,9 @@ ensemble decoding would help answer those?
 ** Hippocampal anatomy and physiology relevant to information coding
 
 *** Hippocampal anatomy: cell layer and dendritic layer
+
+The rat hippocampus is a curved, three-dimensional structure with anatomical features that do not align with the stereotactic coordinate frame. It is easier to describe after flattening, into a sheet with thickness. This sheet is the height of a single hippocampal pyramidal neuron, about 1mm, as hippocampal
+
 *** Hippocampal laminar anatomy: CA1, CA3, entorhinal cortex; their connectivity
 *** Hippocampal place cells
 *** Theta oscillations and multiunit spike phase
@@ -306,8 +309,7 @@ ensemble decoding would help answer those?
 
 ** Introduction
 
-*** Cortico-hippocampal interactions during sleep thought to be
-important for memory
+*** Cortico-hippocampal sleep interactions, possible role in memory
 
 -  Two phase consolidation model: encode at wake, burn-in during sleep
 -  HPC ripples correlated w/ sleep CTX sleep spindles - communication
@@ -315,11 +317,9 @@ important for memory
 -  Regular interval between hippocampal frame onset and cortical frame
    onset
 
-** Materials & Methods
-
--  10 tetrodes in HPC, 10 tetrodes split between retrosplenial,
-   somatosensory, motor, posterior parietal cortex
--  Trained rats to run circular track for reward every 270 degrees CCW
+*** Slow wave oscillations cleanly destinguish between sleeping and awake cortex
+*** Ripples cleanly destinguish between 'online' and 'offline' hippocampus
+*** Retrosplenial cortex unexpectedly follows HPC into SWS-like state during reward
 
 ** Results
 
@@ -331,8 +331,7 @@ important for memory
 -  Distribution of activity over all cortical electrodes
 -  Average up-state length, down-state length
 
-*** Retrosplenial cortex enters SWS-like state during novelty / large
-rewards
+*** Retrosplenial cortex enters SWS-like state during novelty / large rewards
 
 -  Examples
 -  Average up-state length, down-state length
@@ -345,13 +344,13 @@ rewards
 -  Cross-correlation of ripples & RSC frames similar between wake and
    SWS
 
-*** RSC awake slow waves, evolution over training
+*** RSC awake slow waves require large reward in well-trained rats
 
 -  Occur at most stopping points early in training
 -  After ~1 week, spontaneous frames & small-reward frames stop, but
    large-reward frames persist (for at least a month)
 
-*** Anatomical restriction
+*** Anatomical restriction - nonparticipation in other cortical areas
 
 -  Simultaneously recorded somatosensory, motor, posterior parietal
    cortex have no frame-like activity (noticeable changes in spike rate
@@ -365,23 +364,10 @@ rewards
 
 ** Discussion
 
--  Recap: Awake slow-waves in RSC, coordinated with HPC, fully awake
--  Recap: Spontaneous SW's decrease w/ training, can always be brought
-   back with large rewards
--  Online (running) vs. Offline (reflecting or sleeping) may be a better
-   dichotomy for brain states than the wake vs. sleep dichotomy
--  The hypothesized roles for HPC-CTX interaction during sleep may apply
-   during wake too
--  Wake SW's have similar properties to sleep SW's
-
-   -  Multi-tetrode coordinated gaps in spiking
-   -  Multi-tetrode coordinated K-complexes in LFP
-   -  Timing relationship to HPC ripples
-
--  Wake SW's differ from sleep
-
-   -  Wake limited to a few frames. Sleep, continuous SW's for minutes
-   -  Wake restricted to RSC, sleep is all-cortex
+*** Recap: Awake slow-waves in RSC, coordinated with HPC, fully awake
+*** In HPC-Cortex interaction, Online/offline vs. awake/asleep
+*** Functional roles for HPC-Cortex coordination may apply to wake
+*** New questions raised by SWW: mechanism and function
 
 -  New questions:
 
@@ -394,6 +380,14 @@ rewards
       bounded by slow wave boundaries in an interesting way?
 
 \pagebreak
+
+** Materials & Methods
+
+-  10 tetrodes in HPC, 10 tetrodes split between retrosplenial,
+   somatosensory, motor, posterior parietal cortex
+-  Trained rats to run circular track for reward every 270 degrees CCW
+
+\newpage
 
 * Conclusion / Wrap-up
 
