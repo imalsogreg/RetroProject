@@ -37,8 +37,7 @@ The rat hippocampus is a curved, complex, three-dimensional structure most easil
 Basal dendritic arbors extending upward from the cell bodies toward the skull (the hippocampus is inverted relative to cortex) for 0.25mm form the /stratum oriens/. Apical dendrites extend downward for 0.5mm forming the /stratum radiatum/, and then branch widely to form the /stratum laconosum moleculare/.
 
 *** Hippocampal laminar anatomy: CA1, CA3, entorhinal cortex; their connectivity
-
-The first sheet fold described above divides the /proximal-distal axis/ into two parts, CA3 and CA1 (CA comes from /cornu ammonis/, "ram's horn", due to the 
+The first folding of the sheet described above divides the /proximal-distal axis/ into two parts, named CA3 and CA1 by Lorente de Nó [@lorente1934studies], (CA stands for "cornu ammonis", or ram's horn, which is reminiscent of the shape of the hippocampus in cross section).
 
 
 *** Hippocampal place cells
@@ -406,3 +405,7 @@ coding, or just a means of denoising, and answering that question will
 involve manipulations that account for information content in and react
 to it in real time, as well as studies of how population sequences are
 interpreted by downstream cortical areas.
+
+\newpage
+
+* References
