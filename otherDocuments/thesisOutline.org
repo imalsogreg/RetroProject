@@ -29,11 +29,18 @@ using real-time ensemble decoding would help answer those questions?
 
 ** Hippocampal anatomy and physiology relevant to information coding
 
-*** Hippocampal anatomy: cell layer and dendritic layer
+A brief reveiw of cellular organization in the hippocampus is given to help the reader stay oriented during discussions of electrode placement and traveling wave propagation. We also describe the common hippocampal field potential and basic spiking patterns of excitatory neurons in freely-moving rats, which are central to the rest of the thesis.
 
-The rat hippocampus is a curved, three-dimensional structure with anatomical features that do not align with the stereotactic coordinate frame. It is easier to describe after flattening, into a sheet with thickness. This sheet is the height of a single hippocampal pyramidal neuron, about 1mm, as hippocampal
+*** Hippocampal anatomy: cell layer and dendritic layers
+The rat hippocampus is a curved, complex, three-dimensional structure most easily thought of as a sheet, about 10 by 7 mm face-on and 1mm thick, folded into a 'C' shape first along its short axis, and again into a larger 'C' along its long axis. The face of the sheet is fully tiled by primarily excitatory pyramidal neurons. Their cell bodies of these neurons are collected into a thin (about 0.1mm) band whithin the sheet's 1mm thickness. 
+
+Basal dendritic arbors extending upward from the cell bodies toward the skull (the hippocampus is inverted relative to cortex) for 0.25mm form the /stratum oriens/. Apical dendrites extend downward for 0.5mm forming the /stratum radiatum/, and then branch widely to form the /stratum laconosum moleculare/.
 
 *** Hippocampal laminar anatomy: CA1, CA3, entorhinal cortex; their connectivity
+
+The first sheet fold described above divides the /proximal-distal axis/ into two parts, CA3 and CA1. 
+
+
 *** Hippocampal place cells
 *** Theta oscillations and multiunit spike phase
 *** Theta phase precession & theta sequences
