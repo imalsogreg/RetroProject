@@ -47,10 +47,10 @@ Pyramidal cells increase their firing rate dramatically when rats enter a partic
 
 The behavior of place fields in response to rotations and distortions of the maze is a matter of human curiosity responsible for the demise of fandastical numbers of laboratory rats. This large body of work can be summarized in terms of map displacement, /rate remapping/ and /global remapping/. /Rate remapping/ refers to a change in place field peak firing rate and /global remapping/ a displacement in place field location not necessarily in agreement with the displacements experienced at the same time by other place cells. The rules governing which sort of remapping will result from which types of maze manipulation are baroque, to the point that the neurons themselves disagree on the rules in particular instances and may fall at the same time in different directions [TODO]. But in genaral, minor changes to the appearance of the maze tend to elicit rate remapping [TODO octagon] while radical ones scramble the locations of place fields and produce global remapping [TODO octagon and teleport].
 
-As a simular rule of thumb applies to most maze and cue displacement results: place fields tend to follow what we would expect of a rat's top-level model of where he is. Minor enlargements of the maze produce proportional stretching and displacement of the place fields [TODO]. A rotation of enough maze cues such that North is falsely recognized as the old West will produce the appropriate rotation of place fields with respect to the polse of the earth (and a lack of displacement with respect to the cues)[TODO].
+A simular rule of thumb applies to most maze and cue displacement results: place fields tend to follow what we would expect of a rat's top-level model of where he is. Minor enlargements of the maze produce proportional stretching and displacement of the place fields. A rotation of enough maze cues such that North is falsely recognized as the old West will produce the appropriate rotation of place fields with respect to the polse of the earth (and a lack of displacement with respect to the cues)[TODO].
 
 *** Theta oscillations and multiunit spike phase
-
+Electrodes in the hippocampus pick up a 7-10 Hz, large-amplitude rhythm, in addition to somatic spikes. This is called the /theta rhythm/ [TODO vanderwolf?] 
 
 *** Theta phase precession & theta sequences
 
