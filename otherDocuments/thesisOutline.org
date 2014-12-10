@@ -52,6 +52,7 @@ The behavior of place fields in response to rotations and distortions of the maz
 
 A simular rule of thumb applies to most maze and cue displacement results: place fields tend to follow what we would expect of a rat's top-level model of where he is. Minor enlargements of the maze produce proportional stretching and displacement of the place fields. A rotation of enough maze cues such that North is falsely recognized as the old West will produce the appropriate rotation of place fields with respect to the polse of the earth (and a lack of displacement with respect to the cues)[TODO].
 
+
 *** Theta oscillations and multiunit spike phase
 Electrodes in the hippocampus pick up a 7-10 Hz, large-amplitude rhythm, in addition to somatic spikes. This is called the /theta rhythm/ [TODO vanderwolf?] This rhythm is present when animals are running or in a stationary, attentive state, and during REM sleep [TODO]. Theta oscillations can be found throughout CA1 and CA1, as well as in the dentate gyrus and entorhinal contex, and a host of other cortical and subcortical areas. Collectively the areas expressing theta are known as the /Papez circuit/ [TODO]. Incidentally a lesion to any component of the Papez circuit produces in humans strong anterograde amnesia (as reported in the hippocampal patient H.M. [TODO Squire], thought in fact HM's entorhinal cortex was far more damaged than his hippocampus [TODO Italian slice guy]).
 
@@ -79,6 +80,12 @@ Buzsaki [TODO fix name accents] in particular has done a lot of mapping of the e
 ** Haskell
 
 *** What is functional programming
+Functional programming is both a style of programming and a set of language features designed to make functional programs natural to write and performant. That style revolves around two novel notions of what a function is. First, functions in a functional programming language are analogous to functions in math - relationships between inputs in a domain and return values in a range; they are guaranteed to return the same result from the same inputs. Second, functions are themselves 'normal values' - they can be passed as arguments to other functions, or returned from other functions as return values.
+
+Languages like c allow a programmer to use functions in this way but do not make it easy. C is modeled closely on computer hardware, a context that emphasizes allocating memory and manipulating it. These operations are not 'functional' in the mathematical sense, because they involve 'doing' things - fetching memory blocks, performing some activity that is dependent on what was found in the memory block, and modifying the memory block. Functions in math are relationships between values in a domain and a range; these relationships are not dependent on the state of things like memory blocks, and the evaluation of a function's result in math does not impact the world in a way that changes other mathematical equations.
+
+
+
 *** What are types
 *** Avoiding bugs by lifting program logic into types, compiler catches mistakes early
 *** Avoiding bugs through declarative programming
