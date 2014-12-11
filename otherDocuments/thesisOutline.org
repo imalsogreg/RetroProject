@@ -111,8 +111,11 @@ The $map$ function in Haskell looks very similar, except that there are no paren
 
 And more text
 
-
 *** What are types
+Types are sets like $Integer$ or $String$ whose elements are values, like $\{0, 1, -1, 2, -2, ...\}$ and $\{'', ' Hello\ neuron\backslash n', ...\}$ respectively [TODO]. Their role is to annotate data in a program, which would otherwise exist only as $0$'s and $1$'s whose identity would need to be tracked by the programmer. These annotations ensure that functions and data are paired in the correct way - for example preventing the programmer from attemping to take the square root of a string.
+
+That basic motivation for types has been elaborated to an enormous degree. The nature of types is the main feature distinguishing programming languages. Languages are typically classified in terms of their type systems; they divide languages into classes like dynamically typed languages (e.g. python, javascript, lisp) and statically typed languages (e.g. c++, Java, Haskell). An orthoginal classification still revolving around types is object-oriented (e.g. python, Java) vs. Hindley-Milner (e.g. Haskell and a large number of research languages and several new 
+
 *** Avoiding bugs by lifting program logic into types, compiler catches mistakes early
 *** Avoiding bugs through declarative programming
 *** Concurrency - difficulty of running multiple threads simultaneously
