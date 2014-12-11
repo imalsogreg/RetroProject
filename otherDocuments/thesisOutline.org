@@ -84,7 +84,7 @@ Functional programming is both a style of programming and a set of language feat
 
 Languages like c allow a programmer to use functions in this way but do not make it easy. C is modeled closely on computer hardware, a context that emphasizes allocating memory and manipulating it. These operations are not 'functional' in the mathematical sense, because they involve 'doing' things - fetching memory blocks, performing some activity that is dependent on what was found in the memory block, and modifying the memory block. Functions in math are relationships between values in a domain and a range; these relationships are not dependent on the state of things like memory blocks, and the evaluation of a function's result in math does not impact the world in a way that changes other mathematical equations.
 
-More natural support for functional programming is available in many higher-level languages, for instance python has the builtin functions map, which takes a function and a list and returns a list with the function applied to each element:
+More natural support for functional programming is available in many higher-level languages, for instance python has the builtin functions $map$, which takes a function and a list and returns a list with the function applied to each element. We can write a function that modifies a single number and apply that function to a list of numbers using $map$.
 
 #+NAME: pythonMap
 #+BEGIN_SRC python :results output
@@ -96,23 +96,18 @@ More natural support for functional programming is available in many higher-leve
 
   print map(topLimit,[1,15,20,3,-2,5])
 #+END_SRC
-
 #+RESULTS: pythonMap
-: [1, 10, 10, 3, -2, 3]
+: [1, 10, 10, 3, -2, 5]
 
-Some more text here.
+The $map$ function in Haskell looks very similar, except that there are no parentheses used in applying a function to its arguments. The first line defines the function $topLimit$ as a mapping from number to number, and the second line uses $map$ to apply $topLimit$ to a list of numbers.
 
 #+NAME: haskellMap
 #+BEGIN_SRC haskell :results function
-  let topLimit2 x = if x > 10 then 10 else x
-  map topLimit2 [1,15,20,3,-2,2]
+  let topLimit x = if (x > 10) then 10 else x
+  print $ map topLimit [1,15,20,3,-2,2]
 #+END_SRC
-
 #+RESULTS: haskellMap
 | 1 | 10 | 10 | 3 | -2 | 2 |
-
-
-
 
 And more text
 
