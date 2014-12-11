@@ -98,23 +98,24 @@ More natural support for functional programming is available in many higher-leve
 #+END_SRC
 
 #+RESULTS: pythonMap
-: [1, 10, 10, 3, -2, 5]
+: [1, 10, 10, 3, -2, 3]
 
 Some more text here.
 
 #+NAME: haskellMap
-#+BEGIN_SRC haskell results: html
-  let topLimit2 x = case compare x 10 of {LT -> x; _ -> 10}
-
-  putStrLn . show $ map topLimit2 [1,15,20,3,-2,5]
+#+BEGIN_SRC haskell :results function
+  let topLimit2 x = if x > 10 then 10 else x
+  map topLimit2 [1,15,20,3,-2,2]
 #+END_SRC
 
 #+RESULTS: haskellMap
-: Prelude> [1,10,10,3,-2,5]
+| 1 | 10 | 10 | 3 | -2 | 2 |
 
 
 
-And more text.
+
+And more text
+
 
 *** What are types
 *** Avoiding bugs by lifting program logic into types, compiler catches mistakes early
