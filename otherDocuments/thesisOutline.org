@@ -114,7 +114,14 @@ And more text
 *** What are types
 Types are sets like $Integer$ or $String$ whose elements are values, like $\{0, 1, -1, 2, -2, ...\}$ and $\{'', ' Hello\ neuron\backslash n', ...\}$ respectively [TODO]. Their role is to annotate data in a program, which would otherwise exist only as $0$'s and $1$'s whose identity would need to be tracked by the programmer. These annotations ensure that functions and data are paired in the correct way - for example preventing the programmer from attemping to take the square root of a string.
 
-That basic motivation for types has been elaborated to an enormous degree. The nature of types is the main feature distinguishing programming languages. Languages are typically classified in terms of their type systems; they divide languages into classes like dynamically typed languages (e.g. python, javascript, lisp) and statically typed languages (e.g. c++, Java, Haskell). An orthoginal classification still revolving around types is object-oriented (e.g. python, Java) vs. Hindley-Milner (e.g. Haskell and a large number of research languages and several new 
+That basic motivation for types has been elaborated to an enormous degree. The nature of types is the main feature distinguishing programming languages [TODO]. Type systems divide languages into classes like dynamically typed languages (e.g. python, javascript, lisp), in which values can adopt a new type if the context demands it; and statically typed languages (e.g. c++, Java, Haskell), in which they can't. The term 'object oriented programming' refers to one style of type system, in which smaller types can be collected into a larger type called a 'class', and classes can be derived from a parent class [TODO]. The typical example is a $Car$ class that has associated data, such as a $String$ to identify its owner, a pair of $Number$'s to indicate its location, and a $Number$ to indicate its speed. Another class $Truck$ could be derived from $Car$, and the $Truck$ type would inherit the $Car$'s associated data. We can add additional associated data, like a $Number$ type to indicate the maximum payload and a $Number$ to store the tow rating of its trailer hitch. Individual $Car$'s would be constructed in the program with concrete values in all the associated data fields. The goal in an object-oriented design is to build a heirarchy of sets (types, classes) that reflects the heirarchy of labels of objects. Internal properties of the objects being modeled are 'inside' the types, and running a program involves modifying these interval values. Consequently, the style is very noun-oriented [TODO - Yegee post].
+
+An alternative foundation is to model types around logic, capturing ideas like mutual exclusion, associated data, and value-to-value relationships in the types. An example is in order:
+
+#+BEGIN_SRC haskell
+  data Maybe a = HasAn a
+               | Nothing
+#+END_SRC
 
 *** Avoiding bugs by lifting program logic into types, compiler catches mistakes early
 *** Avoiding bugs through declarative programming
