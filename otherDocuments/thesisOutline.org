@@ -86,6 +86,8 @@ Languages like c allow a programmer to use functions in this way but do not make
 
 More natural support for functional programming is available in many higher-level languages, for instance python has the builtin functions $map$, which takes a function and a list and returns a list with the function applied to each element. We can write a function that modifies a single number and apply that function to a list of numbers using $map$.
 
+\singlespacing
+
 #+NAME: pythonMap
 #+BEGIN_SRC python :results output
   def topLimit(x):
@@ -99,7 +101,11 @@ More natural support for functional programming is available in many higher-leve
 #+RESULTS: pythonMap
 : [1, 10, 10, 3, -2, 5]
 
+\doublespacing
+
 The $map$ function in Haskell looks very similar, except that there are no parentheses used in applying a function to its arguments. The first line defines the function $topLimit$ as a mapping from number to number, and the second line uses $map$ to apply $topLimit$ to a list of numbers.
+
+\singlespacing
 
 #+NAME: haskellMap
 #+BEGIN_SRC haskell :results function
@@ -109,12 +115,16 @@ The $map$ function in Haskell looks very similar, except that there are no paren
 #+RESULTS: haskellMap
 | 1 | 10 | 10 | 3 | -2 | 2 |
 
+\doublespacing
+
 *** What are types
 Types are sets like $Integer$ or $String$ whose elements are values, like $\{0, 1, -1, 2, -2, ...\}$ and $\{'Greg', 'Hello\ neuron\backslash n', ...\}$ respectively [TODO]. Their role is to annotate data in a program, which would otherwise exist only as $0$ s and $1$ s whose identity would need to be tracked by the programmer. These annotations ensure that functions and data are paired in the correct way - for example preventing the programmer from attemping to take the square root of a string.
 
 That basic motivation for types has been taken much further in the design of different programming languages. The nature of types is the main feature distinguishing programming languages [TODO]. Type systems divide languages into classes like dynamically typed languages (e.g. python, javascript, lisp), in which values can adopt a new type if the context demands it; and statically typed languages (e.g. c++, Java, Haskell), in which they can't. The term 'object oriented programming' refers to one style of type system, in which smaller types can be collected into a larger type called a 'class', and classes can be derived from a parent class [TODO]. The typical example is a $Car$ class that has associated data, such as a $String$ to identify its owner, a pair of $Number$ s to indicate its location, and a $Number$ to indicate its speed. Another class $Truck$ could be derived from $Car$, and the $Truck$ type would inherit the $Car$ s associated data. We can add additional associated data, like a $Number$ type to indicate the maximum payload and a $Number$ to store the tow rating of its trailer hitch. Individual $Car$ s would be constructed in the program with concrete values in all the associated data fields. The goal in an object-oriented design is to build a heirarchy of sets (types, classes) that reflects the heirarchy of labels of objects. Internal properties of the objects being modeled are 'inside' the types, and running a program involves modifying these interval values. Consequently, the style is very noun-oriented [TODO - Yegee post].
 
 An alternative foundation is to model types around logic, capturing ideas like mutual exclusion, associated data, and value-to-value relationships in the types. We need an example here:
+
+\singlespacing
 
 #+BEGIN_SRC haskell
   data Coord = C Double Double  -- (1)
@@ -148,13 +158,20 @@ regionC = Intersect regionA regionB
 
  - $(4)$: We define three different regions. The first is a rectangular region defined for tetrode channels 1 and 2. The second is a polygonal region defined by our three $Coord$ s on channels 2 and 3. The third is the intersection of the first two regions. $regionC$ is a typical sort of region used in manual cluster-cutting: the intersection of regions drawn on two projections. A region that uses a third projection to further restrict $regionC$ could be constructed simply as $Intersect\ regionC\ anotherRegion$.
 
+\doublespacing
+
 To declare five mutually-exclusive sorts of regions in Python, we have two options, neithof of which are as intuitive as the Haskell type above. 
 
-We could (A) write one class with an associated string that we set to 'box', 'polygon', etc, as well as the sum of all the associated data for all of the possible sorts of regions. This solution allows a programmer using a $SpikeRegion$ type to accidentally use value that does not belong with that sort of region. If we try to refer to one of the $Intersection$ 's sub-regions when our region is a $Box$, our program will crash at some time in execution. An more serious issue would arise if data were used in a way that disagrees with the meaning of the type but does not cause a crash. It would be a very innocent mistake for a programmer to accidentally make use of the $bChans$ data when working with a $Union$ region, believing that they are taking the union of two projections instead of a union within the full 4 channels of a tetrode. This is a silent bug; the program will run but produce incorrect results. In the best case, a user will notice this and the bug will be fixed; in the worst case the error will propagate into the experimental conclusions.
+First, we could write one class with an associated string that we set to 'box', 'polygon', etc, as well as the sum of all the associated data for all of the possible sorts of regions. This solution allows a programmer using a $SpikeRegion$ type to accidentally use value that does not belong with that sort of region. If we try to refer to one of the $Intersection$ 's sub-regions when our region is a $Box$, our program will crash at some time in execution. An more serious issue would arise if data were used in a way that disagrees with the meaning of the type but does not cause a crash. It would be a very innocent mistake for a programmer to accidentally make use of the $bChans$ data when working with a $Union$ region, believing that they are taking the union of two projections instead of a union within the full 4 channels of a tetrode. This is a silent bug; the program will run but produce incorrect results. In the best case, a user will notice this and the bug will be fixed; in the worst case the error will propagate into the experimental conclusions.
 
-Alternatively, we could (B) use object-oriented style in Python to enfoce the invariant that $Box$ and $Union$ and the others are associated with different sorts of data. The approach would be to define a $GenericRegion$ class with no assaciated data, and one asso
+Alternatively, we could use object-oriented style in Python to enfoce the invariant that $Box$ and $Union$ and the others are associated with different sorts of data. The approach would be to define a $GenericRegion$ class with no assaciated data, and one associated 'stub' function for checking whether the generic region contains a spike (the stub will not be implemented - it's a placeholder). Then five new classes can be written for the five types of region. The derived $Box$ class will have fields for the corners of the box and for the channels of the electrode. The derived $Intersection$ class will have two references to other $SpikeRegion$ s. This solution enforces our invariant nicely, but it forces the functions that use a subtype of $SpikeRegion$ to resolve the actual type; and it cost us a lot of boiler-plate code defining all of our subtypes. Aditionally, we have no way to keep track of whether additional classes will be derived in distant files that are part of the same program.
+
+The mechanism of defining data types in Haskell allows (in fact, forces) the programmer to enumerate the variants of a type in one place, circumventing the issues discussed in the context of Python's types. Additionally, because the definition of our data is collected into one place, the compiler can know enough about our type check its use during compilation, before the program is ever run. It would be impossible for the programmer to accidentally refer to the sub-region of a $Polygon$ and produce an error in running code, for example, because the compiler would recognize this as a contradiction in terms ($Polygon$ has no associated sub-region data) and refuse to produce an program from the faulty code. The compiler can also ensure than any function operating on $SpikeRegions$ has handled every possible case of $SpikeRegion$. This checking is a tremendous source of help to a programmer experimenting with changes in the data model. Without this checking, bringing the rest of a program into alignment with a change to a data definition is often done by running the program to the point of failure, finding and fixing one bug at a time.
 
 Functions in Haskell are values and therefore have types. Their types indicate their domain and range. $length$ is a function from $[a]$ (list of any type) to $Integer$. We will also define a tetrode spike and a function for judging whether it is in a region.
+
+\singlespacing
+
 #+BEGIN_SRC haskell
 length :: [a] -> Int
 length =  undefined   -- we'll implement length soon
@@ -165,9 +182,50 @@ regionContainsSpike :: SpikeRegion -> TetrodeSpike -> Bool
 regionContainsSpike =  undefined
 #+END_SRC
 
-The type of $regionContainsSpike$ looks strange to normal programmers because there is not a clear distinction between arguments and return values. However there is something interesting happening. The $\rightarrow$ in a type is right associative, so $a \rightarrow b \rightarrow c$ is synonymous with $a \rightarrow (b \rightarrow c)$. $regionContainsSpike$ is in fact a function that takes a $SpikeRegion$ and returns a $(TetrodeSpike \rightarrow Bool)$, a function. We can apply this new function to a $TetrodeSpike$ to get a $Bool$. 
+\doublespacing
+
+The type of $regionContainsSpike$ looks strange to normal programmers because there is not a clear distinction between arguments and return values. However there is something interesting happening. The $\rightarrow$ in a type is right associative, so $a \rightarrow b \rightarrow c$ is synonymous with $a \rightarrow (b \rightarrow c)$. $regionContainsSpike$ is in fact a function that takes a $SpikeRegion$ and returns a $(TetrodeSpike \rightarrow Bool)$, a function. We can apply this new function to a $TetrodeSpike$ to get a $Bool$. Surprisingly, all functions in Haskell are 'actually' functions of one argument. Multiple-function arguments can always be simulated in terms of single-argument functions that return new functions taking one argument fewer.
 
 *** Declarative programming
+
+Another side of the story of how Haskell facilitates writing code with fewer bugs is /immutability/ - the notion that variables are fixed at a single value throughout a program. The rationalle is that the behavior of a program is much harder to reason about when variables are allowed to change value. All modern languages have facilities for limiting the access of particular variables to specific other regions in the source code, to make this reasoning easier. Haskell goes to the extreme by forbiding any variable from changing.
+
+Removing the ability to change a variable is obviously an enormous restriction on the flexability and usefullness of a language, and it's not immediately clear how many types of programs we could recover in this regime. In fact, this aspect of Haskell was very unflattering during its early history [TODO - lazy with class]. But a great deal of research and practice have resulted in new programming tools, styles and idioms that bridge the gap. After importing something called a /monad/ from abstract mathematics, the notion of change could be integrated into the type system in a highly principled way [TODO Wadler], and now Haskell is an exceptionally good language for coordinating programs with moving parts and uncertainty from the data in the world.
+
+But before resorting to monads, it is usefull to see how many values can be computed without making use of changing variables, using pure mathematical equations instead.
+
+\singlespacing
+
+#+BEGIN_SRC haskell
+length :: [a]    -> Int
+length    []     =  0
+length    (x:xs) =  1 + length xs
+#+END_SRC
+
+\doublespacing
+
+In this listing, the function $length$ is defined by parts. The length of the empty list ( [] ) is $0$. The length of any list that can be broken into its first element and a remainder is $1$ more than the length of the remainder. Evaluating the right-hand-side in the non-empty-list case involves a recursive call to length on $xs$. The term $(x:xs)$ on the left-hand side is a way of naming different parts of the input value passed to the function that makes this kind of recursive definition (the definition of functions in general) convenient. These names only apply within the body of the function, they aren't permanently stored or passed into subfunctions. So when we recursively descend into length, the name $xs$ is a different variable in each context, respectively being bound to a smaller sublist. This is easier to see with the names removed completely:
+
+\singlespacing
+
+#+BEGIN_SRC haskell
+  length "Rat"           -- matches (R:"at")
+= 1 + length "at"        -- matches (a:"t")
+= 1 + 1 + length "t"     -- matches (t: [])
+= 1 + 1 + 1 + length []  -- matches []
+= 1 + 1 + 1 + 0
+= 3
+#+END_SRC
+
+\doublespacing
+
+Using recursion, we described the length of the list, rather than computing it with iteration, as would be normal in Python for example:
+
+#+BEGIN_SRC python
+def listLength(x):
+    i = 0
+    l = x.copy()
+    while
 *** Avoiding bugs by lifting program logic into types, compiler catches mistakes early
 
 *** Concurrency - difficulty of running multiple threads simultaneously
