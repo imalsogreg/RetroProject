@@ -110,33 +110,62 @@ The $map$ function in Haskell looks very similar, except that there are no paren
 | 1 | 10 | 10 | 3 | -2 | 2 |
 
 *** What are types
-Types are sets like $Integer$ or $String$ whose elements are values, like $\{0, 1, -1, 2, -2, ...\}$ and $\{'', ' Hello\ neuron\backslash n', ...\}$ respectively [TODO]. Their role is to annotate data in a program, which would otherwise exist only as $0$'s and $1$'s whose identity would need to be tracked by the programmer. These annotations ensure that functions and data are paired in the correct way - for example preventing the programmer from attemping to take the square root of a string.
+Types are sets like $Integer$ or $String$ whose elements are values, like $\{0, 1, -1, 2, -2, ...\}$ and $\{'Greg', 'Hello\ neuron\backslash n', ...\}$ respectively [TODO]. Their role is to annotate data in a program, which would otherwise exist only as $0$ s and $1$ s whose identity would need to be tracked by the programmer. These annotations ensure that functions and data are paired in the correct way - for example preventing the programmer from attemping to take the square root of a string.
 
-That basic motivation for types has been elaborated to an enormous degree. The nature of types is the main feature distinguishing programming languages [TODO]. Type systems divide languages into classes like dynamically typed languages (e.g. python, javascript, lisp), in which values can adopt a new type if the context demands it; and statically typed languages (e.g. c++, Java, Haskell), in which they can't. The term 'object oriented programming' refers to one style of type system, in which smaller types can be collected into a larger type called a 'class', and classes can be derived from a parent class [TODO]. The typical example is a $Car$ class that has associated data, such as a $String$ to identify its owner, a pair of $Number$'s to indicate its location, and a $Number$ to indicate its speed. Another class $Truck$ could be derived from $Car$, and the $Truck$ type would inherit the $Car$'s associated data. We can add additional associated data, like a $Number$ type to indicate the maximum payload and a $Number$ to store the tow rating of its trailer hitch. Individual $Car$'s would be constructed in the program with concrete values in all the associated data fields. The goal in an object-oriented design is to build a heirarchy of sets (types, classes) that reflects the heirarchy of labels of objects. Internal properties of the objects being modeled are 'inside' the types, and running a program involves modifying these interval values. Consequently, the style is very noun-oriented [TODO - Yegee post].
+That basic motivation for types has been taken much further in the design of different programming languages. The nature of types is the main feature distinguishing programming languages [TODO]. Type systems divide languages into classes like dynamically typed languages (e.g. python, javascript, lisp), in which values can adopt a new type if the context demands it; and statically typed languages (e.g. c++, Java, Haskell), in which they can't. The term 'object oriented programming' refers to one style of type system, in which smaller types can be collected into a larger type called a 'class', and classes can be derived from a parent class [TODO]. The typical example is a $Car$ class that has associated data, such as a $String$ to identify its owner, a pair of $Number$ s to indicate its location, and a $Number$ to indicate its speed. Another class $Truck$ could be derived from $Car$, and the $Truck$ type would inherit the $Car$ s associated data. We can add additional associated data, like a $Number$ type to indicate the maximum payload and a $Number$ to store the tow rating of its trailer hitch. Individual $Car$ s would be constructed in the program with concrete values in all the associated data fields. The goal in an object-oriented design is to build a heirarchy of sets (types, classes) that reflects the heirarchy of labels of objects. Internal properties of the objects being modeled are 'inside' the types, and running a program involves modifying these interval values. Consequently, the style is very noun-oriented [TODO - Yegee post].
 
 An alternative foundation is to model types around logic, capturing ideas like mutual exclusion, associated data, and value-to-value relationships in the types. We need an example here:
 
 #+BEGIN_SRC haskell
-  type Coord = (Double,Double)
+  data Coord = C Double Double  -- (1)
 
-  ptA, ptB, ptC :: Coord
-  ptA = (0.1, 0.1)
-  ptB = (1.1, 0.1)
-  ptC = (0.5, 2,1)
+  ptA = C 0.1 0.1 :: Coord      -- (2)
+  ptB = C 1.1 0.1 :: Coord
+  ptC = C 0.5 2.1 :: Coord
 
-  data SpikeRegion = 
+  data SpikeRegion =            -- (3)
       Box       { corners :: (Coord,Coord), bChans :: (Int,Int)}
     | Polygon   { polyPoints :: [Coord],    pChans :: (Int,Int)}      
     | Union     SpikeRegion SpikeRegion
     | Intersect SpikeRegion SpikeRegion
     | Diff      { rBase :: SpikeRegion, rDelete :: SpikeRegion}
+
+regionA :: SpikeRegion          -- (4)
+regionA = Box {corners = (ptA, ptB), bChans = (1,2)}
+
+regionB :: SpikeRegion
+regionB = Polygon { polyPoints = [ptA,ptB,ptC], pChans = (2,3)}
+
+regionC :: SpikeRegion
+regionC = Intersect regionA regionB
 #+END_SRC
 
+ - $(1)$: We first define our own set $Coord$, the set of all pairs of $Double$ s (real numbers). The $C$ is a 'constructor' that can be used to build a $Coord$.
 
-$SpikeRegion$ is the set of amplitude regions that could be used to spike-sort tetrode data. 
+ - $(2)$: $ptA$, $ptB$ and $ptC$ are each particular $Coord$ s, built from $C$ and a pair of real numbers.
 
+ - $(3)$: We define a more complicated type, $SpikeRegion$, the set of amplitude regions that could be used to spike-sort tetrode data. A spike region could take one of five forms. The definition of each form is separated by a $|$ and a new line. The $Box$ constructor builds a Spike Region from a pair of $Coord$ s and the pair of electrode channels used for sorting. The terms 'corners' and 'bChans' here are not important - they are just labels for accessing the $Box$ s internal data later. Alternatively, the $Polygon$ constructor can be appleid to a list of $Coord$ s. $Union$ is different; it is built from its constructor and a pair of other $SpikeRegion$ s. Its meaning in our program is: 'the space that is in either of the associated bounding regions'.
+
+ - $(4)$: We define three different regions. The first is a rectangular region defined for tetrode channels 1 and 2. The second is a polygonal region defined by our three $Coord$ s on channels 2 and 3. The third is the intersection of the first two regions. $regionC$ is a typical sort of region used in manual cluster-cutting: the intersection of regions drawn on two projections. A region that uses a third projection to further restrict $regionC$ could be constructed simply as $Intersect\ regionC\ anotherRegion$.
+
+To declare five mutually-exclusive sorts of regions in Python, we have two options, neithof of which are as intuitive as the Haskell type above. We could (A) write one class with an associated string that we set to 'box', 'polygon', etc, as well as the sum of all the associated data for all of the 
+
+Functions in Haskell are values and therefore have types. Their types indicate their domain and range. $length$ is a function from $[a]$ (list of any type) to $Integer$. We will also define a tetrode spike and a function for judging whether it is in a region.
+#+BEGIN_SRC haskell
+length :: [a] -> Int
+length =  undefined   -- we'll implement length soon
+
+data TetrodeSpike = TS [Double]
+
+regionContainsSpike :: SpikeRegion -> TetrodeSpike -> Bool
+regionContainsSpike =  undefined
+#+END_SRC
+
+The type of $regionContainsSpike$ looks strange to normal programmers because there is not a clear distinction between arguments and return values. However there is something interesting happening. The $\rightarrow$ in a type is right associative, so $a \rightarrow b \rightarrow c$ is synonymous with $a \rightarrow (b \rightarrow c)$. $regionContainsSpike$ is in fact a function that takes a $SpikeRegion$ and returns a $(TetrodeSpike \rightarrow Bool)$, a function. We can apply this new function to a $TetrodeSpike$ to get a $Bool$. 
+
+*** Declarative programming
 *** Avoiding bugs by lifting program logic into types, compiler catches mistakes early
-*** Avoiding bugs through declarative programming
+
 *** Concurrency - difficulty of running multiple threads simultaneously
 *** Software transactional memory
 
