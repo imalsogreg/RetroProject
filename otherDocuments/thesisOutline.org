@@ -117,10 +117,12 @@ That basic motivation for types has been elaborated to an enormous degree. The n
 An alternative foundation is to model types around logic, capturing ideas like mutual exclusion, associated data, and value-to-value relationships in the types. We need an example here:
 
 #+BEGIN_SRC haskell
-  data Coord = Pts Double Double
+  type Coord = (Double,Double)
 
-  ptA :: Coord
-  ptA = Pts 0.4 1.0
+  ptA, ptB, ptC :: Coord
+  ptA = (0.1, 0.1)
+  ptB = (1.1, 0.1)
+  ptC = (0.5, 2,1)
 
   data SpikeRegion = 
       Box       { corners :: (Coord,Coord), bChans :: (Int,Int)}
@@ -129,6 +131,7 @@ An alternative foundation is to model types around logic, capturing ideas like m
     | Intersect SpikeRegion SpikeRegion
     | Diff      { rBase :: SpikeRegion, rDelete :: SpikeRegion}
 #+END_SRC
+
 
 $SpikeRegion$ is the set of amplitude regions that could be used to spike-sort tetrode data. 
 
