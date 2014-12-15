@@ -48,7 +48,7 @@ if(isempty(opt.trig_times))
 
     % temporarily use only a single lfp channel
     if(isempty(opt.phase_cdat)||isempty(opt.env_cdat))
-        opt.lfp = contchans(opt.lfp,'chans',[1]);
+        opt.lfp = contchans(opt.lfp,'chanlabels',opt.lfp_chan);
         [opt.lfp_theta,opt.phase_cdat,opt.env_cdat] = gh_theta_filt(opt.lfp);
         eeg_r.raw = opt.lfp;
         eeg_r.theta = opt.lfp_theta;

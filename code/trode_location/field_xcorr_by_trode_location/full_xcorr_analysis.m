@@ -16,6 +16,8 @@ p.addParamValue('rate_thresh_for_multipeak', 5);
 p.addParamValue('multipeak_max_spacing', 0.3);
 p.addParamValue('max_abs_field_dist', 1);
 p.addParamValue('smooth_field_m_sd',0.1);
+p.addParamValue('min_boundary_edge_dist',0.25);
+p.addParamValue('min_peak_edge_dist',0);
 
 %options for xcorr_dists
 p.addParamValue('xcorr_dists',[]);
@@ -26,7 +28,7 @@ p.addParamValue('xcorr_lag_limits', [-0.1, 0.1]);
 p.addParamValue('smooth_timewin', 0.01);
 p.addParamValue('r_thresh', 1e-2);
 
-% options for anatomical_dists
+% options for anatomiacal_dists
 p.addParamValue('anatomical_dists',[]);  %pass this to bypass computing it in full_xcorr_anal
 p.addParamValue('ok_areas',[]); % don't use!
 p.addParamValue('ok_pair',[]);
@@ -56,7 +58,7 @@ place_cells = assign_field(place_cells,pos_info,'smooth_sd_segs',smooth_segs,'n_
 [fields,field_cells] = get_fields(place_cells, 'method', opt.method, ...
         'min_peak_rate_thresh', opt.min_peak_rate_thresh, 'rate_thresh_for_multipeak',opt.rate_thresh_for_multipeak,...
         'multipeak_max_spacing', opt.multipeak_max_spacing, 'max_abs_field_dist', opt.max_abs_field_dist,...
-        'ok_directions',opt.ok_directions);
+        'ok_directions',opt.ok_directions,'min_boundary_edge_dist',opt.min_boundary_edge_dist,'min_peak_edge_dist',opt.min_peak_edge_dist);
 
 fieldClusts = place_cells_index_by_field(place_cells,field_cells);
 place_cells.clust = fieldClusts;

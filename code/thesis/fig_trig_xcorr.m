@@ -10,14 +10,16 @@ opt = p.Results;
 rpos = decode_pos_with_trode_pos(d.spikes,d.pos_info,d.trode_groups,...
    'r_tau',opt.r_tau,'field_direction','outbound');
 
+lfpChan = d.eeg_r.raw.chanlabels(d.thetaChanInd);
+
 rtOutbound = gh_triggered_reconstruction(rpos,d.pos_info,'lfp',d.eeg, ...
-    'lfp_chan',d.thetaChanInd,'min_vel',opt.min_vel);
+    'lfp_chan',lfpChan,'min_vel',opt.min_vel);
 
 % Get inbound triggered avg
 rpos = decode_pos_with_trode_pos(d.spikes,d.pos_info,d.trode_groups,...
    'r_tau',opt.r_tau,'field_direction','inbound');
 
 rtInbound = gh_triggered_reconstruction(rpos,d.pos_info,'lfp',d.eeg, ...
-    'lfp_chan',d.thetaChanInd,'min_vel',-1 * opt.min_vel);
+    'lfp_chan',lfpChan,'min_vel',-1 * opt.min_vel);
 
 rt = triggeredReconstructionMergeDirections(rtOutbound,rtInbound);
