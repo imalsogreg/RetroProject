@@ -2,7 +2,7 @@
  - Traveling theta waves & their impact on place cell timing
  - Real-time position decoding
  - Slow-Wave Sleep in the awake Retrosplenial cortex
- - Defense
+ - Current progress & Defense
 
 # Theta oscillations within CA1 differ in phase
 ![LFP recorded from three tetrodes](images/fig1a.jpg "Site-dependent LFP phase")
@@ -167,3 +167,24 @@ Offset     -0.001   0.006
 # Time coupling with hippocampus
 
 ![](SWW_Figs/HPCCoordination.png)
+
+# Interpretation
+
+ - Up/Down states not restricted to SWS
+ - When hippocampus goes into offline mode, retrosplenial follows closely
+ - Proposed models of sleep HPC <-> CTX communication may apply during wake too
+
+# Progress & Defense
+
+ - Done:
+     - ~3/4 of the writing
+     - Exploratory analysis
+     - Some analyses summarized across all rats / sessions
+     - Main conclusions
+ - To do:
+     - ~1/4 of the writing
+     - Remainder of analyses summarized across all rats
+     - Output data from real-time decoder for comparison w/ offline
+     - Make slides, defend thesis
+ - Proposed defense: early February
+     
