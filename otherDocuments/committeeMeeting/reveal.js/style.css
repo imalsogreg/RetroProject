@@ -18,6 +18,7 @@
   font-size:18pt;
   color: rgba(0,0,0,0.9);
   padding:10px;
+  line-height:110%;
 }
 
 .reveal li:hover{

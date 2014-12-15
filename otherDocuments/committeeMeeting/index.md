@@ -2,6 +2,7 @@
  - Traveling theta waves & their impact on place cell timing
  - Real-time position decoding
  - Slow-Wave Sleep in the awake Retrosplenial cortex
+ - Defense
 
 # Theta oscillations within CA1 differ in phase
 ![LFP recorded from three tetrodes](images/fig1a.jpg "Site-dependent LFP phase")
@@ -138,12 +139,12 @@ Offset     -0.001   0.006
 
 # Interpretation
 
-## Info coding decoupled from local excitatory drive timing
+- Info coding decoupled from local excitatory drive timing
 
-## Possible mechanisms (test w/ future experiments)
+- Possible mechanisms (test w/ future experiments)
 
- - Local theta phase impacts theta sequence timing, but is counteracted by anatomically graded compensating excitation
- - Phase precession is inherited directly from upstream areas, upstream areas' theta sequences are aligned temporally, but with different rate prerefences (EC: nearby part of sequence, CA3: extended sequence). CA1 theta phase inherited according to input projection strength gradient
+     - Local theta phase impacts theta sequence timing, but is counteracted by anatomically graded compensating excitation
+     - Phase precession is inherited directly from upstream areas, upstream areas' theta sequences are aligned temporally, but with different rate prerefences (EC: nearby part of sequence, CA3: extended sequence). CA1 theta phase inherited according to input projection strength gradient
 
 # Slow-wave sleep in the awake Retrosplenial cortex
 
