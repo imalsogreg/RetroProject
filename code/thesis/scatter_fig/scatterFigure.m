@@ -45,8 +45,8 @@ function f = scatterFigure(d,m,varargin)
         thisFieldInd = opt.exampleData.fields(i);
         thisCellName = field_cells(thisFieldInd);
         subplot(n,3,3*(i-1)+1);
-        plotField(thisCellName, d, fields, ...
-            opt.exampleData.fields(i));
+%        plotField(thisCellName, d, fields, ...
+%            opt.exampleData.fields(i));
         hold on;
         for j = 1:size(opt.exampleData.rasterTWins,2);
             ax(3*(i-1)+1 + (j-1)) = subplot(n,3,3*(i-1)+1 + j);
@@ -177,6 +177,12 @@ function dat = defaultExampleData(d,m)
         %dat.okPair = 'medial,lateral';
         dat.okPair = 'any,any';  % Pair-restriction is only for CA3/CA1
         dat.rasterTWins = [5645.5, 5647.5; 5809.2,5809.9]';
+        dat.trode_groups_style = 'ml';
+    elseif(strContains(m.pFileName,'yolanda'))
+        dat.fields=[1,2,3];
+        dat.ok_directions = {'outbound','inbound'};
+        dat.okPair = 'CA1,CA1';
+        dat.rasterTWins = [5000,5001; 5002,5003]; % TODO fix
         dat.trode_groups_style = 'ml';
     else
         error('scatterFigure:noNameMatch',['No default fields for ', m.pFileName]);

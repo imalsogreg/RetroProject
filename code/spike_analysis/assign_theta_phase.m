@@ -90,8 +90,10 @@ for n = 1:ncell
         warning('assign_theta_phase:no_spikes',['Found no spike times for cluster: ', sdat.clust{n}.name]);
     end
     
+    
     spike_times(or(spike_times <= cdat_r.phase.tstart, spike_times >= cdat_r.phase.tend)) = NaN;
-    spike_phase = interp1(ts,phase,spike_times,'linear','extrap');
+    isOk = (~isnan(ts)) & (~isnan(phase));
+    spike_phase = interp1(ts(isOk),phase(isOk),spike_times,'linear','extrap');
     
     [tmp, logicals] = gh_times_in_timewins(spike_times, bouts{lfp_col});
     spike_phase(~logicals) = NaN;

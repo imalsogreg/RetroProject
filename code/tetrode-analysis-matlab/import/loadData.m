@@ -62,7 +62,7 @@ end
 if(p.Results.loadSpikes)
     d.spikes = imspike('spikes','arte_correction_factor',m.arteCorrectionFactor,...
         'ad_dirs',cmap(@(x) [x,dayOfWeek], m.ad_tts),'arte_dirs',cmap(@(x) [x,dayOfWeek],m.arte_tts)  );
-    d.spikes = assign_theta_phase(d.spikes, thetaCdatR,'lfp_default_chan',m.singleThetaChan);
+    %d.spikes = assign_theta_phase(d.spikes, thetaCdatR,'lfp_default_chan',m.singleThetaChan);
 end
 
 if(p.Results.loadPos)
