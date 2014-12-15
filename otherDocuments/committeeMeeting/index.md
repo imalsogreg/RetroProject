@@ -106,6 +106,7 @@
 
 ![Position reconstruction cross-correlation](images/caillou_rpos_xcorr.png "Position reconstruction cross-correlation")
 
+ - Replace x-corr with line-fit to triggered theta sequences.
 
 # Measuring timing differences in place cell pairs
 
@@ -134,6 +135,15 @@ Field Pos  0.169    0.015
 Anatomy    0.002    0.009
 Offset     -0.001   0.006
 </div>
+
+# Interpretation
+
+## Info coding decoupled from local excitatory drive timing
+
+## Possible mechanisms (test w/ future experiments)
+
+ - Local theta phase impacts theta sequence timing, but is counteracted by anatomically graded compensating excitation
+ - Phase precession is inherited directly from upstream areas, upstream areas' theta sequences are aligned temporally, but with different rate prerefences (EC: nearby part of sequence, CA3: extended sequence). CA1 theta phase inherited according to input projection strength gradient
 
 # Slow-wave sleep in the awake Retrosplenial cortex
 
