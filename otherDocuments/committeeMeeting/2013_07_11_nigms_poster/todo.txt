@@ -1,0 +1,17 @@
+TODO:
+
+Find day w/ good sleep ripples/dips, good run ripples/dips
+
+OOO Rat brain figure
+
+OOO Track figure
+
+OOO Figure: Example 
+OOO -sleep, run, sleep-dep 
+OOO -dips in MUA, LFP of retrosplenial and other-cortex.
+
+Distributiuon of dip durations in run, sleep
+
+Dip/ripple xcorr in run, sleep
+
+Slow-wave like activity is present

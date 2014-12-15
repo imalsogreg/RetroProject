@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Greg Hale" />
+  <meta name="dcterms.date" content="2014-10-28" />
+  <title>MWL Lab Meeting</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.min.css"/>
+    <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="reveal.js/style.css"/>
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">MWL Lab Meeting</h1>
+    <h2 class="author">Greg Hale</h2>
+    <h3 class="date">October 28, 2014</h3>
+</section>
+
+<section id="overview" class="slide level1">
+<h1>Overview</h1>
+<ul>
+<li>Traveling theta waves &amp; their impact on place cell timing</li>
+<li>Real-time decoding - performance debugging</li>
+</ul>
+</section>
+<section id="theta-oscillations-within-ca1-differ-in-phase" class="slide level1">
+<h1>Theta oscillations within CA1 differ in phase</h1>
+<figure>
+<img src="images/fig1a.jpg" title="Site-dependent LFP phase" alt="LFP recorded from three tetrodes" /><figcaption>LFP recorded from three tetrodes</figcaption>
+</figure>
+</section>
+<section id="traveling-wave-is-a-good-fit-for-profile-of-phase-offsets" class="slide level1">
+<h1>Traveling wave is a good fit for profile of phase offsets</h1>
+<figure>
+<img src="images/siapasTravelingWave.png" title="Siapas traveling wave result" alt="Siapas traveling wave" /><figcaption>Siapas traveling wave</figcaption>
+</figure>
+</section>
+<section id="traveling-wave-is-a-good-fit-for-profile-of-phase-offsets-1" class="slide level1">
+<h1>Traveling wave is a good fit for profile of phase offsets</h1>
+<figure>
+<img src="images/fig1b.png" title="Traveling wave model parameters" alt="Traveling wave model parameters" /><figcaption>Traveling wave model parameters</figcaption>
+</figure>
+</section>
+<section id="variability-in-traveling-wave-parameters" class="slide level1">
+<h1>Variability in traveling wave parameters</h1>
+<figure>
+<img src="images/fig1c.png" title="Traveling wave model parameters over time" alt="Traveling wave model parameters, fit over time" /><figcaption>Traveling wave model parameters, fit over time</figcaption>
+</figure>
+</section>
+<section id="multi-unit-spiking-roughly-follows-the-traveling-wave" class="slide level1">
+<h1>Multi-unit spiking roughly follows the traveling wave</h1>
+<figure>
+<img src="images/fig1d.svg" title="MUA phase preference vs. a single LFP chanel" alt="Different tetrodes&#39; MUA phase preference vs. a single LFP channel" /><figcaption>Different tetrodes' MUA phase preference vs. a single LFP channel</figcaption>
+</figure>
+</section>
+<section id="ca1-theta-phase-locking-becomes-ambiguous.-which-theta-phase" class="slide level1">
+<h1>&quot;CA1 theta phase locking&quot; becomes ambiguous. Which theta phase?</h1>
+<ul>
+<li>CA3/CA1, DG/CA1, EC/CA1, phase relationships (Mizuseki, 2012)</li>
+<li>Specific +/- currents in various CA1 dendritic segments (Leung, 1984)</li>
+<li>CA3/CA1 low gamma coupling, EC/CA1 high gamma coupling (Colgin, 2012)</li>
+<li>PV cell, O-LM cell cell, septal cells firing phase (Freund, Klausburger)</li>
+<li>Functional roles for theta phases</li>
+<li><strong>Theta phase precession</strong></li>
+</ul>
+</section>
+<section id="place-cell-spike-timing-theta-sequences" class="slide level1">
+<h1>Place cell spike timing: theta sequences</h1>
+<p><br/></p>
+<h2 id="two-complementary-views-of-theta-sequences">Two complementary views of theta sequences</h2>
+<div class="colHalf" style="height:300px">
+<img src="images/thetaSequencesRaster.png" title="TestA" alt="Theta sequences in place cell reconstruction" />
+</div>
+<div class="colHalf" style="height:300px">
+<img src="images/dragoiXCorr.png" title="Dragoi &amp; Buzsaki, 2006" alt="Cell pair cross-correlation" />
+</div>
+<br/>
+<div class="colHalf">
+<h2>View A</h2>
+<ul>
+<li>Reconstruct trace position</li>
+<li>Time-compressed sequences every cycle</li>
+<li>~1 meter per theta cycle</li>
+<li>~8 meters per second (~15x speedup)</li>
+</ul>
+</div>
+<div class="colHalf">
+<h2>View B</h2>
+<ul>
+<li>Time-x correlate place cell pairs</li>
+<li>E.g. cell A is 0.4 meter beyond cell B,</li>
+<li>Cell A fires 75 ms later</li>
+<li>5.3 meters/sec virtual running (~ 10x speedup)</li>
+</ul>
+</div>
+</section>
+<section id="accounting-for-traveling-wave-in-theta-sequences" class="slide level1">
+<h1>Accounting for traveling wave in theta sequences</h1>
+<ul>
+<li>Prediction
+<ul>
+<li>Find mean LFP traveling wave parameters</li>
+<li>Convert to predicted time offset between anatomical points</li>
+</ul></li>
+<li>Measurement
+<ul>
+<li><strong>View A</strong> Divide cells into early/late theta groups and compare theta sequences</li>
+<li><strong>View B</strong> Factor anatomical separation into time offset regression</li>
+</ul></li>
+<li>Technical limitations
+<ul>
+<li>Would like to partition cells into many small groups, <em>but need many cells to decode theta sequences</em></li>
+<li>Would like to account for cycle-to-cycle variability, <em>but have to pool data across time to overcome noise</em></li>
+<li>Compromise - focus on evaluating the simple case here to answer basic question, followup with many more tetrodes for more precise picture</li>
+</ul></li>
+</ul>
+</section>
+<section id="traveling-wave-parameters-and-variability" class="slide level1">
+<h1>Traveling wave parameters and variability</h1>
+<div class="colHalf">
+<img src="images/fig2a.png" title="Distribution of expected time offsets" alt="Distribution of expected time offsets" />
+</div>
+<div class="colHalf">
+<img src="images/fig2b.png" title="Distribution of expected time offsets" alt="Distribution of expected time offsets" />
+</div>
+<p><br/></p>
+<ul>
+<li><em>Left top</em> Timecourse of expected time offset per anatomical mm along medial-lateral axis</li>
+<li><em>Left bottom</em> Running speed</li>
+<li><em>Right</em> Expected time-offset distribution along the medial-lateral axis</li>
+</ul>
+</section>
+<section id="measuring-timing-differences-in-reconstructed-theta-sequences" class="slide level1">
+<h1>Measuring timing differences in reconstructed theta sequences</h1>
+<figure>
+<img src="images/rpos_split.png" title="Grouped theta sequence reconstruction" alt="Grouped position reconstruction" /><figcaption>Grouped position reconstruction</figcaption>
+</figure>
+</section>
+<section id="measuring-timing-differences-in-reconstructed-theta-sequences-1" class="slide level1">
+<h1>Measuring timing differences in reconstructed theta sequences</h1>
+<figure>
+<img src="images/caillou_rpos_xcorr.png" title="Position reconstruction cross-correlation" alt="Position reconstruction cross-correlation" /><figcaption>Position reconstruction cross-correlation</figcaption>
+</figure>
+</section>
+<section id="measuring-timing-differences-in-place-cell-pairs" class="slide level1">
+<h1>Measuring timing differences in place cell pairs</h1>
+<div class="colHalf">
+<img src="images/fig3a.jpg" title="Example place cells" alt="Example place cells" />
+</div>
+<div class="colHalf">
+<img src="images/fig3c.jpg" title="Example place cell pairs" alt="Example place cell pairs" />
+</div>
+</section>
+<section id="measuring-timing-differences-in-place-cell-pairs-1" class="slide level1">
+<h1>Measuring timing differences in place cell pairs</h1>
+<figure>
+<img src="images/fig3d.jpg" title="Place cell pairs regression" alt="Place cell pairs regression" /><figcaption>Place cell pairs regression</figcaption>
+</figure>
+</section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.min.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: 'none', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>

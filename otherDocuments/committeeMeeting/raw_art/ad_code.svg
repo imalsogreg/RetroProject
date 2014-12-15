@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg9990"
+   version="1.1"
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="ad_code.svg"
+   inkscape:export-filename="/home/greghale/Documents/talks/labmeeting_2011_07_12/raw_art/ad_code.png"
+   inkscape:export-xdpi="72"
+   inkscape:export-ydpi="72">
+  <defs
+     id="defs9992" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="406.04666"
+     inkscape:cy="665.66193"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="995"
+     inkscape:window-x="1680"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata9995">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-size:31.89999962px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       x="22.029442"
+       y="38.220047"
+       id="text10508"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan10510"
+         x="22.029442"
+         y="38.220047">Main:</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="78.095047"
+         id="tspan10536">1: Initialize structures to hold data buffer</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="117.97005"
+         id="tspan10512">2: Re-initialize for config file</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="157.84505"
+         id="tspan10514">3: Draw the background screen</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="197.72005"
+         id="tspan10556">4: Set up a buffer in memory to collect digitized samples</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="237.59505"
+         id="tspan10520">5: Wait in a loop for user/master input (clock_reset, file, start, stop, amp_prog)</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="277.47003"
+         id="tspan10528">...</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="317.34503"
+         id="tspan10532">Clock_reset:</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="357.22003"
+         id="tspan10538">1: Reset internal counter to 0</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="397.09503"
+         id="tspan10542" /><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="436.97003"
+         id="tspan10544">Start - in a loop:</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="476.84503"
+         id="tspan10546">1: Poll the DAQ card once every N samples, requesting N new samples</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="516.72003"
+         id="tspan10548">    (N ~ 10,000?), written into the data buffer</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="556.59503"
+         id="tspan10602">2. Ask the clock card for the currunt clock count</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="596.47003"
+         id="tspan10550">3: Search the buffer for spikes</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="636.34503"
+         id="tspan10552">4: Mark indices where signal crosses threshold as 'spike'</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="676.22003"
+         id="tspan10554">5: Extrapolate from the clock count at the beginning of the </tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="716.09503"
+         id="tspan10606">    buffer to estimate the time of the spike</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="755.97003"
+         id="tspan10604">6: Save 5 points before and 26 points after the trigger point,</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="795.84503"
+         id="tspan10564">    for each channel to disk.</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="835.72003"
+         id="tspan10566">7: If time permits, compute the heights of the spikes on each </tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="875.59503"
+         id="tspan10568">    channel and plot them in a projection window</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="915.47003"
+         id="tspan10560">8: If time still permits, draw the waveforms to the screen, too</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="955.34503"
+         id="tspan10574" /><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="995.22003"
+         id="tspan10576">Stop:</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="1035.0951"
+         id="tspan10578">1: Ignore incoming buffers, or tell the DAQ card to </tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="1074.9701"
+         id="tspan10580">    stop acquiring them</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="1114.8451"
+         id="tspan10586" /><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="1154.7201"
+         id="tspan10592">File:</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="1194.5951"
+         id="tspan10594">1: Open a file for writing spikes to</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="1234.4701"
+         id="tspan10596" /><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="1274.3451"
+         id="tspan10598">Amp_prog:</tspan><tspan
+         sodipodi:role="line"
+         x="22.029442"
+         y="1314.22"
+         id="tspan10600">1: Set lines on the DIO card to change amplifier settings</tspan></text>
+  </g>
+</svg>

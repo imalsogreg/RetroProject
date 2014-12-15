@@ -1,0 +1,35 @@
+I. Ripple timing
+- Motivation: 
+ - Rhythmicity as a mechanistic clue
+ - Rhythmic communication
+ - Bursts - special forms of ripples?  Bursts more communicative than single ripples?
+
+OOO- Examples of ripple-detection, doublets, tripplets
+OOO - During run
+OOO - During sleep
+OOO - Overview
+
+OOO- Average ripple power triggered on singlets, doublets, tripplets
+OOO - During run
+OOO - During sleep
+
+OOO- Rhythmicity
+OOO - Align bursts on central ripple 
+
+OOO- Average Hippocampal MUA triggered on singlets, doublets, tripplets
+OOO - During run
+OOO - During sleep
+
+OOO- MUA in RSC during singlets, doublets, tripplets
+OOO - During run
+OOO - During sleep
+
+- Dips in RSC during singlets, doublets, tripplets
+ - During run
+ - During sleep
+
+- Dips in other-cortex during singlets, doublets, tripplets
+ - Only during sleep
+
+II. Haskell
+- 

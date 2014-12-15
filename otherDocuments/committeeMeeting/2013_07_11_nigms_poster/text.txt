@@ -1,0 +1,13 @@
+Slow-wave like activity is present in the retrosplenial cortex of waking rats.  Slow-waves appear as ~1Hz local field potential (LFP) deflections across the cortex, coordinated with nearly complete suppression of cortical spiking.  These events occur in response to sleep deprivation(1).  They also appear during reward-consumption in fully awake animals.BOLD_SUPER_CHECKCITATION
+
+Awake up-down states resemble those of slow wave sleep.  (Top) Slow-wave sleep down states in somatosensory cortex, motor cortex, and retrosplenial cortex last between 20 and 200 ms.  Down states observed during sleep deprivation follow a similar pattern.  Down states during reward consumption have a similar duration, but are completely restricted to the retrosplenial cortex. (Bottom) Motor, somatosensory, and retrosplenial cortical LFPs reflect up-to-down state transitions during slow wave sleep and sleep deprivation.  LFP deflections near down states are restricted to retrosplenial cortex during reward.BOLD
+
+Hippocampal ripple events co-occur with retrosplenial slow-waves.  (Top) Examples of ripples recorded during consumption of large reward occur near in time to retrosplenial down-states, but do not perfectly overlap with them. (Bottom) Over the course of a run (left) or slow-wave sleep (right) session, ripples power and slow-wave power are modestly correlated at the behavioral timescale.
+
+The appearance of slow-wave like activity frames in the awake retrosplenial cortex suggests that up-down states may have an active role in spatial processing.  Coordination with hippocampal ripples, which mark hippocampal sequence replay events, further suggests that awake slow-waves may serve a mnemonic role, or may interact with the time structure and spatial content of sequence replay.
+
+Citations & Acknowledgements
+
+Vyazovskiy, V.,	Olcese, U., Hanlon, E., Nir, Y., Cirelli, C., & Tononi, G. Local sleep in awake rats.  Nature. 472, 443–447 (28 April 2011)
+
+This work was supported by The National Institute of General Medical Sciences

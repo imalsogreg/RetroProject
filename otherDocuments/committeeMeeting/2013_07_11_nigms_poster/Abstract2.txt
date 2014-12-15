@@ -1,0 +1,17 @@
+Cortico-hippocampal coordination during sleep, drowsiness, and wake
+
+Cortical slow waves interact with the hippocampus during sleep, in the timing of their oscillations and the information content of neural ensembles.  We sought to characterize this coordination in cortical areas known to process spatial information, and areas with more primary sensory or motor roles, through multisite tetrode recordings in rats at various levels of alertness or sleep.
+
+We show that sleep slow-oscillations coordinate a ~1Hz alternation between periods of spiking and silence reaching across all recorded cortical areas, as expected.  And we corroborate the recent finding that these events can be observed in sleep-deprived rats.
+
+Surprisingly, slow-wave oscillations also occur in the cortex of awake rats as they consume large rewards during spatial navigation tasks, even when running well-rested during the dark phase of the light cycle.  Recorded wake events resemble the classical slow wave sleep events in depth of spike suppression and in the waveform of local field potentials.  They are unique in that they extend across retrosplenial cortex, but are absent from sensory and motor cortices.
+
+Hippocampal non-REM sleep is dominated by ripple burst events, which disappear during track running and reemerge during reward consumption irrespective of sleepiness.  Our results suggest that retrosplenial cortex slow waves, too, are common to sleep and reward consumption.  Awake ripple slow-wave coordination may be a clue to the source of spatial sequence replay content.
+
+
+
+
+
+We report that transient slow-wave like activity in drowsy and alert rats strongly resembles slow wave sleep in several respects: the duration of interruptions of ongoing spiking activity (down-states), the temporal relationship to hippocampal ripples, and the features of the local field potential.  Alert slow waves also differ in important ways from slow wave sleep.  Most notably, alert slow waves were present broadly throughout retrosplenial cortex, but were absent in sensory and motor cortex.  And while the frames of slow-wave sleep generally involve interleaving of up and down states, awake down-states are often separated by several seconds.  These characteristics of awake slow-wave like activity are stable over a variety of alertness states: under mild sleep deprivation, during light-phase maze running, and during dark-phase maze running.  Together these findings suggest that the slow oscillation that pervades cortex during slow-wave sleep is not strictly a sleep-related phenomenon.  On the contrary, slow waves accompany hippocampal sequence replay during reward consumption and may play a role in awake cortico-hippocampal communication.
+
+
