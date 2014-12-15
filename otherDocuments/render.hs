@@ -20,7 +20,7 @@ buildFileDir = "build"
 
 cmd f fmt  =
   "pandoc -o " ++ (buildFileDir </> f') ++
-  " --latex-engine=xelatex -H preamble.tex --toc --bibliography background.bib --csl=plos.csl " ++
+  " --latex-engine=xelatex -H preamble.tex --toc --bibliography background.bib --bibliography theta.bib --csl=plos.csl " ++
   (rawFileDir </> f)
   where f' = stripExt f ++ extension fmt
 
