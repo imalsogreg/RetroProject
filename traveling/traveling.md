@@ -1,3 +1,5 @@
+## THIS TEXT IS NOW IN otherDocuments/thesis.org - thesis.org version has no mention of CA3
+
 # Abstract #
 
 Brain  areas involved in mnemonic and spatial processing are locked to an underlying 8-12 Hz oscillation known as the theta rhythm.  Different layers of entorhinal cortex, subcortical areas, and hippocampal subfields are each maximally activated during different theta phases; even within field CA1, theta-locked excitation is offset in a gradient manner.  In addition to pacing cell excitability, theta influences spatial information processing by organizing the timing of place cell ensembles into temporally precise sequences. We sought to determine the impact of theta timing offsets on the coordination of spatial representations in ensembles of place cells in different brain areas.
