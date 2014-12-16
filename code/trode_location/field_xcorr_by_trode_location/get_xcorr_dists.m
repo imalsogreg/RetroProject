@@ -93,20 +93,26 @@ n_time = size(rates_array_broken_into_bouts,2);
 
 rates_array_bouts_concat = mat2cell(rates_array_broken_into_bouts,...
         ones(n_cells,1), n_time);
-big_rates_array = repmat(rates_array_bouts_concat, 1, n_cells);
+%big_rates_array = repmat(rates_array_bouts_concat, 1, n_cells);
 
+%if(~isempty(opt.field_dists))
+%    big_rates_array( isnan(opt.field_dists) ) = {NaN};
+%end
+
+XX = repmat([1:n_fields]',1,n_fields);
+YY = repmat([1:n_fields], n_fields,1);
 if(~isempty(opt.field_dists))
-    big_rates_array( isnan(opt.field_dists) ) = {NaN};
+    isOk = ~isnan(opt.field_dists);
+else
+    isOk = ones(size(XX));
 end
-tmptmp = []
-r = arrayfun( @(x,y) lfun_new_xcorr(rates_array_bouts_concat{x},rates_array_bouts_concat{y},opt),  ...
-        repmat([1:n_fields]', 1,        n_fields),...
-        repmat([1:n_fields],  n_fields, 1       ),...
-    'UniformOutput', false);
+
+r = arrayfun( @(x,y,k) lfun_new_xcorr(rates_array_bouts_concat{x},rates_array_bouts_concat{y},k,opt),  ...
+        XX, YY, isOk, 'UniformOutput', false);
 xcorr_mat = r;    
 
 xcorr_dists = cellfun( @(x) lfun_xcorr_best_time(x,opt), r);
-xcorr_maxr = cellfun( @(x) max(x(~isnan(x))), r);
+xcorr_maxr = cellfun( @max, r);
 lags = opt.lag_times;
 
 for n = 1:size(opt.draw_pairs,1)
@@ -148,8 +154,8 @@ function r_cell = lfun_new_multibout_xcorr(multbouts_ratesA, multibouts_ratesB, 
 
 end
 
-function r = lfun_new_xcorr(ratesA, ratesB, opt)
-    if( and( ~isnan(ratesA), ~isnan(ratesB) ) )
+function r = lfun_new_xcorr(ratesA, ratesB, thisIsOk, opt)
+    if( all(~isnan(ratesA)) && all(~isnan(ratesB)) && thisIsOk )
         r = xcorr(ratesA,ratesB, opt.max_lags, 'unbiased')./opt.xcorr_bin_size;
     else
         r = NaN;

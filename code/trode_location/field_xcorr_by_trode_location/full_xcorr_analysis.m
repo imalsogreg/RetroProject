@@ -14,7 +14,7 @@ p.addParamValue('field_direction',''); % don't use
 p.addParamValue('min_peak_rate_thresh',15);
 p.addParamValue('rate_thresh_for_multipeak', 5);
 p.addParamValue('multipeak_max_spacing', 0.3);
-p.addParamValue('max_abs_field_dist', 1);
+p.addParamValue('max_abs_field_dist', 0.5);
 p.addParamValue('smooth_field_m_sd',0.1);
 p.addParamValue('min_boundary_edge_dist',0.25);
 p.addParamValue('min_peak_edge_dist',0);
@@ -26,7 +26,7 @@ p.addParamValue('timebouts', []);
 p.addParamValue('xcorr_bin_size', 0.002);
 p.addParamValue('xcorr_lag_limits', [-0.1, 0.1]);
 p.addParamValue('smooth_timewin', 0.01);
-p.addParamValue('r_thresh', 1e-2);
+p.addParamValue('r_thresh', 5e-2);
 
 % options for anatomiacal_dists
 p.addParamValue('anatomical_dists',[]);  %pass this to bypass computing it in full_xcorr_anal
@@ -90,7 +90,7 @@ if(~isempty(opt.field_dists))
     field_dists = opt.field_dists;
 else
     d.spikes.clusts = fieldClusts;
-    field_dists = get_field_dists(field_cells,fields,fieldClusts);
+    field_dists = get_field_dists(field_cells,fields,fieldClusts,'okMatrix',okPairs);
 end
 
 %field_dists(~okPairs) = NaN;

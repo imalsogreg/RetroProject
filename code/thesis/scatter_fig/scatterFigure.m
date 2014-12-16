@@ -62,7 +62,7 @@ function f = scatterFigure(d,m,varargin)
         subplot(3,nPairs,(n));
         text(0,0,num2str(field_dists(thisPair(1),thisPair(2))));
         subplot(3,nPairs,(nPairs+n));
-        plotXCorr(xcorr_mat,lags,thisPair(1),thisPair(2));
+%        plotXCorr(xcorr_mat,lags,thisPair(1),thisPair(2));
         subplot(3,nPairs,(2*nPairs)+n);
         text(0,0,num2str(anatomical_dists(thisPair(1),thisPair(2))));
     end
