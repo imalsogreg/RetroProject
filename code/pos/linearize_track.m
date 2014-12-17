@@ -106,7 +106,7 @@ end
 if(isempty(opt.click_points))
     figure;
     plot(x,y,'.')
-    title('Please click points along track, starting at start, ending at end.  Double-click to set end point.  Thanks');
+    title('Please click points along track. Double-click to set end point.');
     %x = linspace(0,opt.track_length,opt.interp_count);
     [xs,ys] = getpts();
     click_points = [xs,ys];

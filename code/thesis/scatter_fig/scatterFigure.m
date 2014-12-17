@@ -70,7 +70,7 @@ function f = scatterFigure(d,m,varargin)
     figure('Color',[1,1,1]);
     drawScatter(field_dists,anatomical_dists,xcorr_dists,X_reg,y_reg,...
         pairs,okPairs,opt);
-    
+    a = 1;
 end
 
 function drawScatter(fDists,aDists,xDists,X_reg,y_reg,pairs,okPairs,opt)
@@ -183,7 +183,7 @@ function dat = defaultExampleData(d,m)
         dat.ok_directions = {'outbound','inbound'};
         dat.okPair = 'CA1,CA1';
         dat.rasterTWins = [5000,5001; 5002,5003]; % TODO fix
-        dat.trode_groups_style = 'ml';
+        dat.trode_groups_style = 'areas';
     else
         error('scatterFigure:noNameMatch',['No default fields for ', m.pFileName]);
     end

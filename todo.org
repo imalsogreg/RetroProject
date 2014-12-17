@@ -1,0 +1,13 @@
+* Analysis
+** Collect some more wave parameters
+** Composite ms/mm estimate
+** Composite pairwise xcorr
+** Composite reconstr. xcorr
+* Figures
+** Collect wave descr. figs into one
+** Composite ms/mm fig
+** Spruce up pairwise fig
+** Pairwise table
+** Composite reconstr. fig & comparison to prediction
+* Writing
+* 

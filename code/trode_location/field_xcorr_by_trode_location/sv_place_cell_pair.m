@@ -26,8 +26,8 @@ place_cells = d.spikes;
 place_cells.clust = place_cells.clust(inds);
 d.spikes = place_cells;
 
-xcorr_r( isnan(xcorr_r) ) = 0;
-xcorr_r = xcorr_r .* (1 - eye(size(xcorr_r,1)));
+%xcorr_r( isnan(xcorr_r) ) = 0;
+%xcorr_r = xcorr_r .* (1 - eye(size(xcorr_r,1)));
 
 data.m               = p.Results.m;
 data.n               = p.Results.n;
