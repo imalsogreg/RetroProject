@@ -2,11 +2,11 @@ function [fields,fieldSources,unwrappedPlaceCells] = get_fields(place_cells,vara
 
 p = inputParser();
 p.addParamValue('ok_directions',{'outbound','inbound'});
-p.addParamValue('min_boundary_edge_dist',0.25);
-p.addParamValue('min_peak_edge_dist',0);
+p.addParamValue('min_boundary_edge_dist',0);
+p.addParamValue('min_peak_edge_dist',0.05);
 p.addParamValue('method', 'peak', @(x) any(strcmp(x, {'peak', 'xcorr'})));
 p.addParamValue('min_peak_rate_thresh', 10);
-p.addParamValue('edge_rate_thresh',0.25);
+p.addParamValue('edge_rate_thresh',0.5);
 p.addParamValue('rate_thresh_for_multipeak',5);
 p.addParamValue('multipeak_max_spacing',0.5);
 p.addParamValue('max_abs_field_dist',2);

@@ -53,14 +53,16 @@ end
 
 function localfn_plots(f)
   dat = guidata(f);
-  subplot(2,3,1); localfn_plot_trode_pos(dat.m,dat.n,dat.d);
-  subplot(2,3,3); localfn_plot_xcorr(dat.m,dat.n,dat.xCorrMat,dat.xCorrDists);
-  subplot(2,3,2); localfn_plot_field(dat.m,dat);
-  subplot(2,3,4); localfn_plot_field(dat.n,dat);
-  subplot(2,3,5); localfn_plot_mat(dat.m,dat.n,...
+  subplot(2,4,1); localfn_plot_trode_pos(dat.m,dat.n,dat.d);
+  subplot(2,4,3); localfn_plot_xcorr(dat.m,dat.n,dat.xCorrMat,dat.xCorrDists);
+  subplot(2,4,2); localfn_plot_field(dat.m,dat);
+  subplot(2,4,4); localfn_plot_field(dat.n,dat);
+  subplot(2,4,5); localfn_plot_mat(dat.m,dat.n,...
       max(-50,real(log(dat.xCorrR))));
   xlabel('xcorr');
-  subplot(2,3,6); localfn_plot_mat(dat.m,dat.n,dat.fieldDists); xlabel('field');
+  subplot(2,4,6); localfn_plot_mat(dat.m,dat.n,dat.fieldDists); xlabel('field');
+  subplot(2,4,7); localfn_plot_scatter(dat.m, dat.n, ...
+      dat.fieldDists, dat.xCorrDists,dat.xCorrR);
 end
 
 function localfn_plot_mat(m,n,mat)
@@ -77,6 +79,22 @@ function localfn_plot_mat(m,n,mat)
   imagesc(max(mat,mask));
 end
 
+function localfn_plot_scatter(m,n,fieldDists,tDists,xCorrR)
+    fieldDistsFlat = reshape(fieldDists,1,[]);
+    tDistsFlat     = reshape(tDists,1,[]);
+    xCorrRFlat     = reshape(xCorrR,1,[]);
+    hold off;
+    plot(fieldDistsFlat,tDistsFlat,'.');
+    hold on;
+    if (~isnan(fieldDists(m,n)) && ~isnan(tDists(m,n)));
+        plot(fieldDists(m,n),tDists(m,n),'o');
+        fieldDists(m,n)
+        tDists(m,n)
+    else
+        disp('nan');
+    end
+    xlim([-1,1]); ylim([-0.05,0.05]);
+end
 
 function localfn_figure_keypress(src,eventdata)
 data = guidata(src);

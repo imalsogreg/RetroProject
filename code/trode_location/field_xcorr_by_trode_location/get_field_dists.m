@@ -5,7 +5,7 @@ p.addParamValue('method', 'peak', @(x) any(strcmp(x, {'peak', 'xcorr'})));
 p.addParamValue('min_peak_rate_thresh', 15);
 p.addParamValue('rate_thresh_for_multipeak',5);
 p.addParamValue('multipeak_max_spacing',0.5);
-p.addParamValue('max_abs_field_dist',2);
+p.addParamValue('max_abs_field_dist',1);
 p.addParamValue('okMatrix', ones(numel(fields),numel(fields)));
 p.addParamValue('draw',false);
 p.parse(varargin{:});
@@ -55,6 +55,8 @@ end
 end
 
 function dist = distByPeak(binCenters,fieldA,fieldB)
+    midInd = floor(numel(binCenters)/2)+1;
+    binCenters(midInd:end) = binCenters(1:(midInd-1));
     peakB = binCenters(find(fieldB == max(fieldB),1,'first'));
     peakA = binCenters(find(fieldA == max(fieldA),1,'first'));
 %    warning('check comment on next line is true');

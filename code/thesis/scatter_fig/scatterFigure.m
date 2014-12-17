@@ -175,9 +175,9 @@ function dat = defaultExampleData(d,m)
         dat.fields = [11,15,16];
         dat.ok_directions = {'outbound'};
         %dat.okPair = 'medial,lateral';
-        dat.okPair = 'any,any';  % Pair-restriction is only for CA3/CA1
+        dat.okPair = 'CA1,CA1';  % Pair-restriction is only for CA3/CA1
         dat.rasterTWins = [5645.5, 5647.5; 5809.2,5809.9]';
-        dat.trode_groups_style = 'ml';
+        dat.trode_groups_style = 'areas';
     elseif(strContains(m.pFileName,'yolanda'))
         dat.fields=[1,2,3];
         dat.ok_directions = {'outbound','inbound'};

@@ -12,6 +12,9 @@ p.addParamValue('segment_style',[]);
 p.parse(varargin{:});
 opt = p.Results;
 
+origDir = pwd;
+
+cd(m.basePath);
 if(isempty(p.Results.timewin))
     timewin = m.loadTimewin;
 else
@@ -97,6 +100,7 @@ if(~m.checkedArteCorrectionFactor)
         'This day''s correction factor hasn''t been checked');
 end
 
+cd(origDir);
 end
 
 function a = lfun_args(m)
