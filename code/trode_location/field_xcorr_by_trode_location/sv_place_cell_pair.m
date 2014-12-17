@@ -34,6 +34,7 @@ data.n               = p.Results.n;
 data.d               = d;
 data.sdat            = place_cells;
 data.fields          = fields;
+data.fieldCells      = fieldCells;
 data.fieldDists      = fieldDists;
 data.anatomicalDists = anatomicalDists;
 data.xCorrDists      = xCorrDists;
@@ -53,6 +54,8 @@ end
 
 function localfn_plots(f)
   dat = guidata(f);
+  disp(['m: ', dat.fieldCells{dat.m}]);
+  disp(['n: ', dat.fieldCells{dat.n}]);
   subplot(2,4,1); localfn_plot_trode_pos(dat.m,dat.n,dat.d);
   subplot(2,4,3); localfn_plot_xcorr(dat.m,dat.n,dat.xCorrMat,dat.xCorrDists);
   subplot(2,4,2); localfn_plot_field(dat.m,dat);
@@ -87,13 +90,13 @@ function localfn_plot_scatter(m,n,fieldDists,tDists,xCorrR)
     plot(fieldDistsFlat,tDistsFlat,'.');
     hold on;
     if (~isnan(fieldDists(m,n)) && ~isnan(tDists(m,n)));
-        plot(fieldDists(m,n),tDists(m,n),'o');
-        fieldDists(m,n)
-        tDists(m,n)
+        plot(fieldDists(m,n),tDists(m,n),'r.','MarkerSize',32);
+        disp(['field: ', num2str(fieldDists(m,n)), ...
+              ', time:', num2str(tDists(m,n))]);
     else
-        disp('nan');
+        disp([num2str(m),', ',num2str(n),': nan']);
     end
-    xlim([-1,1]); ylim([-0.05,0.05]);
+    xlim([-1,1]); ylim([-0.1,0.1]);
 end
 
 function localfn_figure_keypress(src,eventdata)
