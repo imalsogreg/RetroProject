@@ -41,20 +41,29 @@ function [f,X_reg,y_reg] = scatterFigure(d,m,varargin)
         okPairs          = opt.okPairs;
     end
     
+    [field_dists,anatomical_dists,xcorr_dists,xcorr_mat] = fillSymmetry(field_dists,anatomical_dists,xcorr_dists,xcorr_mat,opt);
+    
     if(opt.drawExamples)
     f = figure('Color','white','Position',[100,180,640,480]);
-    n = numel(opt.exampleData.fields);
-    for i = 1:n
+    % Drawing the fields, and example rasters for two laps
+    nField = numel(opt.exampleData.fields);
+    nTWin  = size(opt.exampleData.rasterTWins,1);
+    ax = zeros(nField,nTWin);
+    for i = 1:nField
         thisFieldInd = opt.exampleData.fields(i);
         thisCellName = field_cells(thisFieldInd);
-        subplot(n,3,3*(i-1)+1);
+        subplot(nField,3,3*(i-1)+1);
         plotField(thisCellName, d, fields, ...
             opt.exampleData.fields(i));
         hold on;
         for j = 1:size(opt.exampleData.rasterTWins,2);
-            ax(3*(i-1)+1 + (j-1)) = subplot(n,3,3*(i-1)+1 + j);
-            plotRaster(thisCellName, d, opt.exampleData.rasterTWins(:,j));
+            %ax(3*(i-1)+1 + (j-1)) = subplot(nField,3,3*(i-1)+1 + j);
+            ax(i,j) = subplot(nField,nTWin+1,(nTWin+1)*(i-1)+1 + j);
+            plotRaster(thisCellName, d, opt.exampleData.rasterTWins(j,:));
         end
+    end
+    for j = 1:nTWin
+        linkaxes(ax(:,j),'x');
     end
     end
     
@@ -62,13 +71,13 @@ function [f,X_reg,y_reg] = scatterFigure(d,m,varargin)
     pairs  = opt.exampleData.fields(opt.exampleData.comparisons);
     figure('Color',[1,1,1],'Position',[150,90,640,480]);
     nPairs = size(pairs,1);
-    for n = 1:nPairs
-        thisPair = pairs(n,:);
-        subplot(3,nPairs,(n));
+    for nField = 1:nPairs
+        thisPair = pairs(nField,:);
+        subplot(3,nPairs,(nField));
         text(0,0,num2str(field_dists(thisPair(1),thisPair(2))));
-        subplot(3,nPairs,(nPairs+n));
+        subplot(3,nPairs,(nPairs+nField));
         plotXCorr(xcorr_mat,lags,thisPair(1),thisPair(2));
-        subplot(3,nPairs,(2*nPairs)+n);
+        subplot(3,nPairs,(2*nPairs)+nField);
         text(0,0,num2str(anatomical_dists(thisPair(1),thisPair(2))));
     end
     else
@@ -187,6 +196,9 @@ function plotXCorr(xcorrMat,lags,m,n)
     maxX = lags(mInd);
     maxY = thisXCorr(mInd);
     plot(lags(mInd),maxY*1.1,'v');
+    if(isempty(mInd))
+        error('scatterFigure:badXCorr',['No xcorr found for ', num2str(m), ', ', num2str(n)]);
+    end
     ylim([0,maxY*1.2]);
     text(lags(mInd),maxY*1.1,[num2str(floor(maxX*1000)),'ms']);
 end
@@ -205,11 +217,12 @@ function dat = defaultExampleData(d,m)
         dat.rasterTWins = [5645.5, 5647.5; 5809.2,5809.9]';
         dat.trode_groups_style = 'areas';
     elseif(strContains(m.pFileName,'yolanda') && strContains(m.pFileName,'120711'))
-        dat.fields=[14,38,15,34];  % TODO fix % or [14,38] [15,34] fields overlapping distant trodes
-        dat.comparisons = [1,2; 3,4];
+%        dat.fields=[14,38,15,34];  % TODO fix % or [14,38] [15,34] fields overlapping distant trodes
+        dat.fields = [25,38,14];
+        dat.comparisons = [2,1; 3,2];
         dat.ok_directions = {'outbound','inbound'};
         dat.okPair = 'CA1,CA1';
-        dat.rasterTWins = [5000,5001; 5002,5003]; % TODO fix
+        dat.rasterTWins = [6000,7100; 6000,7100]; % TODO fix
         dat.trode_groups_style = 'areas';
         dat.xlim = [-1,1];
         dat.ylim = [-0.5,2];
@@ -225,6 +238,27 @@ function dat = defaultExampleData(d,m)
     end
 end
 
+function [f,a,t,x] = fillSymmetry(f,a,t,x,opt)
+comparisonPairs = opt.exampleData.fields(opt.exampleData.comparisons);
+for r = 1:size(f,1)
+    for c = 1:(r-1)
+        for p = 1:size(comparisonPairs,1)
+            if all(comparisonPairs(p,:) == [r,c])
+                f(r,c) = -1*f(c,r);
+                a(r,c) = -1*a(c,r);
+                t(r,c) = -1*t(c,r);
+                x{r,c} = x{c,r}(end:(-1):1);
+                f(c,r) = NaN;
+                a(c,r) = NaN;
+                t(c,r) = NaN;
+                x{c,r} = NaN;
+            end
+        end
+    end
+end
+            
+
+end
 
 function b = strContains(s,target)
 
