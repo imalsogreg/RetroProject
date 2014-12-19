@@ -1,0 +1,231 @@
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg preserveAspectRatio="xMinYMin meet" width="100%" height="100%" viewBox="0 0 640.000 480.000"   version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <desc>Matlab Figure Converted by PLOT2SVG written by Juerg Schwizer</desc>
+  <rect x="0" y="0" width="640.000" height="480.000" fill="#ffffff" stroke="none" />
+  <g>
+  <clipPath id="ID000000">
+    <rect x="83.200" y="36.000" width="496.000" height="391.200"/>
+  </clipPath>
+      <polyline fill="#ffffff" fill-opacity="1.00" stroke="none" stroke-width="0.5pt" stroke-opacity="1.00" stroke-dasharray="none" points="298.550,427.200 579.200,351.216 363.850,252.191 83.200,328.175 "/>
+      <polyline fill="#ffffff" fill-opacity="1.00" stroke="none" stroke-width="0.5pt" stroke-opacity="1.00" stroke-dasharray="none" points="579.200,351.216 363.850,252.191 363.850,36.000 579.200,135.025 "/>
+      <polyline fill="#ffffff" fill-opacity="1.00" stroke="none" stroke-width="0.5pt" stroke-opacity="1.00" stroke-dasharray="none" points="83.200,328.175 363.850,252.191 363.850,36.000 83.200,111.984 "/>
+    <g>
+<g clip-path="url(#ID000000)">
+<g>
+<circle cx="367.450" cy="215.685" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="286.451" cy="176.850" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="327.230" cy="274.136" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="407.671" cy="118.319" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="451.923" cy="231.762" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="412.083" cy="200.471" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="412.083" cy="202.633" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="326.153" cy="256.346" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="381.553" cy="250.407" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="487.213" cy="242.077" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="344.005" cy="204.330" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="408.367" cy="221.528" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="350.570" cy="237.748" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="283.536" cy="309.945" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="389.196" cy="303.777" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="434.347" cy="144.130" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="306.318" cy="150.248" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+<circle cx="330.460" cy="258.326" r="5.333" fill="#cccccc" stroke="none" stroke-width="0.5pt" />
+</g>
+</g>
+<g clip-path="url(#ID000000)">
+<g>
+<circle cx="492.353" cy="273.119" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="485.650" cy="268.448" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="452.133" cy="331.571" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="532.574" cy="175.753" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="505.760" cy="256.518" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="505.760" cy="243.546" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="505.760" cy="245.708" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="452.133" cy="314.275" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="465.540" cy="289.026" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="499.057" cy="247.523" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="499.057" cy="275.628" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="492.353" cy="260.148" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="472.243" cy="293.697" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="405.209" cy="365.894" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="438.726" cy="326.553" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="525.871" cy="186.216" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="499.057" cy="238.876" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+<circle cx="452.133" cy="314.275" r="1.000" fill="#0000ff" stroke="none" stroke-width="0.5pt" />
+</g>
+</g>
+<g clip-path="url(#ID000000)">
+<g>
+<circle cx="173.647" cy="268.156" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="99.351" cy="227.507" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="173.647" cy="315.718" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="173.647" cy="181.680" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="244.713" cy="287.863" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="204.873" cy="256.572" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="204.873" cy="258.733" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="172.570" cy="297.928" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="214.564" cy="295.618" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="286.706" cy="296.363" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="143.498" cy="258.616" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="214.564" cy="273.999" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="176.877" cy="284.775" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="176.877" cy="338.822" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="249.020" cy="341.729" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="207.026" cy="205.676" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="105.812" cy="204.534" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+<circle cx="176.877" cy="299.908" r="1.000" fill="#ff0000" stroke="none" stroke-width="0.5pt" />
+</g>
+</g>
+<g clip-path="url(#ID000000)">
+<g>
+<circle cx="407.671" cy="118.319" r="16.000" fill="none" stroke="#0000ff" stroke-width="0.5pt" />
+<circle cx="306.318" cy="150.248" r="16.000" fill="none" stroke="#0000ff" stroke-width="0.5pt" />
+</g>
+</g>
+  <g transform="translate(407.671,121.319)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="start" font-size="8.0pt" fill="#000000" >A vs. B</text>
+    </g>
+  </g>
+<g clip-path="url(#ID000000)">
+      <polyline fill="none" stroke="#0000ff" stroke-width="0.5pt" stroke-dasharray="8pt,2pt" points="407.671,118.319 532.574,175.753 "/>
+<g>
+</g>
+</g>
+<g clip-path="url(#ID000000)">
+      <polyline fill="none" stroke="#0000ff" stroke-width="0.5pt" stroke-dasharray="8pt,2pt" points="407.671,118.319 173.647,181.680 "/>
+<g>
+</g>
+</g>
+  <g transform="translate(306.318,153.248)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="start" font-size="8.0pt" fill="#000000" >A vs. C</text>
+    </g>
+  </g>
+<g clip-path="url(#ID000000)">
+      <polyline fill="none" stroke="#0000ff" stroke-width="0.5pt" stroke-dasharray="8pt,2pt" points="306.318,150.248 499.057,238.876 "/>
+<g>
+</g>
+</g>
+<g clip-path="url(#ID000000)">
+      <polyline fill="none" stroke="#0000ff" stroke-width="0.5pt" stroke-dasharray="8pt,2pt" points="306.318,150.248 105.812,204.534 "/>
+<g>
+</g>
+</g>
+  <g transform="translate(424.700,450.708)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="start" font-size="8.0pt" fill="#000000" >Field Separation (m)</text>
+    </g>
+  </g>
+  <g transform="translate(186.700,444.705)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="end" font-size="8.0pt" fill="#000000" >Anatomical Distance (mm)</text>
+    </g>
+  </g>
+  <g transform="translate(37.700,220.194)">
+    <g transform="rotate(-90.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="middle" font-size="8.0pt" fill="#000000" >Spike time peak offset (ms)</text>
+    </g>
+  </g>
+<g clip-path="url(#ID000000)">
+      <polyline fill="none" stroke="#0000ff" stroke-width="3.0pt" stroke-dasharray="none" points="423.283,355.809 548.017,178.525 "/>
+<g>
+</g>
+</g>
+<g clip-path="url(#ID000000)">
+      <polyline fill="none" stroke="#ff0000" stroke-width="3.0pt" stroke-dasharray="none" points="271.631,305.124 137.038,244.842 "/>
+<g>
+</g>
+</g>
+    </g>
+    <g>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="298.550,427.200 303.934,429.676 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="392.100,401.872 397.484,404.348 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="485.650,376.544 491.034,379.019 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="579.200,351.216 584.584,353.691 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="298.550,427.200 579.200,351.216 "/>
+  <g transform="translate(309.318,440.151)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="middle" font-size="8.0pt" fill="#000000" >-1</text>
+    </g>
+  </g>
+  <g transform="translate(402.868,414.823)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="middle" font-size="8.0pt" fill="#000000" >-0.5</text>
+    </g>
+  </g>
+  <g transform="translate(496.418,389.495)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="middle" font-size="8.0pt" fill="#000000" >0</text>
+    </g>
+  </g>
+  <g transform="translate(589.968,364.167)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="middle" font-size="8.0pt" fill="#000000" >0.5</text>
+    </g>
+  </g>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="298.550,427.200 291.534,429.100 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="244.713,402.444 237.696,404.343 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="190.875,377.688 183.859,379.587 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="137.038,352.931 130.021,354.831 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="83.200,328.175 76.184,330.075 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="298.550,427.200 83.200,328.175 "/>
+  <g transform="translate(284.518,438.999)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="middle" font-size="8.0pt" fill="#000000" >-0.5</text>
+    </g>
+  </g>
+  <g transform="translate(230.680,414.243)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="middle" font-size="8.0pt" fill="#000000" >0</text>
+    </g>
+  </g>
+  <g transform="translate(176.843,389.487)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="middle" font-size="8.0pt" fill="#000000" >0.5</text>
+    </g>
+  </g>
+  <g transform="translate(123.005,364.731)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="middle" font-size="8.0pt" fill="#000000" >1</text>
+    </g>
+  </g>
+  <g transform="translate(69.168,339.975)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="middle" font-size="8.0pt" fill="#000000" >1.5</text>
+    </g>
+  </g>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="83.200,328.175 77.816,325.700 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="83.200,274.128 77.816,271.652 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="83.200,220.080 77.816,217.604 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="83.200,166.032 77.816,163.556 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="83.200,111.984 77.816,109.509 "/>
+      <polyline fill="none" stroke="#000000" stroke-width="0.5pt" stroke-dasharray="none" points="83.200,328.175 83.200,111.984 "/>
+  <g transform="translate(72.432,326.224)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="end" font-size="8.0pt" fill="#000000" >-0.1</text>
+    </g>
+  </g>
+  <g transform="translate(72.432,272.176)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="end" font-size="8.0pt" fill="#000000" >-0.05</text>
+    </g>
+  </g>
+  <g transform="translate(72.432,218.129)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="end" font-size="8.0pt" fill="#000000" >0</text>
+    </g>
+  </g>
+  <g transform="translate(72.432,164.081)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="end" font-size="8.0pt" fill="#000000" >0.05</text>
+    </g>
+  </g>
+  <g transform="translate(72.432,110.033)">
+    <g transform="rotate(-0.0)">
+      <text x="0.000" y="0.000" font-family="Helvetica" text-anchor="end" font-size="8.0pt" fill="#000000" >0.1</text>
+    </g>
+  </g>
+    </g>
+  </g>
+</svg>
