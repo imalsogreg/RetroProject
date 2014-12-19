@@ -10,9 +10,6 @@ function [f,X_reg,y_reg] = scatterFigure(d,m,varargin)
     p.addParamValue('xcorr_mat',[]);
     p.addParamValue('X_reg',[]);
     p.addParamValue('y_reg',[]);
-    p.addParamValue('xlim',[-1,1]);
-    p.addParamValue('ylim',[-2,2]);
-    p.addParamValue('zlim',[-0.1,0.1]);
     p.addParamValue('lags',[]);
     p.addParamValue('okPairs',[]);
     p.addParamValue('drawExamples',[]);
@@ -62,7 +59,7 @@ function [f,X_reg,y_reg] = scatterFigure(d,m,varargin)
     end
     
     if(opt.drawExamples)
-    pairs  = opt.exampleData.fields([1,2; 1,3; 2,3]);
+    pairs  = opt.exampleData.fields(opt.exampleData.comparisons);
     figure('Color',[1,1,1],'Position',[150,90,640,480]);
     nPairs = size(pairs,1);
     for n = 1:nPairs
@@ -70,7 +67,7 @@ function [f,X_reg,y_reg] = scatterFigure(d,m,varargin)
         subplot(3,nPairs,(n));
         text(0,0,num2str(field_dists(thisPair(1),thisPair(2))));
         subplot(3,nPairs,(nPairs+n));
-%        plotXCorr(xcorr_mat,lags,thisPair(1),thisPair(2));
+        plotXCorr(xcorr_mat,lags,thisPair(1),thisPair(2));
         subplot(3,nPairs,(2*nPairs)+n);
         text(0,0,num2str(anatomical_dists(thisPair(1),thisPair(2))));
     end
@@ -105,11 +102,17 @@ function drawScatter(fDists,aDists,xDists,X_reg,y_reg,pairs,okPairs,opt)
     aDists=aDists(okB);
     xDists=xDists(okB);
     plot3(fDists,aDists,xDists,'.','Color',[0.8,0.8,0.8],'MarkerSize',32);
-    hold on;    
-    %dFieldLims = xlim();
-    dAnatomyLims = ylim();
-    dFieldLims = opt.xlim;
-    %dAnatomyLims = opt.ylim;
+    hold on;
+    if(isfield(opt.exampleData,'xlim'))
+        dFieldLims = opt.exampleData.xlim;
+    else
+        dFieldLims = xlim();
+    end
+    if(isfield(opt.exampleData,'ylim'))
+        dAnatomyLims = opt.exampleData.ylim;
+    else
+        dAnatomyLims = ylim();
+    end
     plot3(fDists,dAnatomyLims(1)*ones(size(fDists)), xDists,'b.');
     plot3(dFieldLims(1)*ones(size(aDists)), aDists, xDists,'r.');
     if(opt.drawExamples)
@@ -149,16 +152,16 @@ function plotField(cellName, d, fields, fieldInd)
     thisField = fields{fieldInd};
     domain = d.spikes.clust{1}.field.bin_centers;
     nBin = numel(domain);
-    rangeBack  = thisClust.clust{1}.field.out_rate;
-    rangeFront = thisField(1:nBin);
-    if(max(rangeFront) == 0)
-        rangeBack  = thisClust.clust{1}.field.in_rate;
-        rangeFront = thisClust.clust{1}.field((nBin+1):end);
+    rangeCellFields  = thisClust.clust{1}.field.out_rate;
+    rangeThisField = thisField(1:nBin);
+    if(max(rangeThisField) == 0)
+        rangeCellFields  = thisClust.clust{1}.field.in_rate(end:(-1):1);
+        rangeThisField = thisField((nBin+1):end);
     end
     plot(domain,0,'-k');
     hold on;
-    area(domain,rangeBack,'FaceColor',[0.7,0.7,0.7]);
-    area(domain(rangeFront>0),rangeBack(rangeFront > 0));
+    area(domain,rangeCellFields,'FaceColor',[0.7,0.7,0.7]);
+    area(domain(rangeThisField>0),rangeCellFields(rangeThisField > 0));
     set(gca,'XTick',[]);
     set(gca,'YTick',[]);
 
@@ -195,17 +198,22 @@ function dat = defaultExampleData(d,m)
     end
     if(strContains(m.pFileName,'caillou'))
         dat.fields = [11,15,16];
+        dat.comparisons = [1,2;2,3;1,3];
         dat.ok_directions = {'outbound'};
         %dat.okPair = 'medial,lateral';
         dat.okPair = 'CA1,CA1';  % Pair-restriction is only for CA3/CA1
         dat.rasterTWins = [5645.5, 5647.5; 5809.2,5809.9]';
         dat.trode_groups_style = 'areas';
-    elseif(strContains(m.pFileName,'yolanda'))
-        dat.fields=[20,35,25];  % TODO fix
+    elseif(strContains(m.pFileName,'yolanda') && strContains(m.pFileName,'120711'))
+        dat.fields=[14,38,15,34];  % TODO fix % or [14,38] [15,34] fields overlapping distant trodes
+        dat.comparisons = [1,2; 3,4];
         dat.ok_directions = {'outbound','inbound'};
         dat.okPair = 'CA1,CA1';
         dat.rasterTWins = [5000,5001; 5002,5003]; % TODO fix
         dat.trode_groups_style = 'areas';
+        dat.xlim = [-1,1];
+        dat.ylim = [-0.5,2];
+        dat.zlim = [-0.1,0.1];
     elseif(strContains(m.pFileName,'morpheus'))
         dat.fields=[1,2,3];  % TODO fix
         dat.ok_directions = {'outbound','inbound'};
