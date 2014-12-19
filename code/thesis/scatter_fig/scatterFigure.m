@@ -10,6 +10,9 @@ function [f,X_reg,y_reg] = scatterFigure(d,m,varargin)
     p.addParamValue('xcorr_mat',[]);
     p.addParamValue('X_reg',[]);
     p.addParamValue('y_reg',[]);
+    p.addParamValue('xlim',[-1,1]);
+    p.addParamValue('ylim',[-2,2]);
+    p.addParamValue('zlim',[-0.1,0.1]);
     p.addParamValue('lags',[]);
     p.addParamValue('okPairs',[]);
     p.addParamValue('drawExamples',[]);
@@ -103,8 +106,10 @@ function drawScatter(fDists,aDists,xDists,X_reg,y_reg,pairs,okPairs,opt)
     xDists=xDists(okB);
     plot3(fDists,aDists,xDists,'.','Color',[0.8,0.8,0.8],'MarkerSize',32);
     hold on;    
-    dFieldLims = xlim();
+    %dFieldLims = xlim();
     dAnatomyLims = ylim();
+    dFieldLims = opt.xlim;
+    %dAnatomyLims = opt.ylim;
     plot3(fDists,dAnatomyLims(1)*ones(size(fDists)), xDists,'b.');
     plot3(dFieldLims(1)*ones(size(aDists)), aDists, xDists,'r.');
     if(opt.drawExamples)
@@ -196,16 +201,16 @@ function dat = defaultExampleData(d,m)
         dat.rasterTWins = [5645.5, 5647.5; 5809.2,5809.9]';
         dat.trode_groups_style = 'areas';
     elseif(strContains(m.pFileName,'yolanda'))
-        dat.fields=[1,2,3];
+        dat.fields=[20,35,25];  % TODO fix
         dat.ok_directions = {'outbound','inbound'};
         dat.okPair = 'CA1,CA1';
         dat.rasterTWins = [5000,5001; 5002,5003]; % TODO fix
         dat.trode_groups_style = 'areas';
     elseif(strContains(m.pFileName,'morpheus'))
-        dat.fields=[1,2,3];
+        dat.fields=[1,2,3];  % TODO fix
         dat.ok_directions = {'outbound','inbound'};
         dat.okPair = 'CA1,CA1';
-        dat.rasterTWins = [5000,5001; 5002,5003];
+        dat.rasterTWins = [5000,5001; 5002,5003]; % TODO fix
         dat.trode_groups_style = 'areas';
     else
         error('scatterFigure:noNameMatch',['No default fields for ', m.pFileName]);
