@@ -1,0 +1,19 @@
+* Traveling wave
+** Pairwise xcorr
+
+#+BEGIN_SRC matlab
+
+% Do this on a non-xmonad session, for window sizing.
+% Load example data
+m = yolanda_120711_metadata();
+d = loadData(m,'segment_style','areas');
+scatterFigure(d,m,'okPairs','CA1,CA1','drawExamples',true);
+plot2svg
+plot2svg
+plot2svg
+
+% composite
+
+% copy-paste the printout into regression table
+scatterSummary()
+plot2svg
