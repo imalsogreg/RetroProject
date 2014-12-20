@@ -177,7 +177,7 @@ function plotField(cellName, d, fields, fieldInd)
     hold on;
     area(domain,rangeCellFields,'FaceColor',[0.7,0.7,0.7]);
     area(domain(rangeThisField>0),rangeCellFields(rangeThisField > 0));
-    set(gca,'YTick',[]);
+    %set(gca,'YTick',[]);
 
 end
 
