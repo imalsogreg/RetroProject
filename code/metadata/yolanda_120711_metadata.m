@@ -22,7 +22,7 @@ m.linearize_opts.calibrate_points = [ 134.7  257.8; ...
 
 m.mua_filelist_fn = @yolanda_mua_filelist;
 m.trode_groups_fn = @yolanda_trode_groups;
-m.trode_groups = m.trode_groups_fn('date',m.today);
+m.trode_groups = m.trode_groups_fn('date',m.today,'segment_style','areas');
 
 m.ad_tts = {'24','23','22','21','20','19','17','16','15','27','11','01','30','28','02','26'};
 
