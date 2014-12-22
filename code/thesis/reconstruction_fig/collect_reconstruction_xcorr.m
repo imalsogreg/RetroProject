@@ -1,4 +1,9 @@
-function [xc,steps] = collect_reconstruction_xcorr()
+function [xc,steps] = collect_reconstruction_xcorr(varargin)
+
+p = inputParser();
+p.addParamValue('cleanSlate',false);
+p.parse(varargin{:});
+opt = p.Results;
 
 metadatas = { yolanda_112511_metadata()  ...
             , yolanda_120711_metadata()  ...
@@ -14,7 +19,7 @@ for i = 1:nSessions
     xcData   = [m.basePath,'/rposData.mat'];
     ratDefault = defaultData(m);
     
-    if(~exist(baseData))
+    if(~exist(baseData) || opt.cleanSlate )
         d = loadData(m,'segment_style','ml');
         save(baseData,d);
     else
@@ -23,9 +28,9 @@ for i = 1:nSessions
 
     d.trode_groups = m.trode_groups_fn('date',m.today,'segment_style','ml');
     
-    if(~exist(xcData))
+    if(~exist(xcData) || opt.cleanSlate )
         [rs,steps] = reconstruction_xcorr_shift(d,m,'medial','lateral', ...
-            'only_direction',ratDefault.okDirections,'xcorr_step', 0.05,'posSteps',[-2:1:2]);
+            'only_direction',ratDefault.okDirections,'xcorr_step', 0.0025,'posSteps',[-6:1:6]);
         save(xcData, 'rs','steps');
     else
         load(xcData);
