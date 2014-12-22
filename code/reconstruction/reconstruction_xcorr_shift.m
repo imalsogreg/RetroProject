@@ -6,6 +6,7 @@ p.addParamValue('xcorr_range',0.1);
 p.addParamValue('xcorr_step', 0.005);
 p.addParamValue('r_tau',0.010);
 p.addParamValue('only_direction',[]);
+p.addParamValue('posSteps',[-5:1:5]);
 p.addParamValue('min_vel',0.2);
 p.parse(varargin{:});
 opt = p.Results;
@@ -25,12 +26,11 @@ trigTimes = [trigTimesOut,trigTimesIn];
 rposTrig0 = triggeredBidirect(placeCells0,d.pos_info,trodeGroup0,0,0,opt.min_vel,trigTimes,opt.r_tau,rTimewin,opt.only_direction);
 
 steps = -opt.xcorr_range : opt.xcorr_step : opt.xcorr_range;
-posSteps = -5:1:5;
 
-rs = zeros(numel(posSteps),numel(steps));
+rs = zeros(numel(opt.posSteps),numel(steps));
 
-for p = 1:numel(posSteps)
-    rs(p,:) = arrayfun(@(s) triggeredBidirectCorr(placeCellsTau,d.pos_info,trodeGroupTau,s,posSteps(p),...
+for p = 1:numel(opt.posSteps)
+    rs(p,:) = arrayfun(@(s) triggeredBidirectCorr(placeCellsTau,d.pos_info,trodeGroupTau,s,opt.posSteps(p),...
         opt.min_vel,trigTimes,opt.r_tau,rTimewin,opt.only_direction,rposTrig0),steps);
 end
 
@@ -51,14 +51,16 @@ function rpTrig = triggeredBidirect(placeCells,posInfo,tg,tDelay,posShift,minVel
     rpTrigIn  = gh_triggered_reconstruction(rpIn, posInfo,'min_vel',-minVel,...
         'trig_times',trigTimesIn+tDelay);
 
-    if(strcmp(onlyDir,'outbound') || sum(sum(isnan(rpTrigIn.pdf_by_t))) > 0)
+    if(all(strcmp(onlyDir,'outbound')) || sum(sum(isnan(rpTrigIn.pdf_by_t))) > 0)
         rpTrig = rpTrigOut;
-    elseif(strcmp(onlyDir,'inbound') || sum(sum(isnan(rpTrigOut.pdf_by_t))) > 0)
+    elseif(all(strcmp(onlyDir,'inbound')) || sum(sum(isnan(rpTrigOut.pdf_by_t))) > 0)
         rpTrig = rpTrigIn;
-    elseif(isempty(onlyDir))
+    elseif(isempty(onlyDir) || all(strcmp(onlyDir, {'outbound','inbound'})) || all(strcmp(onlyDir, {'inbound','outbound'})))
         rpTrig = rpTrigOut;
         for n = 1:numel(rpTrig)
-            rpTrig(n).pdf_by_t = rpTrig(n).pdf_by_t .* rpTrigIn(n).pdf_by_t(end:-1:1,:);
+            tOut = rpTrig(n).pdf_by_t;
+            tIn  = rpTrigIn(n).pdf_by_t(end:-1:1,:);
+            rpTrig(n).pdf_by_t = tOut ./ max(max(tOut)) + tIn ./ max(max(tIn));
         end
     else
         error('reconstruction_xcorr_shift:unrecognizedOnlyDirection',...

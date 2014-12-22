@@ -64,7 +64,7 @@ if(~isfield(mua, 'clust'))
 end
 mua.nclust = numel(mua.clust);
 
-trode_groups = opt.trode_groups('date',dateStr);
+trode_groups = opt.trode_groups('date',dateStr,'segment_style','areas');
 
 if(opt.sort)
     all_areas = cmap( @(x) x.name, trode_groups);
