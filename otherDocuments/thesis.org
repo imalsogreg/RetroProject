@@ -108,13 +108,17 @@ The $map$ function in Haskell looks very similar, except that there are no paren
 
 \singlespacing
 
-#+NAME: haskellMap
-#+BEGIN_SRC haskell :results function
-  let topLimit x = if (x > 10) then 10 else x
+#+NAME: haskellMap 
+#+BEGIN_SRC org :tangle haskellMap.hs
+  topLimit x
+    | x > 10    = 10 
+    | otherwise = x  
   print $ map topLimit [1,15,20,3,-2,2]
 #+END_SRC
-#+RESULTS: haskellMap
-| 1 | 10 | 10 | 3 | -2 | 2 |
+#+BEGIN_SRC python :results output
+runhaskell haskellmap.hs
+#+END_SRC
+
 
 \doublespacing
 
