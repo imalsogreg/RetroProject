@@ -42,10 +42,11 @@ if(opt.breakout_chans)
   n_plot = n_r_pos + 1;
   nrow = ceil(sqrt(n_plot));
   for n = 1:n_r_pos
-    subplot(nrow,nrow,n);
+    ax(n) = subplot(nrow,nrow,n);
     lfun_draw(r_pos_array(n),pos, opt);
   end
   subplot(nrow,nrow,n_plot);
+  linkaxes(ax,'x');
 end
 lfun_draw(r_pos_array,pos, opt);
 		    

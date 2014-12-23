@@ -109,15 +109,22 @@ The $map$ function in Haskell looks very similar, except that there are no paren
 \singlespacing
 
 #+NAME: haskellMap 
-#+BEGIN_SRC org :tangle haskellMap.hs
+#+BEGIN_SRC haskell :tangle tangles/haskellMap.hs
+module Main where
+
   topLimit x
     | x > 10    = 10 
     | otherwise = x  
-  print $ map topLimit [1,15,20,3,-2,2]
+
+  main = print( map topLimit [1,15,20,3,-2,2] )
 #+END_SRC
-#+BEGIN_SRC python :results output
-runhaskell haskellmap.hs
+
+#+BEGIN_SRC sh :results output :exports results
+runhaskell tangles/haskellMap.hs
 #+END_SRC
+
+#+RESULTS:
+| [1 | 10 | 10 | 3 | -2 | 2] |
 
 
 \doublespacing
@@ -224,13 +231,85 @@ In this listing, the function $length$ is defined by parts. The length of the em
 
 \doublespacing
 
-Using recursion, we described the length of the list, rather than computing it with iteration, as would be normal in Python for example:
+Using recursion, we described the length of the list, rather than computing it with iteration as we would in Python:
 
-#+BEGIN_SRC python
+\singlespacing
+
+#+BEGIN_SRC python :results output :exports both
 def listLength(x):
-    i = 0
-    l = x.copy()
-    while
+    nElem = 0
+    for i in x:
+        nElem = nElem + 1
+    return nElem 
+
+print listLength('Hello iteration.')
+#+END_SRC
+
+#+RESULTS:
+: 16
+
+\doublespacing
+
+The differences between declarative and traditional styles becomes more clear when we combine pieces together into larger programs. Let's try to take the product of the first 10 elemnts of the Fibbonacci sequence.
+
+\singlespacing
+
+#+BEGIN_SRC python :results output :exports both
+def listProduct(xs):
+    acc = 1
+    for n in xs:
+        acc = acc * n;
+    return acc
+
+def makeFibbonacci(nElems):
+    fibs = [1,1]
+    for n in range(2,nElems):
+        fibs.insert(n,fibs[n-1] + fibs[n-2])
+    return fibs
+
+print listProduct(makeFibbonacci(10))
+
+#+END_SRC
+
+#+RESULTS:
+: 122522400
+
+\doublespacing
+
+This works, but it's a little unsatisfying to have to say how to build an array filled with Fibbonacci numbers, instead of describing the series itself, and that the definition is tangled up with an arbitrary detail, the length of the list we want to produce. What would happen if we needed the $1000000000$th number, and the array didn't fit it memory? Should we have used something more complicated like a generator, to produce Fibbonacci numbers without using increasing amounts of memory? This would force any users of $makeFibbonacci$ to consume streams. In Haskell, we use recursion to declare what Fibbonacci numbers are:
+
+\singlespacing
+
+#+BEGIN_SRC haskell :tangle tangles/fib.hs
+fibs :: [Integer]
+fibs = [1,1] ++ (zipWith (+) fibs (tail fibs))
+#+END_SRC
+
+\doublespacing
+
+Translating this into English, $fibs$ is the list [1,1] followed by the list-wise sum of $fibs$ with $fibs$ less its first element. The surprising fact that we can define a value in terms of itself comes from the fact that, in math, we don't need to know the entire list $fibs$ in order to apply a function to $fibs$, we only need to know enough about $fibs$ to satisfy what will be used by the function. Here $fibs$ is defined as a seed and a function that only needs the seed in order to produce the next value. But this is an implementation detail. From the point of view of the programmer, we have our hands on a value $fibs$ that is indistinguiquasble from the entire infinite series. Trying to take the product of the list will take infinite time, not because our definition is infinite, but because we are doing something infinite. On the other hand, we can do something finite with something infinite, and it will take only finite time.
+
+\singlespacing
+
+#+BEGIN_SRC haskell :tangle tangles/fibprod.hs
+module Main where
+
+fibs = [1,1] ++ (zipWith (+) fibs (tail fibs))
+prodFibs n = product (take n fibs)
+main = print(prodFibs 10)
+#+END_SRC
+
+#+BEGIN_SRC sh :results output :exports results
+runhaskell tangles/fibprod.hs
+#+END_SRC
+
+#+RESULTS:
+: 122522400
+
+\doublespacing
+
+This property of being able to apply functions to arguments when the arguments aren't fully known is called $laziness$, and it is one of the main features allowing declarative programming style and the combination of diverse software components into large programs. Combining infinite things with other infinite things in finite time, and decoupling mathematical models from details about how many elements to generate, are central to that. For an excellent discussion of functional programming's role as a glue layer between large components see Why Functional Programming Matters [@hughes1989functional].
+
 *** Avoiding bugs by lifting program logic into types, compiler catches mistakes early
 
 *** Concurrency - difficulty of running multiple threads simultaneously

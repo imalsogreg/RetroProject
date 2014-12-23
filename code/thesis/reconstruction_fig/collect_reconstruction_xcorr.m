@@ -19,19 +19,18 @@ for i = 1:nSessions
     xcData   = [m.basePath,'/rposData.mat'];
     ratDefault = defaultData(m);
     
-    if(~exist(baseData) || opt.cleanSlate )
-        d = loadData(m,'segment_style','ml');
-        save(baseData,d);
-    else
-        load(baseData);
-    end
-
-    d.trode_groups = m.trode_groups_fn('date',m.today,'segment_style','ml');
-    
     if(~exist(xcData) || opt.cleanSlate )
-        [rs,steps] = reconstruction_xcorr_shift(d,m,'medial','lateral', ...
-            'only_direction',ratDefault.okDirections,'xcorr_step', 0.0025,'posSteps',[-6:1:6]);
-        save(xcData, 'rs','steps');
+        if(~exist(baseData) || opt.cleanSlate )
+            d = loadData(m,'segment_style','ml');
+            save(baseData,d);
+        else
+            load(baseData);
+        end
+
+        d.trode_groups = m.trode_groups_fn('date',m.today,'segment_style','ml');
+            [rs,steps] = reconstruction_xcorr_shift(d,m,'medial','lateral', ...
+                'only_direction',ratDefault.okDirections,'xcorr_step', 0.0025,'posSteps',[-6:1:6]);
+            save(xcData, 'rs','steps');
     else
         load(xcData);
     end
