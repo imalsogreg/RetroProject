@@ -4,11 +4,10 @@ function f = reconstruction_fig()
 
 % Get reconstruction example
 m = caillou_112812_metadata(); % Don't change this anymore!
-exampleTimewin = [5723.5,5725];
+exampleTimewin = [5724,5724.75];
 m.linearize_opts.click_points = ...
-    [174.4116  192.9724  208.9106  221.6207  233.9274  248.2515  254.3040  258.5407  256.7249  252.2865  246.0323  237.5588  228.4802  218.3927  205.0773  185.3060  166.7451  152.0175  136.4829  123.1675  109.0451  101.1769   94.1157   87.4580   81.4055   76.1601   72.5286   70.1076   69.0989   70.7128   73.9408   79.7915   86.6510   91.8964   98.1506  104.6066  112.2730  119.7377  128.2112  137.6933  148.9913  159.4822  167.7539  174.2098; ...
-     228.7863  223.9527  216.4339  209.4522  200.8593  180.9882  165.9506  140.1719  113.8561   99.8926   84.3179   74.6509   62.2986   53.1686   47.2610  39.7422   34.3716   34.3716   39.2052   44.5757   53.1686   59.0763   68.2062   77.3362   88.6144   99.8926  109.5596  124.0602  135.3383  149.8389  164.8765  176.6917  186.3588  193.3405  200.8593  207.8410  213.7487  218.0451  223.9527  227.7121  229.8604  229.8604  228.2492  228.2492]';  
-m.linearize_opts.click_points = m.linearize_opts.click_points(:,end:-1:1); % because the above paste is backwards...
+    [243.0061  247.6463  251.4795  255.5145  256.7249  258.5407  257.9354  255.1110  252.0847  247.8480  243.0061  238.1641  233.1204  226.2609  220.6120  212.9455  206.4896  200.6389  195.1917  188.1305  180.4640  171.7888  162.9119  152.8245  143.5440  133.2549  125.3867  117.9220  110.8608  104.6066  97.3436   90.6859   84.0282   76.9670   73.3356   69.9059   69.9059   71.7216   76.1601   82.0108   87.8615   93.3087   99.5629  108.4398  115.5010 123.7727  133.8601  141.9301  149.5965  158.8769  166.3416  175.2186  183.0868  191.5602  199.4284  208.1036  216.5770  222.4277  227.8749  233.3221  238.7693  242.4008;...
+     80.5585   86.4662   95.5961  106.8743  116.0043  133.7272  147.6907  160.0430  168.6359  177.7658  186.8958  193.3405  200.8593  206.2299  209.9893    214.8228  218.5822  220.1933  222.8786  226.1010  226.1010  226.6380  229.8604  228.7863  226.6380  223.9527  222.3416  218.5822  211.0634  205.1557  199.2481  193.3405  184.2105  171.3212  156.8206  141.2460  124.0602  111.7078   97.2073   86.4662   75.7250   69.2803   61.7615   55.8539   49.4092 43.5016   39.7422   38.1310   34.9087   35.4458   35.4458   37.5940   38.6681   41.3534   43.5016   46.1869   52.0945   54.7798   59.0763   64.9839   73.0397   78.4103]';      
 
 dataPath   = [m.basePath,'/rposExampleData.mat'];
 rposXCPath = [m.basePath,'/rposData.mat'];
@@ -33,4 +32,43 @@ d.trode_groups{2}.color = [0,1,0];
 
 rpos = decode_pos_with_trode_pos(d.spikes,d.pos_info,...
     d.trode_groups,'r_tau',0.020,'field_direction','outbound');
+
+[rpTrig,trigTimesOut] = gh_triggered_reconstruction(rpos,...
+    d.pos_info,'lfp',d.thetaRaw,'min_vel',0.2);
+
+rpTrig(1).pdf_by_t = rpTrig(1).pdf_by_t .^2;  % Enhance color diff
+rpTrig(2).pdf_by_t = rpTrig(2).pdf_by_t .^2;
+
+subplot(1,2,1);
+
+plot_rpos_and_fe_raster(rpos,d.spikes,d.pos_info,...
+    'trode_groups',d.trode_groups,'split_plots',false,...
+    'color_by_group',true);
+ylim([0,2.5]);
+xlim(exampleTimewin);
+hold on;
+eegExample = contwin(contchans(d.eeg_r.theta,'chanlabels',m.singleThetaChan),...
+    exampleTimewin);
+
+lfpY = eegExample.data * 5 + 0.75;
+plot(conttimestamp(eegExample),lfpY);
+
+boxH = 0.75;
+boxW = 0.10;
+
+tt = gh_points_in_segs(trigTimesOut,{exampleTimewin});
+for i = 1:numel(tt)
+    thisX = tt(i);
+    thisY0 = interp1(conttimestamp(eegExample),lfpY,tt(i));
+    thisY1 = interp1(conttimestamp(d.pos_info.lin_cdat),...
+        d.pos_info.lin_cdat.data,tt(i)) - boxH/2;
+    plot([thisX,thisX],[thisY0,thisY1]);
+    rectangle('Position',[thisX-boxW/2, thisY1, boxW, boxH]);
+end
+
+subplot(2,4,3);
+plot_multi_r_pos(rpTrig(1), d.pos_info, 'norm_c',true);
+plot_multi_r_pos(rpTrig(2), d.pos_info, 'norm_c',true);
+
+subplot(2,2,4);
 

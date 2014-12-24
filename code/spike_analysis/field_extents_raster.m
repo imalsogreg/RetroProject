@@ -7,7 +7,8 @@ function h = field_extents_raster( place_cells, fe, varargin )
 p = inputParser();
 p.addParamValue('inds_to_plot', 1:numel(fe))
 p.addParamValue('timewin',[-Inf,Inf]);
-p.addParamValue('line_width',5);
+p.addParamValue('line_width',2);
+p.addParamValue('Color',[]);
 p.parse(varargin{:});
 opt = p.Results;
 
@@ -25,7 +26,11 @@ opt = p.Results;
          ys = [ys, this_ys];
      end
      %plot(xs,ys,'-', 'Color', fe(n).color,'LineWidth',opt.line_width);
-     
-     plot(xs,ys,'-', 'Color', gh_colors(n),'LineWidth',opt.line_width);
+     if(isempty(opt.Color))
+         c = gh_colors(n);
+     else
+         c = opt.Color;
+     end
+     plot(xs,ys,'-', 'Color', c,'LineWidth',opt.line_width);
      hold on;
  end
