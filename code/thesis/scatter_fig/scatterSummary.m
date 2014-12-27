@@ -61,7 +61,7 @@ for i = 1:numel(metadatas)
     bs{i} = b;
     bints{i} = bint;
     pValues{i} = stats(4);
-    
+    nPairs{i} = size(y_reg,1);
 end
 
 i = nDatasets + 1;
@@ -70,6 +70,7 @@ names{i}.basePath = 'total';
 bs{i} = b;
 bints{i} = bint;
 pValues{i} = stats(4);
+nPairs{i} = sum(cell2mat(nPairs(1:nDatasets)));
 
 scatterFigure([],[], 'fieldDists', fldTotal, ...
     'timeDists', timTotal, 'anatomyDists', atyTotal,...
@@ -82,6 +83,7 @@ for i = 1:(nDatasets+1)
    disp(['b: ', num2str(reshape(bs{i},1,[]))]);
    disp(['ci: ' num2str(reshape(bints{i}(:,2) - bs{i},1,[]))]);
    disp(['p: ', num2str(pValues{i})]);
+   disp(['n: ', num2str(nPairs{i})]);
 end
 
 end

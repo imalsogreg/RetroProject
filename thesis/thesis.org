@@ -371,7 +371,7 @@ Behavioral training began when nearly all tetrodes exhibited separable spike clu
 *** Electrophysiological Characterization
 Spikes and local field potentials were voltage buffered and recorded against a common white-matter reference, at 32 kHz and 2kHz respectively, and position was tracked at 15 Hz through a pair of alternating LED's mounted on the headstage, as in (TODO) Davidson et. al. (2009). Spikes were clustered manually using the custom program, xclust3 (M.A.W. TODO). Place fields were computed for each neuron as in Brown Sejnowski et al (TODO), by partitioning the track into 50 to 100 spatial bins, and dividing the number of spikes occurring with the rat in each spatial bin by the amount of time spent in that spatial bin, in each case only counting events when the rat was moving at least 10 cm/second around the track. Direction of running was also taken into account, allowing us to compute separate tuning curves for the two directions of running, which we label 'outbound' and 'inbound'.
 
-To characterize the phase differences among tetrodes in CA1, a simple spatial traveling wave model was fit to the theta-frequency filtered LFP signals and the theta-filtered multiunit firing rate in turn (TODO figure?), as in Lubenov and Spapas (2011 TODO). TODO expand on this.
+To characterize the phase differences among tetrodes in CA1, a simple spatial traveling wave model was fit to the theta-frequency filtered LFP signals and the theta-filtered multiunit firing rate in turn, as in Lubenov and Spapas [@lubenov2009hippocampal]. TODO expand on this.
 
 *** Theta sequences
 Two complementary techniques were used to assess the relationship between phase offsets between tetrodes and timing offsets in spatial information encoding. First, in CA1-only recordings, a pairwise regression was performed similar to that in Dragoi and Buzsaki (TODO 2006), measuring the dependence of short-timescale peak spike time differences on the distance between the peaks of that pair's place fields. We added a second inedpendent variable to this regression: the anatomical distance between each pair of place cells. The result is a model that predicts the average latency between any pair of cells, given that pair's place fields, that pair's anatomical separation, and the parameters of the traveling wave pattern of phase offsets.
@@ -383,11 +383,33 @@ Second, Bayesian stimulus reconstruction (TODO Zhang et. al., 1998) was carried 
 *** Theta phase spatial properties and timing offsets: 20ms delay per mm
 We first characterized the timing of the local-field potential (LFP) theta rhythm within a ~3mm long, 1.5mm wide strip dorsal CA1, in electrodes embedded near the pyramidal cell layer. A traveling wave model was fit to the theta-filtered and Hilbert-transformed signals from 16 to 24 tetrodes, in 0.25 second segments, resulting in a timecourse of traveling theta wave parameters (Figure 1 TODO link). We focus on the parameters that characterize the desynchronization: spatial wavelength, wave propagation direction, and temporal wavelength. 
 
+TODO
+
+#+CAPTION: This is the caption for the next figure link (or table)
+#+NAME:   fig:SED-HR4049
+[[./committeeMeeting/images/fig1a.jpg]]
+
+TODO
+
+#+CAPTION: This is the caption for the next figure link (or table)
+#+NAME:   fig:waveModel
+[[./committeeMeeting/images/fig1b.png]]
+
+
 Each of these parameters vary on a short timescale, but are fairly consistent between animals when averaged across time. Theta frequency during running (which has been reported many times before) varies from 7 $\pm$ 3 (Hz $\pm$ standard deviations) TODO. The spatial wavelength is 10.2 mm $\pm$ with standard deviation of 5 mm, and the dominant propagation direction is 0.3 $\pm$ 20 degrees (mean $\pm$ standard deviation) TODO. The fit of the model was not sigficantly higher during running (r^2^ = 0.7 $\pm$ 0.3) than during stopping periods (0.75 $\pm$ 0.3) when theta amplitude is low, suggesting that traveling waves are a broad enough family to fit many patterns of data (in fact, a traveling wave model will perfectly fit a set of perfectly synchronized oscillators; the spatial wavelength in this case would be infinity).
+
+TODO
+
+#+CAPTION: This is the caption for the next figure link (or table)
+#+NAME:   fig:waveParameters
+[[./committeeMeeting/images/fig1c.png]]
+
 
 To put the parameters of the traveling wave into concrete terms, the peaks of theta in CA1 occur at earlier times in tetrodes closer to the midline, and at later times in more lateral tetrodes. Every millimeter of movement along this axis produces approximately 15 $\pm$ 5ms (TODO) of LFP delay.
 
 Using multiunit firing rate (MUA) instead of LFP to estimate the underlying rhythm produced qualitatively similar results, with some quantitative differences. The goodness-of-fit across many tetrodes to a single traveling wave model was lower for MUA than LFP (r^2 = 0.9 $\pm$ 0.1 (LFP) vs. 0.7 $\pm$ 0.1 (MUA) (TODO FIX)), and the propagation direction was  30 $\pm$ 10 degrees (TODO), more anterior than the LFP. Importantly, the spatial wavelength was approximately half of that estimated from the LFP (5.2 $\pm$ 3.1 mm). These parameters together result in a 30 $\pm$ 10 ms wavefront delay for each millimeter of travel along the direction of wave propagation.
+
+TODO figure
 
 Due to the differences between LFP and MUA estimates, and the tendency for the phase of an individual tetrode to deviate from others unpredictably when tetrodes are near the pyramidal cell layer, we focus the rest of our analysis on the relationship between spike times and a single "reference theta". 
  
@@ -396,9 +418,31 @@ We directly measured the relationship between anatomical spacing and spike timin
 
 These predictions can be generalized beyond cell pairs with perfectly overlapping fields. Field separation will result in a theta-timescale timing shift due to phase precession. The virtual speed of the rat encoded in theta sequences is about 10 m/s, so a cell with a field peaking 0.5 meters beyond that of another cell will tend to spike 50 ms later, simply due to phase precession. If phase precession is paced against the local theta, then anatomical separation on the axis of the traveling wave should add to this delay linearly. We can use simple linear regression to estimate the independent effects of place field spacing and anatomical spacing on spike timing (Figure 2C). 
 
+TODO
+
+#+CAPTION: This is the caption for the next figure link (or table)
+#+NAME:   fig:pairsExplanation
+[[./finalFigs/pairXCorr.png]]
+
 Pooling across several recording sessions with large numbers of simultaneously recorded cells, anatomical distance contributes 0.7 $\pm 3.3 ms per medial-lateral mm.
 Pooling cell pairs across rats, we estimate each meter of place field distance to contribute 20 $\pm$ 6 ms (TODO) of delay and each mm of anatomical spacing along the traveling wave axis contributing 2 $\pm$ 5 ms (TODO). In other words, place cells fire with temporal delays that reflect spatial relationships on the track, and these spiking events are tightly coordinated throughout the measured extent of CA1 (about 3 mm).
 
+TODO
+
+#+CAPTION: This is the caption for the next figure link (or table)
+#+NAME:   fig:pairsSummary
+[[./finalFigs/pairXcorrSummary.png]]
+
+
+#+CAPTION: This is the caption for the next table (or link)
+#+NAME:   tab:basic-data
+| Session   | Anatomical (ms/mm) | Field (ms/m)     | Offset (ms)     | # of Pairs  |
+|---------  | ---------          | -----            | -----           | ----        |  
+|Yolanda A  |  -7.0 $\pm$ 13.9   | 101.2 $\pm$ 20.0 | 7.3 $\pm$ 11.3  | 31          |
+|Yolanda B  |  -1.2 $\pm$ 16.4   | 199.1 $\pm$ 40.9 | 1.2 $\pm$ 11.0  | 18          |
+|Morpheus   |  0.9 $\pm$ 3.3     | 163.1 $\pm$ 20.7 | -2.1 $\pm$ 5.2  | 38          |
+|Caillou    |  18.6 $\pm$ 12.8   | 198.1 $\pm$ 25.1 |  6.4 $\pm$ 7.9  | 19          |
+|\textbf{Total} |  \textbf{0.7 $\pm$ 3.3} | \textbf{147.4 $\pm$ 14.2} | \textbf{-0.4 $\pm$ 3.5} | \textbf{106} |
 
 
 *** Ensemble theta sequences are synchronized
@@ -407,6 +451,11 @@ To assess the impact of anatomical distance on spatial representations from anot
 Within CA1, we partitioned cells into three groups according to the tetrode they were recorded on, then discarded the middle group, leaving two groups separated by a millimeter at their closest point, two millimeters on average. We then reconstructed the rat's location twice, once from each set of tetrodes, at a 10ms (TODO) temporal scale suitable for observing theta sequences. This division of units into independent groups drastically degrades the appearance of ongoing theta sequences, because the reconstruction process at such short timescales requires input from a large number of neurons. But clear theta sequences can be recovered by combining segments of the position reconstruction, aligned in time by peaks of the theta rhythm, and in space by the rat's current track position.
 
 Using cross-correlations between the reconstructed theta sequences from different parts of hippocampus, we asked whether theta sequences are aligned with one another, or separated in time by a degree suggested by the timing of the local underlying theta rhythms. The peak of this cross correlation occurs when septal CA1 leads temporal CA1 by 10 $\pm$ 5 ms in time and lags 0.1 $\pm$ 0.01 (TODO) meters in space.
+
+#+CAPTION: This is the caption for the next figure link (or table)
+#+NAME:   fig:sequences
+[[./finalFigs/sequences.png]]
+
 
 (TODO) Characterize time cross-correlation upward-diagonal skew.
 
@@ -567,6 +616,11 @@ Kloosterman et. al.'s algorithm requires the comparison of recently-received spi
    -  Tracking of rat's position
    -  Appearance of theta sequences
    -  Appearance of replay
+
+#+CAPTION: This is the caption for the next figure link (or table)
+#+NAME:   fig:decodingExamples
+[[./finalFigs/headToHeadDecoding.png]]
+
 
 *** Decoding speed and realtime requeriments
 *** Bugs, deadlocks, crashes and refactorings
