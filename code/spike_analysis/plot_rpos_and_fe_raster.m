@@ -18,7 +18,7 @@ if(opt.split_plots)
         'extent_size_override', 0.1, 'max_fields', 1));
     linkaxes(ax,'x');
 else
-    plot_multi_r_pos(r_pos, pos_info, 'timewin', opt.timewin);
+    plot_multi_r_pos(r_pos, pos_info, 'timewin', opt.timewin,'norm_c',true,'e',1.5);
     if(opt.color_by_group)
        for g = 1:numel(opt.trode_groups)
            keepCell = ...

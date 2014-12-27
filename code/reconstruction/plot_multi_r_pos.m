@@ -116,7 +116,7 @@ function lfun_draw(r_pos,pos, opt)
   end
 	   
   if(opt.draw_centermarks)
-    plot([0 0],[-.25 .25],'w-');
+    plot([0 0],[-.1 .1],'w-');
     hold on;
     plot([-0.05 0.05],[0 0],'w-');
   end
