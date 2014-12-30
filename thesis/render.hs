@@ -20,12 +20,16 @@ buildFileDir = "build"
 
 cmd f fmt  =
   "pandoc -o " ++ (buildFileDir </> f') ++
-  " --latex-engine=xelatex -H preamble.tex --toc --bibliography background.bib --bibliography theta.bib --csl=plos.csl " ++
+  " --latex-engine=xelatex -H preamble.tex " ++
+  "--toc --bibliography background.bib " ++
+  "--bibliography theta.bib --csl=plos.csl " ++
+  "-V geometry:margin=1in " ++
   (rawFileDir </> f)
   where f' = stripExt f ++ extension fmt
 
 fnExtension :: FilePath -> String
 fnExtension = reverse . takeWhile (/= '.') . reverse
+
 ------------------------------------------------------------------------------
 main = do
   args <- getArgs
