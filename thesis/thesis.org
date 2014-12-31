@@ -417,12 +417,14 @@ TODO
 
 #+CAPTION: This is the caption for the next figure link (or table)
 #+NAME:   fig:SED-HR4049
+#+ATTR_LATEX: :width 5cm
 [[./committeeMeeting/images/fig1a.jpg]]
 
 TODO
 
 #+CAPTION: This is the caption for the next figure link (or table)
 #+NAME:   fig:waveModel
+#+ATTR_LATEX: :width 50px
 [[./committeeMeeting/images/fig1b.png]]
 
 
@@ -484,6 +486,7 @@ Using cross-correlations between the reconstructed theta sequences from differen
 
 #+CAPTION: This is the caption for the next figure link (or table)
 #+NAME:   fig:sequences
+#+ATTR_LATEX: :width 50px
 [[./finalFigs/sequences.png]]
 
 
