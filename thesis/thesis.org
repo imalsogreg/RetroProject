@@ -418,14 +418,14 @@ TODO
 #+CAPTION: This is the caption for the next figure link (or table)
 #+NAME:   fig:SED-HR4049
 #+ATTR_LATEX: :width 5cm
-[[./committeeMeeting/images/fig1a.jpg]]
+[[./finalFigs/brainAndWaves.png]]
 
 TODO
 
 #+CAPTION: This is the caption for the next figure link (or table)
 #+NAME:   fig:waveModel
 #+ATTR_LATEX: :width 50px
-[[./committeeMeeting/images/fig1b.png]]
+[[./finalFigs/waveModel.png]]
 
 
 Each of these parameters vary on a short timescale, but are fairly consistent between animals when averaged across time. Theta frequency during running (which has been reported many times before) varies from 7 $\pm$ 3 (Hz $\pm$ standard deviations) TODO. The spatial wavelength is 10.2 mm $\pm$ with standard deviation of 5 mm, and the dominant propagation direction is 0.3 $\pm$ 20 degrees (mean $\pm$ standard deviation) TODO. The fit of the model was not sigficantly higher during running (r^2^ = 0.7 $\pm$ 0.3) than during stopping periods (0.75 $\pm$ 0.3) when theta amplitude is low, suggesting that traveling waves are a broad enough family to fit many patterns of data (in fact, a traveling wave model will perfectly fit a set of perfectly synchronized oscillators; the spatial wavelength in this case would be infinity).
@@ -434,7 +434,7 @@ TODO
 
 #+CAPTION: This is the caption for the next figure link (or table)
 #+NAME:   fig:waveParameters
-[[./committeeMeeting/images/fig1c.png]]
+[[./finalFigs/waveTimecourse.png]]
 
 
 To put the parameters of the traveling wave into concrete terms, the peaks of theta in CA1 occur at earlier times in tetrodes closer to the midline, and at later times in more lateral tetrodes. Every millimeter of movement along this axis produces approximately 15 $\pm$ 5ms (TODO) of LFP delay.
