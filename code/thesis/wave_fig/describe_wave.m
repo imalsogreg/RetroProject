@@ -27,8 +27,21 @@ end
 [f1] = drawBrainAndExampleWaves(d,m,opt.brainPicPath,opt.timewin,opt.upleft_chanlabels);
 f2 = figure; text(0,0,'RetroProject/code/thesis/wave_fig/figure_draft');
 [f3,eeg_wave] = drawTimeseries(d,m,opt.fitTimewin);
-f4 = 0;
 
+modelPath = [m.basePath,'/wave_model.mat'];
+if(exist(modelPath))
+    load(modelPath)
+else
+    error('describe_wave:not_implemented',...
+        'Error, not implemented computer wave model in figure');
+end
+
+pOffset = predicted_time_offset(beta,'anatomical_axis',[1,0]);
+allRunSegs = [d.pos_info.out_run_bouts; d.pos_info.in_run_bouts];
+pIsOk = gh_points_are_in_segs(beta.timestamps,allRunSegs)
+bins = linspace(-0.5,0.5,200)
+
+f4 = 0;
 
 end
 
@@ -162,7 +175,7 @@ function [chanLabels,tWin,fitTWin] = ratDefaults(m)
 
      if(strContains(m.basePath,'morpheus'))
          chanLabels = {'24','17','12'};
-         tWin = [904.17 904.7]; % TODO is rat running now?
+         tWin = [904.17 904.7]; % TODO is rat running now? Kind of, not great.
          fitTWin = [885,920];
      else
          error('ratUpLeftChans:noLabelData',['Don''t know which ',...
