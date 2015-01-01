@@ -22,7 +22,8 @@ cmd f fmt  =
   "pandoc -o " ++ (buildFileDir </> f') ++
   " --latex-engine=xelatex -H preamble.tex " ++
   "--toc --bibliography background.bib " ++
-  "--bibliography theta.bib --csl=plos.csl " ++
+  "--bibliography ../theta.bib --bibliography ../template.bib " ++
+  "--csl=plos.csl " ++
   "-V geometry:margin=1.25in " ++
   (rawFileDir </> f)
   where f' = stripExt f ++ extension fmt
