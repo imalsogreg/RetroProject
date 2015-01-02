@@ -1,62 +1,38 @@
 function [slope,intercept] = heatRegress(xLims,yLims,heats,varargin)
+% This function is extremely specific to the theta sequence
+% cross correlation
 
 p = inputParser();
-%p.addParamValue('nSamples',5000);
-%p.addParamValue('draw',false);
+p.addParamValue('yRangeToFit',[-0.1,0.1]);
+p.addParamValue('smooth',5);
+p.addParamValue('draw',false);
 p.parse(varargin{:});
 opt = p.Results;
 
-maxH = max(max(heats));
-minH = min(min(heats));
-normalizedHeats = (heats - minH) / (maxH - minH);
+ys = linspace(min(yLims),max(yLims),size(heats,1));
+xs = linspace(min(xLims),max(xLims),size(heats,2));
 
-nSampsPerBin = opt.nSamples / (numel(heats)) / mean(mean(normalizedHeats));
+yIndsToUse = find( ys >= opt.yRangeToFit(1) & ys <= opt.yRangeToFit(2));
+ysToUse = ys(yIndsToUse);
 
-nRows = size(heats,1);
-nCols = size(heats,2);
+xsAtYs = zeros(size(yIndsToUse));
 
-rowCenters = linspace(yLims(1),yLims(2),nRows);
-dRow = mean(diff(rowCenters));
-rowEdges = bin_edges_to_centers(rowCenters);
-colCenters = linspace(xLims(1),xLims(2),nCols);
-dCol = mean(diff(colCenters));
-colEdges  = bin_centers_to_edges(colCenters);
-
-sampsInBins = arrayfun(@(x) genSamples(x,nSampsPerBin), normalizedHeats,'UniformOutput',false);
-
-sampsX = nan .* ones(1,opt.nSamples * 10);
-sampsY = sampsX;
-nAccum = 0;
-for r = 1:nRows
-    for c = 1:nCols
-        thisNSamps = numel(sampsInBins{r,c});
-        sampsX(nAccum+1:(nAccum+thisNSamps)) = colCenters(c) .* ones(1,thisNSamps);
-        sampsY(nAccum+1:(nAccum+thisNSamps)) = rowCenters(r) .* ones(1,thisNSamps);
-        nAccum = nAccum + thisNSamps;
-    end
+for n = 1:numel(yIndsToUse)
+    
+    thisYs = smooth(heats(yIndsToUse(n),:), opt.smooth);
+    xsAtYs(n) = xs( find(max(thisYs) == thisYs, 1, 'first'));
+    
 end
-sampsX = sampsX(1:nAccum);
-sampsY = sampsY(1:nAccum);
 
-sampsX = sampsX + dCol/5.*randn(1,numel(sampsX));
-sampsY = sampsY + dRow/5.*randn(1,numel(sampsY));
-
-b = regress(sampsY', [sampsX',ones(size(sampsX'))]);
+b = regress(ysToUse',[xsAtYs',ones(size(xsAtYs'))]);
 slope = b(1);
 intercept = b(2);
+xIntercept = -intercept/slope;
 
 if(opt.draw)
-   imagesc(xLims,yLims,heats);
-   hold on;
-   set(gca,'YDir','normal');
-   plot(sampsX,sampsY,'.');
-end
-
-end
-
-function samps = genSamples(prob, nSampsPerBin)
-
-  samps = rand(1,ceil(nSampsPerBin));
-  samps = samps(samps <= prob);
-
+    imagesc(xLims,yLims,heats);
+    set(gca,'YDir','normal');
+    hold on;
+    plot(xsAtYs,ysToUse,'.');
+    plot(xLims, xLims*b(1) + b(2));
 end
