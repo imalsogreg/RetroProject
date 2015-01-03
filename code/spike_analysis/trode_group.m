@@ -1,3 +1,11 @@
 function g = trode_group( tName, trode_groups )
 
-g = trode_groups{ cellfun(@(x) any(strcmp(x.trodes, tName)), trode_groups) };
+isOk = cellfun(@(x) any(strcmp(x.trodes,tName)), trode_groups);
+if(sum(isOk) == 0)
+    g = cell(0);
+    return;
+elseif(sum(isOk) > 1)
+    error('trode_group:too_many','Too many matches');
+else
+    g = trode_groups{ cellfun(@(x) any(strcmp(x.trodes, tName)), trode_groups) };
+end

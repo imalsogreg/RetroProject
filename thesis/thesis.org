@@ -429,19 +429,19 @@ These parameters vary on a short timescale but are fairly consistent between ani
 *** Place cell pairs are synchronized across anatomical space
 We directly measured the relationship between anatomical spacing and spike timing in pairs of place cells. If two cells with the same place field and phase precession profile are separated by a spatial interval corresponding to a 13ms delay between theta peaks, two fast-timescale timing relationships are possible. Either phase precession is locked to to the local theta oscillation, and spikes from the cell 1mm 'downstream' with respect to the traveling wave will occur 13ms later than those of the upstream cell (Figure 3). Alternatively, if phase precession disregards the anatomical delays of theta phase, then spikes from the two cells should fire roughly in synchrony. Other timing relationships are possible of course, but it is not clear what they would imply mechanistically.
 
-These predictions can be generalized beyond cell pairs with perfectly overlapping fields. Field separation will result in a timing shift due to phase precession. The virtual speed of the rat encoded in theta sequences is about 10 m/s, so a cell with a field peaking 0.5 meters beyond that of another cell will tend to spike 50 ms later. If phase precession is paced against the local theta, then anatomical separation on the axis of the traveling wave should add to this delay linearly. We can estimate the effects of place field spacing and anatomical spacing on spike timing by linear regression (Figure 3).
-
 #+CAPTION: \textbf{Assessing the effect of tuning curves and anatomical location on spike timing.} \textbf{A.} Three place cells with partly overlapping fields. Tuning curves are plotten in the left column. In the center and right columns are a raster plot of several seconds, and a several hundred millisecond detail. \textbf{B.} Cell A's place field peak is 25 cm beyond Cell B's, its anatomical position is 0.66 mm more lateral, and it tends to fire 74 ms later (the peak offset of the cross correlation of the two spike trains). Cell A's place field peak is 7 cm beyond Cell C's, its anatomical position is 1.29 mm more lateral, and it tends to fire 24 ms later. \textbf{C.} A scatterplot of all pairs of place fields (gray dots), taking the peak time offset between the spike trains as a function of both place field distance and anatomical distance. Projecting all of the points to one axis shows the correlation between field distance and time offset due to theta sequences (blue). Projecting onto the other axis shows the much weaker correlation between anatomical offset and timing offset (red).
 #+NAME:   fig:pairsExplanation
 [[./finalFigs/pairXCorr.png]]
 
-Pooling across several recording sessions with large numbers of simultaneously recorded cells, anatomical distance contributes 0.7 $\pm 3.3 ms per medial-lateral mm.
-Pooling cell pairs across rats, we estimate each meter of place field distance to contribute 20 $\pm$ 6 ms (TODO) of delay and each mm of anatomical spacing along the traveling wave axis contributing 2 $\pm$ 5 ms (TODO). In other words, place cells fire with temporal delays that reflect spatial relationships on the track, and these spiking events are tightly coordinated throughout the measured extent of CA1 (about 3 mm).
+These predictions can be generalized beyond cell pairs with perfectly overlapping fields. Field separation will result in a timing shift due to phase precession. The virtual speed of the rat encoded in theta sequences is about 10 m/s, so a cell with a field peaking 0.5 meters beyond that of another cell will tend to spike 50 ms later. If phase precession is paced against the local theta, then anatomical separation on the axis of the traveling wave should add to this delay linearly. We can estimate the effects of place field spacing and anatomical spacing on spike timing by linear regression (Figure 3).
 
 #+CAPTION: \textbf{Field location is the primary determinant of spike time offsets.} The scatterplot of the previous figure, combining all cell pairs (gray) from four recording sessions, considering timing offsets (z-axis) as a function of both place field distance (right axis) and anatomical distance (left axis). Projecting the points onto one axis shows a strong correlation between field distance and timing offsets (blue) due to theta sequnces. Projecting onto the other axis shows the much weaker correlation between anatomical offset and timing offsets (red).
 #+NAME:   fig:pairsSummary
 [[./finalFigs/pairXcorrSummary.png]]
 
+Pooling cell pairs across rats, we estimate each meter of place field distance to contribute 147.4 $\pm$ 14.2 ms of delay and each mm of anatomical spacing along the traveling wave axis contributing 0.7 $\pm$ 3.3 ms, significatnly less lower than the expected 12.8 ms per mm (p < 0.05). In other words, place cells fire with temporal delays that reflect spatial relationships on the track, and these spiking events are tightly coordinated throughout the measured extent of CA1 (about 3 mm).
+
+#+LaTeX: \pagebreak[3]
 
 #+CAPTION: \textbf{Anatomical separation accounts for relatively little timing offset.} Results of the regression analysis of the previous figure for each recording session. In three of four rats, the isolated effect of anatomical distance of time offsets is less than the 12.8 ms per mm time delay of the theta wave. Pooling cell pairs into a single regression results in a final estimate of 0.7 ms per mm. The effect of field separation on the other hand is reliably in line with previous accounts of theta sequences.
 #+NAME:   tab:basic-data
@@ -457,14 +457,24 @@ Pooling cell pairs across rats, we estimate each meter of place field distance t
 *** Ensemble theta sequences are synchronized
 To assess the impact of anatomical distance on spatial representations from another angle, we turned to population decoding, which provides a direct view of theta seuences as well as spontaneous spatial replay events. 
 
-Within CA1, we partitioned cells into three groups according to the tetrode they were recorded on, then discarded the middle group, leaving two groups separated by a millimeter at their closest point, two millimeters on average. We then reconstructed the rat's location twice, once from each set of tetrodes, at a 10ms (TODO) temporal scale suitable for observing theta sequences. This division of units into independent groups drastically degrades the appearance of ongoing theta sequences, because the reconstruction process at such short timescales requires input from a large number of neurons. But clear theta sequences can be recovered by combining segments of the position reconstruction, aligned in time by peaks of the theta rhythm, and in space by the rat's current track position.
-
-Using cross-correlations between the reconstructed theta sequences from different parts of hippocampus, we asked whether theta sequences are aligned with one another, or separated in time by a degree suggested by the timing of the local underlying theta rhythms. The peak of this cross correlation occurs when septal CA1 leads temporal CA1 by 10 $\pm$ 5 ms in time and lags 0.1 $\pm$ 0.01 (TODO) meters in space.
-
 #+CAPTION: This is the caption for the next figure link (or table)
 #+NAME:   fig:sequences
-#+ATTR_LATEX: :width 50px
 [[./finalFigs/sequences.png]]
+
+Within CA1, we partitioned cells into three groups according to the tetrode they were recorded on, then discarded the middle group, leaving two groups separated by a millimeter at their closest point, two millimeters on average. We then reconstructed the rat's location twice, once from each set of tetrodes, at a 15ms temporal scale suitable for observing theta sequences. The division of tetrodes into independent anatomical groups drastically degrades the appearance of ongoing theta sequences, because the reconstruction process at such short timescales requires input from a large number of neurons. But clear theta sequences can be recovered by combining segments of the position reconstruction, aligned in time by peaks of the theta rhythm, and in space by the rat's current track position (Figure 5B).
+
+We asked whether the reconstructed theta sequences are aligned with one another in time by taking their two-dimensional cross-correlation. The peak of this cross correlation occurs when septal CA1 leads temporal CA1 by 10 $\pm$ 5 ms in time and lags 0.1 $\pm$ 0.01 (TODO) meters in space.
+
+
+#+CAPTION: \textbf{Theta sequences are aligned in time.} Averege and minimum anatomical distances, along the direction of wave propagation, between place cells in the two groups used for theta sequence decoding. Expected time offsets are derived from the estimated wave delay times the mean spacing. Offsets observed from the mean theta-sequence cross-correlations are close to zero, suggesting that that distant theta sequences are tightly synchronized.
+#+NAME:   tab:basic-data
+| Session   | Mean spacing (mm) | Min spacing (mm) | Expected offset (ms) | Observed offset (ms) |
+|---------  | ---------         | -----            | -----                | ----                 |
+|Yolanda A  |  1.33             | 0.94             | 17.02                | -4.0                 |
+|Yolanda B  |  1.30             | 0.94             | 16.64                | -3.0                 |
+|Morpheus   |  2.27             | 1.47             | 29.06                |  6.0                 |
+|Caillou    |  1.05             | 0.69             | 13.44                |  3.5                 |
+
 
 
 (TODO) Characterize time cross-correlation upward-diagonal skew.
