@@ -75,7 +75,7 @@ The hippocampal ripples have also been found to coordinate in time with cortical
 
 *** Spatial content in CA1 and visual cortex
 
-The specter of cortico-hippocampal information transfer became much more concrete after the report by Ji and Wilson [ji2006coordinated] that hippocampus and cortex express coordinated information content during slow-wave sleep. Surprisingly, single neurons in primary visual cortex (V1) fire spikes at specific locations on a maze, when that maze is instrumented with visual cues on its floor (1 bit per spike in V1, /vs./ 3 bits per spike in hippocampus); and during sleep, the sequence of V1 cells activated by the track spontaneously co-fire in the same order during slow wave sleep, as place cells have been shown to do [@lee2002memory].  @mehta2007cortico
+The specter of cortico-hippocampal information transfer became much more concrete after the report by Ji and Wilson [ji2006coordinated] that hippocampus and cortex express coordinated information content during slow-wave sleep. Surprisingly, single neurons in primary visual cortex (V1) fire spikes at specific locations on a maze, when that maze is instrumented with visual cues on its floor (1 bit per spike in V1, /vs./ 3 bits per spike in hippocampus); and during sleep, the sequence of V1 cells activated by the track spontaneously co-fire in the same order during slow wave sleep, as place cells have been shown to do in slow-wave sleep [@lee2002memory]. When both hippocampus and cortex reexpress in sleep a sequence learned in wake (admittently a rare event, at least with our current recording capabilities), they almost always agree on /what/ sequence to replay [@ji2006coordinated].
 
 ** Haskell
 
@@ -645,23 +645,23 @@ Kloosterman et. al.'s algorithm requires the comparison of recently-received spi
 
 ** Results
 
-*** Decoding quality: theta sequences and replay
+The results of our effort to date are a working real time decoding alrogithm and a proof-of-concept system of supporting infrastructure. The core alrogithm takes advantage of Haskell's highly efficient runtime system and composable concurrency model to combine spiking and positional information in real time and produce a streaming Bayesian estimate of the rat's location. The bandwidth of the system is sufficient for decoding fast-timescale features like theta sequences and sequence replay. The development process itself made critical use of Haskell's type system features, which drastically improve the programmer's ability to reorginaze code and discover logical and typographical errors at the time of program compilation.
 
-   -  Offline position reconstruction compared to online with clusters,
-      online clusterless
-   -  Tracking of rat's position
-   -  Appearance of theta sequences
-   -  Appearance of replay
+*** Decoding fast-timescale features: theta sequences and replay
 
-#+CAPTION: This is the caption for the next figure link (or table)
+Simply decoding the rat's position is a potentially useful engineering goal, but in general the rat's instantaneous position is more conveniently estimated using an overhead camera. The features we are really interested in gaining real time access to are those internal states that deviate from the rat's physical location; and these deviations happen on a very fast timescale - the timescale of theta sequences and sequence replay. Thus one of our primary design goals was to achive a processing bandwidth capable of estimating the rat's position in 20ms time windows. Figure 1 shows a position estimate computed post-hoc (top row), and the estimate derived from real time processing of the same data, at a lower spatial resolution (bottom row). The data set used included 33 place cells recorded on 8 tetrodes. This is combination of spatial resolution and cell count was near the processing limit for our machine, although we expect that the bandwith will increase substantially when the various cell-sorting tasks are split among multiple computers, as they would be in a full recording system. The middle and right pannels show decoded theta sequences and sequence replay respectively.
+
+#+CAPTION: \textbf{Fast time-scale position decoding.} Reconstructed features computed in real time by the ArtE decoder (bottom row) match those derived post-hoc (top row). The features are harder to resolve in the ArtE case because we decoding position at a courser spatial scale (20 cm bins /vs./ 3.5 cm bins), but are still sufficient for the detection of events that would be used as triggers in a closed-loop experiment. Theta sequences (middle) and sequence replay (right) are both recoverable from a typical place cell population in real time.
 #+NAME:   fig:decodingExamples
 [[./finalFigs/headToHeadDecoding.png]]
 
 
 *** Decoding speed and realtime requeriments
+
+
 *** Bugs, deadlocks, crashes and performance debugging
 
-#+CAPTION: \textbf{Memory profiling helps performance debugging.} Most Haskel debugging is performance debugging, because it can be hard to see which parts of a program will accumulate resources over time. The GHC Haskell compiler produced this plot of memory usage over time broken down by module. The runtime system uses the most memory (green). The Histogram module, which is part of the ArtE project, fails to release data and grows linearly with time. These profiles generally make it easy to find the code errors that lead to ramping memory use and program slowdowns.
+#+CAPTION: \textbf{Memory profiling helps performance debugging.} Most Haskel debugging is performance debugging, because it can be hard to see which parts of a program will accumulate resources over time. The GHC Haskell compiler produced this plot of memory usage over time broken down by module. The runtime system uses the most memory (green). The Histogram module (yellow), which is part of the ArtE project, fails to release data and grows linearly with time. These profiles generally make it easy to find the code errors that lead to ramping memory use and program slowdowns.
 #+NAME:   fig:arteDecodeProfile
 [[./finalFigs/arteDecodeProfile.png]]
 
