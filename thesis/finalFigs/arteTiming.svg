@@ -14,7 +14,10 @@
    version="1.1"
    id="svg3329"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="arteTiming.svg">
+   sodipodi:docname="arteTiming.svg"
+   inkscape:export-filename="/home/greghale/Documents/RetroProject/thesis/finalFigs/arteTiming.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <metadata
      id="metadata3617">
     <rdf:RDF>
@@ -23,6 +26,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -60,7 +64,7 @@
      inkscape:window-height="710"
      id="namedview3613"
      showgrid="false"
-     inkscape:zoom="1.1987382"
+     inkscape:zoom="0.59936909"
      inkscape:cx="376.62373"
      inkscape:cy="226.80387"
      inkscape:window-x="0"
