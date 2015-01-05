@@ -72,6 +72,8 @@ Buzsaki [TODO fix name accents] in particular has done a lot of mapping of the e
 ** Sleep states, cortical rhythms, hippocampal-cortical interactions
 
 *** Sleep stages, cortical EEG correlates (spindles, delta, theta)
+
+
 *** Up-down states in vitro, frames of cortical spikes during sleep in vivo
 *** Hippocampal ripples and sleep replay, wake replay
 *** Hippocampal-cortical coordination of ripples/spindles
@@ -648,7 +650,12 @@ Kloosterman et. al.'s algorithm requires the comparison of recently-received spi
 
 
 *** Decoding speed and realtime requeriments
-*** Bugs, deadlocks, crashes and performance debugging p
+*** Bugs, deadlocks, crashes and performance debugging
+
+#+CAPTION: \textbf{Memory profiling helps performance debugging.} Most Haskel debugging is performance debugging, because it can be hard to see which parts of a program will accumulate resources over time. The GHC Haskell compiler produced this plot of memory usage over time broken down by module. The runtime system uses the most memory (green). The Histogram module, which is part of the ArtE project, fails to release data and grows linearly with time. These profiles generally make it easy to find the code errors that lead to ramping memory use and program slowdowns.
+#+NAME:   fig:arteDecodeProfile
+[[./finalFigs/arteDecodeProfile.png]]
+
 
 ** Discussion
 
