@@ -3,26 +3,7 @@
 
 * Overview
 
-Three chapters about populations of neurons in the hippocampus
-coordinating their activity on fine timescales, and how that
-coordination relates to the larger context of hippocampal inputs,
-outputs, and experimental measurements. In the first chapter, explore
-the lack of synchrony in timing of the brain rhythms underlying
-excitatory drive in hippocampal place cells, and the impact of those
-differences on the ability of distant place cells to coordinate reliably
-during population-wide coding events. In the second chapter, describe
-the development of a tool for detecting place cell population coding
-events and using the information they contain to manipulate brain
-activity or behavior experimentally. In the third chapter, describe the
-unexpected transition of retrosplenial cortex into a slow-wave-sleep
-like state during reward consumption, and the timing relationship
-between hippocampal activity and retrosplenial cortex during these
-events. Conclude with a discussion about coordinated encoding that ties
-the three chapters together - how does the sequential nature of coding
-in hippocampus relate to coding in the afferents and efferents - 
-do they also encode information in spike sequences? What experiments 
-using real-time ensemble decoding would help answer those questions?
-
+Three chapters about populations of neurons in the hippocampus coordinating their activity on fine timescales, and how that coordination relates to the larger context of hippocampal inputs, outputs, and experimental measurements. In the first chapter, explore the lack of synchrony in timing of the brain rhythms underlying excitatory drive in hippocampal place cells, and the impact of those differences on the ability of distant place cells to coordinate reliably during population-wide coding events. In the second chapter, describe the development of a tool for detecting place cell population coding events and using the information they contain to manipulate brain activity or behavior experimentally. In the third chapter, describe the unexpected transition of retrosplenial cortex into a slow-wave-sleep like state during reward consumption, and the timing relationship between hippocampal activity and retrosplenial cortex during these events. Conclude with a discussion about coordinated encoding that ties the three chapters together - how does the sequential nature of coding in hippocampus relate to coding in the afferents and efferents - do they also encode information in spike sequences? What experiments using real-time ensemble decoding would help answer those questions?
 
 
 
@@ -72,10 +53,18 @@ Buzsaki [TODO fix name accents] in particular has done a lot of mapping of the e
 ** Sleep states, cortical rhythms, hippocampal-cortical interactions
 
 *** Sleep stages, cortical EEG correlates (spindles, delta, theta)
+Waking and sleep behavioral states are accompanied by very different patterns of neural activity in the cortex and hippocampus. These differences can be more pronounced that the modulations of firing rate associated with encoding sensory information and producing particular motor output. Some are easily detected through the human skull via EEG. They are immediately apparent in the firing patterns of populations of neurons and in the character of local field potentials recorded inside the brain. We study these differences in order to understand the function and mechanistic origins of sleep, as well as to gain clues about how sensory stimuli are processed during waking and shut out during sleep. We would also like to know whether the particular signature activity patterns of sleep have functional roles themselves, or in combination with other sleep-specific events in other brain areas.
+
+Sleep in most animals [@lesku2011ostriches] is divided into two categories [@rechtschaffen1968manual]: slow-wave sleep, named after the EEG oscillation associated with it [@steriade1993thalamocortical]; and REM sleep, named for the associated rapid movement of the eyes [@aserinsky1953regularly]. The latter is also called ``paradoxical sleep"[fn:: Perhaps if most sleep were REM sleep, then our nomenclature would be different, and what is now known as slow-wave sleep would have been called ``paradoxical activity", because sleep itself would no longer be the major discriminator between types of brain activity.], because brain activity during REM sleep so closely resembles brain activity in waking animals and because a relative small fraction of mamallian sleep in REM sleep [@roffwarg1966ontogenetic]. 
+
+Slow-wave sleep in humans can be further divided into four stages that correspond to four levels of depth of sleep and are marked by different combinations of signature EEG events[@rechtschaffen1968manual]. Stage I sleep is drowsiness and it is marked by the appearance of spindles, short bouts of ~10Hz oscillations lasting about a second each and occurring from once a minute to ten times a minute until drowsiness transitions into the next sleep stage. In stage II (TODO) spindles become less freqent and are replaced by occassional k-complexes, large, one-cycle oscillations. Stage III and Stage IV sleep are both deep sleep; they lack spindles altogether, and k-complexes have become part of a 1-4 Hz ``delta oscillation" [@de2000spontaneous], the characteristic rhythm that gives slow-wave sleep its name. Stages III and IV are differentiated by the regularity of the slow waves (they are not very periodic, by the standards of most waves) - in Stage III single cycles will vary in length from 200 ms to 2 s.
 
 
 *** Up-down states in vitro, frames of cortical spikes during sleep in vivo
+Delta oscillations of slow-wave sleep have a clear neural basis, the synchronized spontaneous oscillations of cortical neurons [@steriade2003neuronal]. The extracellural peaks of the slow oscillation correspond to periods of profound hyperpolarization and the complete absence of cortical spiking. Intracellular voltage traces make the non-periodic nature of the slow oscillation more clear; rather than a harmonic oscillation, there is a clear bimodality in the distribution of membrane voltages: ~100ms blocks of -80mV without spiking interspersed between blocks of -60mV with spiking.
+
 *** Hippocampal ripples and sleep replay, wake replay
+
 *** Hippocampal-cortical coordination of ripples/spindles
 *** Spatial content in CA1 and visual cortex
 
@@ -319,6 +308,8 @@ This property of being able to apply functions to arguments when the arguments a
 
 
 
+
+#+LaTeX: \pagebreak[3]
 
 * Coordinated information coding in a desynchronized network
 

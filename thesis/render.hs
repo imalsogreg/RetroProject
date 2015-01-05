@@ -23,6 +23,7 @@ cmd f fmt  =
   " --latex-engine=xelatex -H preamble.tex " ++
   "--toc --bibliography background.bib " ++
   "--bibliography ../theta.bib --bibliography ../template.bib " ++
+  "--bibliography ../sleep.bib " ++
   "--csl=plos.csl " ++
   "-V geometry:margin=1.25in " ++
   (rawFileDir </> f)
