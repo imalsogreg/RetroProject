@@ -658,6 +658,10 @@ Simply decoding the rat's position is a potentially useful engineering goal, but
 
 *** Decoding speed and realtime requeriments
 
+#+CAPTION: \textbf{A timing failure mode.} 
+#+NAME:   fig:arteTiming
+[[./finalFigs/arteTiming.png]]
+
 
 *** Bugs, deadlocks, crashes and performance debugging
 
