@@ -1,6 +1,4 @@
 
-
-
 * Overview
 
 Three chapters about populations of neurons in the hippocampus coordinating their activity on fine timescales, and how that coordination relates to the larger context of hippocampal inputs, outputs, and experimental measurements. In the first chapter, explore the lack of synchrony in timing of the brain rhythms underlying excitatory drive in hippocampal place cells, and the impact of those differences on the ability of distant place cells to coordinate reliably during population-wide coding events. In the second chapter, describe the development of a tool for detecting place cell population coding events and using the information they contain to manipulate brain activity or behavior experimentally. In the third chapter, describe the unexpected transition of retrosplenial cortex into a slow-wave-sleep like state during reward consumption, and the timing relationship between hippocampal activity and retrosplenial cortex during these events. Conclude with a discussion about coordinated encoding that ties the three chapters together - how does the sequential nature of coding in hippocampus relate to coding in the afferents and efferents - do they also encode information in spike sequences? What experiments using real-time ensemble decoding would help answer those questions?
@@ -75,7 +73,7 @@ The hippocampal ripples have also been found to coordinate in time with cortical
 
 *** Spatial content in CA1 and visual cortex
 
-The specter of cortico-hippocampal information transfer became much more concrete after the report by Ji and Wilson [ji2006coordinated] that hippocampus and cortex express coordinated information content during slow-wave sleep. Surprisingly, single neurons in primary visual cortex (V1) fire spikes at specific locations on a maze, when that maze is instrumented with visual cues on its floor (1 bit per spike in V1, /vs./ 3 bits per spike in hippocampus); and during sleep, the sequence of V1 cells activated by the track spontaneously co-fire in the same order during slow wave sleep, as place cells have been shown to do in slow-wave sleep [@lee2002memory]. When both hippocampus and cortex reexpress in sleep a sequence learned in wake (admittently a rare event, at least with our current recording capabilities), they almost always agree on /what/ sequence to replay [@ji2006coordinated].
+The notion of cortico-hippocampal information transfer became much more concrete after the report by Ji and Wilson [ji2006coordinated] that hippocampus and cortex express coordinated information content during slow-wave sleep. Surprisingly, single neurons in primary visual cortex (V1) fire spikes at specific locations on a maze, when that maze is instrumented with visual cues on its floor (1 bit per spike in V1, /vs./ 3 bits per spike in hippocampus); and during sleep, the sequence of V1 cells activated by the track spontaneously co-fire in the same order during slow wave sleep, as place cells have been shown to do in slow-wave sleep [@lee2002memory]. When both hippocampus and cortex reexpress in sleep a sequence learned in wake (admittently a rare event, at least with our current recording capabilities), they almost always agree on /what/ sequence to replay [@ji2006coordinated].
 
 ** Haskell
 
@@ -690,6 +688,9 @@ Simply decoding the rat's position is a potentially useful engineering goal, but
 ** Introduction
 
 *** Cortico-hippocampal sleep interactions, possible role in memory
+Both cortex and hippocampus exhibit interesting forms of structure in sleeping animals. In the hippocampus, a brain rhythm known as a sharp-wave ripple is known to carry information about sequences of locations on a recently visited track [@lee2002memory; @foster2006reverse; @diba2007forward; @davidson2009hippocampal]. The information-richness of these coordinated activity patterns makes us hopeful that there are inroads into understanding the encoding of information and its mechanism of storage. It is thought that cortex has a role in long term information storage, and that sleep is as an important time for memory formation. We study the interactions between hippocampal activity and cortical activity in hopes of understanding the mechanism of information transfer from hippocampus to cortex, and the mechanisms of its long-term storage.
+
+One popular model proposes that memory formation goes in two stages: while animals are awake, sensory information flows through the cortex and into the hippocampus, where it is assembled into short-lived mental models of the various sorts of things to be remembered; and while they are sleeping the hippocampus projects a modelled form of this information back to the cortex, with repetition, for long-term storage [TODO Buzsaki two-stage]. This model serves as a backdrop for designing and interpreting experiments that examine the effect that concrene hippocampal events have on cortex, and that concrete cortical events have on hippocampus.
 
 -  Two phase consolidation model: encode at wake, burn-in during sleep
 -  HPC ripples correlated w/ sleep CTX sleep spindles - communication
@@ -698,6 +699,8 @@ Simply decoding the rat's position is a potentially useful engineering goal, but
    onset
 
 *** Slow wave oscillations cleanly destinguish between sleeping and awake cortex
+The most striking feature of cortical activity in the sleeping brain is a pattern known as ``up-down states", the ``delta rhythm", or ``frames", depending on the recording method [fn:: ``Up-down states" refers to intracellular recordings, ``delta oscillations" to EEG/LFP and ``frames" to extracellular multi-unit recording respectively. We use ``frames" where the distinction is not important]. They are three views of the same underlying phenomenon: the coordinated switching between an online, wake-like state with spikes, and a hyperpolarized state profoundly devoid of spikes. 
+
 *** Ripples cleanly destinguish between 'online' and 'offline' hippocampus
 *** Retrosplenial cortex unexpectedly follows HPC into SWS-like state during reward
 
