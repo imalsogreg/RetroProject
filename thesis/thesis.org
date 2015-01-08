@@ -717,6 +717,19 @@ One popular model proposes that memory formation goes in two stages: while anima
 
 *** Retrosplenial cortex enters SWS-like state during novelty / large rewards
 
+#+CAPTION: \textbf{Recording sites and behavioral training.} /Top:/ Behavioral training was carried out every day over the course of the recording and consisted of clockwise running on a 3.4 meter circular track. For the first the rat got normal (5g TODO) rewards. For the remainder of the session (usually 10 to 20 laps) normal reward was delivered every 270°, but occasional nomral rewards were replaced with large (25g TODO) rewards, to encourage longer pauses and more hippocampal replay.
+#+NAME:   fig:expDesign
+[[./finalFigs/SWW/expDesign.png]]
+
+
+#+CAPTION: \textbf{Example frames in SWS, drowsiness, and large reward consumption.} Example frames and down states are clearly visible and coordinated between retrosplenial cortex (green) and somatosensory and motor cortices (magenta) during SWS. Down states are less frequent during drowsiness and reward consumption. In drowsiness, weak coorditation between cortical areas can be seen. During awake reward consumption, frames and down states are visible in retrosplenial cortex, but somatosensory and motor cortex fire as they normally do during wake.
+#+NAME:   fig:frameExamples
+[[./finalFigs/SWW/finding.png]]
+
+#+CAPTION: \textbf{Distribution of down-state lengths in SWS, drowsiness, and large reward consumption.} Down states were defined as intervals with mean spike rate per tetrode below 40 Hz lasting for at least least 5 ms. Down states in retrosplenial cortex and somatosensory cortex are similarly distributed. The distribution appears during large reward consemption periods in retrosplenial cortex, while no awake down states were seen in somatosensory and motor cortex.
+#+NAME:   fig:downStateDistributions
+[[./finalFigs/SWW/downStateLengthDistributions.png]]
+
 -  Examples
 -  Average up-state length, down-state length
 
@@ -728,10 +741,10 @@ One popular model proposes that memory formation goes in two stages: while anima
 -  Cross-correlation of ripples & RSC frames similar between wake and
    SWS
 
-*** RSC awake slow waves require large reward in well-trained rats
+*** RSC awake slow waves require large reward in well-trained rats9
 
 -  Occur at most stopping points early in training
--  After ~1 week, spontaneous frames & small-reward frames stop, but
+-  After ~ week, spontaneous frames & small-reward frames stop, but
    large-reward frames persist (for at least a month)
 
 *** Anatomical restriction - nonparticipation in other cortical areas
