@@ -12,11 +12,21 @@ p.addParamValue('draw_y_ticks',true);
 p.addParamValue('trode_groups',[]);
 p.addParamValue('zero_nans',false);
 p.addParamValue('area',false);
+p.addParamValue('invert',false);
 p.addParamValue('LineWidth',1);
-p.addParamValue('draw_variance',true);
+p.addParamValue('draw_std',true);
+p.addParamValue('draw_ci',false);
 p.parse(varargin{:});
 opt = p.Results;
 
+if(opt.invert)
+   cdat.data = -1.*cdat.data; 
+end
+
+if(opt.draw_std && opt.draw_ci)
+    error('gh_plot_cont:two_shaded_regions',...
+        'may draw std or confidence interval, not both');
+end
 if(~isempty(opt.timewin))
     this_cdat = contwin(cdat,opt.timewin);
 else
@@ -43,8 +53,16 @@ y = this_cdat.data + offsets;
 x = conttimestamp(this_cdat);
 
 if(isfield(this_cdat,'variance'))
-    v = this_cdat.variance + offsets;
+    if(opt.draw_std)
+        v = sqrt(this_cdat.variance);
+    elseif(opt.draw_ci)
+        v = sqrt(this_cdat.variance) ./ ...
+            sqrt(repmat(this_cdat.n,n_samp,n_chan)-1) ...
+            .* 1.96;
+    end
 end
+
+
 
 x_disp = x;
 if(opt.shorten_x_labels);
@@ -64,16 +82,17 @@ if(isempty(opt.colors))
     end
 end
 
-if(opt.draw_variance && isfield(this_cdat,'variance'))
+if((opt.draw_std || opt.draw_ci) && ...
+        isfield(this_cdat,'variance'))
     for n = 1:n_chan
-        plot(x_disp,(y(:,n)+sqrt(v(:,n)))', '-', 'Color', opt.colors(n,:)./2, 'LineWidth',1);
+        plot(x_disp,(y(:,n)+v(:,n))', '-', 'Color', opt.colors(n,:).^0.5, 'LineWidth',1);
         hold on;
-        plot(x_disp,(y(:,n)-sqrt(v(:,n)))', '-', 'Color', opt.colors(n,:)./2, 'LineWidth',1);
+        plot(x_disp,(y(:,n)-v(:,n))', '-', 'Color', opt.colors(n,:).^0.5, 'LineWidth',1);
     end
 end
 
 for n = 1:n_chan
-    if(~opt.area)
+    if(~opt.areacd )
         fig = plot(x_disp,y(:,n)','-','Color',opt.colors(n,:),'LineWidth',opt.LineWidth); hold on;
     elseif(opt.area)
         fig = area(x_disp,y(:,n)',offsets(n),'FaceColor',opt.colors(n,:),'LineWidth',opt.LineWidth); hold on

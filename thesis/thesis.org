@@ -740,7 +740,8 @@ One popular model proposes that memory formation goes in two stages: while anima
    cortex have no frame-like activity (noticeable changes in spike rate
    or LFP) during RSC awake frames
 
-*** Slow-wave wake not limited to times of sleepiness
+
+*** Slow-wave wake not limited to times of sleepiness (TODO maybe include maybe not)
 
 -  Awake SWS-like activity continues in both light and dark phases of
    light cycle
