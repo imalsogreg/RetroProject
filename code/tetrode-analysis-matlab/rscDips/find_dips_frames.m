@@ -2,14 +2,24 @@ function [dips, frames] = find_dips_frames(mua_rate,varargin)
 
 p = inputParser();
 p.addParamValue('mean_rate_threshold', 40);
-p.addParamValue('frame_length_range', [0.01 3]);
+p.addParamValue('trode_groups',[]);
+p.addParamValue('area_for_threshold','RSC'); % TODO not implemented
+p.addParamValue('frame_length_range', [0.01 10]);
 p.addParamValue('draw',false);
 p.parse(varargin{:});
 opt = p.Results;
 
+if(~isempty(opt.area_for_threshold))
+    if(~isempty(opt.trode_groups))
+        mua_rate = contchans_trode_group(mua_rate,opt.trode_groups,opt.area_for_threshold);
+    else
+        error('find_dips_frames:need_both_params','Need trode_groups and area_for_threshold or neither');
+    end
+end
+    
 dip_crit = seg_criterion('cutoff_value', opt.mean_rate_threshold,...
     'threshold_is_positive',false,...
-    'bridge_max_gap',0.005,'min_width_pre_bridge',0.010);
+    'bridge_max_gap',0.005,'min_width_pre_bridge',0.005);
 
 mua_mean = mua_rate;
 mua_mean.data = mean(double(mua_mean.data),2); % Somehow input data was single
