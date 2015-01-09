@@ -545,6 +545,8 @@ Physiologists are aware of two forms of sequential encoding. The first occurs du
 
 A second form of sequenced spiking occurs while rats are paused on the track, consuming rewards or grooming. At these times, the hippocampus emits irregular, 100-500 ms bursts of local field potential ``sharp wave-ripples''(SW-R's) and spiking activity, with spikes ordered in time according to the spatial ordering of their respective place fields [@foster2006reverse; @diba2007forward]. These are known as 'sequence replay' events. Sequence replay often represents a track other than the track that the rat is currently running on [@karlsson2009awake]; indeed it was first observed in sleeping rats [@lee2002memory].
 
+
+
 *** Summary of replay disruption studies
 In contrast to the large number of studies exploring the phenomenology of theta sequences and sequence replay [@davidson2009hippocampal; @gupta2012segmentation; @karlsson2009awake; @pfeiffer2013hippocampal; @cei2014hippocampal], interventional studies are rare, because any specific activity pattern of interest is embedded in a network also exhibiting off-target sequences, and sequences themselves are not apparent to the experimenter without extensive post-processing. 
 
@@ -647,12 +649,11 @@ The results of our effort to date are a working real time decoding alrogithm and
 
 *** Decoding fast-timescale features: theta sequences and replay
 
-Simply decoding the rat's position is a potentially useful engineering goal, but in general the rat's instantaneous position is more conveniently estimated using an overhead camera. The features we are really interested in gaining real time access to are those internal states that deviate from the rat's physical location; and these deviations happen on a very fast timescale - the timescale of theta sequences and sequence replay. Thus one of our primary design goals was to achive a processing bandwidth capable of estimating the rat's position in 20ms time windows. Figure 1 shows a position estimate computed post-hoc (top row), and the estimate derived from real time processing of the same data, at a lower spatial resolution (bottom row). The data set used included 33 place cells recorded on 8 tetrodes. This is combination of spatial resolution and cell count was near the processing limit for our machine, although we expect that the bandwith will increase substantially when the various cell-sorting tasks are split among multiple computers, as they would be in a full recording system. The middle and right pannels show decoded theta sequences and sequence replay respectively.
+Simply decoding the rat's position is a potentially useful engineering goal, but in general the rat's instantaneous position is more conveniently estimated using an overhead camera. The features we are really interested in gaining real time access to are those internal states that deviate from the rat's physical location; and these deviations happen on a very fast timescale - the timescale of theta sequences and sequence replay. Thus one of our primary design goals was to achive a processing bandwidth capable of estimating the rat's position in 20ms time windows. Figure 7 shows a position estimate computed post-hoc (top row), and the estimate derived from real time processing of the same data, at a lower spatial resolution (bottom row). The data set used included 33 place cells recorded on 8 tetrodes. This is combination of spatial resolution and cell count was near the processing limit for our machine, although we expect that the bandwith will increase substantially when the various cell-sorting tasks are split among multiple computers, as they would be in a full recording system. The middle and right pannels show decoded theta sequences and sequence replay respectively.
 
+#+NAME: fig:decodingExamples
 #+CAPTION: \textbf{Fast time-scale position decoding.} Reconstructed features computed in real time by the ArtE decoder (bottom row) match those derived post-hoc (top row). The features are harder to resolve in the ArtE case because we decoding position at a courser spatial scale (20 cm bins /vs./ 3.5 cm bins), but are still sufficient for the detection of events that would be used as triggers in a closed-loop experiment. Theta sequences (middle) and sequence replay (right) are both recoverable from a typical place cell population in real time.
-#+NAME:   fig:decodingExamples
 [[./finalFigs/headToHeadDecoding.png]]
-
 
 *** Decoding speed and realtime requeriments
 
@@ -670,17 +671,34 @@ Simply decoding the rat's position is a potentially useful engineering goal, but
 
 ** Discussion
 
-*** Recap: designed tool for decoding streaming place cell data
+*** A tool for decoding streaming place cell data
+We have developed a working algorithm and a proof-of-concept test system for performing Bayesian stimulus decoding [@zhang1998interpreting; @davidson2009hippocampal] on populations of place cells in real time. The implementation makes critical use of Haskell's type system, extensive open source libraries [@jones2003haskell], fast runtime [@peyton1987implementation; @gill1993short; @voellmy2013mio], and concurrency and parallelism support [@jones1996concurrent; @marlow2009runtime; @marlow2012parallel] (specifically, using the GHC Haskell compiler [@jones2003haskell]).
+
+As other users of Haskell have noted, one difficulty in writing fast code is avoiding patterns that interact poorly with Haskell's lazy evaluation symantics [@daniels2012experience]. This was a stumbling block in our implementation as well, as some mistakes lead to slowdowns that become evident only after several minutes of running, and are therefore difficult to eliminate by trial and error. Fortunately the GHC compiler provides tools for tracking memory and time usage; these tools greatly aided our performance debugging experience.
+
 *** Remaining components needed to run experiments
+Several components need to be built before our decoding system can be used in closed-loop experiments:
 
-   -  Networked rat tracker and track linearizer
-   -  Online line-finding algorithm
-   -  Combining estimates from multiple computers (for > 16 tetrode
-      case)
-*** Experimental goals with sequence replay
-*** Extension to non-hippocampal contexts
+  - /Tracker/: Rat tracking software capable of linearizing twisted tracks and transforming 3D position into 1D track location and heading direction.
+  - /Replay discriminator/: A means of deciding from the stream of decoded positions, when a pattern counts as /replay/. This must be customizable enough to fit different experimental demands, such as conditioning feedback on a replay's virtual run direction on a T-maze.
+  - /Networked decoding/: A means of splitting the work of model training and model testing across multiple computers, to remove the CPU decoding bottleneck and allow the use of more than eight tetrodes
+  - /Network transport/: A common protocol for packaging various types of data (animal location, neuron spikes, intermediate decoding data, behavioral sensor values, maze actuator commands, etc). Ad-hoc networking is not quite sufficcient because many of our components need to fan out to multiple listeners (e.g. a spike source) or fan in from many sources (e.g. the stimulus decoder).
 
-\pagebreak
+We plan to develop these components ourselves in same way that we developed the ArtE backend system, by replacing one component at a time into the existing AD recording system built by Matthew Wilson and Loren Frank, and doing integration tests comparing AD's native output to the output with one adapted component. Although there is a lot of work left to do before the system can do end-to-end work, it's not too early to start fantasizing about the experimental possibilities. We describe some of these in the next section.
+
+*** Possible experimentals using real time decoding
+An important set of experiments to do is to refine the ripple disrpution studies [@ego2010disruption; @girardeau2009selective; @jadhav2012awake]. The goal of these studies was to determine whether or not sequence replay is necessary for memory consolidation (in the case of [@ego2010disruption; @girardeau2009selective]) or working memory (in the case of [@jadhav2012awake]). Jadhav et. al. disrupted all ripple-related activity on the track. There was no attempt made to restrict ripple disruption to the ripples carrying one type of replay or another[fn:: In fact, their control condition was to begin inhibition 200ms after ripple detection, with the intention of finding a disruption scheme with similar timing characteristics to ripples and avoiding times when the animal is running, without blocking ripples themselves. As Davidson et. al. [@davidson2009hippocampal] and Layton and Wilson [@layton2013temporal] showed, some replay events are longer than 200 ms, and if these were present in the Jadhav study, they may have been truncated.]. They found that this disruption interferes with the rat's ability to choose a maze turn direction based on recent memory, but does not interfere with maze choices that have only long-term memory requirements. But they could not tell, for example, whether individual replay events carry the short-term memory trace used by the rats on individual trials, or whether replay disruption is generally upsetting to performance of the more difficult phase of the task. Indeed, task difficulty is a factor that often distinguishes between the experimental and control phases of a behavioral task[@beylin2001role], but it is not often acknowledged as one. With online replay content detection, the two equally difficult working-memory tasks of the Jadhav study could have been made controls for one another, by selectively disrupting replay corresponding to one of them.
+
+Ego-Stengle and Wilson [@ego2010disruption] and Gerardeau et. al. [@girardeau2009selective] used the fact that replay of recently experienced tracks is more common during sleep than replay of tracks learned several days ago in order to selectively disrupt the replay of one track over another. In experimental designs like these, having the ability to single out one type of replay for disruption would further refine the selectivity, perhaps enhancing the differential effects on behavior.
+
+Real time replay detection provides oppornunities for experimental designs that weren't possible before. Fewer than half of replay events during wake contain decodable spatial content pertaining to the current maze [@davidson2009hippocampal], and the fraction in sleep is much smaller [@lee2002memory; @ji2006coordinated]. If we want to make reward or task contingency conditional on replay, then decoding replay content in real time is a hard requirement.
+
+For example, we may want to test whether left-going replay on a T-maze[fn:: Alternatively, some behavioral factor correlated with replay!] can be used as the behavioral response that is rewarded or punished to produce operant conditioning, in a specific way that doesn't generalize to right-going replay, to test whether the content of replay or a behavioral correlate of that content is something cognitively available to the rat. 
+
+There is currently very little evidence for a one-to-one connection between replay content and immediate past or present behavior [@davidson2009hippocampal; @gupta2010hippocampal; @pfeiffer2013hippocampal]. The dual of the operant conditioning experiment would be to try to train a rat to recognize that, whichever direction his most recent replay took, that is the direction he must run next to find a reward.
+
+A third class of experiments is nebulous but probably very valuable. Using real time Bayesian position decoding (not necessarily replay detection per-se), an experimenter would have immediate access to the joint activity of the recorded population of place cells. Many classical discoveries in neuroscience are due to chance observations rather than premeditated binary-choice hypothesis-based predictions. The discover of place cells themselves [@o1971hippocampus] is due to tinkering with a rat while listening to the audio aplified spiking of an individual hippocampal neuron; as was the discovery of the primary visual cortex simple receptive field [@hubel1959receptive] and the large litterature that followed [fn:: Oriented moving bars of light were famously discovered to be the optimal stimulus for driving spiking in the cells of primary visual cortex when David Hubel and Torsten Wiesel were changing slides in a projector slide deck; although the many pictures of animals and natural stimuli on the slides failed to elicit a responce, the sweeping motion of the edge of the slide as slides were being changed in and out of the machine caused very robust spiking. Hubel and Wiesel creatively pointed their projector at a chalk board, systematically moving the slide edge and making chalk marks at the edge locations and orientations that best excited the cell nearest the electrode. This approach is what we mean by using real time feedback for 'tinkering'.] We expect that when decoded position is available to the experimenter, creativity in the moment will lead to informal experimentation that sheds light on the nature of replay in a way that would not be possible with the traditional, slow data collection / data analysis cycle.
+
 
 
 * Retrosplenial slow-wave wake and interaction with hippocampus
@@ -716,6 +734,8 @@ One popular model proposes that memory formation goes in two stages: while anima
 -  Average up-state length, down-state length
 
 *** Retrosplenial cortex enters SWS-like state during novelty / large rewards
+
+
 
 #+CAPTION: \textbf{Recording sites and behavioral training.} /Top:/ Behavioral training was carried out every day over the course of the recording and consisted of clockwise running on a 3.4 meter circular track. For the first the rat got normal (5g TODO) rewards. For the remainder of the session (usually 10 to 20 laps) normal reward was delivered every 270°, but occasional nomral rewards were replaced with large (25g TODO) rewards, to encourage longer pauses and more hippocampal replay.
 #+NAME:   fig:expDesign
@@ -763,6 +783,8 @@ One popular model proposes that memory formation goes in two stages: while anima
 ** Discussion
 
 *** Recap: Awake slow-waves in RSC, coordinated with HPC, fully awake
+We show that in retrosplenial cortex, slow-wave sleep like activity can be reliably elicited in the fully awake rat using large rewards, and this activity is coordinated on the behavioral and neural timescale with the /offline-mode/ of activity in hippocampus. These results are similar to the /local sleep/ findings of Vyazovski et. al. [@vyazovskiy2011local], but the primary difference is that the results we report seem to be unrelated to drowsiness, while Vyazovski's /local sleep/ is strogly related to sleep need and momentary behavioral impairment. Our findings suggest something else - that local sleep may be a normal part of the waking state, and that the hippocampal-cortical dialog previously thought to occur only during sleep may also occur when large rewards are found.
+
 *** In HPC-Cortex interaction, Online/offline vs. awake/asleep
 *** Functional roles for HPC-Cortex coordination may apply to wake
 *** New questions raised by SWW: mechanism and function
