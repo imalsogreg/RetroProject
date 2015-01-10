@@ -46,7 +46,6 @@ Buzsaki [TODO fix name accents] in particular has done a lot of mapping of the e
 
 
 
-*** Theta phase precession & theta sequences
 
 ** Sleep states, cortical rhythms, hippocampal-cortical interactions
 
@@ -121,7 +120,7 @@ runhaskell tangles/haskellMap.hs
 #+END_SRC
 
 #+RESULTS:
-| [1 | 10 | 10 | 3 | -2 | 2] |
+[1   | 10 | 10 | 3 | -2 | 2]
 
 
 \doublespacing
@@ -307,15 +306,81 @@ runhaskell tangles/fibprod.hs
 
 This property of being able to apply functions to arguments when the arguments aren't fully known is called $laziness$, and it is one of the main features allowing declarative programming style and the combination of diverse software components into large programs. Combining infinite things with other infinite things in finite time, and decoupling mathematical models from details about how many elements to generate, are central to that. For an excellent discussion of functional programming's role as a glue layer between large components see Why Functional Programming Matters [@hughes1989functional].
 
-*** Avoiding bugs by lifting program logic into types, compiler catches mistakes early
 
 *** Concurrency - difficulty of running multiple threads simultaneously
+Concurrency is the simultaneous executition of multiple sections of code simultaneously [fn:: or interleaved in time with one another quickly enough that they appear to be executing simultaneously]. The Haskell standard library provides the function $forkIO$, which takes as its input a single action to run and acquires a new thread from the Haskell runtime to run that action.
+
+\singlespacing
+
+#+NAME: forkIO
+#+BEGIN_SRC haskell :tangle tangle/forkIOExample.hs
+module Main where
+import Control.Concurrent
+import Control.Monad
+
+action :: [Char] -> IO ()
+action xs = 
+  forM_ xs (flip (>>) (threadDelay 500000) . putChar)
+
+main = do
+  forkIO $ action ['a'..'e']
+  action ['v'..'z']
+#+END_SRC
+
+#+RESULTS:
+>> avwbxcydze
+
+\doublespacing
+
+Our $action$ function takes a list of characters and slowly prints them. In $main$, we send one action applied to the list $['a'..'e']$ to a separate thread, and run the same action applied to a different list on the main thread. Because these actions are running concurrently we see the letters mixed with one another in the output (if we remove the $forkIO$, we would have seen 'abcdevwxyz' because the two actions run squentially).
+
+The fact that 'w' appears before 'b' is surpsing, since we expected that 'a' appearing before 'v' implied that the first action's effects will happen before the second action's. In fact we have requested that the letters from the respective lists be printed approximately at the same time; the exact ordering depends on tiny fluctuations in the timing of threads in the runtime system. Running this progam repeatedly, 'b' does come before 'w', about half of the time. When the output of a concurrent program is noticeably different in circumstances that are not noticeably different, this is called a 'race condition' [@bernstein1966analysis]. The metaphor is that two threads are racing toward two positions in memory; the first one will write into the first slot and the second will will write into the second slot.
+
+Does it matter whether 'b' or 'w' is printed first? The answer depends on the application. Even in moderately complex programs, predicting the locations of race conditions can be unintuitive and failing to notice them can result in corrupted data or a disruption of the forward flow of the program. In one famous case, a race condition among three power-line sensors lead to a failure of the alarm system at FirstEnergy Corp, preventing a response as snow-covered trees damaged a number of cables, [fn::  The report tells in fascinating detail just how hard routing out this kind of bug can be: ``The bug had a window of opportunity measured in milliseconds. 'There was a couple of processes that were in contention for a common data structure, and through a software coding error in one of the application processes, they were both able to get write access to a data structure at the same time,' says Unum. `And that corruption led to the alarm event application getting into an infinite loop and spinning ... This fault was so deeply embedded, it took them weeks of poring through millions of lines of code and data to find it.'"] and leading to a 2-day blackout for 8 million Canadians and midwesterners[@poulsen2004tracking].
+
+As a rule of thumb, race conditions become problematic when mulitple threads share read and write access to common data, and some multi-step operations on that data only make sense if the operations are carried out without interruption. The classic example is an a pair of banks processing the transfer of money between ``Alice" and ``Bob" who live in two different states. In this case two different computers in two different banks need to access shared data: the balance of Alice's account and the balance of Bob's account. This pseudocode does the job:
+
+\singlespacing
+
+#+NAME: bankExample 
+#+BEGIN_SRC haskell
+module Bank.Transfer where
+
+transfer :: IORef Account -> IORef Account -> DollarAmount -> IO ()
+transfer fromAccount tAccount amount = do
+  a <- readIORef fromAccount
+  writeIORef fromAccount (a - amount)
+  b <- readIORef toAccount
+  writeIORef toAccount (b + amount)
+#+END_SRC
+
+\doublespacing
+
+The $IORef Account$ type is a reference to a value that can be shared across threads. $transfer$ takes two references and an amount to transfer. It then reads the balances and increments each to reflect the money transfer. This works as long as Alice and Bob aren't at the bank at the same time. But if they try to send each other money at nearly the same time, this unfortunate sequence of events could happen:
+
+#+CAPTION: \textbf{A race condition can corrupt data.} Two concurrent threads operating on shared data will often lead to a corrupted final state, because the individual steps in each operation change the shared data in ways not accounted for by the other thread. In this case, $10 have disappeared from the system after Alice and Bob make near-simultaneous transfers.
+#+NAME:   tab:basic-data
+| Time | Thread             | Command                   | Alice's $ | Bob's $ | Big problem? |
+|------+--------------------+---------------------------+-----------+---------+--------------|
+|    0 | Bob -($10)-> Alice | getBalance bob            |    100.00 |   50.00 | No           |
+|    1 | Bob -($10)-> Alice | setBalance bob (50 - 10)  |    100.00 |   40.00 | Maybe...     |
+|    2 | Alice -($20)-> Bob | getBalance alice          |    100.00 |   40.00 | Maybe...     |
+|    3 | Alice -($20)-> Bob | setBalance alice (100-20) |     80.00 |   40.00 | Maybe...     |
+|    4 | Alice -($20)-> Bob | getBalance bob            |     80.00 |   40.00 | Maybe...     |
+|    5 | Alice -($20)-> Bob | setBalance bob (40+20)    |     80.00 |   60.00 | Maybe...     |
+|    6 | Bob -($10)-> Alice | getBalance alice          |     80.00 |   60.00 | Maybe...     |
+|    7 | Bob -($10)-> Alice | setBalance alice (80+10)  |     90.00 |   40.00 | Yes!         |
+
+So functions that may be run in a concurrent context must somehow clamp the access to variables so that that threads don't make changes behind one another's backs. The basic tool for this is the /mutex/ [fn:: Mutex is short for Mutual exclusion], a `lock' that can be taken by at most one thread at a time. Mutexes are managed by the runtime system and are synchronized across all threads. It's up to the programmer's discretion how many she would like to create and which blocks of code she would like to wrap with them, and how tightly. But it turns out, there is no generally acceptable answer here either! We can wrap the entire $transfer$ function in a single mutex, but this means the entire program can only run a single transfer at a time; Bob and Alice are blocked from making their transfers while a completely unrelated transfer between Chris and Dean is going on. Alternatively, we could make a mutex for each account-holder in the bank, and in the process of transfering money between Alice and Bob, we take both mutexes in turn, perform the transfer, then return both mutexes. This can be made to work, but perhaps surprisngly, it is subject to a problem similar to that in the mutex-free case: the act of taking and releasign mutexes is prone to interaction effects. Alice transfering to Bob at nearly the same time that Bob transfers to Alice can cause one thread to take Alice's mutex just as the other take's Bob's, and then neither thread can make progress because each one is stuck waiting for the other to finish its transaction and release the complementary mutex. The topic is inherently difficult to understand, but the author is partly to blame for this too, in this case. For a more thorough treatment of this topic refer to Marlow's excellent Parallel and Concurrent Programming in Haskell [@marlow2012parallel]. The main point is, concurrency is often necessary to consider in programs that interact with the outside world, with inputs coming from multiple sources, and coping with it can be subtle and difficult.
+
 *** Software transactional memory
+Functional programming is a promising avenue for handling concurrency because so much of the business of functional programming is not about describing how things are done, but what things are. The relationships between values are timeless and constant. So the ``surface area" of a functional program on which parts are legitimately /changing/ is small. We still have to consider data races in those places where values change, and here Haskell offers an interesting solution, called Software Transactional Memory[@herlihy1993transactional] (STM) [fn:: Are my footnotes still working? ]. Allow concurrent mutation to happen without locks, and allow the runtime system to detect when this produces corruption, then undo whatever actions caused the corruption and run them again from a clean version of the data. This approach would be impossible, if the system were attempting to track the changes to every variable, and it is generally impossible to ``undo" arbitrary actions that change the state of the computer. But in Haskell we can declare a small subset of variables to be tracked by the system, and use the type system to enforce that the only variables allowed to change are those tracked ones.
 
+Do we face the same challenge that we had with mutexes above, choosing between two unfavorable alternatives when in comes to the scale at which we wrap our actions with the change-tracking and rollback abilities? Not in such a strict sense, no. Single actions manipulate tracked variables, but the tracking and rollback by default do not happen. Instead of tracking by default, invidivual actions are able to be combined together with other actions, and the /composite/ action is tracked for corruption and allowed to be rolled back. In the bank example, we would combine the four-action sequence (get Alice's balance, set Alice's balance, get Bob's balance, set Bob's balance) into one composite action and mark that composite for tracking and rollback. This gives us the same level of protection as the single global mutex scenario. But individual threads are free to work simultaneously on other transactions.
 
+This approach is very highly preferable to the premptive threading and mutex tools that programmers traditionally go to first when designing mulicore shared memory programs at this modest scale. But it does have a fairly serious drawback. Attempting to push a small number of expensive changes to shared variables from one thread, and a large number of very cheap changes from another thread, can cause the first thread to repeatedly fail to have its changes committed. This is known as /thread starvation/. What constitutes and expensive computation, a cheap computation, or a large number? These factors are system dependent. It can be hard to anticipate that thread starvation will rear its head. In general, one simply implements their algorithm using STM and tests to see that operation seems to be going as expected. But optimistically increasing the workload you subject an STM program to can be risky.
 
-
-#+LaTeX: \pagebreak[3]
+TODO: Get this into footnote. Other popular systems have implemented STM: the database management system PostgreSQL [@stonebraker1986design], Java, and the associated functional language Clojure[@menon2008practical], and it has been implemented at the hardware level[@hammond2004transactional]
 
 * Coordinated information coding in a desynchronized network
 
@@ -396,7 +461,7 @@ Microdrive arrays were implanted with the center of the grid of tetrodes overlyi
 
 *** Behavioral training
 
-Behavioral training began when nearly all tetrodes exhibited separable spike clusters, and consisted of rewarding rats for simply running back and forth on a curved 3.4 meter linear track, or running continuously counter-clockwise on a 3.4 meter long circular track, with rewards given for every 360 degrees of running for the first 3 laps and for every 270 degrees thereafter. Food deprivation began one or two days prior to the beginning of acquisition, with rats receiving 30 grams of food per day, adjusted up or down depending on the rat's motivation to run and level of comfort (assessed by the amount sleep taken before the running session). The target food-deprived weight was 80\% of free-feeding weight, but we rarely achieved this without disrupting the sleep of the animals, so body weights tended to be 90\% of the free-feeding weight or more, especially after rats learned the simple rules of the task. Additionally, we provided large rewards throughout training (2-5 grams of wetted powdered rat chow per lap), to encourage the long stopping periods during which awake replay can be observed (TODO Foster, 2006). Under these conditions, rats run for about 20 laps or 30 minutes before becoming satiated and ignoring rewards.
+Behavioral training began when nearly all tetrodes exhibited separable spike clusters, and consisted of rewarding rats for simply running back and forth on a curved 3.4 meter linear track, or running continuously clockwise on a 3.4 meter long circular track, with rewards given for every 360 degrees of running for the first 3 laps and for every 270 degrees thereafter. Food deprivation began one or two days prior to the beginning of acquisition, with rats receiving 30 grams of food per day, adjusted up or down depending on the rat's motivation to run and level of comfort (assessed by the amount sleep taken before the running session). The target food-deprived weight was 80\% of free-feeding weight, but we rarely achieved this without disrupting the sleep of the animals, so body weights tended to be 90\% of the free-feeding weight or more, especially after rats learned the simple rules of the task. Additionally, we provided large rewards throughout training (2-5 grams of wetted powdered rat chow per lap), to encourage the long stopping periods during which awake replay can be observed (TODO Foster, 2006). Under these conditions, rats run for about 20 laps or 30 minutes before becoming satiated and ignoring rewards.
 
 *** Electrophysiological Characterization
 Spikes and local field potentials were voltage buffered and recorded against a common white-matter reference, at 32 kHz and 2kHz respectively, and position was tracked at 15 Hz through a pair of alternating LED's mounted on the headstage, as in (TODO) Davidson et. al. (2009). Spikes were clustered manually using the custom program, xclust3 (M.A.W. TODO). Place fields were computed for each neuron as in Brown Sejnowski et al (TODO), by partitioning the track into 50 to 100 spatial bins, and dividing the number of spikes occurring with the rat in each spatial bin by the amount of time spent in that spatial bin, in each case only counting events when the rat was moving at least 10 cm/second around the track. Direction of running was also taken into account, allowing us to compute separate tuning curves for the two directions of running, which we label 'outbound' and 'inbound'.
@@ -711,9 +776,9 @@ Both cortex and hippocampus exhibit interesting forms of structured activity in 
 
 
 *** Slow wave oscillations cleanly destinguish between sleeping and awake cortex
-The most striking feature of cortical activity in the sleeping brain is a pattern known as /up-down states/, the /delta rhythm/, or /frames/, depending on the recording method [fn:: /Up-down states/ refers to intracellular recordings, /delta oscillations/ to EEG/LFP and /frames/ to extracellular multi-unit recording respectively. We use /frames/ where the distinction is not important]. They are three views of the same underlying phenomenon: the coordinated switching between an online, wake-like state with spikes, and a hyperpolarized state profoundly devoid of spikes.
+The most striking feature of cortical activity in the sleeping brain is a pattern known as /up-down states/, the /delta rhythm/, or /frames/, depending on the recording method [fn:: /Up-down states/ refers to intracellular recordings, /Delta oscillations/ to EEG + LFP, and /frames/ to extracellular multi-unit recording respectively. We use the term frames where the distinction is not important]. They are three views of the same underlying phenomenon: the coordinated switching between an online, wake-like state with spikes, and a hyperpolarized state profoundly devoid of spikes.
 
-This pattern is not seen while an animal is awake. It has so far only been observed in animals that are drowsey[@vyazovskiy2011local] or in slow-wave sleep[@steriade1993thalamocortical], one of the two primary sleep stages. The other sleep stage, REM sleep. [fn:: REM stands for /Rapid eye movement/. REM sleep is accompanied by movements of the eyes that resemble awake visual exploration [@aserinsky1953regularly; TODO REM eye statistics?].] REM sleep is also referred to as /paradoxical sleep/, because of the similarity of REM brain activity to activity patterns in awake animals.
+This pattern is not seen while an animal is awake. It has so far only been observed in animals that are drowsey[@vyazovskiy2011local] or in slow-wave sleep[@steriade1993thalamocortical], one of the two primary sleep stages. The other sleep stage, REM sleep. [fn:: REM stands for /Rapid eye movement/. REM sleep is accompanied by movements of the eyes that resemble awake visual exploration [@aserinsky1953regularly; but see @aserinsky1985comparison].] REM sleep is also referred to as /paradoxical sleep/, because of the similarity of REM brain activity to activity patterns in awake animals.
 
 *** Theta and ripples destinguish between 'online' and 'offline' hippocampus
 The hippocampus is similar to cortex in that it has two very different modes of operation, but they are not as strictly linked to sleep and wake as the activity patterns in cortex are. Instead, they reflect the 'online' or 'offline' nature of attention. During visual exploration, running, foraging, etc. (and during REM sleep) the hippocampus and many of its input and output structures are engaged in an 7-10 Hz oscillation called the /theta rhythm/ [@vanderwolf1969hippocampal]. When an animal's attention is directed inward and while the animal is in slow-wave sleep, theta ceases and is replaced by /Large irregular activiry/, a generally quiet state interrupted by ~50ms bouts of coordinated vigorous spiking[@ylinen1995sharp], sometimes grouped into /ripple bursts/ that last half a second [@layton2013temporal].
@@ -735,23 +800,24 @@ One popular model proposes that memory formation goes in two stages: while anima
 
 *** Retrosplenial cortex enters SWS-like state during novelty / large rewards
 
-
+We trained rats to run clockwise around a 3.4 meter circumferenec track to receive food reward (Figure 11), in order to engage navigational circuits in the hippocampus as well as head-direction circuits in retrosplenial cortex. Most rewards were small 5g bolus of wetted powdered rat chow, delivered at a single point on the track (requiring a full lap for delivery) for three laps. On subsequent laps, we rewarded the rat once for each 270° degrees of track running (for reasons not related to this study - we were reusing the task design of a study we were aiming to replicate about REM replay [@louie2001temporally]). Once in every 4 to 6 trials, we instead used a 20g bolus, to encourage the rat to stop, eat, and produce more ripples and replay events. We positioned electrodes in hippocampus and retrosplenial cortex and attempted to optimize for isolated single units. In later phases of the experiment, we moved a number of electrodes up from hippocampus into somatosensory and motor areas, to explore further the phenomenon we noticed in retrosplenial cortex. During track running and sleep, we often listened to the amplified activity of either hippocampus or cortex (switching back and forth over the course of 30 minute sessions).
 
 #+CAPTION: \textbf{Recording sites and behavioral training.} /Top:/ Behavioral training was carried out every day over the course of the recording and consisted of clockwise running on a 3.4 meter circular track. For the first the rat got normal (5g TODO) rewards. For the remainder of the session (usually 10 to 20 laps) normal reward was delivered every 270°, but occasional nomral rewards were replaced with large (25g TODO) rewards, to encourage longer pauses and more hippocampal replay.
 #+NAME:   fig:expDesign
 [[./finalFigs/SWW/expDesign.png]]
 
+We became acustomed to the sound of ripples and spindles in the multi-unit spiking activity of cortex in the sleeping rat. We were surprised to hear a subjectively similar pattern from retrosplenial cortex while rats stopped to eat large rewards. Comparing the raster plots and LFPs of several, retrosplenial cortex activty transiently but strongly resembles the structure of activity during slow-wave sleep (Figure 12), with characteristic sharp breaks in ongoing activity and accompanying K-complex like LFP oscillations. In another set of experiments, conducted at the end of a 5-hour period of sustained wake in the middle of the day, we recorded activity during foraging in an open field, using novel objects to keep the rat in a curious state and preventing him from sleeping on the maze. During these periods of drowsiness, we saw similar interruptions in ongoing retrosplenial cortex spiking.
 
 #+CAPTION: \textbf{Example frames in SWS, drowsiness, and large reward consumption.} Example frames and down states are clearly visible and coordinated between retrosplenial cortex (green) and somatosensory and motor cortices (magenta) during SWS. Down states are less frequent during drowsiness and reward consumption. In drowsiness, weak coorditation between cortical areas can be seen. During awake reward consumption, frames and down states are visible in retrosplenial cortex, but somatosensory and motor cortex fire as they normally do during wake.
 #+NAME:   fig:frameExamples
 [[./finalFigs/SWW/finding.png]]
 
+In the retrosplenial cortex, lengths of putative down states in slow-wave sleep, drowsiness, and consumption of large reward were distributed similarly (Figure 13). The same is true of the scattered somatosensory and motor cortex electrodes, with the exception that thees only exhibited down-states during slow-wave sleep and drowsiness. No down states meeting our criterion of 5 milliseconds at less than 40 Hz multiunit activity were observed.
+
 #+CAPTION: \textbf{Distribution of down-state lengths in SWS, drowsiness, and large reward consumption.} Down states were defined as intervals with mean spike rate per tetrode below 40 Hz lasting for at least least 5 ms. Down states in retrosplenial cortex and somatosensory cortex are similarly distributed. The distribution appears during large reward consemption periods in retrosplenial cortex, while no awake down states were seen in somatosensory and motor cortex.
 #+NAME:   fig:downStateDistributions
 [[./finalFigs/SWW/downStateLengthDistributions.png]]
 
--  Examples
--  Average up-state length, down-state length
 
 *** RSC awake slow waves coordinate with hippocampal ripples
 
@@ -783,10 +849,13 @@ One popular model proposes that memory formation goes in two stages: while anima
 ** Discussion
 
 *** Recap: Awake slow-waves in RSC, coordinated with HPC, fully awake
-We show that in retrosplenial cortex, slow-wave sleep like activity can be reliably elicited in the fully awake rat using large rewards, and this activity is coordinated on the behavioral and neural timescale with the /offline-mode/ of activity in hippocampus. These results are similar to the /local sleep/ findings of Vyazovski et. al. [@vyazovskiy2011local], but the primary difference is that the results we report seem to be unrelated to drowsiness, while Vyazovski's /local sleep/ is strogly related to sleep need and momentary behavioral impairment. Our findings suggest something else - that local sleep may be a normal part of the waking state, and that the hippocampal-cortical dialog previously thought to occur only during sleep may also occur when large rewards are found.
+We show that in retrosplenial cortex, slow-wave sleep like activity can be reliably elicited in the fully awake rat using large rewards, and this activity is coordinated on the behavioral and neural timescale with the /offline-mode/ of activity in hippocampus. 
 
-*** In HPC-Cortex interaction, Online/offline vs. awake/asleep
+These results are similar to the /local sleep/ findings of Vyazovski et. al. [@vyazovskiy2011local], but the primary difference is that the results we report seem to be unrelated to drowsiness, while Vyazovski's /local sleep/ is strogly related to sleep need and momentary behavioral impairment. Our findings suggest something else - that local sleep may be a normal part of the waking state, and that the hippocampal-cortical dialog previously thought to occur only during sleep may also occur when large rewards are found.
+
 *** Functional roles for HPC-Cortex coordination may apply to wake
+
+
 *** New questions raised by SWW: mechanism and function
 
 -  New questions:
@@ -802,10 +871,24 @@ We show that in retrosplenial cortex, slow-wave sleep like activity can be relia
 \pagebreak
 
 ** Materials & Methods
+*** Subjects
 
--  10 tetrodes in HPC, 10 tetrodes split between retrosplenial,
-   somatosensory, motor, posterior parietal cortex
--  Trained rats to run circular track for reward every 270 degrees CCW
+All procedures were approved by the Committee on Animal Care at Massachusetts Institute of Technology and followed US National Institutes of Health guidelines. Tetrode arrays were assembled and implanted  according to the procedure in Nguyen et. at. (TODO 2008) and Kloosterman et. al (TODO 2008). We made several modifications to the materials and proceduces to improve our multi-cell sampling.  First, we glued several hundred half-inch pieces of 29 guage and 30 guage hypodermic tubing into rows about 6 mm long, then stacked and glued the rows together to form a honeycomb patterned jig, for organizing the tetrode guide-tubes that would eventually inhabit the microdrive. Second, we developed the ArtE recording system (TODO detailed in Chapter 2) to run in parallel with our usual usual tetrode recording rig. The broader goals of the ArtE project are to enable real-time data analysis and feedback, but in this experiment we used it merely to increase the number of simultaneously recorded tetrodes.
+
+
+
+*** Single-unit tetrode recording
+
+Microdrive arrays were implanted with the center of the grid of tetrodes overlying dorsal CA1 (TODO A/P -4.0, M/L 3.5), spanning 3 mm of hippocampus in the septotemporal dimension and 1.5 mm proximo-distal. In two rats (TODO correct?), tetrodes were lowered into the pyramidal cell layer of CA1 over the course of 2 to 3 weeks and left there for several more weeks of recording.  In two more rats, tetrodes were first lowered into CA1, and later a subset of those was moved further to record simultaneously from field CA3. In each cell layer, we sought to maximize the number of neurons recorded and to minimize within-experiment drift, so closely tracked the shape of sharp wave ripples (which undergo characteristic changes during approach to the cell layer) and later the amplitudes of burgeoning clusters. If either of these factors changed overnight to a degree greater than expected, the tetrode was retracted by 30 - 60 micrometers.
+
+*** Behavioral training
+
+Behavioral training consisted of rewarding rats for simply running back and forth on a curved 3.4 meter linear track, or running continuously clockwise on a 3.4 meter long circular track, with rewards given for every 360 degrees of running for the first 3 laps and for every 270 degrees thereafter. Food deprivation began one or two days prior to the beginning of acquisition, with rats receiving 30 grams of food per day, adjusted up or down depending on the rat's motivation to run and level of comfort (assessed by the amount sleep taken before the running session). The target food-deprived weight was 80\% of free-feeding weight, but we rarely achieved this without disrupting the sleep of the animals, so body weights tended to be 90\% of the free-feeding weight or more, especially after rats learned the simple rules of the task. Additionally, we provided large rewards throughout training (2-5 grams of wetted powdered rat chow per lap), to encourage the long stopping periods during which awake replay can be observed (TODO Foster, 2006). Under these conditions, rats run for about 20 laps or 30 minutes before becoming satiated and ignoring rewards.
+
+*** Electrophysiological Characterization
+Spikes and local field potentials were voltage buffered and recorded against a common white-matter reference, at 32 kHz and 2kHz respectively, and position was tracked at 15 Hz through a pair of alternating LED's mounted on the headstage, as in (TODO) Davidson et. al. (2009). Spikes were clustered manually using the custom program, xclust3 (M.A.W. TODO). Place fields were computed for each neuron as in Brown Sejnowski et al (TODO), by partitioning the track into 50 to 100 spatial bins, and dividing the number of spikes occurring with the rat in each spatial bin by the amount of time spent in that spatial bin, in each case only counting events when the rat was moving at least 10 cm/second around the track. Direction of running was also taken into account, allowing us to compute separate tuning curves for the two directions of running, which we label 'outbound' and 'inbound'.
+
+To characterize the phase differences among tetrodes in CA1, a simple spatial traveling wave model was fit to the theta-frequency filtered LFP signals and the theta-filtered multiunit firing rate in turn, as in Lubenov and Spapas [@lubenov2009hippocampal]. TODO expand on this.
 
 
 
