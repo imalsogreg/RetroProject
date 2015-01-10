@@ -1,6 +1,7 @@
 function f = sws_example(m)
 
-baseDataPath = [m.basePath,'/d.mat'];
+baseDataPathWake  = [m.basePath,'/d.mat'];
+baseDataPathSleep = [m.basePath,'/dSleep.mat'];
 if(exist(baseDataPath))
     load baseDataPath;
 else
