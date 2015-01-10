@@ -28,6 +28,8 @@
 \def\@rule[#1]#2#3{\textcolor{blue}{\old@rule[#1]{#2}{#3}}}
 \makeatother
 
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
 
 
 \doublespacing
