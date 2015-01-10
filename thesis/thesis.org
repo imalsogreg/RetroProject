@@ -1,7 +1,21 @@
 
 * Overview
 
-Three chapters about populations of neurons in the hippocampus coordinating their activity on fine timescales, and how that coordination relates to the larger context of hippocampal inputs, outputs, and experimental measurements. In the first chapter, explore the lack of synchrony in timing of the brain rhythms underlying excitatory drive in hippocampal place cells, and the impact of those differences on the ability of distant place cells to coordinate reliably during population-wide coding events. In the second chapter, describe the development of a tool for detecting place cell population coding events and using the information they contain to manipulate brain activity or behavior experimentally. In the third chapter, describe the unexpected transition of retrosplenial cortex into a slow-wave-sleep like state during reward consumption, and the timing relationship between hippocampal activity and retrosplenial cortex during these events. Conclude with a discussion about coordinated encoding that ties the three chapters together - how does the sequential nature of coding in hippocampus relate to coding in the afferents and efferents - do they also encode information in spike sequences? What experiments using real-time ensemble decoding would help answer those questions?
+This thesis is about timing and information coding in the hippocampus. 
+
+Chapter 1 gives a brief introduction to the topics in the main data chapters.
+
+Chapter 2 examines in detail the timing of information coding in populations of place cells, single neurons in the hippocampus that fire action potentials specifically in preferred regions of space. These neurons also exhibit a surprising degree of coordination in time. In rat, when a series of neurons are activated in turn by exploration of an environment, the same sequence of spiking reappears spontaneously in sleep and as the rat pauses to groom or eat, sped up 10 times but preserving nearly perfect time order. Upon closer examination of the place cells during running itself, neurons here too are tightly organized into 10x-accellerated miniature versions of the macroscopic sequence. This coordination is achieved with the help of a native oscillation in the hippocampus called the /theta rhythm/. 
+
+In 2009 it was discovered that the theta oscillation isn't synchronized across the entire hippocampus, but instead looks more like a traveling wave, with different parts of the hippocampus reaching the peak at different points in time. Exactly how information is encoded in the hippocampus is unknown, but we strongly suspect that the finely coordinated spiking of place cells is an important component. So we set out to measure whether or not the traveling nature of the theta oscillation has a desynchronizing effect on the place cell spiking sequences. To determine whether place cell sequences are synchronized over long distances in the hippocampus, we recorded from many place cells at once, some of them close together and experiencing the same oscillator, some far apart and living in different 'time zones'. To our surprise, the sequences remain tightly aligned in distant groups of cells, replaying spatial sequences that are less than one hundredth of a second off in their synchrony. How is this place cell synchrony achieved in light of the desynchronize oscillator underneath? We propose two possible models and experiments to help discriminate between them. And the question of what the traveling theta wave means for communication between the hippocampus and other brain areas remains open.
+
+In Chapter 3, we discuss the development of ArtE, a tool for collecting place cell population data from running rats and analyzing it in real time. Typically this data is analyzed after the experiment has ended. The goal for ArtE is to detect sequence replay events as they happen, so that we can desing experiments around closed-loop manipulations, for example, rewarding the rat for expressing replay of one part of the track and not the other part, and measuring the impact of biased replay on behavior and on the information-carrying properties of place cells. We take a fairly deep dive into the technical details of the implementation of the tool, as well as a deep dive into Haskell, the odd and wonderful programming language it is written in.
+
+Chapter 4 is a collaborative work detailing a serendipitous finding that spiking activity in the retrosplenial cortex reverts to a sleep like state in rats consuming large rewards on mazes. The timing of these slow-wave sleep like episodes is strictly limited to the times when the hippocampus undergoes a similar transition, to a mode of spiking tightly associated with slow-wave sleep.
+
+We then conclude with a discussion of the potential role of population coordination in the encoding of spatial information, the necessary next steps in connecting this activity with cortical processing, and the recent advances in electrodes, imaging techniques, and real time processing that will help us take these next steps.
+
+To maximize the usefullness of this work, where possible the supporting data are available on Amazon S3 (TODO: link) under a Creative Commons ShareAlike license, and the source code is available at http://github.com/imalsogreg/RetroProject under BSD3. For those considering using this data in their own publications, note that are more particulars about the recording setup than we could possibly enumerate, and it would be impossible to predict whether these would confound your analyses. So we can not reccommend basing new papers on these data alone. However, the data may be extremely valuable in pilot studies or as supplemental material. Both the code and the data format may evolve as we prepare manuscripts or accommodate cleanup requests from other research groups. Please check http://github.com/imalsogreg/RetroProject for updates in this regard. The source code for the ArtE backend is hosted at http://arte-ephys.googlecode.com, and the source code for the Bayesian decoder is at http://github.com/imalsogreg/arte-ephys. All ArtE code is BSD3 licensed. A release will be cut called /thesis2014/, for the purpose of checking the results presented in this thesis against the exact code used to generate them. If you find errors, please do get in touch.
 
 
 
@@ -308,7 +322,7 @@ This property of being able to apply functions to arguments when the arguments a
 
 
 *** Concurrency - difficulty of running multiple threads simultaneously
-Concurrency is the simultaneous executition of multiple sections of code simultaneously [fn:: or interleaved in time with one another quickly enough that they appear to be executing simultaneously]. The Haskell standard library provides the function $forkIO$, which takes as its input a single action to run and acquires a new thread from the Haskell runtime to run that action.
+Concurrency is the simultaneous executition of multiple sections of code simultaneously [fn:: Or interleaved in time with one another quickly enough that they appear to be executing simultaneously]. The Haskell standard library provides the function $forkIO$, which takes as its input a single action to run and acquires a new thread from the Haskell runtime to run that action.
 
 \singlespacing
 
@@ -356,20 +370,20 @@ transfer fromAccount tAccount amount = do
 
 \doublespacing
 
-The $IORef Account$ type is a reference to a value that can be shared across threads. $transfer$ takes two references and an amount to transfer. It then reads the balances and increments each to reflect the money transfer. This works as long as Alice and Bob aren't at the bank at the same time. But if they try to send each other money at nearly the same time, this unfortunate sequence of events could happen:
+The $IORef Account$ type is a reference to a value that can be shared across threads. $transfer$ takes two references and an amount to transfer. It then reads the balances and increments each to reflect the money transfer. This works as long as Alice and Bob aren't at the bank at the same time. But if they try to send each other money at nearly the same time, data races can invalidate invariants that we expect to hold - such as the invariant that the sum of two accounts before and after any transaction should be equal. In the following example, thread A processes a $10 transfer from Bob to Alice while thread B processes a transfer of $20 from Alice to Bob, and interleaved effects cause $10 to be lost in the balance.
 
-#+CAPTION: \textbf{A race condition can corrupt data.} Two concurrent threads operating on shared data will often lead to a corrupted final state, because the individual steps in each operation change the shared data in ways not accounted for by the other thread. In this case, $10 have disappeared from the system after Alice and Bob make near-simultaneous transfers.
+#+CAPTION: \textbf{Two concurrent threads operating on shared data will often lead to a corrupted final state}. This happens because the individual steps in each operation change the shared data in ways not accounted for by the other thread. Thread A is processing $10 transfer from Bob to Alice; thread B is processing a $20 transfer from Alice to Bob.
 #+NAME:   tab:basic-data
-| Time | Thread             | Command                   | Alice's $ | Bob's $ | Big problem? |
-|------+--------------------+---------------------------+-----------+---------+--------------|
-|    0 | Bob -($10)-> Alice | getBalance bob            |    100.00 |   50.00 | No           |
-|    1 | Bob -($10)-> Alice | setBalance bob (50 - 10)  |    100.00 |   40.00 | Maybe...     |
-|    2 | Alice -($20)-> Bob | getBalance alice          |    100.00 |   40.00 | Maybe...     |
-|    3 | Alice -($20)-> Bob | setBalance alice (100-20) |     80.00 |   40.00 | Maybe...     |
-|    4 | Alice -($20)-> Bob | getBalance bob            |     80.00 |   40.00 | Maybe...     |
-|    5 | Alice -($20)-> Bob | setBalance bob (40+20)    |     80.00 |   60.00 | Maybe...     |
-|    6 | Bob -($10)-> Alice | getBalance alice          |     80.00 |   60.00 | Maybe...     |
-|    7 | Bob -($10)-> Alice | setBalance alice (80+10)  |     90.00 |   40.00 | Yes!         |
+| Time | Thread | Command                   |  Alice |   Bob | Violated invariant? |
+|------+--------+---------------------------+--------+-------+---------------------|
+|    0 | A      | getBalance bob            | 100.00 | 50.00 | No                  |
+|    1 | A      | setBalance bob (50 - 10)  | 100.00 | 40.00 | ...                 |
+|    2 | B      | getBalance alice          | 100.00 | 40.00 | ...                 |
+|    3 | B      | setBalance alice (100-20) |  80.00 | 40.00 | ...                 |
+|    4 | B      | getBalance bob            |  80.00 | 40.00 | ...                 |
+|    5 | B      | setBalance bob (40+20)    |  80.00 | 60.00 | ...                 |
+|    6 | A      | getBalance alice          |  80.00 | 60.00 | ...                 |
+|    7 | A      | setBalance alice (80+10)  |  90.00 | 40.00 | Yes                 |
 
 So functions that may be run in a concurrent context must somehow clamp the access to variables so that that threads don't make changes behind one another's backs. The basic tool for this is the /mutex/ [fn:: Mutex is short for Mutual exclusion], a `lock' that can be taken by at most one thread at a time. Mutexes are managed by the runtime system and are synchronized across all threads. It's up to the programmer's discretion how many she would like to create and which blocks of code she would like to wrap with them, and how tightly. But it turns out, there is no generally acceptable answer here either! We can wrap the entire $transfer$ function in a single mutex, but this means the entire program can only run a single transfer at a time; Bob and Alice are blocked from making their transfers while a completely unrelated transfer between Chris and Dean is going on. Alternatively, we could make a mutex for each account-holder in the bank, and in the process of transfering money between Alice and Bob, we take both mutexes in turn, perform the transfer, then return both mutexes. This can be made to work, but perhaps surprisngly, it is subject to a problem similar to that in the mutex-free case: the act of taking and releasign mutexes is prone to interaction effects. Alice transfering to Bob at nearly the same time that Bob transfers to Alice can cause one thread to take Alice's mutex just as the other take's Bob's, and then neither thread can make progress because each one is stuck waiting for the other to finish its transaction and release the complementary mutex. The topic is inherently difficult to understand, but the author is partly to blame for this too, in this case. For a more thorough treatment of this topic refer to Marlow's excellent Parallel and Concurrent Programming in Haskell [@marlow2012parallel]. The main point is, concurrency is often necessary to consider in programs that interact with the outside world, with inputs coming from multiple sources, and coping with it can be subtle and difficult.
 
@@ -381,6 +395,7 @@ Do we face the same challenge that we had with mutexes above, choosing between t
 This approach is very highly preferable to the premptive threading and mutex tools that programmers traditionally go to first when designing mulicore shared memory programs at this modest scale. But it does have a fairly serious drawback. Attempting to push a small number of expensive changes to shared variables from one thread, and a large number of very cheap changes from another thread, can cause the first thread to repeatedly fail to have its changes committed. This is known as /thread starvation/. What constitutes and expensive computation, a cheap computation, or a large number? These factors are system dependent. It can be hard to anticipate that thread starvation will rear its head. In general, one simply implements their algorithm using STM and tests to see that operation seems to be going as expected. But optimistically increasing the workload you subject an STM program to can be risky.
 
 TODO: Get this into footnote. Other popular systems have implemented STM: the database management system PostgreSQL [@stonebraker1986design], Java, and the associated functional language Clojure[@menon2008practical], and it has been implemented at the hardware level[@hammond2004transactional]
+
 
 * Coordinated information coding in a desynchronized network
 
