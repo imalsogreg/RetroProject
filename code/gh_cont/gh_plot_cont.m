@@ -92,7 +92,7 @@ if((opt.draw_std || opt.draw_ci) && ...
 end
 
 for n = 1:n_chan
-    if(~opt.areacd )
+    if(~opt.area )
         fig = plot(x_disp,y(:,n)','-','Color',opt.colors(n,:),'LineWidth',opt.LineWidth); hold on;
     elseif(opt.area)
         fig = area(x_disp,y(:,n)',offsets(n),'FaceColor',opt.colors(n,:),'LineWidth',opt.LineWidth); hold on
