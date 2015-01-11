@@ -42,7 +42,7 @@ A simular rule of thumb applies to most maze and cue displacement results: place
 
 
 *** Theta oscillations and multiunit spike phase
-Electrodes in the hippocampus pick up a 7-10 Hz, large-amplitude rhythm, in addition to somatic spikes. This is called the /theta rhythm/ [@vanderwolf1969hippocampal; @buzsaki2002theta]. The theta rhythm is present when animals are running or in a stationary, attentive state, and during REM sleep [@vanderwolf1969hippocampal]. Theta oscillations can be found throughout CA1 and CA1, as well as in the dentate gyrus and entorhinal contex, and a host of other cortical and subcortical areas. Collectively the areas expressing theta are known as the /Papez circuit/ [@papez1995proposed]. Incidentally a lesion to any component of the Papez circuit produces in humans strong anterograde amnesia (as reported in the hippocampal patient H.M. [@zola1983recall], thought in fact HM's entorhinal cortex was far more damaged than his hippocampus [@@annese2014postmortem]).
+Electrodes in the hippocampus pick up a 7-10 Hz, large-amplitude rhythm, in addition to somatic spikes. This is called the /theta rhythm/ [@vanderwolf1969hippocampal; @buzsaki2002theta]. The theta rhythm is present when animals are running or in a stationary, attentive state, and during REM sleep [@vanderwolf1969hippocampal]. Theta oscillations can be found throughout CA1 and CA1, as well as in the dentate gyrus and entorhinal contex, and a host of other cortical and subcortical areas. Collectively the areas expressing theta are known as the /Papez circuit/ [@papez1995proposed]. Incidentally a lesion to any component of the Papez circuit produces in humans strong anterograde amnesia (as reported in the hippocampal patient H.M. [@zola1983recall], thought in fact HM's entorhinal cortex was far more damaged than his hippocampus [@annese2014postmortem]).
 
 The mechanisms of theta's expression is being explored on two levels: the level of the generation of rhythms in the neurons, and the level of the translation of neural rhythms to extracellular currents [@buzsaki2002theta]. Neither level is completely understood, despite a large number of studies lesioning or pharmacologically silencing specifically excitatory or inhibitory neurons in various brain regions. 
 
@@ -803,6 +803,31 @@ The hippocampus is similar to cortex in that it has two very different modes of 
 *** Retrosplenial cortex unexpectedly follows HPC into SWS-like state during reward
 One popular model proposes that memory formation goes in two stages: while animals are awake, sensory information flows through the cortex and into the hippocampus, where it is assembled into short-lived mental models of the various sorts of things to be remembered; and while they are sleeping the hippocampus projects a modelled form of this information back to the cortex, with repetition, for long-term storage [@buzsaki1989two]. This model serves as a backdrop for designing experiments that examine the effect that concrene hippocampal events have on cortex, and that concrete cortical events have on hippocampus.
 
+** Materials & Methods
+*** Subjects
+
+All procedures were approved by the Committee on Animal Care at Massachusetts Institute of Technology and followed US National Institutes of Health guidelines. Tetrode arrays were assembled and implanted  according to the procedure in Nguyen et. at. (TODO 2008) and Kloosterman et. al (TODO 2008). We made several modifications to the materials and proceduces to improve our multi-cell sampling.  First, we glued several hundred half-inch pieces of 29 guage and 30 guage hypodermic tubing into rows about 6 mm long, then stacked and glued the rows together to form a honeycomb patterned jig, for organizing the tetrode guide-tubes that would eventually inhabit the microdrive. Second, we developed the ArtE recording system (TODO detailed in Chapter 2) to run in parallel with our usual usual tetrode recording rig. The broader goals of the ArtE project are to enable real-time data analysis and feedback, but in this experiment we used it merely to increase the number of simultaneously recorded tetrodes.
+
+
+
+*** Single-unit tetrode recording
+We constructed a tetrode guide jig by cluing together several hundred 2 cm strips of 30-guage polyimide tubing (TODO Vendor) into a dense 'honeycomb' pattern, one tube at a time. Starting with a single row of 30 tubes, and then building upwards, each new tube was secured to the honeycomb with medium thickness cyanoacrylate glue (TOOD vendor). This is a tedious process. The result is an array of hexagonally-spaced 30-guage tubes. From these several hundred, we selected 32 tubes that would become the target sites for individual tetrodes, with several targeting hipocampal CA1, several targeting retrosplenial cortex, and several targeting anterior dorsal thalamus (these thalamic tetrodes are not analyzed in this study). We inserted 10 cm stainless steel wires (5 milliinch diameter) partially into the selected tubes, and on the exposed ends, we loaded 32 10 cm lengths of 30 guage polyimide tube. These 32 tubes were glued together in place with Teets dental acryllic, and the bundle was removed as a unit, and integrated into a tetrode hyperdrive according to the instructions at Jove [@kloosterman2009micro; @nguyen2009micro].
+
+Craniotomy templates were printed on paper with a standard laser-jet printer, with markings corresponding to the guide tube bundles. Marks were printed for bregma and lambda skull points too. Plastic transparency sheet was placed on top of this diagram and holes were cut to accommodate the drive bundles; needle holes were made at the bregma and lambda points. We sterilized this plastic cutout and used it during surgery at a stencil, using sterilized pencil to mark the locations of the craniotomy. This ensures that the craniotomy will perfectly fit the peculiar shape of the tetrode guide tubes.
+
+Tetrodes were lowered into the pyramidal cell layer of CA1 over the course of 2 to 3 weeks and left there for several more weeks of recording. We sought to maximize the number of neurons recorded and to minimize within-experiment drift, so we closely tracked the shape of sharp wave ripples (which undergo characteristic changes during approach to the cell layer) and later the amplitudes of emerging clusters. If either of these factors changed overnight to a greater degree than expected, the tetrode was retracted by 30 to 60 micrometers.
+
+*** Behavioral training
+
+Behavioral training consisted of rewarding rats for simply running back and forth on a curved 3.4 meter linear track, or running continuously clockwise on a 3.4 meter long circular track, with rewards given for every 360 degrees of running for the first 3 laps and for every 270 degrees thereafter. Food deprivation began one or two days prior to the beginning of acquisition, with rats receiving 30 grams of food per day, adjusted up or down depending on the rat's motivation to run and level of comfort (assessed by the amount sleep taken before the running session). The target food-deprived weight was 80\% of free-feeding weight, but we rarely achieved this without disrupting the sleep of the animals, so body weights tended to be 90\% of the free-feeding weight or more, especially after rats learned the simple rules of the task. Additionally, we provided large rewards throughout training (2-5 grams of wetted powdered rat chow per lap), to encourage the long stopping periods during which awake replay can be observed. Under these conditions, rats run for about 20 laps or 30 minutes before becoming satiated and ignoring rewards. In some cases, rats continued to express interest in track running, but we aborted the trial early because continuous running in a single direction causes coiling of the electrical teather and tortion on the head.
+
+*** Electrophysiological Characterization
+Spikes and local field potentials were voltage buffered and recorded against a common white-matter reference, at 32 kHz and 2kHz respectively, and the rat's position was tracked at 15 Hz through a pair of alternating LED's mounted on the headstage, as in Davidson et. al. [@davidson2009hippocampal]. Spikes were clustered manually using the custom program, xclust3 (M.A.W.). Place fields were computed for each neuron as in Zhang et. al. [@zhang1998hippocampal], by partitioning the track into 50 to 100 spatial bins, and dividing the number of spikes occurring with the rat in each spatial bin by the amount of time spent in that spatial bin, in each case only counting events when the rat was moving at least 10 cm/second around the track. Direction of running was also taken into account, allowing us to compute separate tuning curves for the two directions of running, which we label 'outbound' and 'inbound'.
+
+*** Frame detection
+
+
+
 
 ** Results
 
@@ -873,43 +898,20 @@ Furthermore, this activity is coordinated on the behavioral and neural timescale
 
 These results are similar to the /local sleep/ findings of Vyazovski et. al. [@vyazovskiy2011local], but the primary difference is that the results we report seem to be unrelated to drowsiness, while Vyazovski's /local sleep/ is strogly related to sleep need and momentary behavioral impairment. Our findings suggest something else - that local sleep may be a normal part of the waking state, and that the hippocampal-cortical dialog previously thought to occur only during sleep may also occur when large rewards are found.
 
+To summarize, we think that Vyazovskiy et. al. are seeing the same thing that we are seeing - slow waves. However, Vyazovskiy shows that the slow waves of sleep can encroach on local cortical circuits at the times near sleep. We show that slow waves may also appear in retrosplenial cortex in a way that's otherwise unrelated to sleep.
+
 *** Functional roles for HPC-Cortex coordination may apply to wake
-Very little is known about the effect of ripples and replay on ongoing cortical activity. The finding that retrosplenial cortex follows the same general activity pattern in wake gives us the opportunity to extend work in hippocampal-cortical interactions during sleep to waking periods. Awake hippocampal-cortical interaction may 
+Very little is known about the effect of ripples and replay on ongoing cortical activity. The finding that retrosplenial cortex follows the same general activity pattern in wake gives us the opportunity to extend work in hippocampal-cortical interactions during sleep to waking periods. 
 
-*** New questions raised by SWW: mechanism and function
+Awake hippocampal-cortical interaction may share features with the cortico-hippocampal interactions of sleep, such as the appearance of up-down states in hippocampal interneurons [@hahn2006phase] or the coordination of encoded spatial content [@ji2006coordinated]. 
 
--  New questions:
+*** New questions raised by awake slow waves
 
-   -  What other brain areas have SWWake? Papez circuit?
-   -  What's the mechanism for the switch from awake-aroused to SWW
-      cortex?
-   -  What causes Slow Waves to traverse all of cortex during sleep, and
-      not wake?
-   -  Is there information content in slow-wave frame spikes? Is it
-      bounded by slow wave boundaries in an interesting way?
+These findings raise a number of interesting questions. First, what other brain areas coordinate with hippocampus during wake? Is this phenomenon specific to retrosplenial cortex, or could be a feature of all navigational cortical structures in the Papez circuit [@papez1995proposed]? Or is it a feature of the default mode network [@greicius2003functional]? The retrosplenial cortex is a member of both.
 
-\pagebreak
+Then there is the question of mechanism. Slow wave sleep is thought to arise from an interaction between cortex, relay thalamus, and inhibitory recicular thalamus. In the case of retrosplenial cortex, the excitatory thalamic afferent comes from the anterior dorsal thalamic nucleus (ADT). This raises the obvious question, does anterior does ADT participate in awake slow waves? Is there enough specificity in the connections from ADT to the reticular nucleus such that slow waves could be expressed in retrosplenial cortex without spilling over into other thalamo-cortical loops? Or does more of the thalamus than ADT participate in awake slow waves, and it is the cortex that supresses these effects in order to maintain the normal cortical activity while retrosplenial cortex adopts sleep-like activity. All of these questions can be answered simply by multisite recording in a maze with large rewards, and this should greatly expand our understanding of the role and extend of slow-wave activity.
 
-** Materials & Methods
-*** Subjects
-
-All procedures were approved by the Committee on Animal Care at Massachusetts Institute of Technology and followed US National Institutes of Health guidelines. Tetrode arrays were assembled and implanted  according to the procedure in Nguyen et. at. (TODO 2008) and Kloosterman et. al (TODO 2008). We made several modifications to the materials and proceduces to improve our multi-cell sampling.  First, we glued several hundred half-inch pieces of 29 guage and 30 guage hypodermic tubing into rows about 6 mm long, then stacked and glued the rows together to form a honeycomb patterned jig, for organizing the tetrode guide-tubes that would eventually inhabit the microdrive. Second, we developed the ArtE recording system (TODO detailed in Chapter 2) to run in parallel with our usual usual tetrode recording rig. The broader goals of the ArtE project are to enable real-time data analysis and feedback, but in this experiment we used it merely to increase the number of simultaneously recorded tetrodes.
-
-
-
-*** Single-unit tetrode recording
-
-Microdrive arrays were implanted with the center of the grid of tetrodes overlying dorsal CA1 (TODO A/P -4.0, M/L 3.5), spanning 3 mm of hippocampus in the septotemporal dimension and 1.5 mm proximo-distal. In two rats (TODO correct?), tetrodes were lowered into the pyramidal cell layer of CA1 over the course of 2 to 3 weeks and left there for several more weeks of recording.  In two more rats, tetrodes were first lowered into CA1, and later a subset of those was moved further to record simultaneously from field CA3. In each cell layer, we sought to maximize the number of neurons recorded and to minimize within-experiment drift, so closely tracked the shape of sharp wave ripples (which undergo characteristic changes during approach to the cell layer) and later the amplitudes of burgeoning clusters. If either of these factors changed overnight to a degree greater than expected, the tetrode was retracted by 30 - 60 micrometers.
-
-*** Behavioral training
-
-Behavioral training consisted of rewarding rats for simply running back and forth on a curved 3.4 meter linear track, or running continuously clockwise on a 3.4 meter long circular track, with rewards given for every 360 degrees of running for the first 3 laps and for every 270 degrees thereafter. Food deprivation began one or two days prior to the beginning of acquisition, with rats receiving 30 grams of food per day, adjusted up or down depending on the rat's motivation to run and level of comfort (assessed by the amount sleep taken before the running session). The target food-deprived weight was 80\% of free-feeding weight, but we rarely achieved this without disrupting the sleep of the animals, so body weights tended to be 90\% of the free-feeding weight or more, especially after rats learned the simple rules of the task. Additionally, we provided large rewards throughout training (2-5 grams of wetted powdered rat chow per lap), to encourage the long stopping periods during which awake replay can be observed (TODO Foster, 2006). Under these conditions, rats run for about 20 laps or 30 minutes before becoming satiated and ignoring rewards.
-
-*** Electrophysiological Characterization
-Spikes and local field potentials were voltage buffered and recorded against a common white-matter reference, at 32 kHz and 2kHz respectively, and position was tracked at 15 Hz through a pair of alternating LED's mounted on the headstage, as in (TODO) Davidson et. al. (2009). Spikes were clustered manually using the custom program, xclust3 (M.A.W. TODO). Place fields were computed for each neuron as in Brown Sejnowski et al (TODO), by partitioning the track into 50 to 100 spatial bins, and dividing the number of spikes occurring with the rat in each spatial bin by the amount of time spent in that spatial bin, in each case only counting events when the rat was moving at least 10 cm/second around the track. Direction of running was also taken into account, allowing us to compute separate tuning curves for the two directions of running, which we label 'outbound' and 'inbound'.
-
-To characterize the phase differences among tetrodes in CA1, a simple spatial traveling wave model was fit to the theta-frequency filtered LFP signals and the theta-filtered multiunit firing rate in turn, as in Lubenov and Spapas [@lubenov2009hippocampal]. TODO expand on this.
-
+In addition to the parallels that may be drawn between functional roles for sleep interactions and wake interactions, awake interactions may be have some of their own unique features. The rest of the cortex is behaving so dissimilarly between wake and slow-wave sleep that the inputs to retrosplenial cortex between wake and sleep will be very different. It is not necessarily the case that slow waves preclude the processing of sensory information however. Rasch et. al. [@rasch2007odor] showed that the slow-wave sleep presentation of odors that were previously paired with awake learning improve performance on the next day.
 
 
 * Conclusion / Wrap-up
