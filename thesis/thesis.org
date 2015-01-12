@@ -1,4 +1,3 @@
-#+TITLE: Title.
 
 * Overview
 
@@ -383,6 +382,10 @@ A third class of experiments is nebulous but probably very valuable. Using real 
 
 
 * Retrosplenial slow-wave wake and interaction with hippocampus
+
+** Abstract
+
+Cortical slow waves interact with the hippocampus during sleep, in the timing of their oscillations and the information content of local neural ensembles. These interactions are thought to be involved in memory consolidation. Here we show that slow-wave like activity in the retrosplenial cortex is not confined to periods of behavioral sleep, but also accompanies hippocampal ripples and replay during awake reward consumption. During initial exposure to a maze, many hippocampal transitions into the offline state are accompanied by slow-wave sleep features. Later in learning, slow-wave sleep like activity is less prevalent during the consumption of small rewards, but can reliably be elicited with large rewards. This activity is similarly prevalent during both light and dark phases of the sleep cycle, suggesting that in is not a function of drowsiness. We propose that the offline state of the hippocampus is not a time of hippocampal isolation from all cortex. Rather, the same mnemonic processing thought to rely on cortico-hippocampal interaction may also occur during wake.
 
 ** Introduction
 

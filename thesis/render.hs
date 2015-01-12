@@ -20,6 +20,7 @@ buildFileDir = "build"
 
 cmd f fmt  =
   "pandoc -o " ++ (buildFileDir </> f') ++
+  " --template=thesisTemplate.latex " ++
   " --latex-engine=xelatex -H preamble.tex " ++
   "--toc --bibliography background.bib " ++
   "--bibliography ../theta.bib --bibliography ../template.bib " ++
