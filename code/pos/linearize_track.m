@@ -355,7 +355,9 @@ pos.lin_vel_timestamp = conttimestamp(speeds);
 pos.lin_vel = speeds.data;
 pos.lin_vel_cdat = speeds;
 pos.lin_vel_cdat.data( abs(pos.lin_vel_cdat.data) > 1 ) = 0;
-pos.lin_vel_cdat.data = smooth(pos.lin_vel_cdat.data,15);
+disp('about to do a smooth, is this the slowe one?')
+pos.lin_vel_cdat.data = reshape(smooth(pos.lin_vel_cdat.data',15),[],1);
+disp('done with the smooth');
 
 out_run_bouts = contbouts(pos_speed_filt,'datargunits','data',...
     'thresh',opt.run_thresh,'minevdur',0.2,'mindur',0.4,'window',0.1);

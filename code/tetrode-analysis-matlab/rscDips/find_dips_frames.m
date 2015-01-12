@@ -1,9 +1,10 @@
 function [dips, frames] = find_dips_frames(mua_rate,varargin)
 
 p = inputParser();
-p.addParamValue('mean_rate_threshold', 40);
+p.addParamValue('mean_rate_threshold', 30);
+p.addParamValue('smooth_sec',0.005);
 p.addParamValue('trode_groups',[]);
-p.addParamValue('area_for_threshold','RSC'); % TODO not implemented
+p.addParamValue('area_for_threshold','RSC');
 p.addParamValue('frame_length_range', [0.01 10]);
 p.addParamValue('draw',false);
 p.parse(varargin{:});
@@ -19,11 +20,15 @@ end
     
 dip_crit = seg_criterion('cutoff_value', opt.mean_rate_threshold,...
     'threshold_is_positive',false,...
-    'bridge_max_gap',0.005,'min_width_pre_bridge',0.005);
+    'bridge_max_gap',0.005,'min_width_pre_bridge',0.020);
 
 mua_mean = mua_rate;
-mua_mean.data = mean(double(mua_mean.data),2); % Somehow input data was single
+mua_mean.data = mean(double(mua_mean.data),2);
 mua_mean.chanlabels = {'meanRate'};
+nSmooth = floor(mua_mean.samplerate * opt.smooth_sec);
+if(nSmooth > 1)
+    mua_mean.data = smooth(mua_mean.data,nSmooth);
+end
 
 dips = gh_signal_to_segs(mua_mean,dip_crit);
 

@@ -1,10 +1,10 @@
-function m = caillou_112812_metadata()
+function m = caillou_120912_metadata()
 
 % Notes: see notes.txt
 
-m.today = '112812';
+m.today = '120912';
 m.basePath = ['~/Data/caillou/',m.today];
-m.loadTimewin = [4382, 5829];
+m.loadTimewin = [2282.4,3171.4];
 m.checkedArteCorrectionFactor = false;
 m.arteCorrectionFactor = 0;
 m.rat_conv_table = caillou_rat_conv_table();
@@ -30,10 +30,10 @@ m.arte_tts = {'14','13','12','10','09','08','07','06','05','04','02','01'};
 
 m.systemList = {'ad','ad','arte','arte'};
 
-m.f1File   = 'j28.eeg';
+m.f1File   = 'j09.eeg';
 m.f1TrodeLabels = {'30','29','28','27','26','25','24','23'};
 m.f1Inds   = 1:8;
-m.f2File   = 'k28.eeg';
+m.f2File   = 'k09.eeg';
 m.f2TrodeLabels = {'22','21','20','19','18','17','16','15'};
 m.f2Inds   = 1:8;
 
@@ -47,7 +47,7 @@ m.f4TrodeLabels = {'05','04','02','01'};
 %m.f4TrodeLabels = {'05','04','02','01','18arte','17arte','16arte','15arte'};
 
 m.singleThetaChan = '06';
-m.keep_list = [1     3     5     6    25    26    27    28    29    34    35    37    38    39    51    55    68    69    71    72    79    80 82    94    95    96    97    99   108   109   111   112   115];
+m.keep_list = [];
 
 % MUA
 m.keepGroups = {'CA1','ADT','CTX','RSC'};
