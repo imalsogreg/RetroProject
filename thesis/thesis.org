@@ -865,6 +865,20 @@ Examining longer periods of time, we can find that the epochs dominated by hippo
 
 Some filler text!
 
+
+
+*** RSC awake slow waves coordinate with hippocampus under diverse conditions
+
+To determine whether slow-wave like activity is related to familiarity or drowsiness, we recorded it early and late in behavioral training, and during both the light and dark phases of the light cycle. Early in training, both ripples and frames appear in response to large and small rewards (Figure 14, top). Later in training, ripples may still appear during the collection of small rewards, but down-states are more restricted to large reward consumption (Figure 14, bottom). To determine whether slow-wave sleep like activity is related to drowsiness, we attempted to eliminate it by providing a rat two day's rest and then running him during the dark phase of the light cycle, when rats are more active (Figure 14, middle). We continued to see very strong slow-wave like activity during these sessions.
+
+#+CAPTION: \textbf{Behavioral scale alignment between slow-wave like activity and hippocampal ripples, during two phases of the light cycle and early in training.} Retrosplenial slow-wave like activity can arise under diverse conditions, but is always associated with a hippocampal offline state. Down states detected as sharp drops in cortical firing rate are indicated as green raster tics over the course of three training sessions. Ripples detected by increases in hippocampal firing rate and ripple-frequency LFP power are indicated in blue. /Top:/ Early in training down states occur during both short and long pauses on the track. /Middle:/ A recording session taken in the middle of the wake phase of the light cycle late in training. Ripples and down states largely avoid short stopping periods and small rewards. /Bottom:/ A typical recording session late in training, during the light phase of the light cycle. Down states are largely restricted to long eating pauses; ripples are more prevalent during long pauses but also present during collection of small rewards.
+#+NAME:   fig:manyLongExamples
+[[./finalFigs/SWW/manyLongExamples.png]]
+
+*** Anatomical restriction - nonparticipation in other cortical areas
+
+In later recording sessions, we retracted most of the hippocampal tetrodes up into overlying somatosensory and motor cortices and recorded from these in tandem with the retrosplenial cortex. We saw clear slow-wave modulation of these tetrodes during slow-wave sleep and a dergee of participation during drowsiness. However no spontaneous down states, frames, or K-complexes were seen during wake.
+
 #+CAPTION: \textbf{Example frames in SWS, drowsiness, and large reward consumption.} Example frames and down states are clearly visible and coordinated between retrosplenial cortex (green) and somatosensory and motor cortices (magenta) during SWS. Down states are less frequent during drowsiness and reward consumption. In drowsiness, weak coorditation between cortical areas can be seen. During awake reward consumption, frames and down states are visible in retrosplenial cortex, but somatosensory and motor cortex fire as they normally do during wake.
 #+NAME:   fig:frameExamples
 [[./finalFigs/SWW/finding.png]]
@@ -875,33 +889,6 @@ In the retrosplenial cortex, lengths of putative down states in slow-wave sleep,
 #+NAME:   fig:downStateDistributions
 [[./finalFigs/SWW/downStateLengthDistributions.png]]
 
-
-*** RSC awake slow waves coordinate with hippocampal ripples
-
--  5-second window showing co-transition into SWS-like state (RSC
-   frames, HPC ripples & replay)
--  200-second window showing behavioral-timescale relationship
--  Cross-correlation of ripples & RSC frames similar between wake and
-   SWS
-
-*** RSC awake slow waves require large reward in well-trained rats9
-
--  Occur at most stopping points early in training
--  After ~ week, spontaneous frames & small-reward frames stop, but
-   large-reward frames persist (for at least a month)
-
-*** Anatomical restriction - nonparticipation in other cortical areas
-
--  Simultaneously recorded somatosensory, motor, posterior parietal
-   cortex have no frame-like activity (noticeable changes in spike rate
-   or LFP) during RSC awake frames
-
-
-*** Slow-wave wake not limited to times of sleepiness (TODO maybe include maybe not)
-
--  Awake SWS-like activity continues in both light and dark phases of
-   light cycle
--  Many SW's are flanked by fast running and chewing
 
 ** Discussion
 
