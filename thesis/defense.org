@@ -1,0 +1,37 @@
+#+AUTHOR: Gregory Hale
+#+TITLE: Timing and hippocampal information processing
+
+
+* Timing and information processing
+** The role of time in hippocampal spatial processing
+** Timing of hippocampal cortical sleep rhythms, during wake
+** A new tool for responding to ensemble coding in real time
+
+* Synchronized information in a desynchronized circuit
+** Theta oscillations, timing offsets
+** Theta sequences
+** Position decoding, regional offsets
+** Follow-up: pairwise time offsets
+** Interpretation
+
+* Retrosplenial cortex slow-wave wake
+** Slow-wave sleep, frames, and HPC-CTX interactions
+** RSC exhibits SWS-like behavior during rewards
+** SWW coordinates with HPC
+** SWW appearance under diverse conditions
+** SWW anatomical restriction
+** Interpretation
+
+* Real time position decoding
+** Hippocampal replay
+** Real time experiments
+** Position decoding
+** Real time decoding challenges
+** Concurrency
+** Haskell
+** Real time demo
+** Example decodings
+** Bugs, deadlocks, crashes, and performance debugging
+** Sketching a full real time decoding system
+
+* Thank you's
