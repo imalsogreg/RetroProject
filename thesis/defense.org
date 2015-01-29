@@ -7,6 +7,7 @@
 ** Timing of hippocampal cortical sleep rhythms, during wake
 ** A new tool for responding to ensemble coding in real time
 
+
 * Synchronized information in a desynchronized circuit
 ** Theta oscillations, timing offsets
 ** Theta sequences
