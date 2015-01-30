@@ -165,7 +165,7 @@
        x2="620"
        y1="53.890526"
        x1="620"
-       gradientTransform="matrix(0.99224806,0,0,1.2073171,7.9379845,-960)"
+       gradientTransform="matrix(0.99224806,0,0,1.2073171,7.937985,-960)"
        gradientUnits="userSpaceOnUse"
        id="linearGradient11931"
        xlink:href="#linearGradient11871-3"
@@ -896,7 +896,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.5"
-     inkscape:cx="611.78813"
+     inkscape:cx="522.13684"
      inkscape:cy="493.49625"
      inkscape:document-units="px"
      inkscape:current-layer="layer11"
@@ -923,7 +923,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer5"
-     inkscape:label="bkgnd">
+     inkscape:label="bkgnd"
+     style="display:inline">
     <rect
        style="color:#000000;fill:url(#pattern11851);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="rect11825"
@@ -977,30 +978,30 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="guides2"
-     style="opacity:0.96356275">
+     style="opacity:0.96356273;display:inline">
     <rect
-       style="color:#000000;fill:#3caa85;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;filter:url(#filter4962)"
+       style="color:#000000;fill:#3caa85;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4962);enable-background:accumulate"
        id="rect9624"
        width="549.37042"
        height="563.16254"
        x="365.38159"
        y="198.371" />
     <rect
-       style="color:#000000;fill:#89b1af;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;filter:url(#filter4974)"
+       style="color:#000000;fill:#89b1af;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4974);enable-background:accumulate"
        id="rect9626"
        width="339.6384"
        height="341.67603"
        x="11.085779"
        y="198.83817" />
     <rect
-       style="color:#000000;fill:#eaea85;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;filter:url(#filter4986)"
+       style="color:#000000;fill:#eaea85;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4986);enable-background:accumulate"
        id="rect9657"
        width="339.6384"
        height="209.9136"
        x="11.085779"
        y="551.9632" />
     <rect
-       style="color:#000000;fill:#dbb8e8;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;filter:url(#filter5034)"
+       style="color:#000000;fill:#dbb8e8;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter5034);enable-background:accumulate"
        id="rect9626-3"
        width="339.75949"
        height="341.93927"
@@ -1008,7 +1009,7 @@
        y="-761.47504"
        transform="scale(1,-1)" />
     <rect
-       style="color:#000000;fill:#81c5c5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;filter:url(#filter5022)"
+       style="color:#000000;fill:#81c5c5;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter5022);enable-background:accumulate"
        id="rect9657-6"
        width="339.6384"
        height="209.9136"
@@ -1346,10 +1347,11 @@
   <g
      inkscape:groupmode="layer"
      id="layer11"
-     inkscape:label="text">
+     inkscape:label="text"
+     style="display:none">
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Sans;filter:url(#filter5176)"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter5176);font-family:Sans"
        x="657.05591"
        y="280.86572"
        id="text4877"
@@ -1374,7 +1376,7 @@
    id="tspan4895">P</tspan>ROCESSING</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Sans;filter:url(#filter5188)"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter5188);font-family:Sans"
        x="649.59369"
        y="421.21582"
        id="text4897"
@@ -1411,7 +1413,7 @@
          style="font-size:32px;fill:#ffffff" /></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;font-family:Sans;filter:url(#filter5200)"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;display:inline;filter:url(#filter5200);font-family:Sans"
        x="638.92773"
        y="607.06396"
        id="text4938"
@@ -1420,26 +1422,26 @@
          id="tspan4940"
          x="638.92773"
          y="607.06396"
-         style="font-size:32px;text-align:center;text-anchor:middle;fill:#ffffff;-inkscape-font-specification:Sansation;font-family:Sansation;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"><tspan
-   style="font-size:40px;fill:#ffffff;-inkscape-font-specification:Sansation;font-family:Sansation;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+         style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Sansation;-inkscape-font-specification:Sansation"><tspan
+   style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;font-family:Sansation;-inkscape-font-specification:Sansation"
    id="tspan4946">W</tspan>ILSON <tspan
-   style="font-size:40px;fill:#ffffff;-inkscape-font-specification:Sansation;font-family:Sansation;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+   style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;font-family:Sansation;-inkscape-font-specification:Sansation"
    id="tspan4948">L</tspan>AB</tspan><tspan
          sodipodi:role="line"
          x="638.92773"
          y="657.06396"
          id="tspan4942"
-         style="font-size:32px;text-align:center;text-anchor:middle;fill:#ffffff;-inkscape-font-specification:Sansation;font-family:Sansation;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"><tspan
-   style="font-size:40px;fill:#ffffff;-inkscape-font-specification:Sansation;font-family:Sansation;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+         style="font-size:32px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Sansation;-inkscape-font-specification:Sansation"><tspan
+   style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;font-family:Sansation;-inkscape-font-specification:Sansation"
    id="tspan4950">B</tspan>RAIN <tspan
-   style="font-size:40px;fill:#ffffff;-inkscape-font-specification:Sansation;font-family:Sansation;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+   style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;font-family:Sansation;-inkscape-font-specification:Sansation"
    id="tspan4960">&amp; C</tspan>OGNITIVE <tspan
-   style="font-size:40px;fill:#ffffff;-inkscape-font-specification:Sansation;font-family:Sansation;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+   style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;fill:#ffffff;font-family:Sansation;-inkscape-font-specification:Sansation"
    id="tspan4954">S</tspan>CIENCES</tspan><tspan
          sodipodi:role="line"
          x="638.92773"
          y="707.06396"
          id="tspan4944"
-         style="font-size:40px;text-align:center;text-anchor:middle;fill:#ffffff;-inkscape-font-specification:Sansation;font-family:Sansation;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">MIT</tspan></text>
+         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;text-anchor:middle;fill:#ffffff;font-family:Sansation;-inkscape-font-specification:Sansation">MIT</tspan></text>
   </g>
 </svg>
