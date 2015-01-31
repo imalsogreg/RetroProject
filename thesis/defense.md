@@ -82,6 +82,17 @@
 
 ---
 
+## Sequence Replay
+
+![](../talkFigs/replayExample2.png "")
+
+ - Zoom in on stationary rat
+ - Neural activity replays high-speed track traversal^[8]^
+
+[8]:http://www.nature.com/nature/journal/v440/n7084/full/nature04587.html
+
+---
+
 ## Theta sequences
 
 ![](../talkFigs/exampleThetaSequencesAndRaster2.png "A raster plot of four place cells, for about 500 milliseconds. The cells are sorted vertically by preferred location on the track. At fine timescales, they can be seen to fire in fast sequences that reflect the ordering of their preferred locations. In the background is a position reconstruction in the same time interval, showing the same information: that the ensemble sweeps ahead of the rat in his direction of running. There is one such sweep per theta cycle.")
