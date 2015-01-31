@@ -63,11 +63,22 @@
 
 ---
 
+## Place Cells
+
+<div class="leftHalf">
+![](../talkFigs/placeField.png "")
+</div>
+<div class="leftHalf">
+#[](../talkFigs/slowDecode.png "")
+</div>
+
+---
+
 ## Theta sequences
 
 ![](../talkFigs/exampleThetaSequencesAndRaster2.png "A raster plot of four place cells, for about 500 milliseconds. The cells are sorted vertically by preferred location on the track. At fine timescales, they can be seen to fire in fast sequences that reflect the ordering of their preferred locations. In the background is a position reconstruction in the same time interval, showing the same information: that the ensemble sweeps ahead of the rat in his direction of running. There is one such sweep per theta cycle.")
 
- - Hippocampal units ("place cells") fire at stable preferred track locations
+ - Hippocampal units ("place cells") fire at fixed track locations (y-axis)
  - Sort units by preferred location (y-axis) and zoom in time (x-axis)
  - Place cells fire in quick sequences reflecting place field order
  - Grey background: fine time-scale position estimate from 30 place cells
@@ -128,7 +139,8 @@
 </div>
 <div class="leftHalf">
 
- - Divide cells into <span style="color:red">**medial**</span> and <span style="color:green">**lateral**</span> groups
+ - Divide cells into <span style="color:red">**medial**</span>
+   and <span style="color:green">**lateral**</span> groups
  - Reconstruct theta sequences independently
  - Average together individual theta sequences
  - Compare group averaged theta sequences
@@ -139,22 +151,15 @@
 
 ## Position Decoding, Regional Time Offsets
 
-
-<div class="leftHalf">
-![](../talkFigs/sequences_all.png "")
-</div>
-<div class="leftHalf">
-
 <br/>
 
- Session                Yolanda A    Yolanda B    Morpheus     Caillou
---------------------- ------------ ------------ ----------- ------------
- Mean spacing(mm)       1.33         1.30          2.27       1.05
- Min spacing (mm)       0.94         0.94          1.47       0.69
- Expected offset(ms)    17.02        16.64         29.06      13.44
- Observed offset(ms)    -4.0          -3.0         6.0         3.5
 
-</div>
+![](../talkFigs/sequences_all.png "")
+
+ - Observed delay < expected (p < 0.05)
+ - Stretched diagonal shape
+ - Note center of mass
+
 
 ---
 
