@@ -65,12 +65,20 @@
 
 ## Place Cells
 
+<br/>
+
 <div class="leftHalf">
-![](../talkFigs/placeField.png "")
+![](../talkFigs/placeField2.png "")
 </div>
 <div class="leftHalf">
-#[](../talkFigs/slowDecode.png "")
+![](../talkFigs/slowDecode2.png "")
 </div>
+
+ - Single cells become active at one track location
+ - Many cells' activity can be combined to estimate rat's position^[6],[7]^
+
+[6]:http://jn.physiology.org/content/79/2/1017.short
+[7]:http://www.sciencedirect.com/science/article/pii/S0896627309005820
 
 ---
 
@@ -96,12 +104,12 @@
 
 <br/><br/>
 	
- - Within hippocampus, theta is desynchronized^[6]^
+ - Within hippocampus, theta is desynchronized^[8]^
  - Field potential is increasingly delayed more laterally
  
 </div>
 
-[6]:http://www.nature.com/nature/journal/v459/n7246/full/nature08010.html
+[8]:http://www.nature.com/nature/journal/v459/n7246/full/nature08010.html
 
 ---
 
