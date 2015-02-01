@@ -260,6 +260,12 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
+## Hippocampal-cortical sleep interactions
+
+![From [Mehta's review](http://www.gmail.com) of [Ji & Wilson 2007](http://www.gmail.com)](../talkFigs/jiMehtaModel.gif "Pictures of three stages of learning. First, random neocortical inputs and a weak hippocampal connectivity matrix result in unstructured spiking in sleeping hippocampus. Then structured neocortical input during run results in structured firing of hippocampus and sequence learning in hippocampus. Third, the newly structured synaptic weights in hippocampus result in spontaneous replay, as well as driving the activity of cortex.")
+
+---
+
 ## Experimental Setup
 
 <br/>
