@@ -55,6 +55,7 @@
 .spacedBullets li {
     margin:50px;
     font-family: 'Open Sans', sans-serif;
+    line-height:100%;
 }
 
 .reveal .slide .spacedBullets a {
@@ -75,9 +76,6 @@
     text-align:center;
 }
 
-.reveal table thead th {
-    background-color:green;
-}
 
 .reveal table td {
     background-color: #30F0F0;
@@ -88,8 +86,8 @@
 
 
 .reveal .slide li {
-    margin-top:20px;
-    margin-bottom:20px;
+    margin-top:10px;
+    margin-bottom:10px;
     font-size:18pt;
     font-family: 'Open Sans', sans-serif;
 }

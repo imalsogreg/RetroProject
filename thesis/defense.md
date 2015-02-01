@@ -22,11 +22,11 @@
 
 ---
 
-# Synchronized information in a desynchronized circuit{#waves}
+# Synchronized Information in a Desynchronized Circuit {#waves style="width:60%;margin-left:15%;margin-right:15%;"}
 
 ---
 
-## Theta oscillations, timing offsets
+## Theta Oscillations
 
 <div class="leftHalf">
 ![](../talkFigs/brainAndWavesOneChan.png "Overhead image of rat brain with one hippocampal recording site indicated. A voltage trace from that site shows several cycles of the theta rhythm in the local field potential")
@@ -68,10 +68,10 @@
 <br/>
 
 <div class="leftHalf">
-![](../talkFigs/placeField2.png "")
+![](../talkFigs/placeField2.png "A circular track viewed from above. Blue dots clustered together at one point indicate rat's position when a particular cell fired spikes. That small area is the neuron's place field.")
 </div>
 <div class="leftHalf">
-![](../talkFigs/slowDecode2.png "")
+![](../talkFigs/slowDecode2.png "A plot of the rat's position on the track (y-axis) as a function of time. Overlaid is an estimate of the rat's position made by considering which neurons fired spikes in any small time window, and looking up those neurons' place fields for the entire run session.")
 </div>
 
  - Single cells become active at one track location
@@ -84,7 +84,7 @@
 
 ## Sequence Replay
 
-![](../talkFigs/replayExample2.png "")
+![](../talkFigs/replayExample2.png "Another plot of rat's position as a function of time with position estimate overlaid, zoomed in to a few seconds. Although the rat is stationary at the end of the track, the decoded position sweeps down the track in a linear way.")
 
  - Zoom in on stationary rat
  - Neural activity replays high-speed track traversal^[8]^
@@ -93,7 +93,7 @@
 
 ---
 
-## Theta sequences
+## Theta Sequences
 
 ![](../talkFigs/exampleThetaSequencesAndRaster2.png "A raster plot of four place cells, for about 500 milliseconds. The cells are sorted vertically by preferred location on the track. At fine timescales, they can be seen to fire in fast sequences that reflect the ordering of their preferred locations. In the background is a position reconstruction in the same time interval, showing the same information: that the ensemble sweeps ahead of the rat in his direction of running. There is one such sweep per theta cycle.")
 
@@ -106,33 +106,34 @@
 
 
 
-## Local theta desynchronization
+## Local Theta Desynchronization
 
 <div class="leftHalf">
-![](../talkFigs/brainAndWaves.png "")
+![](../talkFigs/brainAndWaves.png "A figure of a brain with three recording sites all in hippocampus, but progressively more lateral and posterior. Beside, three local field potential traces showing the theta rhythm. More lateral/posterior tetrodes have a graded time delay.")
 </div>
 <div class="leftHalf">
 
 <br/><br/>
 	
- - Within hippocampus, theta is desynchronized^[8]^
+ - Within hippocampus, theta is desynchronized^[9]^
  - Field potential is increasingly delayed more laterally
  
 </div>
 
-[8]:http://www.nature.com/nature/journal/v459/n7246/full/nature08010.html
+[9]:http://www.nature.com/nature/journal/v459/n7246/full/nature08010.html
 
 ---
 
-## Local theta desynchronization
+## Theta is a Traveling Wave
 
 <video width="640" height="480" controls>
 <source src="../movies/thanos1.ogg" type="video/ogg"/>
+A high-speed animation of several cycles theta in the local field potentials of 32 tetrodes organized in an array along the hippocampus. Theta can be seen as a traveling wave here, with a peak that begins at the most medial tetrodes and sweeps laterally.
 </video>
 
 ---
 
-## Local theta desynchronization
+## Local Theta Desynchronization
 
 <div class="leftHalf">
 ![](../talkFigs/brainAndWaves.png "")
@@ -151,7 +152,7 @@
 
 ---
 
-## Position Decoding, Regional Time Offsets
+## Position Decoding, Measuring Regional Time Offsets
 
 <div class="leftHalf">
 ![](../talkFigs/decodingStrategy.png "An illustration of the procedure for measuring the impact of theta phase differences on theta sequences.")
@@ -168,26 +169,102 @@
 
 ---
 
-## Position Decoding, Regional Time Offsets
+## Regional Time Offsets are Actually Small 
 
 <br/>
 
 
 ![](../talkFigs/sequences_all.png "")
 
- - Observed delay < expected (p < 0.05)
- - Stretched diagonal shape
- - Note center of mass
+ - Black arrows: x-intercept, theta sequence time delay
+ - Blue arrows: Time delay of theta oscillation
+ - Theta sequence delay < theta wave delay (p < 0.05)
+ - Stretched diagonal shape: regional theta sequences are similarly streaked
+ - Center of mass: when (>0), lateral cells participate later
 
 
 ---
 
-## Follow-up: pairwise time offsets
+## Time Offsets in Neuron Pairs Are Small
+
+<br/>
+
+![](../talkFigs/pairwise.png "A scatterplot with each point representing a pair of place cells. Time offset is on the z-axis, place-field offset is on the y-axis (right, blue) and anatomical offset is on the x-axis (left, red)")
+
+ - All pairs of nearby cells, spike timing *vs.* anatomical distance & field distance
+ - Strong relationship between <span style="color:#0040A0">
+   place fields and timing</span> (theta sequences)
+ - No strong relationship between <span style="color:#C00020">
+   anatomical location and timing</span>
+
+[10]:https://github.com/imalsogreg/RetroProject/tree/master/thesis
+
+---
+
 ## Interpretation
 
+<div class="spacedBullets">
+ - Most spikes from place cells fall in sequences
+ - Spike sequences are tightly aligned in time
+ - ...despite time offsets in the underlying oscillations
+ - What's the mechanism?
+</div>
 
+---
+
+## Mechanism
+
+<br/>
+
+<div class="spacedBullets">
+
+ - Several competing models for theta sequences
+ - All rely on a local theta & predict sequences desynchronized by traveling wave
+ - Two classes of explanation for our data:
+    - Traveling wave is counteracted by a factor with the opposite timing gradient.
+	  **Test through properties of place fields.**
+	- Theta sequences are inherited from upstream regions that *are* synchronized.
+	  **Test by recording upstream areas.**
+
+</div>
+
+
+---
 
 # Hippocampal Cortical Sleep Interactions, During Wake {#sww}
+
+---
+
+## Slow-wave sleep
+
+<br/>
+
+<div class="leftHalf" style="width:75%">
+![](../talkFigs/exampleSleep.png "")
+</div>
+<div class="leftHalf" style="width:25%;">
+
+  - Hippocampus
+	- Irregular field potential ripples
+	- Bursts of action potentials
+	- Replay
+	- Sleep + rest
+
+  - Cortex
+	- ~4 Hz delta oscillations
+	- K-complexes
+	- Up/Down states
+	- Sleep only
+	
+</div>
+
+---
+
+## Experimental Setup
+
+<br/>
+
+![](../talkFigs/expDesign.png "")
 
 ---
 
