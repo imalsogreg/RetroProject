@@ -128,7 +128,9 @@
 
 <video width="640" height="480" controls>
 <source src="../movies/thanos1.ogg" type="video/ogg"/>
+
 A high-speed animation of several cycles theta in the local field potentials of 32 tetrodes organized in an array along the hippocampus. Theta can be seen as a traveling wave here, with a peak that begins at the most medial tetrodes and sweeps laterally.
+
 </video>
 
 ---
@@ -148,7 +150,6 @@ A high-speed animation of several cycles theta in the local field potentials of 
  
 </div>
 
-[6]:http://www.nature.com/nature/journal/v459/n7246/full/nature08010.html
 
 ---
 
@@ -235,7 +236,20 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Slow-wave sleep
+
+## Hippocampal-cortical sleep interactions
+
+<br/>
+
+![From [Mehta's review](http://www.nature.com/neuro/journal/v10/n1/full/nn0107-13.html) of [Ji & Wilson 2007](http://www.nature.com/neuro/journal/v10/n1/full/nn1825.html)](../talkFigs/jiMehtaModel.gif "Pictures of three stages of learning. First, random neocortical inputs and a weak hippocampal connectivity matrix result in unstructured spiking in sleeping hippocampus. Then structured neocortical input during run results in structured firing of hippocampus and sequence learning in hippocampus. Third, the newly structured synaptic weights in hippocampus result in spontaneous replay, as well as driving the activity of cortex.")
+
+ a. Presleep: unstructured CTX, unstructured HPC synapses, unstructured output
+ a. Run: structured input $\rightarrow$ HPC place field sequences and plasticity
+ a. Postsleep: learned HPC sequences replay and train the cortex
+
+---
+
+## Slow-wave sleep features
 
 <br/>
 
@@ -260,34 +274,67 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Hippocampal-cortical sleep interactions
-
-![From [Mehta's review](http://www.gmail.com) of [Ji & Wilson 2007](http://www.gmail.com)](../talkFigs/jiMehtaModel.gif "Pictures of three stages of learning. First, random neocortical inputs and a weak hippocampal connectivity matrix result in unstructured spiking in sleeping hippocampus. Then structured neocortical input during run results in structured firing of hippocampus and sequence learning in hippocampus. Third, the newly structured synaptic weights in hippocampus result in spontaneous replay, as well as driving the activity of cortex.")
-
----
-
 ## Experimental Setup
 
 <br/>
 
-![](../talkFigs/expDesign.png "")
+![](../talkFigs/expDesign2.png "Experimental design illustration showing circular track and reward locations; diagram of tetrode recording locations: hippocampus, retrosplenial cortex, and somatosensory and motor cortices.")
+
+ - Track designed to activate head-direction coding cells in RSC
+ - Non-trivial reward locations with occasional large rewards
+ - Record from HPC, RSC, and Somatosensory/Motor cortex
 
 ---
 
-## Slow-wave sleep, frames, and HPC-CTX interactions
 
-Content
+## Retrosplenial Cortex and Hippocampus During Run
+
+Awaiting fig from Hector
 
 ---
 
+## Retrosplenial Cortex and Hippocampus During Reward Consumption
 
-## RSC exhibits SWS-like behavior during rewards
+<div class="leftHalf" style="width:70%">
+![](../talkFigs/exampleDetail.png "")
+</div>
+<div class="leftHalf" style="width:30%">
 
-Content
+  - HPC: ripples, replay
+  - As usual
 
-## SWW coordinates with HPC
+<br/>
 
-## SWW appearance under diverse conditions
+  - RSC: Delta, K-complexes, downstates.
+  - Strange.
+
+</div>
+
+---
+
+## Up/Down States Coordinate with Hippocampus
+
+![](../talkFigs/exampleExtended.png "")
+
+---
+
+## Up/Down States are Due to Drowsiness?
+
+![](../talkFigs/SWWDark.png "")
+
+---
+
+## Up/Down States are Due to Reward Size?
+
+![](../talkFigs/SWWEarly.png "")
+
+---
+
+## Up/Down States are Due to Novelty?
+
+![](../talkFigs/SWWEarly.png "")
+
+---
 
 ## SWW anatomical restriction
 

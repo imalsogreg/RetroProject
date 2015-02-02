@@ -66,22 +66,16 @@
     line-height:80%;
 }
 
-.reveal table {
-    font-size:12pt;
+.reveal .slide figcaption {
+    margin-top:-50px;
+    font-size:16pt;
+    text-align: right;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.reveal table tr {
-    background-color: #30F0F0;
-    height:10px;
-    text-align:center;
-}
-
-
-.reveal table td {
-    background-color: #30F0F0;
-    height:10px;
-    text-align:center;
-    padding: 4px;
+.reveal .slide figcaption a {
+    font-size:16pt;
+    font-family: 'Open Sans', sans-serif;
 }
 
 
