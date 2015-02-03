@@ -318,46 +318,144 @@ Awaiting fig from Hector
 
 ---
 
-## Up/Down States are Due to Drowsiness?
+## Up/Down States and Drowsiness
+
+<br/>
 
 ![](../talkFigs/SWWDark.png "")
 
+ - Repeat experiment at night: rat's active phase
+ - Persisting strong Up/Down states during pauses for large reward
+
 ---
 
-## Up/Down States are Due to Reward Size?
+## Up/Down States and Reward Size
+
+<br/>
 
 ![](../talkFigs/SWWEarly.png "")
 
----
-
-## Up/Down States are Due to Novelty?
-
-![](../talkFigs/SWWEarly.png "")
+ - Recordings from first day of training
+ - Strong Up/Down states during large rewards, also during small rewards
 
 ---
 
-## SWW anatomical restriction
+## Up/Down States and Novelty
 
-## Interpretation
+<br/>
 
+![](../talkFigs/SWWNormal.png "")
 
+ - Recordings from later in training
+ - Large rewards are completely predictable
+ - Up/Down states still present during stops for large reward
 
-# A Tool for Real Time Population Decoding {#arte}
+---
+
+## Up/Down States in Other Cortical Areas?
+
+<br/>
+
+![](../talkFigs/SWWAnatomical.png "")
+
+ - Simultaneous recording from RSC and somatosensory & motor cortex
+ - Down-states tightly coordinated during sleep
+ - No down-states during wake except in Retrosplenial cortex
+
+---
+
+## Summary & New Questions
+
+ - Slow-waves are not limited to slow-wave sleep and drowsiness
+ - Retrosplenial cortex enters SWS-like state during reward
+ - HPC $\rightarrow$ CTX information not limited to sleep
+ - New questions:
+    - Involvement of other cortical areas?
+    - Occurance during other behavioral states?
+    - Slow wave selectivity mechanism?
+
+---
+
+# Real Time Position Decoding {#arte}
+
+---
+
 ## Hippocampal replay
+
+<div class="leftHalf">
+![](../talkFigs/replayExample2.png "Another plot of rat's position as a function of time with position estimate overlaid, zoomed in to a few seconds. Although the rat is stationary at the end of the track, the decoded position sweeps down the track in a linear way.")
+</div>
+<div class="leftHalf">
+<br/>
+
+ - What is it for?
+ - What causes it to travel one direction or the other?
+ - Can we influence it?
+ - Does it influence place later place cell spiking?
+
+</div>
+
+---
+
 ## Real time experiments
-## Position decoding
+<br/>
+
+<div class="leftHalf">
+<hr/>
+
+ - Some replay goes left, some goes right
+ - Can we reward left-going replay? Disrupt right-going?
+ - Can we encourage large amounts of left-going replay?
+ - Will this cause place cell pasticity?
+ - Can we train a rat to follow his replay?
+
+<hr/>
+</div>
+<div class="leftHalf">
+![](../talkFigs/tmaze.png "")
+</div>
+
+---
+
+## Offline Position Decoding
+
+ - Sort spikes from electrodes into single units
+ - Training data:
+     - Compute place fields from all tetrode's spikes in recording session
+	 - Repeat for all electrodes
+ - Testing data:
+     - Choose decoding time window (20ms)
+     - For cells that spiked in that window, lookup place fields
+	 - Bayesian inference to combine active place cells into one estimate
+	 - Repeat for all time windows
+
+---
+
 ## Real time decoding challenges
-## Concurrency
+
+<div class="leftHalf">
+
+![](../talkFigs/concurrency.png "")
+</div>
+<div class="leftHalf">
+
+ - All data must be streaming
+   - Can't keep all spikes in memory, too many
+   - Too many spikes to process
+ - Large amounts of concurrency
+   - Can't process tetrodes one at a time, they generate spikes in parallel
+   - Parallel data must be shared to produce single position estimate
+   - Other data sources (video camera, mouse & keyboard, new clusters) also share the data
+
+</div>
+
+---
+
+
 ## Haskell
 ## Real time demo
 ## Example decodings
 ## Bugs, deadlocks, crashes, and performance debugging
 ## Sketching a full real time decoding system
-
-
-
-
-
-
 
 # Thank you's

@@ -15,8 +15,8 @@
    inkscape:version="0.48.5 r10040"
    width="500"
    height="400"
-   sodipodi:docname="slowDecode.png"
-   inkscape:export-filename="/home/greghale/Documents/RetroProject/thesis/talkFigs/slowDecode2.png"
+   sodipodi:docname="decodeExamples.svg"
+   inkscape:export-filename="/home/greghale/Documents/RetroProject/thesis/talkFigs/replayExample2.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <metadata
@@ -158,12 +158,12 @@
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
      x="349.48575"
-     y="325.74557"
+     y="333.74557"
      id="text4538"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan4540"
        x="349.48575"
-       y="325.74557"
+       y="333.74557"
        style="font-size:20px">500 ms</tspan></text>
 </svg>
