@@ -289,7 +289,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ## Retrosplenial Cortex and Hippocampus During Run
 
-Awaiting fig from Hector
+![](../talkFigs/SWWNothing2.png "")
 
 ---
 
@@ -440,22 +440,82 @@ Awaiting fig from Hector
 <div class="leftHalf">
 
  - All data must be streaming
-   - Can't keep all spikes in memory, too many
-   - Too many spikes to process
+    - Can't keep all spikes in memory, too many
+    - Too many spikes to process
  - Large amounts of concurrency
-   - Can't process tetrodes one at a time, they generate spikes in parallel
-   - Parallel data must be shared to produce single position estimate
-   - Other data sources (video camera, mouse & keyboard, new clusters) also share the data
+    - Can't process tetrodes one at a time, they generate spikes in parallel
+    - Parallel data must be shared to produce single position estimate
+    - Other data sources (video camera, mouse & keyboard, new clusters) also share the data
+ - Need to be creative with data structures and concurrency
+ - Lots of experimentation and refactoring
 
 </div>
 
 ---
 
+## Refactoring is Hard
+
+```matlab
+function p = bayesFields(fields,spikeCounts)
+
+  % spike-times in column 1, interneuron in 2, field-id in 3
+  for s = 1:size(spikeCounts,2)
+    if (~(spikeCounts(2,s)))
+	  spikeCounts(2,:) = [];
+    end
+  end
+  
+  pred = zeros(size(fields,1);
+  for s = 1:size(spikeCounts,1)
+    ...
+```
+
+ - There are 10 functions that rely on this column mapping
+ - What happens when we modify fieldCounts?
+ - Flexible functions: errors are rare
+
+---
+
+## Refactoring Can be Easier
+
+```haskell
+-- (f . g) x  == f (g (x))
+
+bayesField fieldMap spikeCounts =
+  (foldl' (*) .
+  filterBy (not . isInterneuron) .
+  map (lookupField fieldMap)) spikeCounts  
+								  
+```
+ - No magic numbers or magic dimensions
+ - Very strict functions: errors are obvious
+
+---
 
 ## Haskell
+
+![](../talkFigs/haskellPromise.png "")
+
+ - 
+
+---
+
 ## Real time demo
+
+---
+
 ## Example decodings
-## Bugs, deadlocks, crashes, and performance debugging
+
+![](../talkFigs/headToHeadDecoding.png "")
+
+---
+
 ## Sketching a full real time decoding system
+
+
+ - Accept spikes from ArtE, Open-ephys, Puggle, etc.
+ - Real time position tracking
+ - Condition experimental stimuli on replay direction
+ - Visualize replay during experiment for unstructured experimentation
 
 # Thank you's

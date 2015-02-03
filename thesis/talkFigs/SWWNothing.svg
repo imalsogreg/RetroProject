@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg4032"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   width="797"
+   height="166.30716"
+   sodipodi:docname="SWWNothing.png">
+  <metadata
+     id="metadata4038">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4036">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4073">
+      <rect
+         y="35.865223"
+         x="-11.669492"
+         height="347.00723"
+         width="876.50848"
+         id="rect4075"
+         style="opacity:0.95154186;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4078">
+      <rect
+         y="432.0025"
+         x="-2.7013969"
+         height="166.30716"
+         width="905.62549"
+         id="rect4080"
+         style="opacity:0.95154186;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1364"
+     inkscape:window-height="766"
+     id="namedview4034"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.87612505"
+     inkscape:cx="221.54231"
+     inkscape:cy="211.98889"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg4032" />
+  <image
+     width="797"
+     height="612"
+     xlink:href="file:///home/greghale/Documents/RetroProject/thesis/talkFigs/SWWNothing.png"
+     id="image4040"
+     x="0"
+     y="0"
+     clip-path="url(#clipPath4078)"
+     transform="translate(0,-432.0025)" />
+  <image
+     width="797"
+     height="612"
+     xlink:href="file:///home/greghale/Documents/RetroProject/thesis/talkFigs/SWWNothing.png"
+     id="image4040-1"
+     x="0"
+     y="0"
+     clip-path="url(#clipPath4073)"
+     transform="translate(0,-388.0025)" />
+</svg>
