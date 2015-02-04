@@ -7,7 +7,7 @@
     width: 50%;
     color: white;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'tempfont', sans-serif;
 }
 
 .reveal #timing-and-hippocampal-information-processing ul{
@@ -23,13 +23,13 @@
     list-style-type: none;
     text-align: center;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'tempfont', sans-serif;
 }
 
 .reveal h1 {
     color:#008080;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'tempfont', sans-serif;
     font-size:32pt;
     font-variant:small-caps;
 }
@@ -37,7 +37,7 @@
 .reveal h2 {
     color:#008080;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'tempfont', sans-serif;
     font-size:32pt;
     font-variant:small-caps;
 }
@@ -54,7 +54,7 @@
 
 .spacedBullets li {
     margin:50px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'tempfont', sans-serif;
     line-height:100%;
 }
 
@@ -70,12 +70,12 @@
     margin-top:-50px;
     font-size:16pt;
     text-align: right;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'tempfont', sans-serif;
 }
 
 .reveal .slide figcaption a {
     font-size:16pt;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'tempfont', sans-serif;
 }
 
 
@@ -83,13 +83,13 @@
     margin-top:10px;
     margin-bottom:10px;
     font-size:18pt;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'tempfont', sans-serif;
 }
 
 .reveal .slide a {
     text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
     color:#008080;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'tempfont', sans-serif;
     font-size:12pt;
 }
 

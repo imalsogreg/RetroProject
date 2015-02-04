@@ -51,6 +51,8 @@
 
 ## Hippocampal-Cortical Coherence
 
+<!-- Bigger! -->
+
 <br/>
 
 ![](../talkFigs/siapasPFC2.jpg "Figure 1 of Lubenov and Spaipas 2006, showing prefrental spike timing preferentially aligned to peaks of hippocampal theta oscillations")
@@ -64,6 +66,8 @@
 ---
 
 ## Place Cells
+
+
 
 <br/>
 
@@ -406,7 +410,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
  - Some replay goes left, some goes right
  - Can we reward left-going replay? Disrupt right-going?
  - Can we encourage large amounts of left-going replay?
- - Will this cause place cell pasticity?
+ - Will this cause place cell plasticity?
  - Can we train a rat to follow his replay?
 
 <hr/>
