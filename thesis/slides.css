@@ -1,0 +1,115 @@
+
+.reveal #timing-and-hippocampal-information-processing h1 {
+    font-size:24pt;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 5%;
+    width: 50%;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    font-family: 'tempfont', sans-serif;
+}
+
+.reveal #timing-and-hippocampal-information-processing ul{
+    margin-left: 25%;
+    margin-right: 25%;
+    width:50%;
+    color:white;
+}
+
+.reveal #timing-and-hippocampal-information-processing ul li {
+    font-size:24pt;
+    font-variant:small-caps;
+    list-style-type: none;
+    text-align: center;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    font-family: 'tempfont', sans-serif;
+}
+
+.reveal h1 {
+    color:#008080;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    font-family: 'tempfont', sans-serif;
+    font-size:32pt;
+    font-variant:small-caps;
+}
+
+.reveal h2 {
+    color:#008080;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    font-family: 'tempfont', sans-serif;
+    font-size:32pt;
+    font-variant:small-caps;
+}
+
+.reveal .leftHalf {
+    float:left;
+    width:50%;
+}
+
+.reveal .clearHalf {
+    clear:both;
+    width:50%;
+}
+
+.spacedBullets li {
+    margin:50px;
+    font-family: 'tempfont', sans-serif;
+    line-height:100%;
+}
+
+.reveal .slide .spacedBullets a {
+    font-size:24pt;
+}
+
+.reveal .slide ul {
+    line-height:80%;
+}
+
+.reveal .slide figcaption {
+    margin-top:-50px;
+    font-size:16pt;
+    text-align: right;
+    font-family: 'tempfont', sans-serif;
+}
+
+.reveal .slide figcaption a {
+    font-size:16pt;
+    font-family: 'tempfont', sans-serif;
+}
+
+
+.reveal .slide li {
+    margin-top:10px;
+    margin-bottom:10px;
+    font-size:18pt;
+    font-family: 'tempfont', sans-serif;
+}
+
+.reveal .slide a {
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+    color:#008080;
+    font-family: 'tempfont', sans-serif;
+    font-size:12pt;
+}
+
+.reveal .slide a:hover {
+    color:#109090;
+}
+
+.reveal .slide sup {
+    font-size:8pt;
+}
+
+.reveal section img {
+    border: none;
+    box-shadow: none;
+}
+
+/* Prevent sub/superscripts from affecting ul line-height */
+sup, sub {
+   vertical-align: baseline;
+   position: relative;
+   top: -0.1em;
+}
+sub { top: 0.4em; }
