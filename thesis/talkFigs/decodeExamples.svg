@@ -13,8 +13,8 @@
    id="svg3062"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   width="500"
-   height="400"
+   width="823.69678"
+   height="388.6525"
    sodipodi:docname="decodeExamples.svg"
    inkscape:export-filename="/home/greghale/Documents/RetroProject/thesis/talkFigs/replayExample2.png"
    inkscape:export-xdpi="90"
@@ -27,7 +27,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -46,124 +46,160 @@
      inkscape:window-height="766"
      id="namedview3064"
      showgrid="false"
-     inkscape:zoom="1.3055696"
-     inkscape:cx="179.79311"
-     inkscape:cy="183.18685"
+     inkscape:zoom="0.67956093"
+     inkscape:cx="638.52345"
+     inkscape:cy="52.127014"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg3062" />
+     inkscape:current-layer="layer2"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <image
+     width="358.24658"
+     height="343.9686"
+     xlink:href="file:///home/greghale/Documents/RetroProject/thesis/talkFigs/slowDecode.png"
+     id="image267716"
+     x="435.7345"
+     y="0.53601164" />
   <path
      style="fill:none;stroke:#000000;stroke-width:6;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-     d="m 123.958,339.1042 63.57799,0"
+     d="m 488.60186,328.95389 63.57799,0"
      id="path3931"
      inkscape:connector-curvature="0" />
   <text
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-     x="121.75214"
-     y="330.41565"
+     x="486.396"
+     y="320.26535"
      id="text4441"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan4443"
-       x="121.75214"
-       y="330.41565"
+       x="486.396"
+       y="320.26535"
        style="font-size:24px">4 sec</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-     x="168.67188"
-     y="393.03717"
+     x="533.31573"
+     y="382.88687"
      id="text4451"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan4453"
-       x="168.67188"
-       y="393.03717"
-       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Open Sans;-inkscape-font-specification:Open Sans">Many neurons</tspan></text>
-  <image
-     width="359.82675"
-     height="344.0206"
-     xlink:href="file:///home/greghale/Documents/RetroProject/thesis/talkFigs/replayExample.png"
-     id="image4518"
-     x="70.074341"
-     y="10.150313" />
+       x="533.31573"
+       y="382.88687"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Open Sans;-inkscape-font-specification:Open Sans">Many place cells</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-     x="286.55292"
-     y="69.656853"
-     id="text4445"
-     sodipodi:linespacing="125%"><tspan
-       sodipodi:role="line"
-       id="tspan4447"
-       x="286.55292"
-       y="69.656853"
-       style="font-size:20px;fill:#008000">Actual position</tspan><tspan
-       sodipodi:role="line"
-       x="286.55292"
-       y="94.656853"
-       id="tspan4449"
-       style="font-size:20px">Decoded position</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-     x="25.667824"
-     y="343.91522"
+     x="390.31168"
+     y="333.76492"
      id="text3851"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan3853"
-       x="25.667824"
-       y="343.91522"
+       x="390.31168"
+       y="333.76492"
        style="font-size:24px">0m</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-     x="25.544769"
-     y="61.676056"
+     x="390.18863"
+     y="51.525742"
      id="text3897"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan3899"
-       x="25.544769"
-       y="61.676056"
+       x="390.18863"
+       y="51.525742"
        style="font-size:24px">3m</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-     x="25.579933"
-     y="155.75578"
+     x="390.22379"
+     y="145.60547"
      id="text3897-6"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan3899-2"
-       x="25.579933"
-       y="155.75578"
+       x="390.22379"
+       y="145.60547"
        style="font-size:24px">2m</tspan></text>
   <text
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-     x="25.140472"
-     y="249.83549"
+     x="389.78433"
+     y="239.68518"
      id="text3897-5"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan3899-4"
-       x="25.140472"
-       y="249.83549"
+       x="389.78433"
+       y="239.68518"
        style="font-size:24px">1m</tspan></text>
+  <image
+     width="309"
+     height="376"
+     xlink:href="file:///home/greghale/Documents/RetroProject/thesis/rawFigs/travelingWave/twoPlaceFieldsNoLabel.png"
+     id="image254789"
+     x="0"
+     y="0.37155628" />
   <text
      xml:space="preserve"
      style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-     x="349.48575"
-     y="333.74557"
-     id="text4538"
+     x="65.315735"
+     y="382.88687"
+     id="text4451-6"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
-       id="tspan4540"
-       x="349.48575"
-       y="333.74557"
-       style="font-size:20px">500 ms</tspan></text>
+       id="tspan4453-4"
+       x="65.315735"
+       y="382.88687"
+       style="font-size:24px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Open Sans;-inkscape-font-specification:Open Sans">Two place cells</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="651.19678"
+     y="59.506538"
+     id="text4445"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan4447"
+       x="651.19678"
+       y="59.506538"
+       style="font-size:20px;fill:#008000">Actual position</tspan><tspan
+       sodipodi:role="line"
+       x="651.19678"
+       y="84.506538"
+       id="tspan4449"
+       style="font-size:20px">Decoded position</tspan></text>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="replay"
+     style="display:none">
+    <image
+       width="359.82675"
+       height="344.0206"
+       xlink:href="file:///home/greghale/Documents/RetroProject/thesis/talkFigs/replayExample.png"
+       id="image4518"
+       x="434.7182"
+       y="-3.6621093e-06" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="714.12964"
+       y="323.59528"
+       id="text4538"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4540"
+         x="714.12964"
+         y="323.59528"
+         style="font-size:20px">500 ms</tspan></text>
+  </g>
 </svg>
