@@ -16,6 +16,8 @@ p.addParamValue('invert',false);
 p.addParamValue('LineWidth',1);
 p.addParamValue('draw_std',true);
 p.addParamValue('draw_ci',false);
+p.addParamValue('scale_y',1);
+p.addParamValue('translate_y',0);
 p.parse(varargin{:});
 opt = p.Results;
 
@@ -35,8 +37,10 @@ else
 end
 
 if(opt.zero_nans)
-    cdat.data(isnan(cdat.data)) = 0;
+    this_cdat.data(isnan(this_cdat.data)) = 0;
 end
+
+this_cdat.data = this_cdat.data .* opt.scale_y + opt.translate_y;
 
 n_samp = size(this_cdat.data,1);
 n_chan = size(this_cdat.data,2);

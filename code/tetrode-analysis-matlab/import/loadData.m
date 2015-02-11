@@ -59,7 +59,7 @@ if(p.Results.loadMUA)
     'trode_groups', m.trode_groups_fn, 'timewin', m.loadTimewin, 'arte_correction_factor',m.arteCorrectionFactor,...
     'ad_trodes',m.ad_tts,'arte_trodes',m.arte_tts,'width_window',m.width_window,'threshold',m.threshold, ...
     'segment_style', opt.segment_style);
-    [~,d.mua_rate] = assign_rate_by_time(d.mua,'timewin',timewin,'samplerate',p.Results.samplerate);
+    [~,d.mua_rate] = assign_rate_by_time(d.mua,'timewin',timewin,'samplerate',p.Results.samplerate,'gauss_sd_sec',0.04);
 end
 
 if(p.Results.loadSpikes)
@@ -82,7 +82,7 @@ if(p.Results.loadPos)
     d.pos_info.lin_speed_cdat.data = abs(d.pos_info.lin_speed_cdat.data);
 end
 
-if(opt.computeFields)
+if(opt.computeFields && opt.loadPos)
     [spikes,pos_info2,track_info2] = assign_field(d.spikes, d.pos_info, ...
         'n_track_seg',100,'smooth_sd_segs',2, 'track_info',d.track_info);
     d.spikes = spikes;
@@ -100,6 +100,17 @@ if(~m.checkedArteCorrectionFactor)
         'This day''s correction factor hasn''t been checked');
 end
 
+% Copy over some literal data. Pretty yucky. How to fix?
+if(isfield(m,'cxtBlacklist')) 
+    d.ctxBlacklist = m.cxtBlacklist;
+end
+if(isfield(m,'cxtThreshold'))
+    d.ctxThreshold = m.ctxThreshold;
+end
+if(isfield(m,'rscThreshold'))
+    d.rscThreshold = m.rscThreshold;
+end
+    
 cd(origDir);
 end
 

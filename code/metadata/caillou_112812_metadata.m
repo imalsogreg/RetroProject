@@ -53,3 +53,7 @@ m.keep_list = [1     3     5     6    25    26    27    28    29    34    35    
 m.keepGroups = {'CA1','ADT','CTX','RSC'};
 m.width_window = [-Inf,Inf];
 m.threshold = 150;
+
+% thresholds
+m.rscThreshold = 40;
+
