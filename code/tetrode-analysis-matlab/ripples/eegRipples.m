@@ -8,6 +8,8 @@ function [ripples,peakTimes] = eegRipples(rippleEnv, minPeak, baseCutoff, minLen
 segCrit = seg_criterion('peak_min',minPeak,'cutoff_value',baseCutoff,...
     'min_width_pre_bridge',minLength,'bridge_max_gap',bridgeWidth,'adequate_local_min',adequate_local_min, 'min_peak_dist',min_peak_dist);
 
+rippleEnv = contmap(@(x) mean(x,2), rippleEnv);
+
 ripples = gh_signal_to_segs(rippleEnv, segCrit);
 
 peakTimes = cellfun(@(interval) l_peak_in(rippleEnv, interval), ripples);

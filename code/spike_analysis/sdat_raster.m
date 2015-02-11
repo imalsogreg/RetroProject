@@ -4,6 +4,7 @@ p = inputParser();
 p.addParamValue('timewin',[]);
 p.addParamValue('eeg',[]);
 p.addParamValue('format','b');
+p.addParamValue('scale_y',1);
 p.addParamValue('rate_cdat',[]);
 p.addParamValue('rate_y_range',[]);
 p.addParamValue('trode_groups',[]);
@@ -57,7 +58,7 @@ for i = 1:nclust
     ys(ind1) = tic_bottom;
     ys(ind2) = tic_top;
     
-    plot(xs,ys,opt.format,'Color',this_color);
+    plot(xs,ys.*opt.scale_y,opt.format,'Color',this_color);
     hold on
     if(opt.draw_labels)
         text(xs(1), mean(ys(1:2)), sdat.clust{i}.comp);

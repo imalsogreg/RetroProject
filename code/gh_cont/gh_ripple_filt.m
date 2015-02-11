@@ -2,6 +2,7 @@ function [lfp_ripple, lfp_phase, lfp_env] = gh_ripple_filt(lfp,varargin)
 
 p = inputParser();
 p.addParamValue('samplerate',[]);
+p.addParamValue('F',[]);
 p.addParamValue('timewin',[]);
 p.parse(varargin{:});
 
@@ -17,6 +18,9 @@ end
 
 ripple_fo = filtoptdefs();
 ripple_fo = ripple_fo.ripple;
+if (~isempty(p.Results.F))
+    ripple_fo.F = p.Results.F;
+end
 ripple_fo.Fs = lfp.samplerate;
 ripple_filt = mkfilt('filtopt',ripple_fo);
 

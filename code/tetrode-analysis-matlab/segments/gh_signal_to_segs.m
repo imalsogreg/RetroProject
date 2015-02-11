@@ -31,29 +31,15 @@ end
 
 starts = find( [diff( cmp( d, seg_crit.cutoff_value )) ==  1, 0] );
 stops  = find( [diff( cmp( d, seg_crit.cutoff_value )) == -1, 0] ) + 1;
-if(stops(1) < starts(1))
-    stops(1) = [];
+if(numel(starts) > 0 && numel(stops) > 0)
+    if(stops(1) < starts(1))
+        stops(1) = [];
+    end
+    if(starts(end) > stops(end))
+        starts(end) = [];
+    end
 end
-if(starts(end) > stops(end))
-    starts(end) = [];
-end
-
-% Old attempt at a rewrite for different seg_criterion format
-% % Find samples at which cutoff-level is exceeded, then 
-%trans = [];
-%for n = 1:numel(seg_crit.cutoff_vals)
-%    trans = [trans,find(diff( d > seg_crit.cutoff_value ) ~=  0)];
-%end
-%trans = sort(trans) + 1;
-%starts = [1,trans(1:(end-1))];
-%stops  = trans;
-%if (stops(end) < numel(d))
-%    stops = [stops,numel(d)];
-%end
-
-
-
-
+    
 % Now every start should have a corresponding stop, and all starts
 % should preceed their stop.  
 assert( numel(starts) == numel(stops) );

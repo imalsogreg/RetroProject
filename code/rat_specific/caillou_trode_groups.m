@@ -6,6 +6,8 @@ p.addParamValue('segment_style','areas',(@(x) (any(strcmp(x,{'areas','ml'})))));
 p.parse(varargin{:});
 opt = p.Results;
 
+n = @(x) str2num(date_ad_to_alpha(x));
+
 if(strcmp(opt.segment_style,'areas'))
 
 trode_groups{1}.name   = 'THAL';
@@ -39,3 +41,19 @@ elseif(strcmp(opt.segment_style,'ml'))
    trode_groups{2}.color = [0 0 1];
    trode_groups{2}.trodes = {'11','14','13','12'};
 end
+
+if(n(opt.date) > n('120812'))
+    trode_groups{6}.name = 'CTX';
+    trode_groups{6}.trodes = '15';
+    trode_groups{6}.color = [1 0 1];
+    
+    trode_groups{5}.trodes = {'07','26'};
+end
+
+if(n(opt.date) >= n('121212'))
+    trode_groups{3}.trodes = {'06','08','09','10','11','12','14'};
+    trode_groups{6}.trodes = {'15','13','16'};
+end
+    
+    
+

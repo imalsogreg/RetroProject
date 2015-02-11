@@ -28,7 +28,9 @@ for y = 1:numel(segs)
     cellfun( @(x) lfun_draw_seg(x, opt.ys{y}), segs{y});
     if(~isempty(opt.names))
         if (y <= numel(opt.names))
-            text(segs{y}{1}(1) - 1, mean(opt.ys{y}), opt.names{y});
+            if(numel(segs{y}) > 0)
+                text(segs{y}{1}(1) - 1, mean(opt.ys{y}), opt.names{y});
+            end
         end
     end
 end

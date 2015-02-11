@@ -1,10 +1,10 @@
-function m = caillou_120912_metadata()
+function m = caillou_120812_metadata()
 
 % Notes: see notes.txt
 
-m.today = '120912';
+m.today = '120812';
 m.basePath = ['~/Data/caillou/',m.today];
-m.loadTimewin = [2282.4,3171.4];
+m.loadTimewin = [1247.0,2220.0];
 m.checkedArteCorrectionFactor = false;
 m.arteCorrectionFactor = 0;
 m.rat_conv_table = caillou_rat_conv_table();
@@ -30,10 +30,10 @@ m.arte_tts = {'14','13','12','10','09','08','07','06','05','04','02','01'};
 
 m.systemList = {'ad','ad','arte','arte'};
 
-m.f1File   = 'j09.eeg';
+m.f1File   = 'j08.eeg';
 m.f1TrodeLabels = {'30','29','28','27','26','25','24','23'};
 m.f1Inds   = 1:8;
-m.f2File   = 'k09.eeg';
+m.f2File   = 'k08.eeg';
 m.f2TrodeLabels = {'22','21','20','19','18','17','16','15'};
 m.f2Inds   = 1:8;
 
