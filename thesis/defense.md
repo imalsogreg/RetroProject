@@ -71,12 +71,8 @@
 
 <br/>
 
-<div class="leftHalf">
-![](../talkFigs/placeField2.png "A circular track viewed from above. Blue dots clustered together at one point indicate rat's position when a particular cell fired spikes. That small area is the neuron's place field.")
-</div>
-<div class="leftHalf">
-![](../talkFigs/slowDecode2.png "A plot of the rat's position on the track (y-axis) as a function of time. Overlaid is an estimate of the rat's position made by considering which neurons fired spikes in any small time window, and looking up those neurons' place fields for the entire run session.")
-</div>
+![](../talkFigs/decodeExample2.png "")
+
 
  - Single cells become active at one track location
  - Many cells' activity can be combined to estimate rat's position^[6],[7]^
