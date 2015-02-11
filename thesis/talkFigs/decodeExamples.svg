@@ -16,7 +16,7 @@
    width="823.69678"
    height="388.6525"
    sodipodi:docname="decodeExamples.svg"
-   inkscape:export-filename="/home/greghale/Documents/RetroProject/thesis/talkFigs/replayExample2.png"
+   inkscape:export-filename="/home/greghale/Documents/RetroProject/thesis/talkFigs/decodeExample2.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <metadata
@@ -27,7 +27,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>

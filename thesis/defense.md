@@ -26,7 +26,60 @@
 
 ---
 
-## Theta Oscillations
+# Place Cells
+
+<br/>
+
+![](../talkFigs/decodeExample2.png "")
+
+
+ - Single cells become active at one track location
+ - Many cells' activity can be combined to estimate rat's position^[6],[7]^
+
+[6]:http://jn.physiology.org/content/79/2/1017.short
+[7]:http://www.sciencedirect.com/science/article/pii/S0896627309005820
+
+
+---
+
+# Sequence Replay
+
+![](../talkFigs/replayExample2.png "Another plot of rat's position as a function of time with position estimate overlaid, zoomed in to a few seconds. Although the rat is stationary at the end of the track, the decoded position sweeps down the track in a linear way.")
+
+ - Zoom in on stationary rat
+ - Neural activity replays high-speed track traversal^[8]^
+
+[8]:http://www.nature.com/nature/journal/v440/n7084/full/nature04587.html
+
+---
+
+
+# Sequence Replay {data-background="../rawArt/black.png"}
+
+<video width="480" height="480" controls>
+<source src="../movies/replay.ogg" type="video/ogg"/>
+</video>
+
+---
+
+# Theta Sequences
+
+![](../talkFigs/exampleThetaSequencesAndRaster2.png "A raster plot of four place cells, for about 500 milliseconds. The cells are sorted vertically by preferred location on the track. At fine timescales, they can be seen to fire in fast sequences that reflect the ordering of their preferred locations. In the background is a position reconstruction in the same time interval, showing the same information: that the ensemble sweeps ahead of the rat in his direction of running. There is one such sweep per theta cycle.")
+
+ - Place cells fire in quick sequences reflecting place field order
+ - Grey background: fine time-scale position estimate from 30 place cells
+
+---
+
+# Theta Sequences {data-background="../rawArt/black.png"} 
+
+<video width="480" height="480" controls>
+<source src="../movies/sequences.ogg" type="video/ogg"/>
+</video>
+
+---
+
+# Theta Oscillations
 
 <div class="leftHalf">
 ![](../talkFigs/brainAndWavesOneChan.png "Overhead image of rat brain with one hippocampal recording site indicated. A voltage trace from that site shows several cycles of the theta rhythm in the local field potential")
@@ -48,65 +101,10 @@
 [5]:http://onlinelibrary.wiley.com/doi/10.1002/hipo.20345/abstract
 
 ---
-
-## Hippocampal-Cortical Coherence
-
-<!-- Bigger! -->
-
-<br/>
-
-![](../talkFigs/siapasPFC2.jpg "Figure 1 of Lubenov and Spaipas 2006, showing prefrental spike timing preferentially aligned to peaks of hippocampal theta oscillations")
-
-[Lubenov, Spiapas and Wilson (2006)](http://www.sciencedirect.com/science/article/pii/S0896627305001972)
-
- - Theta rhythms in hippocampal field potential (red)
- - No theta in prefrontal field potential (blue)
- - PFC spikes (blue) locked to HPC theta
-
----
-
-## Place Cells
+ 
 
 
-
-<br/>
-
-![](../talkFigs/decodeExample2.png "")
-
-
- - Single cells become active at one track location
- - Many cells' activity can be combined to estimate rat's position^[6],[7]^
-
-[6]:http://jn.physiology.org/content/79/2/1017.short
-[7]:http://www.sciencedirect.com/science/article/pii/S0896627309005820
-
----
-
-## Sequence Replay
-
-![](../talkFigs/replayExample2.png "Another plot of rat's position as a function of time with position estimate overlaid, zoomed in to a few seconds. Although the rat is stationary at the end of the track, the decoded position sweeps down the track in a linear way.")
-
- - Zoom in on stationary rat
- - Neural activity replays high-speed track traversal^[8]^
-
-[8]:http://www.nature.com/nature/journal/v440/n7084/full/nature04587.html
-
----
-
-## Theta Sequences
-
-![](../talkFigs/exampleThetaSequencesAndRaster2.png "A raster plot of four place cells, for about 500 milliseconds. The cells are sorted vertically by preferred location on the track. At fine timescales, they can be seen to fire in fast sequences that reflect the ordering of their preferred locations. In the background is a position reconstruction in the same time interval, showing the same information: that the ensemble sweeps ahead of the rat in his direction of running. There is one such sweep per theta cycle.")
-
- - Hippocampal units ("place cells") fire at fixed track locations (y-axis)
- - Sort units by preferred location (y-axis) and zoom in time (x-axis)
- - Place cells fire in quick sequences reflecting place field order
- - Grey background: fine time-scale position estimate from 30 place cells
-
----
-
-
-
-## Local Theta Desynchronization
+# Local Theta Desynchronization
 
 <div class="leftHalf">
 ![](../talkFigs/brainAndWaves.png "A figure of a brain with three recording sites all in hippocampus, but progressively more lateral and posterior. Beside, three local field potential traces showing the theta rhythm. More lateral/posterior tetrodes have a graded time delay.")
@@ -124,7 +122,7 @@
 
 ---
 
-## Theta is a Traveling Wave
+# Theta is a Traveling Wave
 
 <video width="640" height="480" controls>
 <source src="../movies/thanos1.ogg" type="video/ogg"/>
@@ -135,25 +133,19 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Local Theta Desynchronization
+# Local Theta Desynchronization
 
-<div class="leftHalf">
-![](../talkFigs/brainAndWaves.png "")
+<div style="width:50%;margin:auto;">
+![](../talkFigs/brainAndWaves.png "") 
 </div>
-<div class="leftHalf">
-
-<br/>
 
  - About 13 ms of delay per millimeter (HPC is 10 mm)
  - What effect does this have on cortical communication?
- - What effect does this have on theta sequences?
- 
-</div>
-
+ - What effect does this have on theta sequences
 
 ---
 
-## Position Decoding, Measuring Regional Time Offsets
+# Position Decoding, Measuring Regional Time Offsets
 
 <div class="leftHalf">
 ![](../talkFigs/decodingStrategy.png "An illustration of the procedure for measuring the impact of theta phase differences on theta sequences.")
@@ -170,7 +162,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Regional Time Offsets are Actually Small 
+# Regional Time Offsets are Small 
 
 <br/>
 
@@ -186,23 +178,21 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Time Offsets in Neuron Pairs Are Small
+# Time Offsets in Neuron Pairs Are Small
 
-<br/>
 
-![](../talkFigs/pairwise.png "A scatterplot with each point representing a pair of place cells. Time offset is on the z-axis, place-field offset is on the y-axis (right, blue) and anatomical offset is on the x-axis (left, red)")
 
- - All pairs of nearby cells, spike timing *vs.* anatomical distance & field distance
+![](../talkFigs/pairXCorr.png "A scatterplot with each point representing a pair of place cells. Time offset is on the z-axis, place-field offset is on the y-axis (right, blue) and anatomical offset is on the x-axis (left, red)")
+
  - Strong relationship between <span style="color:#0040A0">
    place fields and timing</span> (theta sequences)
- - No strong relationship between <span style="color:#C00020">
+ - Not between <span style="color:#C00020">
    anatomical location and timing</span>
 
-[10]:https://github.com/imalsogreg/RetroProject/tree/master/thesis
 
 ---
 
-## Interpretation
+# Interpretation
 
 <div class="spacedBullets">
  - Most spikes from place cells fall in sequences
@@ -213,7 +203,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Mechanism
+# Mechanism
 
 <br/>
 
@@ -237,19 +227,19 @@ A high-speed animation of several cycles theta in the local field potentials of 
 ---
 
 
-## Hippocampal-cortical sleep interactions
+# Hippocampal-cortical sleep interactions
 
-<br/>
+![From [Ji & Wilson 2007](http://www.nature.com/neuro/journal/v10/n1/full/nn1825.html)](../talkFigs/jiReplay2.png "")
 
-![From [Mehta's review](http://www.nature.com/neuro/journal/v10/n1/full/nn0107-13.html) of [Ji & Wilson 2007](http://www.nature.com/neuro/journal/v10/n1/full/nn1825.html)](../talkFigs/jiMehtaModel.gif "Pictures of three stages of learning. First, random neocortical inputs and a weak hippocampal connectivity matrix result in unstructured spiking in sleeping hippocampus. Then structured neocortical input during run results in structured firing of hippocampus and sequence learning in hippocampus. Third, the newly structured synaptic weights in hippocampus result in spontaneous replay, as well as driving the activity of cortex.")
+ - Visual cortex neurons fire in sequences during running
+ - Sequence reexpression coordinates with hippocampal sequences
+ - But only during sleep
 
- a. Presleep: unstructured CTX, unstructured HPC synapses, unstructured output
- a. Run: structured input $\rightarrow$ HPC place field sequences and plasticity
- a. Postsleep: learned HPC sequences replay and train the cortex
+[10]:http://onlinelibrary.wiley.com/doi/10.1002/hipo.20345/abstract
 
 ---
 
-## Slow-wave sleep features
+# Slow-wave sleep features
 
 <br/>
 
@@ -274,7 +264,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Experimental Setup
+# Experimental Setup
 
 <br/>
 
@@ -287,13 +277,13 @@ A high-speed animation of several cycles theta in the local field potentials of 
 ---
 
 
-## Retrosplenial Cortex and Hippocampus During Run
+# Retrosplenial Cortex and Hippocampus During Run
 
 ![](../talkFigs/SWWNothing2.png "")
 
 ---
 
-## Retrosplenial Cortex and Hippocampus During Reward Consumption
+# Retrosplenial Cortex and Hippocampus During Reward Consumption
 
 <div class="leftHalf" style="width:70%">
 ![](../talkFigs/exampleDetail.png "")
@@ -312,13 +302,13 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Up/Down States Coordinate with Hippocampus
+# Up/Down States Coordinate with Hippocampus
 
 ![](../talkFigs/exampleExtended.png "")
 
 ---
 
-## Up/Down States and Drowsiness
+# Up/Down States and Drowsiness
 
 <br/>
 
@@ -329,7 +319,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Up/Down States and Reward Size
+# Up/Down States and Reward Size
 
 <br/>
 
@@ -340,7 +330,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Up/Down States and Novelty
+# Up/Down States and Novelty
 
 <br/>
 
@@ -352,7 +342,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Up/Down States in Other Cortical Areas?
+# Up/Down States in Other Cortical Areas?
 
 <br/>
 
@@ -364,7 +354,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Summary & New Questions
+# Summary & New Questions
 
  - Slow-waves are not limited to slow-wave sleep and drowsiness
  - Retrosplenial cortex enters SWS-like state during reward
@@ -380,7 +370,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Hippocampal replay
+# Hippocampal replay
 
 <div class="leftHalf">
 ![](../talkFigs/replayExample2.png "Another plot of rat's position as a function of time with position estimate overlaid, zoomed in to a few seconds. Although the rat is stationary at the end of the track, the decoded position sweeps down the track in a linear way.")
@@ -397,7 +387,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Real time experiments
+# Real time experiments
 <br/>
 
 <div class="leftHalf">
@@ -417,7 +407,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Offline Position Decoding
+# Offline Position Decoding
 
  - Sort spikes from electrodes into single units
  - Training data:
@@ -431,7 +421,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Real time decoding challenges
+# Real time decoding challenges
 
 <div class="leftHalf">
 
@@ -453,7 +443,42 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-## Refactoring is Hard
+# Real Time Place Field Tracking {data-background="../rawArt/black.png"}
+
+<video width="640" height="480" controls>
+<source src="../movies/field.ogg" type="video/ogg"/>
+</video>
+
+---
+
+# Real Time Place Position Decoding {data-background="../rawArt/black.png"}
+
+<video width="640" height="480" controls>
+<source src="../movies/decoding.ogg" type="video/ogg"/>
+</video>
+
+---
+
+
+# Example Decodings
+
+![](../talkFigs/headToHeadDecoding.png "")
+
+---
+
+# Sketching a full real time decoding system
+
+
+ - Accept spikes from ArtE, Open-ephys, Puggle, etc.
+ - Real time position tracking
+ - Condition experimental stimuli on replay direction
+ - Visualize replay during experiment for unstructured experimentation
+
+# Thank you's
+
+---
+
+# Refactoring is Hard
 
 ```matlab
 function p = bayesFields(fields,spikeCounts)
@@ -476,7 +501,7 @@ function p = bayesFields(fields,spikeCounts)
 
 ---
 
-## Refactoring Can be Easier
+# Refactoring Can be Easier
 
 ```haskell
 -- (f . g) x  == f (g (x))
@@ -492,30 +517,13 @@ bayesField fieldMap spikeCounts =
 
 ---
 
-## Haskell
+# Haskell
 
 ![](../talkFigs/haskellPromise.png "")
-
- - 
-
----
-
-## Real time demo
+ 
 
 ---
 
-## Example decodings
-
-![](../talkFigs/headToHeadDecoding.png "")
+# Real time demo
 
 ---
-
-## Sketching a full real time decoding system
-
-
- - Accept spikes from ArtE, Open-ephys, Puggle, etc.
- - Real time position tracking
- - Condition experimental stimuli on replay direction
- - Visualize replay during experiment for unstructured experimentation
-
-# Thank you's
