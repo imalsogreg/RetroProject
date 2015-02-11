@@ -277,12 +277,6 @@ A high-speed animation of several cycles theta in the local field potentials of 
 ---
 
 
-# Retrosplenial Cortex and Hippocampus During Run
-
-![](../talkFigs/SWWNothing2.png "")
-
----
-
 # Retrosplenial Cortex and Hippocampus During Reward Consumption
 
 <div class="leftHalf" style="width:70%">
@@ -302,13 +296,20 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
+# Retrosplenial and Somatosensory Activity During Reward Consumption
+
+![](../talkFigs/ctxVsRsc.png "")
+
+
+---
+
 # Up/Down States Coordinate with Hippocampus
 
 ![](../talkFigs/exampleExtended.png "")
 
 ---
 
-# Up/Down States and Drowsiness
+# Up/Down States Coordinate with Hippocampus
 
 <br/>
 
@@ -319,57 +320,19 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-# Up/Down States and Reward Size
-
-<br/>
-
-![](../talkFigs/SWWEarly.png "")
-
- - Recordings from first day of training
- - Strong Up/Down states during large rewards, also during small rewards
-
----
-
-# Up/Down States and Novelty
-
-<br/>
-
-![](../talkFigs/SWWNormal.png "")
-
- - Recordings from later in training
- - Large rewards are completely predictable
- - Up/Down states still present during stops for large reward
-
----
-
 # Summary
 
 ![](../talkFigs/SWWbarchart.png "")
 
 ---
 
-# Up/Down States in Other Cortical Areas?
-
-
-<br/>
-
-![](../talkFigs/SWWAnatomical.png "")
-
- - Simultaneous recording from RSC and somatosensory & motor cortex
- - Down-states tightly coordinated during sleep
- - No down-states during wake except in Retrosplenial cortex
-
----
 
 # Summary & New Questions
 
- - Slow-waves are not limited to slow-wave sleep and drowsiness
- - Retrosplenial cortex enters SWS-like state during reward
+ - Retrosplenial cortex enters sleep-like state during reward consumption
+ - Hippocampus is coordinated at the behavioral timescale
  - HPC $\rightarrow$ CTX information not limited to sleep
- - New questions:
-    - Involvement of other cortical areas?
-    - Occurance during other behavioral states?
-    - Slow wave selectivity mechanism?
+ - Future question: is spatial information being transfered?
 
 ---
 
