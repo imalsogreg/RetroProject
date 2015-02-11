@@ -706,7 +706,7 @@ if strcmp(get(ax,'Visible'),'on')
             end
         end
     end
-    exponent2svg(fid,groupax,axpos,paperpos,ax)
+    %exponent2svg(fid,groupax,axpos,paperpos,ax)
     fprintf(fid,'    </g>\n');
 end
 fprintf(fid,'  </g>\n');
@@ -1587,7 +1587,8 @@ if strcmp(get(ax,'XTickLabelMode'),'auto') && strcmp(get(ax,'XScale'),'linear')
             numlabels(ix) = str2num(axlabelx{ix});
         end
     else
-        numlabels = str2num(get(ax,'XTickLabel'));
+        %numlabels = str2num(get(ax,'XTickLabel'));
+        numlabels = 2;
     end
     labelpos=get(ax,'XTick');
     numlabels=numlabels(:);
