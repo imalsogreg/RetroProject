@@ -14,7 +14,6 @@ tg = m.trode_groups_fn('date',m.today,'segment_style','areas');
 eventsCA1 = cellfun(@mean, eventsCA1);
 eventsRSC = cellfun(@mean, eventsRSC);
 eventsCTX = cellfun(@mean, eventsCTX);
-hold off;
 
 if(any(strcmp('run',md.sessions)))
 
@@ -22,8 +21,8 @@ if(any(strcmp('run',md.sessions)))
     runTimewins = ...
                 gh_union_segs( timeArrayToSegments(d.pos_info.out_run_bouts),...
                                 timeArrayToSegments(d.pos_info.in_run_bouts));
-                pauseTimewins = gh_subtract_segs({md.twin},runTimewins);
-
+    pauseTimewins = gh_subtract_segs({md.twin},runTimewins);
+    gh_draw_segs(pauseTimewins,'names',{'pauses'},'ys',{[0.01,0.011]});
     disp('CA1:')
     disp( ['run: ', num2str(sum( gh_points_are_in_segs(eventsCA1,runTimewins)))]);
     disp( ['pause: ',num2str(sum(gh_points_are_in_segs(eventsCA1,pauseTimewins)))]);
@@ -33,7 +32,10 @@ if(any(strcmp('run',md.sessions)))
         disp('CTX:')
     disp( ['run: ', num2str(sum( gh_points_are_in_segs(eventsCTX,runTimewins)))]);
     disp( ['pause: ',num2str(sum(gh_points_are_in_segs(eventsCTX,pauseTimewins)))]);
+    hold on;
+    gh_plot_cont( contmap(@(x) x*0.01 + 0.01, d.pos_info.lin_vel_cdat));
 end
+hold off;
 end
 
 % TODO - this was a copy-paste. refactor

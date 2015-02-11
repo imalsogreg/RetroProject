@@ -352,6 +352,12 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
+## Summary
+
+![](../talkFigs/SWWbarchart.png "")
+
+---
+
 ## Up/Down States in Other Cortical Areas?
 
 <br/>

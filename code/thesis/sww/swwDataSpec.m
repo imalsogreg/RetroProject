@@ -89,7 +89,7 @@ d{i}.twin     = [2354, 3264];
 d{i}.areas    = {'CA1','RSC'};
 d{i}.sessions = {'run','nightPause'};
 d{i}.thresh.CA1 = 0.05;
-d{i}.thresh.RSC = -0.0075;
+d{i}.thresh.RSC = -0.006;
 
 i = i+1;
 d{i}.mdata    = m;
@@ -97,7 +97,7 @@ d{i}.twin     = [6100, 6900];
 d{i}.areas    = {'CA1','RSC'};
 d{i}.sessions = {'sleep'};
 d{i}.thresh.CA1 = 0.05;
-d{i}.thresh.RSC = -0.0075;
+d{i}.thresh.RSC = -0.006;
 
 % A night-track day. HPC and RSC
 m = caillou_120712_metadata();
@@ -131,7 +131,7 @@ d{i}.areas    = {'CA1','RSC','CTX'};
 d{i}.sessions = {'drowsy'};
 d{i}.thresh.CA1 = 0.075;
 d{i}.thresh.RSC = -0.006;
-d{i}.thresh.CTX = -0.002;
+d{i}.thresh.CTX = -0.003;
 
 i = i+1;
 d{i}.mdata    = m;
@@ -140,7 +140,7 @@ d{i}.areas    = {'CA1','RSC','CTX'};
 d{i}.sessions = {'sleep'};  % Short sleep bout
 d{i}.thresh.CA1 = 0.075;
 d{i}.thresh.RSC = -0.006;
-d{i}.thresh.CTX = -0.002;
+d{i}.thresh.CTX = -0.004;
 
 % Drowsy open field: HPC, RSC
 m = blue_030313_metadata();
