@@ -473,7 +473,11 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 <br/>
 
-![](../talkFigs/clusterlessCartoon.png "")
+![ [Kloosterman, Layton & Chen, 2014](http://jn.physiology.org/content/111/1/217.short) ](../talkFigs/clusterlessCartoon.png "")
+
+<br/>
+
+
 
 ---
 
