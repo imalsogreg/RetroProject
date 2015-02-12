@@ -245,7 +245,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ![](../talkFigs/replayExample2.png "Another plot of rat's position as a function of time with position estimate overlaid, zoomed in to a few seconds. Although the rat is stationary at the end of the track, the decoded position sweeps down the track in a linear way.")
 
- - Zoom in on stationary rat
+ - Place cell sequence in stationary period
  - Neural activity replays high-speed track traversal^[8]^
 
 [8]:http://www.nature.com/nature/journal/v440/n7084/full/nature04587.html
@@ -274,7 +274,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
  - What is it for?
  - What causes it to travel one direction or the other?
  - Can we influence it?
- - Does it influence place later place cell spiking?
+ - Does it influence later place cell spiking?
 
 </div>
 
@@ -310,9 +310,9 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 <br/>
 
- - Streaming data, all computations must run in constant time
- - Concurrency - many sources of input, several jobs to do at once
- - Implement in Haskell - great concurrency support, excellent for domain modeling
+ - Concurrency: many sources of input, several jobs to do at once
+ - Streaming data: all computations must run in constant time
+ - *Solution:* Implement in Haskell - great concurrency support, excellent for domain modeling
 
 
 </div>
@@ -533,9 +533,9 @@ A high-speed animation of several cycles theta in the local field potentials of 
 <br/>
 
  - Most real time decoders focus on behavioral correlates
- - Focus on fine timescale decoding
- - Needed for interrupting/enhancing replay
- - Get closer to underlying encoding mechanisms
+ - We want to focus on fine timescale decoding
+ - This is needed for interrupting/enhancing replay
+ - Thus, we can get closer to underlying encoding mechanisms
 
 ---
 
