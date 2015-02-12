@@ -14,7 +14,7 @@
    height="435"
    id="svg39136"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="clusterless2.svg"
    inkscape:export-filename="/home/greghale/Documents/RetroProject/thesis/talkFigs/states/clusterless2/q.png"
    inkscape:export-xdpi="89.993141"
@@ -132,15 +132,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.75723517"
-     inkscape:cx="515.85628"
-     inkscape:cy="95.597853"
+     inkscape:zoom="3.5467585"
+     inkscape:cx="350.56694"
+     inkscape:cy="94.42245"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="false"
-     inkscape:window-width="1091"
-     inkscape:window-height="766"
-     inkscape:window-x="273"
+     inkscape:window-width="1918"
+     inkscape:window-height="1198"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0" />
   <metadata
@@ -151,7 +151,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -249,7 +249,7 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="State1"
-     style="display:inline"
+     style="display:none"
      transform="translate(0,-65)">
     <g
        id="g46012"
@@ -2119,7 +2119,7 @@
          y="364.39526"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Open Sans;-inkscape-font-specification:Open Sans">3</tspan></text>
     <path
-       transform="matrix(1.4745836,0,0,-1.4740711,288.32394,783.9945)"
+       transform="matrix(2.2118754,0,0,-2.2111067,261.93247,978.89445)"
        sodipodi:type="arc"
        style="color:#000000;fill:#d62a2a;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="path3794-4-430-4-3"
@@ -2321,7 +2321,7 @@
        sodipodi:ry="3.018868"
        d="m 38.814015,264.43765 a 3.018868,3.018868 0 1 1 -6.037736,0 3.018868,3.018868 0 1 1 6.037736,0 z" />
     <path
-       transform="matrix(1.7582738,0,0,1.7576627,205.15196,-46.88166)"
+       transform="matrix(2.6374107,0,0,2.6364941,173.68313,-279.27776)"
        sodipodi:type="arc"
        style="color:#000000;fill:#658c94;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="path3794-6-2-8-6-3-2-7-8-6"
@@ -2371,26 +2371,6 @@
        sodipodi:ry="3.018868"
        d="m 38.814015,264.43765 a 3.018868,3.018868 0 1 1 -6.037736,0 3.018868,3.018868 0 1 1 6.037736,0 z" />
     <path
-       transform="matrix(1.5287245,0,0,1.5281932,216.16048,2.32878)"
-       sodipodi:type="arc"
-       style="color:#000000;fill:#24d2d3;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3794-49-7-2-0-02-5-7-7-6-6-8"
-       sodipodi:cx="35.795147"
-       sodipodi:cy="264.43765"
-       sodipodi:rx="3.018868"
-       sodipodi:ry="3.018868"
-       d="m 38.814015,264.43765 a 3.018868,3.018868 0 1 1 -6.037736,0 3.018868,3.018868 0 1 1 6.037736,0 z" />
-    <path
-       transform="matrix(1.2415287,0,0,-1.2410972,304.69928,720.12569)"
-       sodipodi:type="arc"
-       style="color:#000000;fill:#d62a2a;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       id="path3794-4-43-2-8-3-2-9"
-       sodipodi:cx="35.795147"
-       sodipodi:cy="264.43765"
-       sodipodi:rx="3.018868"
-       sodipodi:ry="3.018868"
-       d="m 38.814015,264.43765 a 3.018868,3.018868 0 1 1 -6.037736,0 3.018868,3.018868 0 1 1 6.037736,0 z" />
-    <path
        sodipodi:type="arc"
        style="color:#000000;fill:none;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:4, 2;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
        id="path49330-8"
@@ -2401,6 +2381,11 @@
        d="m 279.69851,352.21707 a 12.735834,12.735834 0 1 1 -25.47167,0 12.735834,12.735834 0 1 1 25.47167,0 z"
        transform="translate(73.950278,41.958045)" />
   </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="State4"
+     style="display:none" />
   <g
      inkscape:groupmode="layer"
      id="layer7"

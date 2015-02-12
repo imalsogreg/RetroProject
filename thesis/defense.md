@@ -54,6 +54,25 @@
 
 ---
 
+# Theta Sequences
+
+<div style="width:80%;margin:auto;">
+![](../talkFigs/thetaSequencesRaster3.png "A raster plot of four place cells, for about 500 milliseconds. The cells are sorted vertically by preferred location on the track. At fine timescales, they can be seen to fire in fast sequences that reflect the ordering of their preferred locations. In the background is a position reconstruction in the same time interval, showing the same information: that the ensemble sweeps ahead of the rat in his direction of running. There is one such sweep per theta cycle.")
+</div>
+
+ - Place cells fire in quick sequences reflecting place field order
+ - Grey background: fine time-scale position estimate from 30 place cells
+
+---
+
+# Theta Sequences {data-background="../rawArt/black.png"}
+
+<video width="480" height="480" controls>
+<source src="../movies/sequences.ogg" type="video/ogg"/>
+</video>
+
+---
+
 # Local Theta Desynchronization
 
 <div class="leftHalf">
