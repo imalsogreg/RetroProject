@@ -325,6 +325,110 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
+# Streaming Data
+
+![](../talkFigs/states/running1/1.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/running1/2.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/running1/3.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/running1/4.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/running2/q.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/running2/1.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/running2/2.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/running2/3.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/running2/4.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/placefield/q.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/placefield/1.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/placefield/2.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/placefield/3.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/placefield2/q.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/placefield2/1.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/placefield2/2.png "")
+
+---
+
+# Streaming Data
+
+![](../talkFigs/states/placefield2/3.png "")
+
+---
+
+
+
 # Real Time Place Field Tracking {data-background="../rawArt/black.png"}
 
 <video width="640" height="480" controls>
