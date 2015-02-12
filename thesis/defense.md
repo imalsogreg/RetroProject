@@ -102,8 +102,6 @@
 
 ---
  
-
-
 # Local Theta Desynchronization
 
 <div class="leftHalf">
@@ -142,6 +140,16 @@ A high-speed animation of several cycles theta in the local field potentials of 
  - About 13 ms of delay per millimeter (HPC is 10 mm)
  - What effect does this have on cortical communication?
  - What effect does this have on theta sequences
+
+---
+
+# Traveling Wave and Theta Sequences
+
+<br/>
+
+![](../talkFigs/thetaSequenceModel.png "")
+
+<div style="font-size:24pt;">Theta phase offsets may anatomically arrange theta sequences.</div>
 
 ---
 
