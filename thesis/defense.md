@@ -64,7 +64,20 @@
 
 # Theta Sequences
 
-![](../talkFigs/exampleThetaSequencesAndRaster2.png "A raster plot of four place cells, for about 500 milliseconds. The cells are sorted vertically by preferred location on the track. At fine timescales, they can be seen to fire in fast sequences that reflect the ordering of their preferred locations. In the background is a position reconstruction in the same time interval, showing the same information: that the ensemble sweeps ahead of the rat in his direction of running. There is one such sweep per theta cycle.")
+<div style="width:80%;margin:auto;">
+![](../talkFigs/thetaSequencesRaster2.png "A raster plot of four place cells, for about 500 milliseconds. The cells are sorted vertically by preferred location on the track. At fine timescales, they can be seen to fire in fast sequences that reflect the ordering of their preferred locations. In the background is a position reconstruction in the same time interval, showing the same information: that the ensemble sweeps ahead of the rat in his direction of running. There is one such sweep per theta cycle.")
+</div>
+
+ - Place cells fire in quick sequences reflecting place field order
+ - Grey background: fine time-scale position estimate from 30 place cells
+
+---
+
+# Theta Sequences
+
+<div style="width:80%;margin:auto;">
+![](../talkFigs/thetaSequencesRaster3.png "A raster plot of four place cells, for about 500 milliseconds. The cells are sorted vertically by preferred location on the track. At fine timescales, they can be seen to fire in fast sequences that reflect the ordering of their preferred locations. In the background is a position reconstruction in the same time interval, showing the same information: that the ensemble sweeps ahead of the rat in his direction of running. There is one such sweep per theta cycle.")
+</div>
 
  - Place cells fire in quick sequences reflecting place field order
  - Grey background: fine time-scale position estimate from 30 place cells
@@ -182,8 +195,6 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 # Position Decoding, Measuring Regional Time Offsets
 
-Todo: Split into two slides
-
 <div class="leftHalf">
 ![](../talkFigs/sequencesPost.png "An illustration of the procedure for measuring the impact of theta phase differences on theta sequences.")
 </div>
@@ -200,10 +211,6 @@ Todo: Split into two slides
 ---
 
 # Regional Time Offsets are Small 
-
-Todo: Add figure: arrows turn into points. Column1 expected, column2 observed. T-test.
-
-<br/>
 
 
 ![](../talkFigs/sequences_all.png "")
@@ -226,7 +233,6 @@ Todo: Add figure: arrows turn into points. Column1 expected, column2 observed. T
    place fields and timing</span> (theta sequences)
  - Not between <span style="color:#C00020">
    anatomical location and timing</span>
- - Todo: Add p-value for (anatomy regression coeff < theta time offset)
 
 ---
 
@@ -241,12 +247,169 @@ Todo: Add figure: arrows turn into points. Column1 expected, column2 observed. T
 
 ---
 
-# One Potential Mechanism
+# Gradient Dual-Input Model
 
 <br/>
 
-Todo: Figure with EC2 and CA3 synchronized theta sequences, gradient contribution to CA1
+<div class="leftHalf">
+![](../talkFigs/thetaSequenceModelExplanation.png "")
+</div>
 
+<div class="leftHalf">
+
+ - Two inputs areas
+ - With synchronized theta sequences but different theta phase
+ - Preferentially projecting to medial/lateral CA1
+ - CA1 inherits spike times directly
+ - CA1 theta is a mixture of input's theta
+ - Different input contributions at different phases in CA1
+
+
+
+---
+
+# Real Time Position Decoding {#arte}
+
+---
+
+# Hippocampal replay
+
+<div class="leftHalf">
+![](../talkFigs/replayExample2.png "Another plot of rat's position as a function of time with position estimate overlaid, zoomed in to a few seconds. Although the rat is stationary at the end of the track, the decoded position sweeps down the track in a linear way.")
+</div>
+<div class="leftHalf">
+<br/>
+
+ - What is it for?
+ - What causes it to travel one direction or the other?
+ - Can we influence it?
+ - Does it influence place later place cell spiking?
+
+</div>
+
+---
+
+# Real time experiments
+<br/>
+
+<div class="leftHalf">
+<hr/>
+
+ - Some replay goes left, some goes right
+ - Can we reward left-going replay? Disrupt right-going?
+ - Can we encourage large amounts of left-going replay?
+ - Will this cause place cell plasticity?
+ - Can we train a rat to follow his replay?
+
+<hr/>
+</div>
+<div class="leftHalf">
+![](../talkFigs/tmaze.png "")
+</div>
+
+---
+
+# Real time decoding challenges
+
+<div class="leftHalf">
+
+![](../talkFigs/concurrency.png "")
+</div>
+<div class="leftHalf">
+
+<br/>
+
+ - Streaming data, all computations must run in constant time
+ - Concurrency - many sources of input, several jobs to do at once
+ - Implement in Haskell - great concurrency support, excellent for domain modeling
+
+
+</div>
+
+---
+
+# Real Time Place Field Tracking {data-background="../rawArt/black.png"}
+
+<video width="640" height="480" controls>
+<source src="../movies/field.ogg" type="video/ogg"/>
+</video>
+
+---
+
+# Real Time Place Position Decoding {data-background="../rawArt/black.png"}
+
+<video width="640" height="480" controls>
+<source src="../movies/decoding.ogg" type="video/ogg"/>
+</video>
+
+---
+
+
+# Example Decodings
+
+![](../talkFigs/headToHeadDecoding.png "")
+
+---
+
+# Sketching a full real time decoding system
+
+
+ - Accept spikes from ArtE, Open-ephys, Puggle, etc.
+ - Real time position tracking
+ - Condition experimental stimuli on replay direction
+ - Visualize replay during experiment for unstructured experimentation
+
+# Thank You's
+
+---
+
+# Refactoring is Hard
+
+```matlab
+function p = bayesFields(fields,spikeCounts)
+
+  % spike-times in column 1, interneuron in 2, field-id in 3
+  for s = 1:size(spikeCounts,2)
+    if (~(spikeCounts(2,s)))
+	  spikeCounts(2,:) = [];
+    end
+  end
+  
+  pred = zeros(size(fields,1);
+  for s = 1:size(spikeCounts,1)
+    ...
+```
+
+ - There are 10 functions that rely on this column mapping
+ - What happens when we modify fieldCounts?
+ - Flexible functions: errors are rare
+
+---
+
+# Refactoring Can be Easier
+
+```haskell
+-- (f . g) x  == f (g (x))
+
+bayesField fieldMap spikeCounts =
+  (foldl' (*) .
+  filterBy (not . isInterneuron) .
+  map (lookupField fieldMap)) spikeCounts  
+								  
+```
+ - No magic numbers or magic dimensions
+ - Very strict functions: errors are obvious
+
+---
+
+# Haskell
+
+![](../talkFigs/haskellPromise.png "")
+ 
+
+---
+
+# Real time demo
 
 ---
 
@@ -365,147 +528,3 @@ Todo: Figure with EC2 and CA3 synchronized theta sequences, gradient contributio
 
 ---
 
-# Real Time Position Decoding {#arte}
-
----
-
-# Hippocampal replay
-
-<div class="leftHalf">
-![](../talkFigs/replayExample2.png "Another plot of rat's position as a function of time with position estimate overlaid, zoomed in to a few seconds. Although the rat is stationary at the end of the track, the decoded position sweeps down the track in a linear way.")
-</div>
-<div class="leftHalf">
-<br/>
-
- - What is it for?
- - What causes it to travel one direction or the other?
- - Can we influence it?
- - Does it influence place later place cell spiking?
-
-</div>
-
----
-
-# Real time experiments
-<br/>
-
-<div class="leftHalf">
-<hr/>
-
- - Some replay goes left, some goes right
- - Can we reward left-going replay? Disrupt right-going?
- - Can we encourage large amounts of left-going replay?
- - Will this cause place cell plasticity?
- - Can we train a rat to follow his replay?
-
-<hr/>
-</div>
-<div class="leftHalf">
-![](../talkFigs/tmaze.png "")
-</div>
-
----
-
-# Real time decoding challenges
-
-<div class="leftHalf">
-
-![](../talkFigs/concurrency.png "")
-</div>
-<div class="leftHalf">
-
-<br/>
-
- - Streaming data, all computations must run in constant time
- - Concurrency - many sources of input, several jobs to do at once
- - Implement in Haskell - great concurrency support, excellent for domain modeling
-
-
-</div>
-
----
-
-# Real Time Place Field Tracking {data-background="../rawArt/black.png"}
-
-<video width="640" height="480" controls>
-<source src="../movies/field.ogg" type="video/ogg"/>
-</video>
-
----
-
-# Real Time Place Position Decoding {data-background="../rawArt/black.png"}
-
-<video width="640" height="480" controls>
-<source src="../movies/decoding.ogg" type="video/ogg"/>
-</video>
-
----
-
-
-# Example Decodings
-
-![](../talkFigs/headToHeadDecoding.png "")
-
----
-
-# Sketching a full real time decoding system
-
-
- - Accept spikes from ArtE, Open-ephys, Puggle, etc.
- - Real time position tracking
- - Condition experimental stimuli on replay direction
- - Visualize replay during experiment for unstructured experimentation
-
-# Thank you's
-
----
-
-# Refactoring is Hard
-
-```matlab
-function p = bayesFields(fields,spikeCounts)
-
-  % spike-times in column 1, interneuron in 2, field-id in 3
-  for s = 1:size(spikeCounts,2)
-    if (~(spikeCounts(2,s)))
-	  spikeCounts(2,:) = [];
-    end
-  end
-  
-  pred = zeros(size(fields,1);
-  for s = 1:size(spikeCounts,1)
-    ...
-```
-
- - There are 10 functions that rely on this column mapping
- - What happens when we modify fieldCounts?
- - Flexible functions: errors are rare
-
----
-
-# Refactoring Can be Easier
-
-```haskell
--- (f . g) x  == f (g (x))
-
-bayesField fieldMap spikeCounts =
-  (foldl' (*) .
-  filterBy (not . isInterneuron) .
-  map (lookupField fieldMap)) spikeCounts  
-								  
-```
- - No magic numbers or magic dimensions
- - Very strict functions: errors are obvious
-
----
-
-# Haskell
-
-![](../talkFigs/haskellPromise.png "")
- 
-
----
-
-# Real time demo
-
----
