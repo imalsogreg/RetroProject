@@ -452,15 +452,98 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-# Sketching a full real time decoding system
+# Sketching a Full Real Time Decoding System
 
+<br/>
 
  - Accept spikes from ArtE, Open-ephys, Puggle, etc.
  - Real time position tracking
- - Condition experimental stimuli on replay direction
- - Visualize replay during experiment for unstructured experimentation
+ - *Spike sorting*
+
+# Spike Sorting
+
+<br/>
+
+![](../talkFigs/stereotrode.png "")
+
+---
+
+# Clusterless Decoding
+
+<br/>
+
+![](../talkFigs/clusterlessCartoon.png "")
+
+---
+
+# Streaming Clusterless Decoding
+
+![](../talkFigs/states/clusterless/q.png "")
+
+---
+
+# Streaming Clusterless Decoding
+
+![](../talkFigs/states/clusterless/1.png "")
+
+---
+
+# Streaming Clusterless Decoding
+
+![](../talkFigs/states/clusterless/2.png "")
+
+---
+
+# Streaming Clusterless Decoding
+
+![](../talkFigs/states/clusterless/3.png "")
+
+---
+
+# Streaming Clusterless Decoding
+
+![](../talkFigs/states/clusterless2/q.png "")
+
+---
+
+# Streaming Clusterless Decoding
+
+![](../talkFigs/states/clusterless2/1.png "")
+
+---
+
+# Streaming Clusterless Decoding
+
+![](../talkFigs/states/clusterless2/2.png "")
+
+---
+
+# Streaming Clusterless Decoding
+
+![](../talkFigs/states/clusterless2/3.png "")
+
+---
+
 
 # Thank You's
+
+---
+
+# 
+
+![](../people/pages/lab.png "")
+
+---
+
+#
+
+![](../people/pages/friends.png "")
+
+---
+
+#
+
+![](../people/pages/mentors.png "")
 
 ---
 
