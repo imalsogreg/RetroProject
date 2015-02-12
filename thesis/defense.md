@@ -155,6 +155,8 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 # Position Decoding, Measuring Regional Time Offsets
 
+Todo: Split into two slides
+
 <div class="leftHalf">
 ![](../talkFigs/decodingStrategy.png "An illustration of the procedure for measuring the impact of theta phase differences on theta sequences.")
 </div>
@@ -171,6 +173,8 @@ A high-speed animation of several cycles theta in the local field potentials of 
 ---
 
 # Regional Time Offsets are Small 
+
+Todo: Add figure: arrows turn into points. Column1 expected, column2 observed. T-test.
 
 <br/>
 
@@ -189,14 +193,13 @@ A high-speed animation of several cycles theta in the local field potentials of 
 # Time Offsets in Neuron Pairs Are Small
 
 
-
 ![](../talkFigs/pairXCorr.png "A scatterplot with each point representing a pair of place cells. Time offset is on the z-axis, place-field offset is on the y-axis (right, blue) and anatomical offset is on the x-axis (left, red)")
 
  - Strong relationship between <span style="color:#0040A0">
    place fields and timing</span> (theta sequences)
  - Not between <span style="color:#C00020">
    anatomical location and timing</span>
-
+ - Todo: Add p-value for (anatomy regression coeff < theta time offset)
 
 ---
 
@@ -211,21 +214,11 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-# Mechanism
+# One Potential Mechanism
 
 <br/>
 
-<div class="spacedBullets">
-
- - Several competing models for theta sequences
- - All rely on a local theta & predict sequences desynchronized by traveling wave
- - Two classes of explanation for our data:
-    - Traveling wave is counteracted by a factor with the opposite timing gradient.
-	  **Test through properties of place fields.**
-	- Theta sequences are inherited from upstream regions that *are* synchronized.
-	  **Test by recording upstream areas.**
-
-</div>
+Todo: Figure with EC2 and CA3 synchronized theta sequences, gradient contribution to CA1
 
 
 ---
@@ -340,7 +333,8 @@ A high-speed animation of several cycles theta in the local field potentials of 
  - Retrosplenial cortex enters sleep-like state during reward consumption
  - Hippocampus is coordinated at the behavioral timescale
  - HPC $\rightarrow$ CTX information not limited to sleep
- - Future question: is spatial information being transfered?
+ - Future question: is replayed spatial information moving 
+   between hippocampus and cortex?
 
 ---
 
@@ -385,20 +379,6 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-# Offline Position Decoding
-
- - Sort spikes from electrodes into single units
- - Training data:
-     - Compute place fields from all tetrode's spikes in recording session
-	 - Repeat for all electrodes
- - Testing data:
-     - Choose decoding time window (20ms)
-     - For cells that spiked in that window, lookup place fields
-	 - Bayesian inference to combine active place cells into one estimate
-	 - Repeat for all time windows
-
----
-
 # Real time decoding challenges
 
 <div class="leftHalf">
@@ -407,15 +387,12 @@ A high-speed animation of several cycles theta in the local field potentials of 
 </div>
 <div class="leftHalf">
 
- - All data must be streaming
-    - Can't keep all spikes in memory, too many
-    - Too many spikes to process
- - Large amounts of concurrency
-    - Can't process tetrodes one at a time, they generate spikes in parallel
-    - Parallel data must be shared to produce single position estimate
-    - Other data sources (video camera, mouse & keyboard, new clusters) also share the data
- - Need to be creative with data structures and concurrency
- - Lots of experimentation and refactoring
+<br/>
+
+ - Streaming data, all computations must run in constant time
+ - Concurrency - many sources of input, several jobs to do at once
+ - Implement in Haskell - great concurrency support, excellent for domain modeling
+
 
 </div>
 
