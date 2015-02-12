@@ -153,12 +153,39 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
+# Traveling Wave and Theta Sequences
+
+<br/>
+
+![](../talkFigs/thetaSequenceModelBlurry.png "")
+
+<div style="font-size:24pt;">Theta phase offsets may anatomically arrange theta sequences.</div>
+
+---
+
+# Position Decoding, Measuring Regional Time Offsets
+
+<div class="leftHalf">
+![](../talkFigs/sequencesPre.png "An illustration of the procedure for measuring the impact of theta phase differences on theta sequences.")
+</div>
+<div class="leftHalf">
+
+ - Divide cells into <span style="color:red">**medial**</span>
+   and <span style="color:green">**lateral**</span> groups
+ - Reconstruct theta sequences independently
+ - Average together individual theta sequences
+ - Compare group averaged theta sequences
+
+</div>
+
+---
+
 # Position Decoding, Measuring Regional Time Offsets
 
 Todo: Split into two slides
 
 <div class="leftHalf">
-![](../talkFigs/decodingStrategy.png "An illustration of the procedure for measuring the impact of theta phase differences on theta sequences.")
+![](../talkFigs/sequencesPost.png "An illustration of the procedure for measuring the impact of theta phase differences on theta sequences.")
 </div>
 <div class="leftHalf">
 
