@@ -54,6 +54,7 @@
 
 .spacedBullets li {
     margin:50px;
+    padding:20px;
     font-family: 'tempfont', sans-serif;
     line-height:100%;
 }

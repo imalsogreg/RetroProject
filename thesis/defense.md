@@ -14,15 +14,16 @@
 
 # Overview
 
+<br/>
+
 <div class="spacedBullets">
  1. [Synchronized information processing in a desynchronized network](#waves)
- 1. [Hippocampal-Cortical Sleep Interactions, During Wake](#sww)
  1. [A tool for real time population decoding](#arte)
 </div>
 
 ---
 
-# Synchronized Information in a Desynchronized Circuit {#waves style="width:60%;margin-left:15%;margin-right:15%;"}
+# Synchronized Information in a Desynchronized Circuit {#waves style="width:80%;margin-left:10%;margin-right:10%;"}
 
 ---
 
@@ -42,26 +43,6 @@
 
 ---
 
-# Sequence Replay
-
-![](../talkFigs/replayExample2.png "Another plot of rat's position as a function of time with position estimate overlaid, zoomed in to a few seconds. Although the rat is stationary at the end of the track, the decoded position sweeps down the track in a linear way.")
-
- - Zoom in on stationary rat
- - Neural activity replays high-speed track traversal^[8]^
-
-[8]:http://www.nature.com/nature/journal/v440/n7084/full/nature04587.html
-
----
-
-
-# Sequence Replay {data-background="../rawArt/black.png"}
-
-<video width="480" height="480" controls>
-<source src="../movies/replay.ogg" type="video/ogg"/>
-</video>
-
----
-
 # Theta Sequences
 
 <div style="width:80%;margin:auto;">
@@ -73,24 +54,6 @@
 
 ---
 
-# Theta Sequences
-
-<div style="width:80%;margin:auto;">
-![](../talkFigs/thetaSequencesRaster3.png "A raster plot of four place cells, for about 500 milliseconds. The cells are sorted vertically by preferred location on the track. At fine timescales, they can be seen to fire in fast sequences that reflect the ordering of their preferred locations. In the background is a position reconstruction in the same time interval, showing the same information: that the ensemble sweeps ahead of the rat in his direction of running. There is one such sweep per theta cycle.")
-</div>
-
- - Place cells fire in quick sequences reflecting place field order
- - Grey background: fine time-scale position estimate from 30 place cells
-
----
-
-# Theta Sequences {data-background="../rawArt/black.png"} 
-
-<video width="480" height="480" controls>
-<source src="../movies/sequences.ogg" type="video/ogg"/>
-</video>
-
----
 
 # Theta Oscillations
 
@@ -272,7 +235,41 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-# Hippocampal replay
+
+# Place Cells
+
+<br/>
+
+![](../talkFigs/decodeExample2.png "")
+
+
+
+---
+
+
+# Sequence Replay
+
+![](../talkFigs/replayExample2.png "Another plot of rat's position as a function of time with position estimate overlaid, zoomed in to a few seconds. Although the rat is stationary at the end of the track, the decoded position sweeps down the track in a linear way.")
+
+ - Zoom in on stationary rat
+ - Neural activity replays high-speed track traversal^[8]^
+
+[8]:http://www.nature.com/nature/journal/v440/n7084/full/nature04587.html
+
+---
+
+
+# Sequence Replay {data-background="../rawArt/black.png"}
+
+<video width="480" height="480" controls>
+<source src="../movies/replay.ogg" type="video/ogg"/>
+</video>
+
+---
+
+
+
+# Sequence Replay
 
 <div class="leftHalf">
 ![](../talkFigs/replayExample2.png "Another plot of rat's position as a function of time with position estimate overlaid, zoomed in to a few seconds. Although the rat is stationary at the end of the track, the decoded position sweeps down the track in a linear way.")
