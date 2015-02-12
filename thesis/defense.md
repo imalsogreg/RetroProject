@@ -54,30 +54,6 @@
 
 ---
 
-
-# Theta Oscillations
-
-<div class="leftHalf">
-![](../talkFigs/brainAndWavesOneChan.png "Overhead image of rat brain with one hippocampal recording site indicated. A voltage trace from that site shows several cycles of the theta rhythm in the local field potential")
-</div>
-
-<div class="leftHalf ">
-<br/>
-
- - 8 Hz *Theta* rhythm in local field potential^[1]^
- - Coordinates communication between brain areas^[2],[3]^
- - Coordinates spike timing in local neural ensembles^[4],[5]^
-
-</div>
-
-[1]:http://www.sciencedirect.com/science/article/pii/S089662730200586X
-[2]:http://www.sciencedirect.com/science/article/pii/S0896627308007629
-[3]:http://www.ncbi.nlm.nih.gov/pubmed/15820700
-[4]:http://onlinelibrary.wiley.com/doi/10.1002/hipo.450030307/abstract;jsessionid=16CD25E4E33682387124A01897AC938B.f03t04
-[5]:http://onlinelibrary.wiley.com/doi/10.1002/hipo.20345/abstract
-
----
- 
 # Local Theta Desynchronization
 
 <div class="leftHalf">
@@ -452,6 +428,12 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
+# Throughput
+
+![](../talkFigs/arteTiming.png "")
+
+---
+
 # Sketching a Full Real Time Decoding System
 
 <br/>
@@ -524,6 +506,24 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
+# Real Time Position Decoding
+
+<br/>
+
+ - Most real time decoders focus on behavioral correlates
+ - Focus on fine timescale decoding
+ - Needed for interrupting/enhancing replay
+ - Get closer to underlying encoding mechanisms
+
+---
+
+# Summary
+
+<br/>
+
+![](../talkFigs/summary.png "")
+
+---
 
 # Thank You's
 
