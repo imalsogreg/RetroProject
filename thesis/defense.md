@@ -50,7 +50,7 @@
 </div>
 
  - Place cells fire in quick sequences reflecting place field order
- - Grey background: fine time-scale position estimate from 30 place cells
+
 
 ---
 
@@ -61,7 +61,6 @@
 </div>
 
  - Place cells fire in quick sequences reflecting place field order
- - Grey background: fine time-scale position estimate from 30 place cells
 
 ---
 
@@ -108,9 +107,9 @@ A high-speed animation of several cycles theta in the local field potentials of 
 ![](../talkFigs/brainAndWaves.png "") 
 </div>
 
- - About 13 ms of delay per millimeter (HPC is 10 mm)
+ - ~13 ms of delay per millimeter (HPC is 10 mm)
  - What effect does this have on cortical communication?
- - What effect does this have on theta sequences
+ - What effect does this have on theta sequences?
 
 ---
 
@@ -134,7 +133,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-# Position Decoding, Measuring Regional Time Offsets
+# Position Decoding: Measuring Regional Time Offsets
 
 <div class="leftHalf">
 ![](../talkFigs/sequencesPre.png "An illustration of the procedure for measuring the impact of theta phase differences on theta sequences.")
@@ -170,13 +169,13 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 # Regional Time Offsets are Small 
 
+<br/>
 
 ![](../talkFigs/sequences_all.png "")
 
  - Black arrows: x-intercept, theta sequence time delay
  - Blue arrows: Time delay of theta oscillation
  - Theta sequence delay < theta wave delay (p < 0.05)
- - Stretched diagonal shape: regional theta sequences are similarly streaked
  - Center of mass: when (>0), lateral cells participate later
 
 
