@@ -150,7 +150,7 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
-# Position Decoding, Measuring Regional Time Offsets
+# Position Decoding: Measuring Regional Time Offsets
 
 <div class="leftHalf">
 ![](../talkFigs/sequencesPost.png "An illustration of the procedure for measuring the impact of theta phase differences on theta sequences.")
