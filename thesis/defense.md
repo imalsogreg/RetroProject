@@ -35,6 +35,7 @@
 
 
  - Single cells become active at one track location
+
  - Many cells' activity can be combined to estimate rat's position^[6],[7]^
 
 [6]:http://jn.physiology.org/content/79/2/1017.short
@@ -214,14 +215,78 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 <div class="leftHalf">
 
- - Two inputs areas
+ - Two input areas
  - With synchronized theta sequences but different theta phase
  - Preferentially projecting to medial/lateral CA1
  - CA1 inherits spike times directly
  - CA1 theta is a mixture of input's theta
  - Different input contributions at different phases in CA1
 
+</div>
 
+---
+
+# Gradient Dual-Input Model
+
+
+<div class="leftHalf">
+![](../finalFigs/travelingwave/LFPModelSmall.png "")
+</div>
+
+<div class="leftHalf">
+
+- **One Hypothesis**
+- Interneurons control spike timing
+- Inhibitory currents: synchronized, no traveling wave
+- Excitatory currents control LFP
+- CA3 vs. EC3 differ in phase
+
+<br/>
+
+- **Predition**
+- Local interneurons phase-synchronized
+
+</div>
+
+---
+
+# Interneuron spike phases
+
+<br/>
+
+<div class="leftHalf">
+![](../rawFigs/interneuronPhase/morpheus_052310.png "")
+</div>
+
+<div class="leftHalf">
+
+ - MUA spikes with width [.15-.35 ms]
+ - Phase relative to a single global LFP theta
+ - Phase preference appears correlated with tetrode location
+ - Statistics T.B.D.
+ - For theta sequences, supports *active-realignment* over *synchronized-interneurons* model
+
+</div>
+
+---
+
+# Interneuron spike phases
+
+<br/>
+
+<div class="leftHalf">
+![](../rawFigs/interneuronPhase/yolanda_120711.png "")
+</div>
+
+<div class="leftHalf">
+
+ - MUA spikes with width [.15-.35 ms]
+ - Phase relative to a single global LFP theta
+ - Phase preference appears correlated with tetrode location
+ - Statistics T.B.D.
+ - For theta sequences, supports *active-realignment* over *synchronized-interneurons* model
+
+</div>
 
 ---
 
