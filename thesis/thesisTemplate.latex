@@ -142,7 +142,8 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 \begin{document}
-
+\pagenumbering{roman}
+\setcounter{page}{0}
 \begin{titlepage}
     \begin{center}
         \vspace*{1cm}

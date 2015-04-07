@@ -92,8 +92,8 @@ for n = 1:ncell
     
     
     spike_times(or(spike_times <= cdat_r.phase.tstart, spike_times >= cdat_r.phase.tend)) = NaN;
-    isOk = (~isnan(ts)) & (~isnan(phase));
-    spike_phase = interp1(ts(isOk),phase(isOk),spike_times,'linear','extrap');
+    isOk = (~isnan(ts)) & (~isnan(phase) & ~isinf(ts) & ~isinf(phase));
+    spike_phase = interp1(ts(isOk),unwrap(phase(isOk)),spike_times,'linear','extrap');
     
     [tmp, logicals] = gh_times_in_timewins(spike_times, bouts{lfp_col});
     spike_phase(~logicals) = NaN;

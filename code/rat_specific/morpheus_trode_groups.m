@@ -59,8 +59,12 @@ end
 
 if(strcmp(opt.segment_style,'areas'))
    trode_groups{1}.name = 'CA1';
-   trode_groups{1}.trodes = {'02','03','05','06','07','08','24','16','14','11','10','23','21','20','17','15','13','12'};
+   trode_groups{1}.trodes = {'02','03','05','06','07','08','24','16','14','11','10','23','21','20','17','15','13','12','18'};
    trode_groups{1}.color = [1 0 0];
+   
+   trode_groups{2}.name = 'bad';
+   trode_groups{2}.trodes = {};
+   trode_groups{2}.color = [1 0 1];
 end
 
 if(strcmp(opt.segment_style,'many'))

@@ -319,6 +319,46 @@ A high-speed animation of several cycles theta in the local field potentials of 
 
 ---
 
+# Old Decoder Design
+
+![](../rawArt/oldArte.png "")
+
+---
+
+# New Decoder Design
+
+![](../rawArt/newArte.png "")
+
+--- 
+
+# When to split a program into two?
+
+Benefits of splitting
+
+ - Forces you to define an interface
+ - Swap components easily (get input from disk for testing, from rat for real)
+ - Possibly allows the use of more computers
+
+Costs of splitting
+
+ - Difficulty moving data (must choose data transport, more tradeoffs)
+ - Must keep multiple programs schemas in sync
+ - Types are lost (data are serialized before being shared)
+
+---
+
+# When to split a program in two?
+
+ - Two ends of the spectrum
+   - One program doing everything
+   - One program per function per tetrode
+ - Both extremes obviously wrong
+   - Giant program is too slow (although many other befenits of splitting can be had just by recompiling)
+   - One program per function -> raw data swamp
+ - Right answer comes from considering the costs & benefits at each stage. 
+
+---
+
 # Streaming Data
 
 ![](../talkFigs/states/running1/1.png "")

@@ -1,0 +1,92 @@
+\contentsline {section}{Abstract}{6}{Doc-Start}
+\contentsline {subsection}{Dedication}{7}{section*.1}
+\contentsline {section}{Coordinated information coding in a desynchronized network}{9}{section*.1}
+\contentsline {subsection}{Abstract}{9}{section*.2}
+\contentsline {subsection}{Introduction}{9}{section*.2}
+\contentsline {subsubsection}{CA1 place cell excitation is timed by 10Hz oscillation - theta rhythm}{9}{section*.3}
+\contentsline {subsubsection}{Theta sequences}{10}{section*.3}
+\contentsline {subsubsection}{Communication through coherence}{12}{section*.3}
+\contentsline {subsubsection}{Tension between hypothesized roles in gating communication channels and encoding}{13}{section*.3}
+\contentsline {subsubsection}{Theta as traveling wave, excitatory time offsets over hippocampal CA1}{14}{section*.3}
+\contentsline {subsubsection}{Theta sequences: locally paced or globally synchronized?}{15}{section*.3}
+\contentsline {subsection}{Materials \& Methods}{16}{section*.3}
+\contentsline {subsubsection}{Subjects}{16}{section*.4}
+\contentsline {subsubsection}{Single-unit tetrode recording}{17}{section*.4}
+\contentsline {subsubsection}{Behavioral training}{17}{section*.4}
+\contentsline {subsubsection}{Electrophysiological Characterization}{17}{section*.4}
+\contentsline {subsubsection}{Theta sequences}{18}{section*.4}
+\contentsline {subsection}{Results}{19}{section*.4}
+\contentsline {subsubsection}{Theta phase spatial properties and timing offsets: 13ms delay per mm}{19}{section*.5}
+\contentsline {subsubsection}{Place cell pairs are synchronized across anatomical space}{20}{figure.2}
+\contentsline {subsubsection}{Ensemble theta sequences are synchronized}{23}{table.1}
+\contentsline {subsection}{Discussion}{26}{table.2}
+\contentsline {subsubsection}{Theta traveling wave properties}{26}{section*.6}
+\contentsline {subsubsection}{Despite theta timing differences, information coding is synchronized}{26}{section*.6}
+\contentsline {subsubsection}{Medial/lateral CA1 may preferentially carry most of the spikes at different times}{27}{section*.6}
+\contentsline {subsubsection}{Model 1: Spatially graded, temporally constant compensating excitation}{28}{section*.6}
+\contentsline {subsubsection}{Model 2: Phase precession inherited from synchronized afferents}{28}{section*.6}
+\contentsline {subsubsection}{Model 3: Independent effects on spike timing and LFP from different theta sources}{29}{section*.6}
+\contentsline {subsubsection}{Information timing is decoupled from bulk firing rate for globally coherent coding}{32}{figure.7}
+\contentsline {section}{Real time position decoding from populations of place cells}{35}{figure.7}
+\contentsline {subsection}{Abstract}{35}{section*.7}
+\contentsline {subsection}{Introduction}{35}{section*.7}
+\contentsline {subsubsection}{Theta sequences and replay in place cells, phenomenology}{35}{section*.8}
+\contentsline {subsubsection}{Summary of replay disruption studies}{36}{section*.8}
+\contentsline {subsubsection}{Rationale for information-dependent replay manipulation}{37}{section*.8}
+\contentsline {subsubsection}{Online replay decoding challenges}{38}{section*.8}
+\contentsline {subsubsection}{Minimizing human intervention: no time for manual spike sorting}{39}{section*.8}
+\contentsline {subsubsection}{A proof of concept in c and Haskell}{39}{section*.8}
+\contentsline {subsection}{Materials and Methods}{40}{section*.8}
+\contentsline {subsubsection}{Backend signal acquisition and networking}{40}{section*.9}
+\contentsline {subsubsection}{Offline position reconstruction}{41}{section*.9}
+\contentsline {subsubsection}{Online position reconstruction}{42}{section*.9}
+\contentsline {subsubsection}{Modeling place fields with Haskell data types}{42}{section*.9}
+\contentsline {subsubsection}{Managing concurrency and data streaming}{44}{section*.9}
+\contentsline {subsubsection}{Clusterless decoding}{45}{section*.9}
+\contentsline {subsection}{Results}{46}{section*.9}
+\contentsline {subsubsection}{Decoding fast-timescale features: theta sequences and replay}{46}{section*.10}
+\contentsline {subsubsection}{Decoding speed and real time requirements}{46}{figure.8}
+\contentsline {subsubsection}{Bugs, deadlocks, crashes and performance debugging}{47}{figure.9}
+\contentsline {subsection}{Discussion}{48}{figure.10}
+\contentsline {subsubsection}{A tool for decoding streaming place cell data}{48}{section*.11}
+\contentsline {subsubsection}{Remaining components needed to run experiments}{50}{section*.11}
+\contentsline {subsubsection}{Possible experiments using real time decoding}{51}{section*.11}
+\contentsline {section}{Retrosplenial slow-wave wake and interaction with hippocampus}{53}{section*.11}
+\contentsline {subsection}{Abstract}{53}{section*.12}
+\contentsline {subsection}{Introduction}{53}{section*.12}
+\contentsline {subsubsection}{Cortico-hippocampal sleep interactions, possible role in memory}{53}{section*.13}
+\contentsline {subsubsection}{Slow wave oscillations cleanly distinguish between sleeping and awake cortex}{54}{section*.13}
+\contentsline {subsubsection}{Theta and ripples distinguish between 'online' and 'offline' hippocampus}{54}{section*.13}
+\contentsline {subsubsection}{Retrosplenial cortex unexpectedly follows HPC into SWS-like state during reward}{54}{section*.13}
+\contentsline {subsection}{Materials \& Methods}{55}{section*.13}
+\contentsline {subsubsection}{Subjects}{55}{section*.14}
+\contentsline {subsubsection}{Single-unit tetrode recording}{55}{section*.14}
+\contentsline {subsubsection}{Behavioral training}{56}{section*.14}
+\contentsline {subsubsection}{Electrophysiological Characterization}{57}{section*.14}
+\contentsline {subsubsection}{Frame detection}{57}{section*.14}
+\contentsline {subsection}{Results}{57}{section*.14}
+\contentsline {subsubsection}{Characterizing slow-wave sleep (SWS) in cortex}{57}{section*.15}
+\contentsline {subsubsection}{Retrosplenial cortex enters SWS-like state during novelty / large rewards}{58}{figure.11}
+\contentsline {subsubsection}{RSC awake slow waves coordinate with hippocampus under diverse conditions}{61}{figure.14}
+\contentsline {subsubsection}{Anatomical restriction - non-participation in other cortical areas}{63}{figure.15}
+\contentsline {subsection}{Discussion}{63}{figure.17}
+\contentsline {subsubsection}{Awake slow-waves in RSC, coordinated with HPC, fully awake}{63}{section*.16}
+\contentsline {subsubsection}{Comparison with Vyazovskiy's local sleep}{64}{section*.16}
+\contentsline {subsubsection}{Functional roles for HPC-Cortex coordination may apply to wake}{65}{section*.16}
+\contentsline {subsubsection}{New questions raised by awake slow waves}{65}{section*.16}
+\contentsline {section}{Conclusion / Wrap-up}{67}{section*.16}
+\contentsline {section}{Appendix A: Hippocampal anatomy and physiology background}{68}{section*.16}
+\contentsline {subsection}{Hippocampal anatomy: cell layer and dendritic layers}{68}{section*.17}
+\contentsline {subsection}{Hippocampal place cells}{69}{section*.17}
+\contentsline {subsection}{Theta oscillations and multiunit spike phase}{70}{section*.17}
+\contentsline {section}{Appendix B: Sleep states and hippocampal-cortical interactions}{72}{section*.17}
+\contentsline {subsection}{Sleep stages, cortical EEG correlates (spindles, delta, theta)}{72}{section*.18}
+\contentsline {subsection}{Up-down states in vitro, frames of cortical spikes during sleep in vivo}{73}{section*.18}
+\contentsline {subsection}{Hippocampal ripples and sleep replay, wake replay}{73}{section*.18}
+\contentsline {subsection}{Hippocampal-cortical coordination}{74}{section*.18}
+\contentsline {section}{Appendix C: Haskell}{75}{section*.18}
+\contentsline {subsection}{What is functional programming}{75}{section*.19}
+\contentsline {subsection}{What are types}{76}{section*.19}
+\contentsline {subsection}{Declarative programming}{79}{section*.19}
+\contentsline {subsection}{Concurrency - difficulty of running multiple threads simultaneously}{82}{section*.19}
+\contentsline {section}{References}{87}{table.3}

@@ -8,12 +8,13 @@ import System.Environment
 import System.FilePath
 import System.Process
 
-data Fmt = HTML | WordDoc | PDF
+data Fmt = HTML | WordDoc | PDF | LaTeX
          deriving (Read)
 
 extension HTML    = ".html"
 extension WordDoc = ".doc"
 extension PDF     = ".pdf"
+extension LaTeX   = ".tex"
 
 rawFileDir   = "."
 buildFileDir = "build"
