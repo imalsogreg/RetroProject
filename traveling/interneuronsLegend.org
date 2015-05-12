@@ -1,0 +1,21 @@
+#+CAPTION: \textbf{Interneuron phase preferences are organized in a traveling wave.} Putative interneuron spikes (those with peak-to-trough width < 340 $\mu$s) are plotted as a function tetrode anatomical location (x and y axes) and global theta phase (circular histogram) for a single recording session \textbf{(left)}. Parameters of a traveling wave model fit are given in the inset. \textbf{(Right)} Putative excitatory pyramidal cell spikes recorded in the same session.  
+#+NAME:   fig:pairsSummary
+[[./finalFigs/pairXcorrSummary.png]]
+
+Pooling cell pairs across rats, we estimate each meter of place field distance to contribute 147.4 $\pm$ 14.2 ms of delay and each mm of anatomical spacing along the traveling wave axis contributing 0.7 $\pm$ 3.3 ms, significantly less lower than the expected 12.8 ms per mm (p < 0.05). In other words, place cells fire with temporal delays that reflect spatial relationships on the track, and these spiking events are tightly coordinated throughout the measured extent of CA1 (about 3 mm).
+
+
+#+CAPTION: \textbf{Anatomical separation accounts for relatively little timing offset.} Results of the regression analysis of the previous figure for each recording session. In three of four rats, the isolated effect of anatomical distance of time offsets is less than the 12.8 ms per mm time delay of the theta wave. Pooling cell pairs into a single regression results in a final estimate of 0.7 ms per mm. The effect of field separation on the other hand is reliably in line with previous accounts of theta sequences.
+#+NAME:   tab:basic-data
+| Session   | Anatomical (ms/mm) | Field (ms/m)     | Offset (ms)     | # of Pairs  |
+|---------  | ---------          | -----            | -----           | ----        |  
+|Yolanda A  |  -7.0 $\pm$ 13.9   | 101.2 $\pm$ 20.0 | 7.3 $\pm$ 11.3  | 31          |
+|Yolanda B  |  -1.2 $\pm$ 16.4   | 199.1 $\pm$ 40.9 | 1.2 $\pm$ 11.0  | 18          |
+|Morpheus   |  0.9 $\pm$ 3.3     | 163.1 $\pm$ 20.7 | -2.1 $\pm$ 5.2  | 38          |
+|Caillou    |  18.6 $\pm$ 12.8   | 198.1 $\pm$ 25.1 |  6.4 $\pm$ 7.9  | 19          |
+|\textbf{Total} |  \textbf{0.7 $\pm$ 3.3} | \textbf{147.4 $\pm$ 14.2} | \textbf{-0.4 $\pm$ 3.5}  | \textbf{106} |
+
+
+
+
+ 
