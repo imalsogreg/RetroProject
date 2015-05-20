@@ -1,36 +1,23 @@
 Experience Report: Real-time brain decoding with Haskell
 
-+ Abstract
 
-Points to hit:
-  + Scientist programmers write bad code! How will I do with Haskell?
-  + Expected difficulty vs. actual difficulty.  Getting rid of for loops: hard
-    Using arrays: hard.  Using monads: easy.
+Main points to hit:
+  + Haskell is known for good batch processing or DSL's compiling to something faster; but how does the runtime fare for real time scientific application?
   + Project goal, reason for the software
   + Mid-sized ecosystem of custom programs & formats; multiple processing stages
-  + Old code written in c, hard to extend
-  + Speed in prototyping / experimenting
-  + Application in not-very-Haskellish domain (realtime data analysis)
-  + Ability to self-teach, given state of tutorials and documentation
-  + Ease of concurrency (as opposed to the c code, which stalled the project)
-  + Haskell gives exposure to deeper ideas in CS
-  + Occasional difficulty with out-dated documentation, brocken Haddocks in hackagedb, and frustration over GUI support.
+  + Comparison of experience against published claims (claims in STM paper, MIO)
 
 + Intro
-  + Science background
-    + Place cells fire spikes in particular parts of the track, sequence of
-      places visited -> sequence of place cells activated
-    + During pauses on track, sequences activated again
-    + Reactivation during sleep, too
+  + Science background - Place cells and replay, quick explanation
+  + Go over real-time analog stuff, and realtime brain-machine interfaces (related work)
   + Project goal: 
-    + Record many neurons in learning & sleeping rat
-    + Analyze firing properties and behavior in realtime
-    + Use this information to change rat's environment
+    + Analyze place cells in realtime to make new experiments possible
+  + Contribution: Non trivial signal processing in real time implemented in off-the-shelf Haskell, scientists come join in!
 
 + Challenges
   + Low latency
   + A lot of IO.  Networking
-           
-  + Scientists' requirements: visualization, ease of getting started, libraries,    specific examples
-  + This specific problem - realtime requirements, networking, visualization, 
-    update of a complicated data structure
+  + Type system too restrictive? (answer: no. most pain came from partial fn's or deadlocks. moving toward stronger types generally made progress faster)
+  + Actual memory leaks
+  + Opaque capabilities when we push too hard on STM
+  + Never really got around to unit or integration tests...
